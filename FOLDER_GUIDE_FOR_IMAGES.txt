@@ -1,0 +1,152 @@
+================================================================================
+ORYZATIX - KUMPLETONG FOLDER STRUCTURE GUIDE PARA SA IMAGES
+================================================================================
+
+MAY DALAWANG (2) URI NG IMAGES NA KAILANGAN:
+
+--------------------------------------------------------------------------------
+[ 1 ]  MOBILENET TRAINING DATASET (Para sa AI Model Training)
+--------------------------------------------------------------------------------
+LOCATION:  storage/app/dataset/
+ACCESS:    PRIVATE (Hindi makikita sa browser)
+GAMIT:     Dito ilalagay ang daan-daan o libu-libong larawan ng dahon ng palay
+           para i-train ang MobileNet machine learning model.
+
+           IDEAL NA DAMI NG IMAGES PER CLASS (para sa maayos na training):
+           - Train:      500-1000+ images kada sakit
+           - Validation: 100-200 images kada sakit
+           - Test:       100-200 images kada sakit
+
+FOLDER STRUCTURE (Panel dataset — 4 diseases + healthy, ~1k images each):
+storage/app/dataset/
+├── train/                    ← 70-80% (~750 images per class)
+│   ├── blast/                ← LEAF BLAST (~1k total per class)
+│   ├── blb/                  ← BACTERIAL LEAF BLIGHT
+│   ├── brown_spot/           ← BROWN SPOT
+│   ├── tungro/               ← RICE TUNGRO
+│   └── healthy/              ← HEALTHY LEAF
+│
+├── val/                      ← 10-15% (~125 per class)
+│   ├── blast/
+│   ├── blb/
+│   ├── brown_spot/
+│   ├── tungro/
+│   └── healthy/
+│
+└── test/                     ← 10-15% (~125 per class)
+    ├── blast/
+    ├── blb/
+    ├── brown_spot/
+    ├── tungro/
+    └── healthy/
+
+NOTE: Kung wala sa dataset ang sakit (hal. Hispa, Smut, Downy Mildew),
+      walang result ang app — may message lang na "not in dataset".
+
+IMPORTANT TIPS FOR DATASET:
+✅ Format: .jpg o .png lang
+✅ Size: Mas maganda if 224x224 pixels (MobileNet default input size)
+✅ File names: Pwede kahit ano (hal. blast_001.jpg, healthy_001.png)
+✅ Siguraduhing malinaw ang larawan at yung SAKIT mismo ang nakikita
+✅ Iwasan ang sobrang liwanag o sobrang dilim
+✅ Healthy class = mga dahon na WALANG kahit anong sakit
+✅ Rice Hispa = mga dahon na kinain o sinira ng Rice Hispa beetle
+               (kasama na ang adult beetle images kung meron)
+
+--------------------------------------------------------------------------------
+[ 2 ]  REFERENCE / DISPLAY IMAGES (Para ipakita sa App UI)
+--------------------------------------------------------------------------------
+LOCATION:  public/images/diseases/
+ACCESS:    PUBLIC (Makikita sa browser at sa app)
+GAMIT:     Mga sample/reference images na ipinapakita sa:
+             - RESULTS page (kapag nakapag-scan na)
+             - TREATMENT GUIDE page (sa bawat sakit)
+             - HISTORY page (thumbnail)
+
+ILAGAY DITO ANG MGA SAMPLE NA LARAWAN:
+
+public/images/diseases/
+├── blast.jpg
+├── blb.jpg
+├── brown_spot.jpg
+├── tungro.jpg
+└── healthy.jpg
+
+TIPS PARA SA REFERENCE IMAGES:
+✅ Format: .jpg o .png
+✅ Size: Hindi bababa sa 600x600 pixels (para maganda ang quality)
+✅ Dapat malinaw at makita talaga ang itsura ng sakit
+✅ Pwede kang kumuha ng images sa Internet (e.g. Google Images) basta
+   pang-research/school project lang at hindi for commercial use
+
+--------------------------------------------------------------------------------
+[ 3 ]  USER UPLOADED SCANS (Awtomatikong nilalagay ng app)
+--------------------------------------------------------------------------------
+LOCATION:  storage/app/public/scans/
+ACCESS:    PUBLIC (via /storage/scans/ URL)
+GAMIT:     Dito napupunta ang mga larawan na ina-upload ng USER kapag
+           nag-scan sila gamit ang app.
+
+           ✅ WALA KANG KAILANGANG ILAGAY DITO
+           ✅ Awtomatikong nilalagay ng system ang mga uploaded images
+
+Akses URL:  http://127.0.0.1:8000/storage/scans/<filename>
+            (Example: /storage/scans/scan_abc123.jpg)
+
+--------------------------------------------------------------------------------
+[ 4 ]  TRAINED MODEL FILE (.h5 o .keras)
+--------------------------------------------------------------------------------
+LOCATION:  storage/app/models/
+ACCESS:    PRIVATE (Load via Python/TensorFlow backend)
+GAMIT:     Dito ilalagay ang na-train na MobileNet model.
+
+ILALAGAY DITO:
+└── mobilenet_oryzatix.h5     ← Ang trained model file (output ng training)
+
+            Halimbawa: kapag na-train mo na ang model gamit ang Python,
+            ise-save ang model bilang .h5 file tapos ilalagay dito.
+
+            Pwede ring gamitin ang .keras format (TensorFlow 2.x format)
+
+--------------------------------------------------------------------------------
+[ 5 ]  UI ICONS AT ASSETS (Optional)
+--------------------------------------------------------------------------------
+LOCATION:  public/images/icons/
+ACCESS:    PUBLIC
+GAMIT:     Dito pwede ilagay ang mga custom icons para sa app (logo, etc.)
+
+================================================================================
+QUICK SUMMARY NG KUNG SAAN ILALAGAY:
+================================================================================
+
+KUNG ANO ANG ILALAGAY MO              SAANG FOLDER ILALAGAY
+───────────────────────────────       ──────────────────────────────────────
+Mga 500 larawan ng Leaf Blast   →     storage/app/dataset/train/blast/
+Mga 100 larawan ng BLB          →     storage/app/dataset/val/blb/
+Sample image ng Brown Spot      →     public/images/diseases/brown_spot.jpg
+Trained MobileNet .h5 file      →     storage/app/models/mobilenet_oryzatix.h5
+Ang in-upload ni user ng image  →     storage/app/public/scans/ (AUTOMATIC!)
+Logo ng Oryzatix                →     public/images/icons/logo.png
+
+================================================================================
+PARA MALAMAN KUNG GUMAGANA ANG STORAGE LINK:
+================================================================================
+
+1. Maglagay ng test image:  storage/app/public/scans/test.jpg
+2. I-access ang:            http://127.0.0.1:8000/storage/scans/test.jpg
+3. Kung nakita ang image = GUMAGANA!
+
+Kung HINDI gumagana, i-run ulit:
+   php artisan storage:link
+
+================================================================================
+KAILANGAN PA NG TULONG?
+================================================================================
+
+Kung ready ka na i-setup ang ACTUAL MobileNet model (hindi na yung simulated
+detection), sabihin mo lang at gagawa ako ng:
+   - Python training script
+   - API integration para matawagan ang model
+   - Image pre-processing code (resize, normalize, etc.)
+
+Good luck sa training ng model! 🌾

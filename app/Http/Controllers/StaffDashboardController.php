@@ -1,0 +1,192 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use App\Models\RiceScan;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Exception;
+
+class StaffDashboardController extends Controller
+{
+    /**
+     * Get staff dashboard metrics, recent field scans, and barangay outbreak data.
+     */
+    public function overview(Request $request): JsonResponse
+    {
+        $currentUser = $request->user();
+        if (!$currentUser || !in_array($currentUser->role, ['agri_worker', 'admin'], true)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized. Agricultural extension worker or admin access required.',
+            ], 403);
+        }
+
+        try {
+            $totalScans = RiceScan::count();
+            $totalFarmers = User::where('role', 'farmer')->count();
+
+            // Disease breakdown
+            $blbCount = RiceScan::where('disease_name', 'like', '%Bacterial%')->orWhere('disease_name', 'blb')->count();
+            $blastCount = RiceScan::where('disease_name', 'like', '%Blast%')->orWhere('disease_name', 'blast')->count();
+            $brownSpotCount = RiceScan::where('disease_name', 'like', '%Brown Spot%')->orWhere('disease_name', 'brown_spot')->count();
+            $tungroCount = RiceScan::where('disease_name', 'like', '%Tungro%')->orWhere('disease_name', 'tungro')->count();
+            $healthyCount = RiceScan::where('disease_name', 'like', '%Healthy%')->orWhere('severity', 'healthy')->count();
+
+            $activeOutbreaks = RiceScan::whereIn('severity', ['moderate', 'severe'])->count();
+            $healthyRatio = $totalScans > 0 ? round(($healthyCount / $totalScans) * 100, 1) : 100.0;
+
+            // Fetch recent scans with user info
+            $recentScans = RiceScan::with('user')
+                ->latest()
+                ->take(50)
+                ->get()
+                ->map(function ($scan) {
+                    $imageUrl = $scan->image_path
+                        ? (str_starts_with($scan->image_path, 'http') ? $scan->image_path : asset('storage/' . $scan->image_path))
+                        : null;
+
+                    return [
+                        'id' => $scan->id,
+                        'farmer_name' => $scan->user ? $scan->user->name : 'Walk-in Farmer',
+                        'farmer_email' => $scan->user ? $scan->user->email : 'N/A',
+                        'location' => $scan->user ? ($scan->user->location ?: 'Roxas, Oriental Mindoro') : 'Roxas, Oriental Mindoro',
+                        'image_url' => $imageUrl,
+                        'disease_name' => $scan->disease_name ?: 'Healthy Rice Leaf',
+                        'scientific_name' => $scan->scientific_name ?: 'Oryza sativa',
+                        'confidence' => (float) $scan->confidence,
+                        'severity' => strtolower($scan->severity ?: 'healthy'),
+                        'notes' => $scan->notes ?: '',
+                        'created_at' => $scan->created_at ? $scan->created_at->format('M j, Y g:i A') : 'N/A',
+                        'time_ago' => $scan->created_at ? $scan->created_at->diffForHumans() : '',
+                    ];
+                });
+
+            // Aggregate surveillance by Barangay / Location
+            $scansWithUsers = RiceScan::with('user')->get();
+            $locationMap = [];
+
+            foreach ($scansWithUsers as $scan) {
+                $loc = $scan->user && $scan->user->location ? trim($scan->user->location) : 'Roxas, Oriental Mindoro';
+                if (!isset($locationMap[$loc])) {
+                    $locationMap[$loc] = [
+                        'location' => $loc,
+                        'total_scans' => 0,
+                        'blb' => 0,
+                        'blast' => 0,
+                        'brown_spot' => 0,
+                        'tungro' => 0,
+                        'healthy' => 0,
+                        'severe' => 0,
+                        'moderate' => 0,
+                    ];
+                }
+
+                $locationMap[$loc]['total_scans']++;
+                $sev = strtolower($scan->severity ?: 'healthy');
+                if ($sev === 'severe') $locationMap[$loc]['severe']++;
+                if ($sev === 'moderate') $locationMap[$loc]['moderate']++;
+
+                $dName = strtolower($scan->disease_name ?: '');
+                if (str_contains($dName, 'blight') || str_contains($dName, 'blb')) {
+                    $locationMap[$loc]['blb']++;
+                } elseif (str_contains($dName, 'blast')) {
+                    $locationMap[$loc]['blast']++;
+                } elseif (str_contains($dName, 'brown')) {
+                    $locationMap[$loc]['brown_spot']++;
+                } elseif (str_contains($dName, 'tungro')) {
+                    $locationMap[$loc]['tungro']++;
+                } else {
+                    $locationMap[$loc]['healthy']++;
+                }
+            }
+
+            $locationSurveillance = [];
+            foreach ($locationMap as $loc => $data) {
+                $status = 'normal';
+                if ($data['severe'] >= 3 || ($data['severe'] + $data['moderate']) >= 6) {
+                    $status = 'outbreak';
+                } elseif ($data['severe'] >= 1 || $data['moderate'] >= 2) {
+                    $status = 'watch';
+                }
+                $data['status'] = $status;
+                $locationSurveillance[] = $data;
+            }
+
+            usort($locationSurveillance, fn($a, $b) => $b['total_scans'] <=> $a['total_scans']);
+
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'stats' => [
+                        'total_field_scans' => $totalScans,
+                        'active_outbreaks' => $activeOutbreaks,
+                        'total_farmers' => $totalFarmers,
+                        'healthy_ratio' => $healthyRatio,
+                    ],
+                    'disease_counts' => [
+                        'blb' => $blbCount,
+                        'blast' => $blastCount,
+                        'brown_spot' => $brownSpotCount,
+                        'tungro' => $tungroCount,
+                        'healthy' => $healthyCount,
+                    ],
+                    'recent_scans' => $recentScans,
+                    'location_surveillance' => $locationSurveillance,
+                ]
+            ]);
+        } catch (Exception $e) {
+            Log::error('Staff dashboard error: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to load staff dashboard data: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Add or update agronomist / staff advisory notes for a specific farmer scan.
+     */
+    public function addAdvisory(Request $request, int $id): JsonResponse
+    {
+        $currentUser = $request->user();
+        if (!$currentUser || !in_array($currentUser->role, ['agri_worker', 'admin'], true)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized. Extension worker access required.',
+            ], 403);
+        }
+
+        $request->validate([
+            'advisory' => 'required|string|max:1000',
+        ]);
+
+        try {
+            $scan = RiceScan::findOrFail($id);
+            $staffName = $currentUser->name ?: 'Staff Agronomist';
+            $timestamp = now()->format('M j, Y g:i A');
+
+            $advisoryHeader = "[DA Extension Note by {$staffName} on {$timestamp}]: ";
+            $scan->notes = $advisoryHeader . trim($request->advisory);
+            $scan->save();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Staff advisory saved successfully!',
+                'data' => [
+                    'scan_id' => $scan->id,
+                    'notes' => $scan->notes,
+                ]
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to save staff advisory: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+}

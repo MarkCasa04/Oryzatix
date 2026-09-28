@@ -1,0 +1,543 @@
+﻿ORYZATIX: AN IMAGE PROCESSING-BASED SYSTEM FOR RICE CROP DISEASE DETECTION USING MOBILENET WITH MANAGEMENT RECOMMENDATION
+An
+ Integrative Programming and Technologies Project
+Presented to the Faculty of
+John Paul College
+MG Andaya Compound, Odiong,
+Roxas, Oriental Mindoro
+
+
+
+
+
+In Partial Fulfillment
+of the Requirements for the Degree
+Bachelor of Science in Information Technology
+
+
+
+
+
+Submitted by:
+Alaissa F. Gregorio
+Mark Andrew M. Casa
+Mark Jorenz S. Rover
+Maria Elizabeth P. Sungcan
+
+
+
+
+
+Date
+08/02/2026
+
+
+
+
+TABLE OF CONTENTS
+CHAPTER I 
+Project Context                       4
+Objectives                       5
+Scope and Limitations                       6
+Significance of the Study                                                                                                     9
+Conceptual Framework                                11
+Definition of Terms                                 13
+CHAPTER II 
+Related Literature                                                                                                               15
+Related System                                                                                                                    
+Synthesis                                                         51
+CHAPTER III 
+Development Method                                            53
+Gantt Chart                                                                                                                         54
+Requirements Specification 54
+Functional Requirements
+User Interface
+Hardware Interface
+Software Interface
+Security Requirements
+Technical Background65
+Hardware Specifications
+Software Specifications
+System Analysis and Design67
+System Overview
+System Architecture
+Use Case Diagram70
+Activity Diagram71
+Data Flow Diagram (DFD)72
+Context Diagram
+Diagram 0
+Database Schema74
+Testing and Evaluation75
+Implementation Plan78
+
+
+
+
+
+
+
+
+
+
+Chapter I
+Project Context
+         Rice is one of the most essential food grains in the world. It provides the principal source of food for more than half of the worldâ€™s population and plays an important role in food security, as well as being a vital economic crop, particularly in developing countries in Southeast Asia. For many farmers, rice cultivation is the primary source of income. Nevertheless, rice production is limited by plant diseases, which reduce yields and involve significant costs if not diagnosed and treated promptly.
+
+         Today, most farmers identify rice diseases using only visual assessment, which is often time-consuming and relies on subjective criteria. This approach can be associated with considerable delays in the decision-making process since the disease may no longer be treatable when visible symptoms appear. Moreover, many farmers do not have convenient access to qualified phytosanitary inspectors who can quickly find an appropriate solution to the problem.
+
+         Agricultural extension services currently provide inadequate and untimely advice to farmers, leaving them to deal with disease management on their own. An urgent need has therefore arisen for an intelligent system capable of providing rapid and reliable diagnosis of rice diseases and recommending a subsequent course of action. Such a system would make it possible to find optimal solutions to emerging problems and minimize losses.
+     
+        To address this issue, this study will develop OryzaTix, an image processing-based system utilizing the MobileNet model to recognize and classify common crop diseases and to identify its severity level. The system then recommends the appropriate course of management according to the identified problem. The developed prototype includes accessibility features such as voice-to-text technology, an embedded AI chatbot, and voice-enabled AI consultation in both Tagalog and English to aid local farmers in using the system.
+
+Objectives
+General Objective
+This study aims to design, develop, and evaluate OryzaTix, a cross-platform application that detects rice crop diseases using the MobileNet model while recommending management practices.
+Specific Objectives
+To design and develop a cross-platform application with an intuitive graphical user interface and back-end system for detecting rice diseases.
+To train and integrate the MobileNet model for detecting and classifying rice crop diseases based on images of infected leaves and recommend their severity levels.
+To develop features that can be accessed and utilized by farmers with diverse literacy levels, such as voice-to-text command, AI chatbot, and voice-to-voice AI consultation integrated with Tagalog and English language models.
+To develop a module that recommends management practices depending on the detected rice disease and its corresponding severity level.
+To evaluate the designed system based on disease detection accuracy, response time, and level of acceptance from the target users.
+
+Scope and Limitations
+Scope
+This study was conducted to develop Oryzatix: An Image Processing-Based System for Rice Crop Disease Detection using MobileNet with Management Recommendations that can help users detect their rice crop diseases using image processing and provide management recommendations.
+In this study, the following are included:
+Detecting selected rice crop diseases using image processing and MobileNet;
+Classifying the level of severity of the detected disease based on the infected rice leaf;
+Providing management recommendations depending on the detected rice crop disease and its level of severity;
+Designing the system with an AI-based chatbot feature to help the user ask about rice diseases and crop management;
+Allowing the user to use voice or text;
+Providing translations for the users who prefer to use Tagalog or English;
+Allowing the user to capture an image using his/her camera or upload an image;
+Displaying disease history tracker for users to monitor the diseases, severity level, detection date, and management recommendations of the rice crop;
+Designing the system for Rice Farmers, agricultural experts, students, researchers, and anyone interested to identify and manage rice crop diseases;
+Developing the system into a cross-platform application so that it can be accessed by multiple platforms using different applications;
+Evaluating the efficacy of disease detection and the overall performance of the system such as its performance, ease of use, reliability, and user satisfaction.
+Limitations
+This study involves the use of the following limitations:
+The system can only detect rice crop diseases that were included in the database, and it cannot recognize any other diseases;
+The system can only detect rice crop diseases in leaves and not in stems, roots, panicles, grains, etc.;
+A higher accuracy on disease detection and severity classification is expected for high-quality images captured or uploaded in the system;
+AI-powered chatbot can only provide information and answer queries about rice crop diseases, severity levels, and management recommendations included in the system and should not be used to ask unrelated questions or specific inquiries that require an answer beyond the systemsâ€™ database;
+The systemâ€™s voice-to-text feature is only available for Tagalog, English, and other languages are not supported. Speech-to-speech translation and voice recognition accuracy may differ depending on the userâ€™s voice, accent, articulation, and background noise;
+The system is designed as a cross-platform application, and its performance varies from one device to another;
+Detection of rice diseases and management recommendations provided are only for reference and should not be used for other purposes such as crop scouting, weather prediction, forecasting, and estimation;
+The accuracy of MobileNetâ€™s detection and classification of rice crop diseases and severity levels are dependent on the quality of data used to train the model, which may vary due to differences in rice varieties and environments;
+The system requires an internet connection to utilize the AI capabilities and provide responses using the chatbot, voice-to-text, voice-to-voice, and translation features, which is unavailable when not connected to the internet.
+
+Significance of the Study
+The development of Oryzatix: An Image Processing Based System for Rice Crop Disease Detection using MobileNet with Management Recommendations is significant to many individuals and organizations because it can add value to the lives of rice farmers by facilitating early detection of rice crop diseases through the use of image processing technologies. Some of the stakeholders that will benefit from this study include:
+Rice Farmers. The rice farmers are the primary beneficiaries of this study because they can use the system to detect rice diseases by simply taking a picture or uploading an image of infected rice leaves. They also benefit from the disease severity level, integrated management recommendations, and disease history log where the detected diseases can be viewed and compared to determine disease trends. The chatbot feature in the developed system that uses voice recognition will also help the farmers in making timely decisions in managing diseases affecting rice crops. Besides, the chatbot is available in two languages, Tagalog and English, to offer convenience to the farmers.
+Agricultural Extension Workers. The agricultural extension workers can use this study as a tool to supplement their knowledge in identifying and managing rice crop diseases. This implies that they can provide appropriate management recommendations to the farmers when offering extension services.
+Students and Researchers. This study can benefit students and researchers conducting studies on artificial intelligence, image processing, smart farms, and machine learning. Their research will add value to this project by improving the system through the use of better algorithms and improving the number of rice crop diseases that can be detected by the system. In addition, this study can also benefit the educational institutions because it can be used as a reference material in teaching various topics on information technology, computer science, artificial intelligence, agriculture, and machine learning.
+Educational Institutions. Colleges and universities can use the study because it can offer insight into classes like computer science, information technology, agriculture, artificial intelligence, and machine learning. The research provides examples of how advancements in technology can help solve agricultural issues.
+Future Developers. The findings of this study will also benefit future developers because they will adopt it to improve the performance of the current system by adding new functions such as detecting additional rice crop diseases, deploying better deep learning models to train the system, and improving the artificial intelligence component that identifies diseases from images. It will also benefit the developers to design the system to operate offline and support multiple languages.
+The Agricultural Sector. The agricultural sector will benefit from this study because it addresses the need for artificial intelligence in managing diseases affecting rice crops. The findings will also contribute to the overall improvement of detecting and managing rice crop diseases, which will ultimately boost productivity while promoting the use of new technologies in agriculture.
+Conceptual Framework
+        This research will use the Input-Process-Output (IPO) Model. The model below shows how information provided by the user is processed by the system to come up with disease detection results and management recommendations.
+Input
+The inputs of the system include:
+Captured or uploaded image of a rice leaf
+User voice or text query (Tagalog or English)
+Trained MobileNet model
+Rice disease image dataset
+Disease and management recommendation database
+Process
+The system will perform the following processes:
+Image acquisition (capture or upload of rice leaf image)
+Image preprocessing
+Rice disease classification using the MobileNet model
+Severity level assessment
+Retrieval of disease management recommendations
+Processing of voice or text queries through the AI chatbot
+Generation of bilingual (Tagalog or English) responses based on the userâ€™s selected or detected language
+Storage of detection results in the disease history tracker
+Output
+The system produces:
+Detected rice crop disease
+Disease severity level
+Management recommendations
+AI chatbot response
+Disease history record
+Voice and text response in Tagalog or English
+Definition of Terms
+Artificial Intelligence (AI). Refers to the technologyÂ embeddedÂ inÂ Oryzatix thatÂ allowsÂ the chatbot toÂ comprehendÂ questionsÂ andÂ formulateÂ appropriateÂ responsesÂ aboutÂ rice crop diseases and management.
+Bilingual Support. Refers to the systemâ€™sÂ abilityÂ to communicate in both Tagalog and EnglishÂ andÂ respond accordinglyÂ in theÂ language the user is most comfortable with. ThisÂ languageÂ preference is detected automaticallyÂ by theÂ system.
+
+Chatbot. Refers to the AI-based chatbot use in Oryzatix that is capable of answering queries about rice crop diseases, severity levels, and management recommendations through text or voice.
+Convolutional Neural Network (CNN). Refers to an algorithm use in deep learning for image recognition and classification. For this study, MobileNet is utilized as a CNN to recognize and classify rice crop disease images.
+Cross-Platform Application. Refers to an application created to operate and function to different compatible software, systems, and devices. For this study, Oryzatix is designed to perform its intended functions on different platforms.
+Dataset. Refers to a set of rice leaf images used for training, testing and validating the MobileNet CNN model for rice crop disease classification.
+Deep Learning. Refers to a subset of machine learning that utilizes neural networks to automatically learn patterns from image data for accurate disease classification.
+Image Processing. Refers to the process of capturing, preprocessing, analyzing, and interpreting images of rice leaves to detect and classify diseases.
+Machine Learning. Refers to a branch of artificial intelligence that enables computer systems to learn from data and improve prediction accuracy without being explicitly programmed for every task.
+Management Recommendations. Refer to the suggested disease management practices generated by the system based on the identified rice crop disease and its severity level.
+MobileNet. Refers to the lightweight convolutional neural network (CNN) architecture utilized by Oryzatix for classifying rice crop diseases from rice leaf images.
+Oryzatix. Refers to the proposed cross-platform image processing-based system developed in this study for rice crop disease detection using MobileNet with management recommendations.
+Rice Crop Disease Detection. System refersÂ to the process ofÂ determiningÂ and recognizing disease inÂ riceÂ cropsÂ by analyzingÂ theÂ infected leavesÂ images usingÂ image processingÂ algorithmÂ and MobileNet model.
+Severity Level. Refers to the systemâ€™s classification of the extent of disease infection on a rice leaf, indicating whether the disease is mild, moderate, or severe.
+Voice Input. It refers to a unique characteristic of the chatbot that allows a user to communicate with the bot via voice rather than using traditional typing methods and enables the AI to read and understand the userâ€™s question.
+Disease History Tracker. Refers to the feature of Oryzatix that storesÂ results of the previously detectedÂ disease, including theÂ detectedÂ disease,Â itsÂ severity, date of detection, and recommended managementÂ actions,Â facilitatingÂ userÂ access andÂ reviewÂ ofÂ theÂ pastÂ diagnosis data.
+CHAPTER II
+Review of Related Literature and Related Systems
+Related Literature
+Local
+Bracino et al. (2023) proposed a vision-based deep learning system for the non-destructive classification of healthy and diseased paddy rice leaves. The researchers evaluated EfficientNet-B0, MobileNetV2, and Places365-GoogLeNet in identifying several bacterial and fungal diseases, including Bacterial Leaf Blight, Bacterial Leaf Streak, Bacterial Panicle Blight, Downy Mildew, Hispa, and Rice Tungro Disease. Among the evaluated models, EfficientNet-B0 achieved the highest average classification accuracy of 97.74%. The study emphasized that deep learning provides a fast and accurate approach for disease diagnosis without damaging the crop. This study is related to OryzaTix because both systems use deep learning-based image classification to identify rice diseases automatically and assist farmers in making timely disease management decisions.
+
+Belano et al. (2025) proposed a Rice Plant Disease Detection, Classification, and Mapping System Using Drone that combines YOLOv9 Tiny, drone imagery, and a mobile application to detect Bacterial Leaf Blight, Brown Spot, and Rice Blast in Philippine rice fields. The developed model achieved 98.2% validation accuracy and 87.8% testing accuracy based on expert evaluation from the Department of Agriculture. The system also integrates georeferenced mapping to identify the exact location of infected crops, improving disease monitoring and field management. This study is related to OryzaTix because both systems employ artificial intelligence for automated rice disease detection, although OryzaTix focuses on image-based diagnosis through a web and mobile platform rather than drone-assisted monitoring.
+
+Mirandilla et al. (2023) conducted a study on the use of spectral analysis for detecting and differentiating three major rice diseases in the Philippines, namely tungro, bacterial leaf blight (BLB), and rice blast. The researchers analyzed the spectral reflectance of infected rice leaves using visible and near-infrared wavelengths (400â€“850 nm) to determine the unique spectral characteristics of each disease. The study found that the red and red-edge wavelength ranges were the most sensitive in distinguishing the diseases, while regression models such as Partial Least Squares Regression (PLSR), Random Forest Regression (RFR), and Support Vector Regression (SVR) showed promising results in estimating disease severity. The findings demonstrated that spectral analysis can support early disease detection and improve disease monitoring and management practices. This study is highly relevant to the proposed Oryzatix system because it highlights the importance of early rice disease detection using advanced image analysis techniques. Although Oryzatix uses deep learning instead of spectral sensing, both approaches aim to identify rice diseases accurately and assist farmers in making timely disease management decisions.
+
+Dioses et al. (2024) developed a deep learning-based approach for detecting Philippine rice plant diseases using the ResNet50 Convolutional Neural Network (CNN). The study classified fourteen (14) different rice diseases affecting Philippine rice plants through image-based analysis. Experimental results showed that the model achieved 96% training accuracy, 89% validation accuracy, and 90% overall accuracy. Although the model encountered challenges in distinguishing Bacterial Leaf Blight and Rice Blast due to their similar visual characteristics, it demonstrated reliable performance in classifying the remaining disease categories. The researchers concluded that deep learning-based computer vision techniques can effectively support automated rice disease detection and assist in improving agricultural productivity. This study is highly relevant to the proposed Oryzatix system because it demonstrates the effectiveness of convolutional neural 
+networks in detecting Philippine rice plant diseases. Similar to Oryzatix, the study utilizes AI-based image classification to identify rice diseases, supporting the development of an automated disease detection and treatment recommendation system for farmers.
+
+Orillo et al. (2022) developed an automated rice disease identification system using digital image processing and a Backpropagation Artificial Neural Network (ANN). The study focused on identifying three common rice diseases in the Philippines: bacterial leaf blight, brown spot, and rice blast. Image processing techniques, including image enhancement, segmentation, and feature extraction, were applied to analyze disease characteristics based on color, texture, and infected leaf area. The neural network was trained using 134 disease images, with 70% allocated for training, 15% for validation, and 15% for testing. The system achieved 100% classification accuracy on the experimental dataset and also provided corresponding disease management recommendations after identifying the disease. The researchers concluded that combining image processing and artificial neural networks can significantly improve the accuracy and efficiency of rice disease diagnosis. This study is highly relevant to the proposed Oryzatix system because it demonstrates one of the earliest AI-based approaches for detecting Philippine rice diseases through image processing. Similar to Oryzatix, the system identifies rice diseases from leaf images and provides disease management recommendations, supporting the development of an automated disease detection and treatment recommendation platform.
+Foreign
+Deb et al. (2022) proposed a deep convolutional neural network (CNN)-based approach for paddy disease classification to support early disease diagnosis and reduce productivity loss in agriculture. The study compared the performance of five CNN architectures, namely Inception-V3, VGG-16, AlexNet, MobileNetV2, and ResNet-18, using a dataset of 7,096 paddy leaf images classified into five categories: healthy leaves, bacterial leaf blight, brown spot, leaf blast, and leaf smut. The experimental results showed that Inception-V3 achieved the highest classification accuracy of 96.23%, outperforming the other evaluated CNN models. The study is relevant to the proposed Oryzatix because it demonstrates the effectiveness of deep learning models in classifying rice diseases through image processing. Similar to the reviewed study, Oryzatix utilizes deep learning for disease identification. However, the proposed system specifically employs MobileNet for lightweight and efficient detection while also providing disease severity classification, AI-powered management recommendations, and Tagalog-English chatbot and voice assistance within a cross-platform web and mobile application.
+
+Tholkapiyan et al. (2023) presented a comprehensive review of rice plant disease identification and classification techniques using image processing, deep learning, machine learning, and optimization methods. The study examined various factors influencing disease detection performance, including dataset size, preprocessing techniques, feature extraction, classification methods, and evaluation metrics. The researchers also proposed a hybrid deep learning approach to improve the identification of rice diseases such as rice blast, brown spot, leaf smut, tungro, and sheath blight. The study supports the proposed Oryzatix system by demonstrating the effectiveness of deep learning in classifying rice diseases from leaf images. While the reviewed research focuses on performance analysis and hybrid deep learning techniques, the proposed system further enhances these concepts by providing severity classification, management recommendations, and AI-assisted consultation through a user-friendly cross-platform application.
+
+Tasfe et al. (2025) conducted an experimental review of deep learning-based models for paddy disease classification and segmentation. The study evaluated several classification models, including DenseNet, InceptionV3, Xception, MobileNet, and Vision Transformer (ViT), together with different segmentation models to determine their effectiveness in detecting paddy diseases. The researchers emphasized that early disease diagnosis is essential for reducing chemical use, preventing disease spread, and improving crop productivity. They also identified research gaps and found that lightweight and memory-efficient models can perform effectively in resource-constrained agricultural applications. The study is relevant to the proposed Oryzatix because both focus on applying deep learning for rice disease detection using image processing. However, Oryzatix extends these concepts by integrating MobileNet-based disease detection, severity classification, and AI-powered management recommendations through a cross-platform application.
+Wang et al. (2025) conducted a comprehensive review of recent advancements in deep learning applications for plant disease and pest detection. The study discussed the limitations of traditional disease detection methods and highlighted how deep learning techniques such as image classification, object detection, semantic segmentation, and transfer learning have significantly improved the accuracy and efficiency of plant disease identification. The researchers also emphasized the importance of large-scale pre-trained models, high-quality datasets, and model generalization in developing reliable disease detection systems for precision agriculture. The study is relevant to the proposed Oryzatix system because it supports the application of deep learning and image processing for accurate plant disease detection. Similar to the reviewed approaches, Oryzatix utilizes artificial intelligence to identify rice diseases. However, the proposed system extends these capabilities by integrating MobileNet-based disease detection, severity classification, AI-powered management recommendations, and Tagalog-English chatbot and voice assistance within a cross-platform web and mobile application.
+
+Jeyanathan et al. (2024) developed a Pesticide Recommender System for detecting paddy crop diseases using Support Vector Machine (SVM) and MobileNet-based transfer learning. The study addressed the challenges of manual disease identification by developing an automated image recognition system capable of detecting rice crop diseases from paddy field images. Due to the limited availability of public rice disease datasets, the researchers created a custom dataset collected from paddy fields and online 
+sources. The proposed system utilized a MobileNet-based convolutional neural network to identify diseases and recommend appropriate pesticides, providing farmers with timely and accurate decision support. The system is closely related to the proposed Oryzatix because both utilize MobileNet and image processing techniques for rice disease detection. However, unlike the proposed system of Jeyanathan et al. (2024), Oryzatix not only detects rice diseases but also classifies the severity level, provides AI-powered management recommendations, supports Tagalog-English chatbot and voice assistance, and operates as a cross-platform web and mobile application to improve accessibility and usability for farmers.
+
+Song et al. (2025) conducted a systematic review of recent advancements in agricultural image processing for smart agriculture applications. The study emphasized the importance of image processing in disease detection, yield prediction, and precision agriculture while identifying major challenges such as environmental interference, limited and imbalanced datasets, and the deployment of artificial intelligence models on resource-constrained devices. The researchers discussed various solutions, including attention mechanisms, Transformers, transfer learning, data augmentation, model compression, and edgeâ€“cloud collaboration to improve the performance and efficiency of agricultural image processing systems. The study is relevant to the proposed Oryzatix system because it supports the use of image processing and artificial intelligence for accurate crop disease detection. Similar to the reviewed technologies, Oryzatix applies 
+image processing and MobileNet for identifying rice diseases. However, the proposed system further enhances these capabilities by integrating disease severity classification, AI-powered management recommendations, Tagalog-English chatbot and voice assistance, and a cross-platform web and mobile application to provide comprehensive decision support for farmers.
+
+Sharma et al. (2022) investigated the application of machine learning and deep learning techniques for the early diagnosis of rice plant diseases. The study focused on three major rice diseasesâ€”bacterial blight, rice blast, and brown spotâ€”and conducted a comparative analysis of conventional machine learning algorithms and transfer learning models. The findings revealed that transfer learning techniques significantly outperformed traditional machine learning methods, with InceptionResNetV2 achieving the highest classification performance, followed by XceptionNet. The researchers concluded that artificial intelligence can assist farmers in identifying diseases at an early stage, allowing timely interventions and improved crop management. The study is closely related to the proposed Oryzatix because both apply artificial intelligence to improve the early detection of rice diseases. While Sharma et al. (2022) focused on comparing different machine learning and transfer learning models, the proposed system extends these capabilities by integrating MobileNet-based disease detection, severity classification, AI-powered management recommendations, and cross-platform accessibility to provide a more comprehensive decision-support tool for farmers.
+Kazi et al. (2026) conducted a comprehensive survey of machine learning (ML) and deep learning (DL) methods for rice crop disease detection. The study reviewed more than 70 peer-reviewed publications published between 2019 and 2025 from IEEE, Elsevier, Springer, ACM, and MDPI. It highlighted the effectiveness of convolutional neural networks (CNNs), transfer learning, and advanced artificial intelligence techniques in detecting rice leaf diseases. The survey also discussed existing open-source datasets, identified challenges related to practical implementation, data diversity, domain adaptation, and hardware limitations, and recommended future research directions to improve the reliability and applicability of deep learning models in real-world agricultural environments. The study is relevant to the proposed Oryzatix because it supports the application of machine learning, deep learning, and image processing for accurate rice disease detection. Similar to the reviewed studies, Oryzatix utilizes deep learning techniques to identify rice diseases. However, the proposed system extends these capabilities by integrating MobileNet-based disease detection, severity classification, AI-powered management recommendations, and Tagalog-English chatbot and voice assistance through a cross-platform web and mobile application to provide a more comprehensive decision-support system for farmers.
+
+Seelwal et al. (2024) conducted a systematic review of deep learning applications for rice disease diagnosis by analyzing 69 studies published between 2008 and 2023. The review focused on major rice diseases, including rice brown spot, rice blast, and rice bacterial 
+blight, and examined the deep learning techniques used for disease detection. The researchers identified accuracy as the primary performance metric in evaluating disease detection models and emphasized that combining deep learning and machine learning approaches can further improve the accuracy and reliability of rice disease recognition. The study also highlighted current research trends and identified future directions for developing more efficient and accurate rice disease diagnosis systems. The study is closely related to the proposed Oryzatix because it supports the use of deep learning for accurate rice disease detection through image processing. Similar to the reviewed studies, the proposed system utilizes artificial intelligence to identify rice diseases. However, Oryzatix extends these capabilities by integrating MobileNet-based disease detection, disease severity classification, AI-powered management recommendations, and Tagalog-English chatbot and voice assistance within a cross-platform web and mobile application to provide comprehensive decision support for farmers.
+
+Goswami et al. (2022) developed an end-to-end web-based system for rice leaf disease classification using deep learning techniques. The system was designed to classify four rice leaf conditions, namely Bacterial Leaf Blight, Brown Spot, Leaf Smut, and Healthy leaves, through an online platform. The researchers compared several deep learning models, including InceptionV3, MobileNetV2, VGG19, ResNet50, VGG16, and AlexNet, using a dataset of 9,600 training images, 2,400 validation images, and 4,000 testing images. Although VGG16 achieved the highest accuracy, MobileNetV2 was 
+selected for the web-based system because of its high accuracy (98.05%), faster processing speed, smaller model size, and lower computational requirements, making it more suitable for real-time deployment. The developed system is closely related to the proposed Oryzatix because both utilize MobileNet and image processing for web-based rice disease detection. However, unlike the system developed by Goswami et al. (2022), the proposed Oryzatix not only identifies rice diseases but also determines the severity level, provides AI-powered management recommendations, integrates Tagalog-English chatbot and voice assistance, and supports both web and mobile platforms to improve accessibility and usability for farmers.
+
+Bhargava et al. (2024) conducted a comprehensive review on plant leaf disease detection, classification, and diagnosis using computer vision and artificial intelligence. The study discussed the application of machine learning, deep learning, computer vision, few-shot learning, and soft computing techniques in automatically identifying plant diseases through leaf images. The researchers emphasized that these technologies improve the speed and accuracy of disease detection, enabling farmers to take timely preventive actions and reduce crop losses. In addition, the review examined various diagnosis techniques, identified existing challenges, and presented future research directions to further enhance plant disease recognition systems. The study is closely related to the proposed Oryzatix because it supports the use of computer vision and artificial intelligence for accurate plant disease detection. Similar to the reviewed study, 
+Oryzatix applies deep learning and image processing to identify rice diseases from leaf images. However, the proposed system extends these capabilities by integrating MobileNet-based disease detection, disease severity classification, AI-powered management recommendations, and Tagalog-English chatbot and voice assistance within a cross-platform web and mobile application to provide a more comprehensive decision-support system for farmers.
+
+Kurniawan et al. (2024) introduced SMOREF-SVM, a machine learning approach for rice leaf disease detection that combines Spider Monkey Optimization (SMO), Random Forest (RF), and Support Vector Machine (SVM) to improve disease classification accuracy. The study addressed the limitations of traditional disease detection methods by optimizing feature selection and classification using advanced machine learning techniques. The proposed approach achieved an average accuracy of 98%, outperforming conventional SVM models. It also demonstrated improvements in Precision, Recall, F1-score, and Area Under the Curve (AUC), making it a reliable method for early rice disease detection and supporting sustainable agricultural practices. The study is relevant to the proposed Oryzatix because both aim to improve the accuracy of rice disease detection through artificial intelligence. While Kurniawan et al. (2024) focused on combining optimization and machine learning algorithms for disease classification, the proposed Oryzatix utilizes a MobileNet-based deep learning model, disease severity classification, AI-powered management recommendations, and Tagalog-English chatbot and voice assistance within a cross-platform web and mobile application to provide a more comprehensive decision-support system for farmers.
+
+Manavalan (2022) conducted a comprehensive review of image processing techniques for rice disease identification by analyzing 68 peer-reviewed studies published between 2007 and 2021. The study emphasized that manual disease detection through visual inspection may lead to inaccurate pesticide application and ineffective disease management. The review highlighted the importance of automated image processing and computer-assisted diagnostic systems in improving the early detection of rice diseases. Furthermore, the author identified existing challenges in developing fully automated rice disease diagnosis systems and recommended the advancement of intelligent image processing technologies to enhance agricultural sustainability and productivity. The study is relevant to the proposed Oryzatix because it supports the use of image processing and artificial intelligence for the early detection of rice diseases. Similar to the reviewed study, Oryzatix applies image processing and deep learning to identify rice diseases from leaf images. However, the proposed system further improves disease management by integrating MobileNet-based disease detection, disease severity classification, AI-powered management recommendations, and Tagalog-English chatbot and voice assistance through a cross-platform web and mobile application.
+
+Bhuria (2024) proposed a rice disease classification approach using the DenseNet-121 deep learning model to improve the detection of paddy diseases. The model was evaluated using accuracy, recall, and F1-score to measure its classification performance. Results showed that DenseNet-121 achieved high classification accuracy and effectively minimized false-positive predictions while maintaining a balanced performance between precision and recall. The study concluded that DenseNet-121 is a reliable deep learning model for supporting accurate and efficient paddy disease diagnosis. The study is relevant to the proposed Oryzatix because both systems apply deep learning techniques for rice disease detection. However, while Bhuria (2024) focused on the DenseNet-121 architecture for disease classification, the proposed Oryzatix utilizes a MobileNet-based model, disease severity assessment, AI-powered treatment recommendations, and multilingual chatbot and voice assistance through a web and mobile platform.
+
+Shakeel et al. (2026) proposed a deep transfer learning framework for rice leaf disease classification by comparing five pre-trained models: InceptionV3, DenseNet201, ResNet152V2, EfficientNetV2L, and MobileNetV2. The study incorporated GrabCut segmentation and contour detection to improve the visualization of diseased regions while maintaining classification through the deep learning models. Using a balanced dataset of 1,914 rice leaf images, the models were trained and evaluated over 30 epochs. Results showed that InceptionV3 achieved the highest overall performance, while MobileNetV2 obtained 98.09% training accuracy, 98.18% validation accuracy, and 
+96.87% testing accuracy, demonstrating that lightweight architectures can still provide reliable disease classification with lower computational requirements. The study is closely related to the proposed Oryzatix because both utilize MobileNet-based deep learning for rice leaf disease detection. However, unlike the study of Shakeel et al. (2026), the proposed system extends beyond disease classification by incorporating disease severity assessment, AI-powered treatment recommendations, and Tagalog-English chatbot and voice assistance in a web- and mobile-based platform designed for practical use by farmers.
+
+Haridasan et al. (2023) developed an automated deep learning system for detecting and classifying paddy plant diseases using computer vision, image processing, machine learning, and deep learning techniques. The system identifies five common rice diseases, namely bacterial leaf blight, false smut, brown leaf spot, rice blast, and sheath rot, through image preprocessing, segmentation, and classification using a combination of Convolutional Neural Networks (CNN) and Support Vector Machine (SVM). The proposed model achieved a validation accuracy of 91.45% and provides a predictive remedy after disease recognition to assist farmers in selecting appropriate disease management practices. The study is closely related to the proposed Oryzatix because both systems perform automated rice disease detection and recommend appropriate disease management solutions. However, while the study of Haridasan et al. (2023) combines CNN and SVM with predictive remedies, Oryzatix utilizes a MobileNet-based deep 
+learning model, includes disease severity assessment, AI-powered treatment recommendations, and integrates Tagalog-English chatbot and voice assistance through a web and mobile application.
+
+Gopalakrishnan and Balakrishnan (2026) proposed an improved paddy disease detection approach using convolutional neural networks with stratified cross-validation. The study evaluated several transfer learning models, including DenseNet169, ResNet152, InceptionResNetV2, MobileNetV3, and EfficientNetB3, using a dataset of 10,407 labeled rice leaf images and 3,469 testing images. By incorporating the FastAI framework and stratified cross-validation, the proposed approach achieved an overall classification accuracy of 94%, demonstrating improved reliability and generalization in paddy disease detection. The study is relevant to the proposed Oryzatix because both systems utilize transfer learning and deep learning techniques for rice disease identification. However, unlike the study of Gopalakrishnan and Balakrishnan (2026), the proposed system emphasizes MobileNet-based disease detection, severity classification, AI-powered treatment recommendations, and multilingual chatbot and voice assistance for practical use by farmers.
+
+Simhadri et al. (2025) conducted a systematic literature review on deep learning techniques for rice leaf disease detection. The study discussed the evolution of disease detection methods from traditional image processing and machine learning to advanced deep learning approaches, including transfer learning, ensemble learning, and hybrid models. The review also analyzed commonly used deep learning architectures, hyperparameter optimization, model fine-tuning techniques, and evaluation metrics while identifying current limitations and future research directions. The authors emphasized that deep learning enables automatic feature extraction, resulting in more accurate and efficient rice disease detection than conventional methods. The study is closely related to the proposed Oryzatix because both focus on deep learning-based rice disease detection. Similar to the reviewed studies, Oryzatix utilizes a MobileNet-based model to classify rice diseases from leaf images. However, the proposed system further enhances functionality by incorporating disease severity assessment, AI-powered treatment recommendations, and Tagalog-English chatbot and voice assistance through web and mobile platforms.
+
+Ritharson et al. (2024) developed DeepRice, a deep learning-based framework for the automatic classification of rice leaf diseases. The study combined self-collected and benchmark datasets containing 5,932 rice leaf images categorized into nine classes, including healthy leaves and varying severity levels of blight, tungro, blast, and brown spot. Data augmentation and transfer learning techniques were applied to improve model performance. This study supports the development of Oryzatix because it demonstrates that deep learning and transfer learning models can accurately classify rice leaf diseases from uploaded images. It also validates the use of AI-based image recognition for 
+assisting farmers in identifying rice diseases quickly and effectively.
+
+Seelwal et al. (2024) conducted a systematic review of deep learning applications for rice disease diagnosis by analyzing 69 studies published from 2008 to 2023. The review emphasized that deep learning models have significantly improved the detection of major rice diseases, including rice blast, brown spot, and bacterial blight. The researchers identified accuracy as the primary performance metric and recommended integrating hybrid deep learning and machine learning approaches to further enhance disease recognition performance. The findings are relevant to the proposed Oryzatix system because they support the use of deep learning models for accurate rice disease detection. Similar to the reviewed studies, the proposed system applies artificial intelligence for disease recognition. However, Oryzatix extends these capabilities by integrating MobileNet-based disease detection, severity level classification, and AI-generated treatment recommendations within a cross-platform web and mobile application.
+
+Tholkapiyan et al. (2023) presented a comprehensive review of rice plant disease identification and classification techniques using image processing, deep learning, machine learning, and optimization methods. The study examined various factors influencing disease detection performance, including dataset size, preprocessing 
+techniques, feature extraction, classification methods, and evaluation metrics. The researchers also proposed a hybrid deep learning approach to improve the identification of rice diseases such as rice blast, brown spot, leaf smut, tungro, and sheath blight. The study supports the proposed Oryzatix system by demonstrating the effectiveness of deep learning in classifying rice diseases from leaf images. While the reviewed research focuses on performance analysis and hybrid deep learning techniques, the proposed system further enhances these concepts by providing severity classification, management recommendations, and AI-assisted consultation through a user-friendly cross-platform application.
+
+Haridasan et al. (2023) developed an automated deep learning system for detecting and classifying paddy plant diseases using computer vision, image processing, machine learning, and deep learning techniques. The system identifies five common rice diseases, namely bacterial leaf blight, false smut, brown leaf spot, rice blast, and sheath rot, through image preprocessing, segmentation, and classification using a combination of Convolutional Neural Networks (CNN) and Support Vector Machine (SVM). The proposed model achieved a validation accuracy of 91.45% and provides a predictive remedy after disease recognition to assist farmers in selecting appropriate disease management practices. The study is closely related to the proposed Oryzatix because both systems perform automated rice disease detection and recommend appropriate disease management solutions. However, while the study of Haridasan et al. (2023) combines CNN and SVM with predictive remedies, Oryzatix utilizes a MobileNet-based deep learning model, includes disease severity assessment, AI-powered treatment recommendations, and integrates Tagalog-English chatbot and voice assistance through a web and mobile application.
+
+Fang et al. (2025) proposed RLDD-YOLOv11n, an improved deep learning model for rice leaf disease detection using the YOLOv11 architecture. The study aimed to address the limitations of manual disease inspection by enhancing the model's capability to detect small disease regions through the integration of the SCSABlock residual attention module and the CARAFE upsampling module. The researchers developed a rice leaf dataset containing three common rice diseases, namely bacterial blight, rice blast, and brown spot. Experimental results showed that the proposed model achieved a mean Average Precision (mAP) of 88.3%, improving the baseline YOLOv11 model by 2.8%. The study concluded that the enhanced model provides better detection accuracy and robustness for intelligent rice disease monitoring. This study supports the development of Oryzatix by demonstrating that advanced deep learning models can accurately detect common rice leaf diseases from images. Although Oryzatix uses a different architecture, the findings reinforce the effectiveness of AI-based image recognition in supporting early disease diagnosis and precision agriculture.
+
+Goswami et al. (2022) developed a web-based rice leaf disease classification system that utilizes deep learning to automatically identify healthy rice leaves and three common rice diseases. The researchers compared several convolutional neural network architectures, including InceptionV3, ResNet50, VGG16, VGG19, AlexNet, and MobileNetV2. Although VGG16 achieved the highest classification accuracy, MobileNetV2 was selected for deployment because of its lightweight architecture, faster processing speed, and smaller model size, making it more suitable for web-based applications. The system allows users to upload rice leaf images and receive instant disease classification results. This study is closely related to the proposed OryzaTix because both systems utilize deep learning-based image classification to detect rice leaf diseases. However, OryzaTix differs by providing treatment recommendations after disease detection and by supporting both web and mobile platforms, making the system more accessible to farmers and agricultural stakeholders.
+
+Sankaralingam et al. (2026) presented a deep learning-based approach for classifying paddy crop diseases using a custom image dataset. The study evaluated six advanced deep learning architectures, namely VGG19, DenseNet201, Xception, InceptionResNetV2, MobileNetV2, and EfficientNetV2B3, to determine their effectiveness in recognizing plant diseases. The researchers found that EfficientNetV2B3 and Xception achieved the highest classification performance, while MobileNetV2 provided an effective balance between classification accuracy and computational efficiency. The study also utilized transfer learning and image augmentation to improve model performance and address class imbalance. The findings emphasized that deep learning techniques offer a reliable and efficient solution for automated disease detection 
+and can be integrated into intelligent farming systems. This study is highly relevant to Oryzatix because it validates the use of deep learning models, particularly MobileNetV2 and transfer learning, for accurate paddy disease classification. It also supports the implementation of AI-powered disease detection systems that can assist farmers in identifying rice diseases quickly and efficiently.
+Pujitha and Kiran (2025) proposed an intelligent framework for plant disease segmentation and classification using optimized K-Means clustering and an Attention-based Multi-Dilated DenseNet model. The framework first segmented the diseased regions through an optimized clustering technique and then classified plant diseases using an attention-based deep learning architecture. Experimental results demonstrated that the proposed method effectively improved feature extraction and disease classification by focusing on the most relevant regions of plant images. The study concluded that combining image segmentation with attention mechanisms significantly enhances the performance of automated plant disease recognition systems. This study supports Oryzatix by demonstrating that image segmentation and attention-based deep learning techniques can improve the accuracy of automated plant disease detection systems. These techniques can enhance image analysis and disease recognition in AI-based agricultural applications.
+Sharma et al. (2023) proposed an enhanced deep learning approach for segmenting diseased regions in rice leaves to improve automated disease detection. The researchers focused on three common rice diseases: bacterial leaf blight, brown spot, and leaf smut. 
+Their modified UNet architecture incorporated dilated convolution, EfficientNetB4, and pixel-wise logical AND operations to achieve better segmentation performance. Experimental results demonstrated that the modified UNet outperformed the conventional UNet by achieving a lower mean loss and a higher Dice coefficient, indicating more accurate identification of infected leaf regions. The study concluded that improved image segmentation can significantly enhance the accuracy of automated rice disease detection systems. This study supports the proposed Oryzatix system because accurate segmentation of infected leaf areas can improve disease identification using deep learning. The findings emphasize that enhancing image preprocessing and feature extraction contributes to more reliable rice disease detection and recommendation systems.
+Related System
+Local
+Aquino et al. (2023) developed a rice planthopper detection system that utilizes image processing techniques and Convolutional Neural Networks (CNN) to automatically detect rice planthopper infestations in rice fields. The researchers collected images of rice plants from fields near the harvesting stage and applied image preprocessing techniques, including image resizing, before training the CNN model. The proposed system achieved a 93.74% detection accuracy, demonstrating its capability to identify specific rice planthopper species more accurately than traditional manual inspection methods. Through this system, users can automatically detect, count, and identify rice planthoppers from captured images, providing farmers with an efficient tool for pest monitoring and crop protection. Similar to OryzaTix, this system employs computer vision, image processing, and deep learning to automate rice crop monitoring through image analysis. Both systems aim to assist farmers by replacing manual inspection with AI-based detection. However, Aquino et al. (2023) focused on rice planthopper pest detection, whereas OryzaTix is designed to identify multiple rice leaf diseases from uploaded images and provide treatment recommendations through a web and mobile application, making it a more comprehensive decision-support system for rice disease management.
+
+Costales et al. (2023) developed a prototype mobile application for rice disease detection using Convolutional Neural Networks (CNN) and transfer learning techniques. The study aimed to assist Filipino farmers in identifying rice leaf diseases, particularly bacterial leaf blight, which can significantly reduce crop yield. The researchers trained their CNN model using the Rice Disease Image Dataset from Kaggle and applied image augmentation to improve the diversity of training images and enhance the modelâ€™s classification performance. The prototype allows users to capture or upload rice leaf images through a mobile device for automatic disease detection, providing a faster and more convenient alternative to manual disease identification. This study is closely related to OryzaTix because both systems utilize Convolutional Neural Networks (CNN) and image classification techniques for automatic rice disease detection. However, OryzaTix extends the functionality by supporting both web and mobile platforms, focusing on the identification of multiple rice diseases and providing treatment recommendations after 
+disease recognition. Unlike the prototype of Costales et al. (2023), which primarily emphasizes mobile-based disease detection, OryzaTix aims to deliver a more comprehensive decision-support system that assists farmers not only in identifying diseases but also in selecting appropriate management and treatment strategies.
+Belano et al. (2025) developed a drone-based rice plant disease detection, classification, and mapping system designed to identify three major rice diseases in the Philippines, namely bacterial leaf blight, brown spot, and rice blast. The system utilized the YOLOv9 Tiny deep learning model to detect diseases from drone-captured and uploaded images, achieving 98.2% validation accuracy and 87.8% testing accuracy after evaluation by a Department of Agriculture expert. It was deployed on a Raspberry Pi server and accessed through a mobile application, allowing users to capture or upload images while automatically recording the geographical location of infected rice plants through a georeferenced mapping feature. This functionality enables farmers and agricultural personnel to monitor disease distribution across rice fields and improve disease management strategies. This study is related to OryzaTix because both systems utilize artificial intelligence and deep learning for automated rice disease detection. However, the proposed OryzaTix differs by focusing on a web- and mobile-based rice disease identification system using image classification with treatment recommendations, making it more accessible for individual farmers without requiring drones or specialized mapping equipment. While Belano et al. (2025) emphasizes drone-assisted detection and geographic disease mapping, OryzaTix prioritizes user-friendly disease diagnosis and immediate treatment recommendations through uploaded leaf images, making it more suitable for everyday field use.
+
+De Lara and Sultana (2024) developed a deep learning-based system to detect stress conditions in Philippine rice varieties grown in Lubang, Occidental Mindoro. The study aimed to address the challenges of monitoring rice plant health, as stress caused by environmental factors can significantly reduce crop yield and quality. High-resolution images collected through field surveys and remote sensing technologies were used to build a comprehensive dataset. The developed deep learning model analyzed visible symptoms such as leaf discoloration, wilting, and growth abnormalities, enabling the system to identify and classify different stress conditions more accurately than conventional monitoring methods. The results demonstrated that artificial intelligence can effectively improve crop health assessment and support sustainable rice farming practices. This study is related to the proposed OryzaTix because both systems apply deep learning and computer vision techniques to analyze rice plant conditions through image processing. While the study focuses on identifying various stress conditions affecting rice plants, OryzaTix specifically concentrates on detecting rice leaf diseases and providing treatment recommendations through a web- and mobile-based platform. Both systems aim to assist farmers in making timely decisions that improve crop productivity and promote precision agriculture.
+Magboo and Magboo (2023) developed a deep learning-based rice disease classification system designed to identify rice plant diseases in the Philippines using Convolutional Neural Networks (CNN). The study evaluated several pre-trained deep learning models, including VGG16, InceptionV3, and a custom CNN architecture, to determine the most effective model for classifying rice diseases from leaf images. Among the evaluated models, VGG16 achieved the highest performance with an accuracy of 96%, demonstrating its capability in accurately recognizing rice leaf diseases. The developed system serves as a non-invasive diagnostic tool that enables farmers to detect diseases quickly and accurately, supporting timely disease management and minimizing crop losses. The study is closely related to the proposed OryzaTix system because both utilize deep learning and image classification techniques to identify rice leaf diseases from captured images. However, the proposed system extends this functionality by integrating treatment recommendations after disease detection and providing support for both web and mobile platforms, making it more accessible and practical for farmers and agricultural stakeholders.
+Foreign
+Thanveer Jahan, K. Prakash, E. Balakrishna, Latha Panjala, Swetha Arra, Nagunuri Rajender, K. Rajashekar, & Salim Amirali Jiwani (2026). This study introduced an intelligent rice blast disease detection system that combines Deep Convolutional Neural Networks (DCNN), Vision Transformer (ViT), and a PSO-Lemon-OVT-NetX optimization architecture to improve the accuracy of rice disease classification. The system begins by acquiring hyperspectral images of rice leaves, followed by preprocessing techniques such as normalization, image resizing, and Principal Component Analysis (PCA) to prepare the dataset. DCNN performs feature extraction while attention fusion modules enhance important disease features. The extracted features are further optimized using the proposed PSO-Lemon-OVT-NetX model before being classified by the Vision Transformer. Model parameters were also fine-tuned using the Modified Grey Wolf Optimization algorithm, resulting in improved performance based on accuracy, precision, recall, F1-score, and loss metrics. The researchers concluded that the proposed system provides an effective solution for early rice blast disease detection and can help increase crop productivity through accurate disease identification. Similar to OryzaTix, this system utilizes deep learning and computer vision to automatically detect rice diseases from leaf images. Both systems aim to support early disease diagnosis and improve crop management. However, while the proposed study focuses only on rice blast disease using a hybrid DCNNâ€“Vision Transformer architecture with hyperspectral imaging, OryzaTix is designed to detect multiple rice diseases from ordinary image uploads through a web and mo bile application and provides treatment recommendations, making it more practical for everyday use by farmers.
+
+Nayak et al. (2023) developed the Rice Disease Detector, an Android application that utilizes smartphone image processing and transfer learning to identify 12 rice diseases and nutrient deficiency symptoms from rice plant images. The study employed a dataset 
+of 2,259 smartphone images and 250 real-time validation images to train and evaluate several deep learning models, including DenseNet201, Xception, MobileNetV2, and ResNet50. The researchers applied image segmentation techniques to isolate the affected regions of rice plants before classification. Among the evaluated models, ResNet50 achieved the highest performance for cloud-based deployment, while MobileNetV2 was selected for the Android application because of its lightweight architecture and efficient performance on mobile devices. The developed application also features an adaptive framework that continuously updates the classification model using new image data to improve its accuracy over time. The study demonstrated that the application can effectively detect multiple rice diseases from a single image capture, making it a practical tool for field use by farmers. This study is related to the proposed OryzaTix because both systems utilize deep learning and smartphone image analysis for automatic rice disease detection. Both also employ MobileNetV2 as a lightweight model suitable for mobile deployment. However, while the Rice Disease Detector focuses on Android-based disease diagnosis and nutrient deficiency detection, OryzaTix is designed as both a web and mobile application that not only identifies rice diseases but also provides treatment recommendations to assist farmers in making timely crop management decisions.
+
+Kalyan et al. (2023) developed the Rice Disease Detector, a smartphone application that combines image processing, transfer learning, and MobileNetV2 to identify rice diseases and nutrient deficiencies from leaf images. The application supports multiple disease 
+classes and allows users to capture images directly using a mobile phone for immediate diagnosis. The study concluded that MobileNetV2 provided the best balance between accuracy and computational efficiency, making it suitable for mobile deployment. This study is related to OryzaTix because both systems employ lightweight deep learning models to provide fast and accessible disease detection through image-based analysis.
+
+Shakib et al. (2026) developed an AI-powered smartphone-based solution for rice leaf disease detection integrated with a Smart Electronic Reporting (SER) System using Deep Convolutional Neural Networks (Deep-CNN) and the Internet of Things (IoT). The system enables farmers to capture rice leaf images using a smartphone, automatically identify diseases such as bacterial blight, blast, brown spot, and tungro, and receive disease management recommendations. In addition, the system transmits disease reports through an IoT-based reporting platform to support large-scale agricultural monitoring. The proposed model achieved 99.5% training accuracy and 99.75% validation accuracy, demonstrating its effectiveness for real-time disease diagnosis and field deployment. This study is related to the proposed OryzaTix because both systems utilize deep learning to automatically detect rice diseases and provide treatment recommendations through a user-friendly mobile platform.
+
+Li et al. (2022) developed an intelligent rice disease and pest monitoring system that 
+integrates network cameras, a web client, a cloud server, and an improved YOLO-DPD (YOLO-Diseases and Pests Detection) model for automated monitoring of rice fields. The system was designed to continuously capture rice canopy images and automatically detect three major disease and pest lesions without requiring manual field inspection. By incorporating Residual Feature Augmentation and the Convolutional Block Attention Module (CBAM) into the YOLOv4 architecture, the proposed model achieved a mean Average Precision (mAP) of 90.11%, outperforming RetinaNet, Faster R-CNN, and the original YOLOv4. The system also offers real-time monitoring, unattended operation, objective detection results, and data traceability, making it suitable for large-scale rice field surveillance. This study is related to OryzaTix because both systems utilize artificial intelligence and deep learning to automate the detection of rice diseases. However, while 
+Li et al. (2022) focused on a field-scale monitoring system using network cameras and continuous surveillance, OryzaTix is designed as a web- and mobile-based application that enables farmers to upload rice leaf images for disease identification and receive treatment recommendations. As a result, OryzaTix provides a more accessible and practical solution for individual farmers who may not have access to specialized monitoring equipment.
+
+Haridasan et al. (2023) developed an automated deep learning system for detecting and classifying paddy plant diseases using computer vision, image processing, machine learning, and deep learning techniques. The system identifies five common rice diseases, namely bacterial leaf blight, false smut, brown leaf spot, rice blast, and sheath rot, 
+through image preprocessing, segmentation, and classification using a combination of Convolutional Neural Networks (CNN) and Support Vector Machine (SVM). The proposed model achieved a validation accuracy of 91.45% and provides a predictive remedy after disease recognition to assist farmers in selecting appropriate disease management practices. The study is closely related to the proposed Oryzatix because both systems perform automated rice disease detection and recommend appropriate disease management solutions. However, while the study of Haridasan et al. (2023) combines CNN and SVM with predictive remedies, Oryzatix utilizes a MobileNet-based deep learning model, includes disease severity assessment, AI-powered treatment recommendations, and integrates Tagalog-English chatbot and voice assistance through a web and mobile application.
+
+Vasantha et al. (2022) developed the Rice Disease Diagnosis System (RDDS), an automated deep learning-based system for diagnosing rice diseases and estimating disease severity. The system consists of two integrated modules: the Leaf Disease Identification (LDI) module, which detects eight common rice diseases using a custom CNN model, and the Infection Intensity Estimation (IIE) module, which measures the severity and stage of infection. The proposed RDD_CNN model achieved 98.47% test accuracy and generates a comprehensive diagnostic report to support timely disease management. This system is closely related to OryzaTix because both utilize deep learning for automatic rice disease detection. However, OryzaTix focuses on a web- and mobile-based platform with treatment recommendations, while RDDS additionally estimates disease severity through a dedicated infection intensity module.
+
+Bracino et al. (2023) developed a vision-based deep learning system for the non-destructive classification of paddy rice leaf diseases caused by bacterial and fungal pathogens. The system evaluated three deep learning architectures, namely EfficientNet-B0, MobileNet-V2, and Places365-GoogLeNet, to classify healthy rice leaves and six rice diseases, including bacterial leaf blight, bacterial leaf streak, bacterial panicle blight, downy mildew, hispa, and rice tungro disease. Among the tested models, EfficientNet-B0 achieved the highest average accuracy of 97.74%, demonstrating its effectiveness in automated rice disease recognition while preserving the integrity of the plant. This study is related to OryzaTix because both systems utilize deep learning-based image classification to identify rice diseases from leaf images. However, while Bracino et al. (2023) focuses on comparing deep learning architectures for disease classification, OryzaTix extends this functionality by providing treatment recommendations and supporting both web and mobile platforms, making it a more practical decision-support tool for farmers.
+
+Fang et al. (2025) proposed RLDD-YOLOv11n, an improved rice leaf disease detection system based on the YOLOv11n object detection model. The system incorporates the SCSABlock attention module and the CARAFE upsampling module to improve feature extraction and the detection of small disease lesions. Using a dataset containing Bacterial Blight, Rice Blast, and Brown Spot, the proposed model achieved a mean Average Precision (mAP) of 88.3%, outperforming several lightweight YOLO-based approaches. The researchers concluded that the improved architecture provides accurate and robust real-time rice disease detection suitable for intelligent agricultural applications. This study is related to the proposed OryzaTix because both systems utilize deep learning for automatic rice disease detection to support timely disease diagnosis and crop management.
+
+Sankaralingam et al. (2026) developed a deep learning-based disease classification system using a custom paddy crop image dataset. The researchers compared six transfer learning models, namely VGG19, DenseNet201, Xception, InceptionResNetV2, MobileNetV2, and EfficientNetV2B3, to determine the most effective architecture for disease recognition. The study found that EfficientNetV2B3 and Xception produced the highest classification performance, while MobileNetV2 provided an excellent balance between computational efficiency and prediction accuracy. The researchers also applied transfer learning and image augmentation to improve model performance and reduce class imbalance. This study is related to the proposed OryzaTix because both systems utilize deep learning and transfer learning techniques to automatically classify rice diseases from images and support intelligent farming applications.
+
+Jahan et al. (2026) proposed a hybrid rice blast disease detection system that combines Deep Convolutional Neural Networks (DCNN), Vision Transformer (ViT), Particle Swarm Optimization (PSO), and an attention fusion mechanism for accurate disease classification. The system processes hyperspectral rice images through preprocessing, feature extraction, optimization, and transformer-based classification to improve early rice blast detection. Experimental results demonstrated improvements in accuracy, precision, recall, and F1-score compared with conventional deep learning models. This study is related to the proposed OryzaTix because both systems employ artificial intelligence for automatic rice disease detection and aim to enhance early diagnosis and crop management.
+
+Singh et al. (2023) developed a rice leaf disease detection system using a MobileNet transfer learning model to classify three common rice diseases: bacterial leaf blight, brown spot, and leaf smut. The researchers fine-tuned the pre-trained MobileNet model using different hyperparameters and achieved an 87% classification accuracy after 100 training epochs. The system was designed to support early disease detection and improve farming practices by providing automated disease identification from rice leaf images. The system is closely related to the proposed Oryzatix because both utilize the MobileNet architecture for rice disease detection through image processing. However, Oryzatix 
+enhances these capabilities by incorporating disease severity classification, AI-powered treatment recommendations, and Tagalog-English chatbot and voice assistance, providing a more comprehensive decision-support system for farmers.
+Synthesis 
+         The reviewed literature reveals that the trend is towards developing methods for rice disease diagnosis based on image analysis rather than the laborious manual inspection. Local researchers utilized deep learning, convolutional neural networks, spectral analysis, and digital image processing techniques to identify rice diseases, estimate the percentage of infection, and predict the most appropriate interventions.
+
+         Foreign researchers also report that convolutional neural networks, transfer learning, image segmentation, and comparison of models can be applied to classify rice diseases. Moreover, the accuracy of rice leaf blight detection is found to be dependent on the quality of data, preprocessing, class distribution, environmental conditions during image capture, and the modelâ€™s ability to generalize beyond the training set.
+
+         The MobileNet and MobileNetV2 are essential to OryzaTix because they ensure the balance between classification accuracy, processing speed, and model complexity. It is critical for web and mobile apps for farmers who use devices with lower performance. Besides, multiple articles mention the need for disease-severity estimation. They describe systems that can quantify infected regions or infection severity; however, there is an essential distinction between disease recognition and severity assessment, and management and treatment recommendation systems.
+
+         In general, most solutions described in the articles address only a few aspects of crop disease management. For example, the systems allow for disease classification, field monitoring with computer vision, mapping, severity estimation, and treatment recommendation. There is a lack of lightweight MobileNet diagnosis, severity classification, management recommendation, Tagalog-English bot, voice assistant, disease history, and multilingual application for farmers. Thus, Oryzaixâ€™s application is critical for addressing the detected gap.
+
+         The evaluation should prioritize crop image analysis, classification accuracy, performance, and usability testing and response time. It is vital to promote OryzaTix as a decision-support system rather than a substitute for agricultural experts or diagnostic laboratories.
+
+CHAPTER III
+Development Method
+         TheÂ study willÂ adoptÂ an iterative development process thatÂ followsÂ theÂ requirements analysis, system design, implementation, testing, and refinementÂ cycle.Â TheÂ approachÂ suits the project becauseÂ OryzaTixÂ entailsÂ multipleÂ components,Â includingÂ image-processingÂ algorithmsÂ forÂ crop disease detection, MobileNet classification, management recommendations, and voiceÂ assistant-basedÂ advisoryÂ systems.Â EachÂ partÂ mustÂ go through extensive testingÂ before theÂ finalÂ versionÂ isÂ produced.
+
+         The development process willÂ startÂ byÂ definingÂ the systemâ€™s requirements, including its processes and platforms.Â TheÂ researchers willÂ proceed toÂ design the cross-platformÂ applicationÂ andÂ website,Â implementÂ the MobileNet diseaseÂ classification model, develop theÂ multilingualÂ voice-assistantÂ plugin, andÂ testÂ the productÂ with selected users andÂ testers.Â TheÂ feedbackÂ willÂ helpÂ improveÂ theÂ accuracy,Â efficacy, and overallÂ performance of theÂ system.
+Gantt Chart
+
+Requirements Specification
+Functional Requirements
+1. The system shall allow the users to register, login, and update their information in the system
+2. The system shall allow the users to have access to roles such as farmers, agricultural extension workers, and administrators.
+3. The system shall allow the farmers to capture photographs of rice plants using the camera of the mobile application or upload existing images from their gallery
+4. The system shall allow the processing of images captured or uploaded including resizing, normalization, and noise reduction prior to classification
+5. The system shall employ a MobileNet deep learning model to classify rice crop diseases from the processed image using a trained algorithm without restricting the detection to particular diseases.
+6. The system shall present the result of classification including the predicted disease and the percentage of accuracy.
+7. The system shall estimate the infected region from the processed image and present the severity of the infection.
+8. The system shall generate and present appropriate recommendation, management options, and treatment procedures based on the predicted infection and its level of severity
+9. The system shall allow the users to input their request using a microphone to convert their command into text.
+10. The system shall employ an AI chatbot to answer questions, provide directions, and offer additional information regarding agricultural services.
+11. The system shall provide a voice assistant with bilingual recognition to respond to the userâ€™s request. The assistant should detect the language of the userâ€™s input and reply in either Tagalog or English.
+12. The system shall record all past diseases detected, their results, and consultation history in the system.
+User Interface
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Hardware Interface
+The application shall run on compatible cross-platform devices and operating systems.
+The device shall have a camera to capture image(s) of rice leaves or upload image(s) from the device's internal storage.
+The device shall have a microphone to input voice commands to interact with the AI-powered chatbot.
+The device shall have speakers or headphones to output audio from the application, such as system prompts or chatbot's response.
+The device shall have a touchpad, keyboard, or mouse depending on the device to navigate and interact with the application.
+The device shall have the necessary hardware specifications, memory, and storage capacity.
+The device shall have internet connectivity to access the application's features, such as the AI-powered chatbot, voice-to-text conversion, bilingual responses, and management recommendations.
+The device shall have a screen capable of displaying images with an adequate resolution to view disease detection results, severity level, management recommendations, and history of diseases.
+Software Interface
+Application is compatible with web browsers
+Application is compatible with different operating systems
+Application has a user-friendly Graphical User Interface (GUI)
+The application consists of the MobileNet deep learning algorithm for rice crop disease recognition and severity level detection.
+Application has an option to capture and upload rice leaf images.
+Application has an AI-powered chatbot that is used to answer queries regarding rice crop disease.
+Application has an option to communicate with the AI-powered chatbot using voice and text.
+Application has multiple languages such as Tagalog and English for the user to choose from, and the chatbot will reply in the same language.
+Application has a Disease History Tracker to store the previous disease detection results of the user.
+Application needs internet connectivity to perform AI-powered functions such as disease detection, chatbot, etc.
+All the disease detection results and personal information of the user are stored in the system database securely.
+Security Requirements
+The Application shall be secured by enforcing users to log in their account to access the restricted features including viewing their profiles and disease history.
+The Application shall secure its database and its systems from illegal access and at the same time it shall deny any unauthorized access to its information and services.
+All user information and disease history detected by the Application shall be securely stored in the Applicationâ€™s database.
+The Application shall encrypt any data sent within the Application or received by the Application from its users or servers.
+The Application shall ensure that any user input is free from any invalid data.
+The Application shall allow only users who have logged in their account to access, edit and delete their disease history and other relevant information.
+The Application shall ensure complete privacy of its usersâ€™ data and at the same time it shall ensure that its data is not intercepted during transmission.
+The Application shall keep a log of its error messages without exposing usersâ€™ data or the system details to an attacker.
+The Application shall require users to connect to the Internet to perform its AI-driven services and it shall encrypt messages sent by the Application and received by the server when handling requests related to chatbots and voice recognition technology.
+The Application shall collect and process only the data legally permitted to help it provide its services to its users.
+Technical Background
+Hardware Specifications
+The client deviceÂ mustÂ have a minimumÂ specification of a two-core 2.0 GHz processor orÂ itsÂ equivalent.
+The client device shall have at least 4 GB RAM.
+The client device shall have at least 500 MB of available storage.
+The client deviceÂ mustÂ have a camera with a resolution ofÂ eightÂ mega pixels or higherÂ for capturing rice leaf images.
+The client device shall have a built-in or external microphone for voice interaction.
+
+The client device shall have a speaker or audio output device for voice responses.
+The client device shall support a minimum display resolution of 1280 Ã— 720 pixels.
+The client device shall have a stable internet connection to access AI-powered features, including the chatbot, voice interaction, and bilingual responses.
+Software Specifications
+The applicationÂ should be designed toÂ operate onÂ differentÂ operating systems, including Windows, macOS, Linux, Android, iOS, andÂ others.
+The applicationÂ shouldÂ alsoÂ beÂ compatibleÂ withÂ modern web browsers such as Google Chrome,Â Microsoft Edge, Mozilla Firefox, and Safari.
+The application shall be developed using the React frontend framework.
+The application shall use Laravel as the backend framework.
+The application shall use MySQL as the database management system.
+The application shall use Apache (XAMPP) as the local web server during development.
+The application shallÂ employÂ the MobileNet deep learning model for rice crop disease detection.
+The application shall employ an AI-Powered Chatbot that enables voice communication and multilingual communication, namely Tagalog and English
+The application shallÂ utilize RESTful API forÂ theÂ exchangeÂ ofÂ data between theÂ front end,Â back end, database, and AIÂ Services.
+The application shall require internetÂ connectivityÂ to accessÂ the applicationâ€™sÂ AI-poweredÂ features, chatbot, voiceÂ recognition, and bilingualÂ response.
+System Analysis and Design
+System Overview
+         Oryzatix is an image processing-based system that was designed to help detect and manage selected rice crop diseases through the use of the MobileNet deep learning model. Through the system, users can upload or take images of infected leaves for the detection process. The detected disease and its corresponding severity level are then presented to the user. Based on the results of detection, the application recommends ways to manage the disease to aid the user in his/her disease control efforts.
+
+         Moreover, the system features an AI-powered chatbot that can be accessed through voice and text. The chatbot offers assistance in two languages, namely, Tagalog and English. Users can ask the chatbot questions or request assistance using voice or text. The system also has a feature called the Disease History Tracker which lets users keep track of detected diseases that they had previously uploaded or inputted into the system.
+
+        Because it is a cross-platform system, Oryzatix can be used on different devices so long as they have internet connectivity. The chatbot, voice recognition, and response 
+generation features require internet access in order to function. By combining image processing functions and artificial intelligence, Oryzatix aims to be a convenient system for rice farmers, students, researchers, farm workers, and other individuals concerned with rice cultivation, particularly with detecting and managing rice crop diseases.
+
+
+
+
+
+
+
+
+
+System Architecture
+.
+Use Case Diagram
+
+
+
+
+
+
+
+
+
+Activity Diagram
+
+Data Flow Diagram (DFD)
+Context Diagram
+
+
+Diagram 0
+
+
+
+
+
+
+
+
+
+Database Schema
+
+
+
+
+
+
+
+
+
+Testing and Evaluation
+         The Oryzatix system will be thoroughly tested and reviewed to ensure that all functions operate correctly, efficiently, and effectively in order to meet the needs of the farmers and other users of this system.
+1. Functional Testing
+Functional testing will be carried out to ensure all functions meet the established requirements. The following functions will be tested:
+Image capture and image upload from the device.
+Rice disease detection using the MobileNet model.
+Disease severity level classification.
+Generation of management recommendations.
+AI-powered chatbot responses in Tagalog and English.
+Voice input and speech recognition.
+Disease history tracking and retrieval.
+User authentication and profile management (if applicable).
+2. Performance Testing
+Performance testing will evaluate the systemâ€™s responsiveness and processing efficiency. The evaluation includes:
+Image processing speed.
+Disease detection response time.
+AI chatbot response time.
+System performance under continuous usage.
+Overall application stability across supported platforms.
+3. Usability Testing
+Usability testing willÂ beÂ doneÂ toÂ establishÂ theÂ easeÂ of use ofÂ the systemÂ under consideration. Selected rice farmers and stakeholders willÂ participate in the test, which will involve the following:
+Ease of navigation.
+User interface design.
+Clarity of disease detection results.
+Accessibility of AI consultation features.
+Overall user satisfaction.
+4. Accuracy Testing
+Accuracy testing willÂ establishÂ theÂ abilityÂ of the MobileNet modelÂ toÂ correctlyÂ identify and classify thoseÂ rice crop diseasesÂ thatÂ theÂ systemÂ isÂ intended to address. TheÂ results of theÂ modelâ€™s predictions will be comparedÂ toÂ the expectedÂ findingsÂ indicatedÂ byÂ the testingÂ data set.
+
+
+
+5. Compatibility Testing
+Compatibility testing willÂ ensureÂ that OryzatixÂ isÂ compatibleÂ withÂ differentÂ systems, includingÂ mobile phones, tablets, laptops, andÂ desktopsÂ withÂ differentÂ browsers, thereby making it easily accessible.
+6. User Acceptance Testing (UAT)
+User Acceptance Testing will beÂ performedÂ byÂ selected farmers and agricultural experts toÂ establishÂ whether the systemÂ designÂ suitsÂ the end-usersâ€™ needs.Â TheÂ resultsÂ will be used toÂ make final adjustments toÂ the system.
+Evaluation Method
+The researchers will evaluate the developed system using the ISO/IEC 25010 Software Quality Model.Â The chosenÂ respondents, including rice farmers, agricultural technicians, andÂ ITÂ experts, willÂ be asked to scoreÂ the systemÂ accordingÂ toÂ the followingÂ criteria:
+
+Functional Suitability
+Performance Efficiency
+Compatibility
+Usability
+Reliability
+Security
+Maintainability
+Portability
+Once the data is gathered, theÂ researchers willÂ analyze and interpretÂ theÂ resultsÂ using the appropriate statisticalÂ testsÂ toÂ identifyÂ the overallÂ degree of acceptanceÂ and quality of the Oryzatix system.
+Implementation Plan
+Development Methodology
+         The development of Oryzatix: An Image Processing Based System for Rice Crop Disease Detection using MobileNet with Management Recommendations will be done using Agile Software Development Methodology. It is a type of iterative and incremental software development method used by the researchers. The method allows the researchers to continuously plan, develop, test, and evaluate the system during the development process. In other words, it helps them to accommodate requirements changes and make adjustments based on feedback received at various stages of the development.
+Agile methodology consists of the following phases.
+1. Requirements Analysis
+The researchers will start by identifying and discussing the necessary and unnecessary requirements of the system through a literature review and by consulting with advisers and potential users. The scope, objectives, and system requirements will be determined during this stage.
+2. Planning and Design
+The system architecture, database, user interface, and artificial intelligence model will then be designed, and the researchers will plan how to develop features such as image processing, disease detection and severity classification, artificial intelligence chatbot, speech recognition, bilingual capability, disease history tracker, and management recommendation modules.
+3. Development
+The researchers willÂ constructÂ the cross-platformÂ systemÂ application andÂ begin implementing the system components, such asÂ the MobileNet model for rice disease detection. The AI chatbot, speech recognition, bilingualÂ capability, disease history tracker, and management recommendation modules will also beÂ developed.
+4. Testing
+The researchers willÂ performÂ functional, usability, compatibility, performance, and accuracyÂ testsÂ to ensure that the system meets the requirements.Â TheÂ results of these testsÂ will beÂ usedÂ toÂ improveÂ the system.
+
+5. Review and Improvement
+The researchers will solicit feedback from advisers and agricultural experts and will modify the system to meet the requirements of the potential users. They will continue to refine the system by testing and addressing its aspects, as well as improving its existing features.
+6. Deployment
+Once the researchers are satisfied with the results of the tests, Oryzatix will be introduced to the target users. The researchers will present the final version of the system for evaluation and demonstration while making minor improvements when needed. 
+Project Phases and Timeline
+Phase 1: Planning and Requirements Analysis
+In this phase, the researchers will identify the systemâ€™s functional and non-functional requirements. In addition, they will conduct a literature review on related topics, including rice disease detection, image processing, artificial intelligence, and MobileNet. Finally, the systemâ€™s scope, objectives, and overall design and development plan will be established.
+Phase 2: Dataset Collection and Preparation
+The dataset of images of healthy and diseased rice leaves will be gathered from trusted sources. Then, the images will be cleaned, resized, labeled, and augmented accordingly to enhance the performance and accuracy of the MobileNet model.
+Phase 3: AI Model Development
+The resulting database will be utilized for the training and testing of the MobileNet CNN. The CNN will be fine-tuned to identify supported rice crop diseases and assess their respective severity levels.
+Phase 4: System Development
+The researchers will develop cross-platform Oryzatix application by incorporating their trained MobileNet with the applicationâ€™s features such as image capture and upload, detection of rice diseases, determining its severity, chatbot, voice interaction, bilingualism (Tagalog and English), disease history, and management recommendations.
+Phase 5: Integration and Testing
+All parts of the system will be assembled and tested for functionality, performance, compatibility, usability, and accuracy. All errors will be isolated and corrected to ensure that the system performs to specification on the required platforms.
+Phase 6: User Acceptance Testing and Evaluation
+The final system will be subjected to evaluation by chosen rice farmers, agricultural experts, and information technology specialists using the ISO/IEC 25010 Software Quality Model. The feedback provided by the respondents will be used to assess the systemâ€™s effectiveness and level of acceptability.
+Phase 7: Deployment and Maintenance
+Once Oryzatix has been properly tested and certified, it will be delivered to the targeted users for further usage. The researchers will make sure that they perform maintenance activities, troubleshoot problems, and offer enhancements before delivering it to the end-users.
+
+
+
+
+
+
+
+
+
