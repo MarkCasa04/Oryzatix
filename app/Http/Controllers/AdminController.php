@@ -113,6 +113,9 @@ class AdminController extends Controller
             $brownSpotCount = RiceScan::where(function($q) {
                 $q->where('disease_name', 'like', '%Brown Spot%')->orWhere('disease_name', 'brown_spot');
             })->count();
+            $sheathBlightCount = RiceScan::where(function($q) {
+                $q->where('disease_name', 'like', '%Sheath%')->orWhere('disease_name', 'sheath_blight');
+            })->count();
             $tungroCount = RiceScan::where(function($q) {
                 $q->where('disease_name', 'like', '%Tungro%')->orWhere('disease_name', 'tungro');
             })->count();
@@ -125,6 +128,7 @@ class AdminController extends Controller
             $diseaseRankings = [
                 'Rice Leaf Blast' => $blastCount,
                 'Bacterial Leaf Blight' => $blbCount,
+                'Sheath Blight' => $sheathBlightCount,
                 'Rice Tungro Disease' => $tungroCount,
                 'Brown Spot' => $brownSpotCount,
             ];
@@ -138,6 +142,7 @@ class AdminController extends Controller
             $diseaseDistribution = [
                 'blast' => ['count' => $blastCount, 'percent' => $calcPercent($blastCount), 'label' => 'Leaf Blast', 'severity' => 'Severe'],
                 'blb' => ['count' => $blbCount, 'percent' => $calcPercent($blbCount), 'label' => 'Bacterial Leaf Blight', 'severity' => 'Moderate'],
+                'sheath_blight' => ['count' => $sheathBlightCount, 'percent' => $calcPercent($sheathBlightCount), 'label' => 'Sheath Blight', 'severity' => 'Moderate'],
                 'tungro' => ['count' => $tungroCount, 'percent' => $calcPercent($tungroCount), 'label' => 'Rice Tungro Disease', 'severity' => 'Severe'],
                 'brown_spot' => ['count' => $brownSpotCount, 'percent' => $calcPercent($brownSpotCount), 'label' => 'Brown Spot', 'severity' => 'Moderate'],
                 'healthy' => ['count' => $healthyCount, 'percent' => $calcPercent($healthyCount), 'label' => 'Healthy Rice Leaves', 'severity' => 'Optimal'],
