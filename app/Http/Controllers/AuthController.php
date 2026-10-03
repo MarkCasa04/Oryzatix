@@ -487,16 +487,16 @@ class AuthController extends Controller
 
     public function redirectToGoogle(Request $request)
     {
-        if (!config('services.google.client_id')) {
+        $clientId = config('services.google.client_id');
+        if (!$clientId) {
             return redirect('/')->with('auth_error', 'Google Client ID not configured.');
         }
 
         $mode = $request->query('mode', 'login');
-        session(['google_auth_mode' => $mode]);
-
-        $redirectUrl = route('auth.google.callback');
+        $redirectUrl = route('auth.google.callback') . '?mode=' . urlencode($mode);
 
         return Socialite::driver('google')
+            ->stateless()
             ->redirectUrl($redirectUrl)
             ->with(['prompt' => 'select_account'])
             ->redirect();
@@ -505,62 +505,56 @@ class AuthController extends Controller
     public function handleGoogleCallback(Request $request)
     {
         try {
-            if (!config('services.google.client_id')) {
-                return redirect('/');
+            $clientId = config('services.google.client_id');
+            if (!$clientId) {
+                return redirect('/')->with('auth_error', 'Google Client ID not configured.');
             }
 
-            $redirectUrl = route('auth.google.callback');
+            $mode = $request->query('mode', session('google_auth_mode', 'login'));
+            $redirectUrl = route('auth.google.callback') . '?mode=' . urlencode($mode);
+
             $googleUser = Socialite::driver('google')
+                ->stateless()
                 ->redirectUrl($redirectUrl)
                 ->user();
+
             $email = strtolower(trim($googleUser->getEmail()));
             $name = $googleUser->getName() ?: explode('@', $email)[0];
             $googleId = $googleUser->getId();
             $avatar = $googleUser->getAvatar();
 
-            $mode = session('google_auth_mode', 'login');
-            session()->forget('google_auth_mode');
-
             $user = User::where('email', $email)->first();
 
-            if ($mode === 'register') {
-                if ($user) {
-                    return redirect('/')->with('auth_error', 'Ang Google account na ito (' . $email . ') ay rehistrado na. Mangyaring mag-log in na lamang.');
-                }
-
+            if (!$user) {
+                // Auto-register new farmer account with Google
                 $user = User::create([
                     'name' => $name,
                     'email' => $email,
-                    'password' => Str::random(16),
+                    'password' => Hash::make(Str::random(24)),
                     'role' => 'farmer',
                     'location' => 'Registered via Google Account',
                     'google_id' => $googleId,
-                    'avatar' => $avatar,
+                    'avatar' => $avatar ?: null,
                 ]);
-
-                return redirect('/')->with('auth_success', 'Account has been created successfully! Please sign in with Continue with Google.');
+            } else {
+                $user->google_id = $googleId;
+                if ($avatar && !$user->avatar) {
+                    $user->avatar = $avatar;
+                }
+                $user->save();
             }
-
-            // Login mode
-            if (!$user) {
-                return redirect('/')->with('auth_error', 'Walang account na nakarehistro para sa Google account na ito (' . $email . '). Mangyaring gumawa muna ng account o mag-register bago mag-log in.');
-            }
-
-            $user->google_id = $googleId;
-            if ($avatar) {
-                $user->avatar = $avatar;
-            }
-            $user->save();
 
             Auth::guard('web')->login($user);
-            $request->session()->regenerate();
+            if ($request->hasSession()) {
+                $request->session()->regenerate();
+            }
 
             $authToken = $user->createToken('auth_token')->plainTextToken;
 
             return redirect('/')->with('google_login_success', true)->with('auth_token', $authToken);
         } catch (Exception $e) {
             Log::error('Google Socialite error: ' . $e->getMessage());
-            return redirect('/')->with('auth_error', 'Failed to authenticate with Google. Please try again.');
+            return redirect('/')->with('auth_error', 'Failed to authenticate with Google: ' . $e->getMessage());
         }
     }
 
