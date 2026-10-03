@@ -1,0 +1,3631 @@
+{
+    "generated_at": "2026-10-01 13:16:10",
+    "total": 362,
+    "severity_distribution": {
+        "moderate": 56,
+        "mild": 273,
+        "severe": 33
+    },
+    "images": {
+        "Brown_Spot (117).jpg": {
+            "filename": "Brown_Spot (117).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 27,
+            "confidence": 91.4,
+            "dhash": "0001100000011000000110000001100000011000000110000001100000101100",
+            "md5": "379075bf72cfc65820b0508ca8ecf15a",
+            "filesize": 34199
+        },
+        "Brown_Spot (118).jpg": {
+            "filename": "Brown_Spot (118).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 31.7,
+            "confidence": 92.3,
+            "dhash": "0001100000011000000110000001100000011000000110000001100000011000",
+            "md5": "d7052707daf9fcb69bcca252222b38a9",
+            "filesize": 34948
+        },
+        "Brown_Spot (122).jpg": {
+            "filename": "Brown_Spot (122).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000110000001100000111000001110000001100000111000001110000011100",
+            "md5": "0c5ca760e20a0d1570d0c2f0f2ab4438",
+            "filesize": 27442
+        },
+        "Brown_Spot (124).jpg": {
+            "filename": "Brown_Spot (124).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 71.6,
+            "confidence": 95.1,
+            "dhash": "0001100000011000000110000001100000011000000110000001100000011000",
+            "md5": "fbe078af5c84d77d313f15d7f235adc8",
+            "filesize": 26664
+        },
+        "Brown_Spot (135).jpg": {
+            "filename": "Brown_Spot (135).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 11.2,
+            "confidence": 94.7,
+            "dhash": "0001110000011100000011000000110000001100000011000000110000001100",
+            "md5": "d6010984ac685ddb5809d8894555e2d6",
+            "filesize": 26558
+        },
+        "Brown_Spot (141).jpg": {
+            "filename": "Brown_Spot (141).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 91.2,
+            "confidence": 97.8,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "011ba058734f74dbf408364d4e59b950",
+            "filesize": 17558
+        },
+        "Brown_Spot (154).jpg": {
+            "filename": "Brown_Spot (154).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 23.8,
+            "confidence": 97.7,
+            "dhash": "0000110000001100000011000000110000001100000011000000111000001110",
+            "md5": "4996d80fcd1b47e6e973153eea60a24c",
+            "filesize": 25775
+        },
+        "Brown_Spot (156).jpg": {
+            "filename": "Brown_Spot (156).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 90.4,
+            "confidence": 97.7,
+            "dhash": "0000011000000110000001100000011000000110000001100000011000000110",
+            "md5": "6279ebd79a0c9abf576ca1a306466984",
+            "filesize": 21744
+        },
+        "Brown_Spot (157).jpg": {
+            "filename": "Brown_Spot (157).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 94.8,
+            "confidence": 98.3,
+            "dhash": "0001110000011100000111000001110000011100000111000001110000011100",
+            "md5": "e6387206e84e3c5f0735368ab415c9a6",
+            "filesize": 26412
+        },
+        "Brown_Spot (159).jpg": {
+            "filename": "Brown_Spot (159).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 85.2,
+            "confidence": 97,
+            "dhash": "0000110000001100000010000001100000011000000110000001100000011000",
+            "md5": "9994accf61ed754372b600c44549217b",
+            "filesize": 20425
+        },
+        "Brown_Spot (160).jpg": {
+            "filename": "Brown_Spot (160).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 92.9,
+            "confidence": 98.1,
+            "dhash": "0000110000001100000111000000110000011100000111000001110000011100",
+            "md5": "8d219c96d26b4f825d237966c710141c",
+            "filesize": 26141
+        },
+        "Brown_Spot (172).jpg": {
+            "filename": "Brown_Spot (172).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 92.1,
+            "confidence": 98,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "1765de62c5ed9560f31d8211b5170e49",
+            "filesize": 25888
+        },
+        "Brown_Spot (189).jpg": {
+            "filename": "Brown_Spot (189).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 40.8,
+            "confidence": 94.2,
+            "dhash": "0001100000011000000110000001100000011100000111000001110000011100",
+            "md5": "a011bb5cb495d8752c329b824930f110",
+            "filesize": 23371
+        },
+        "Brown_Spot (190).jpg": {
+            "filename": "Brown_Spot (190).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 24.7,
+            "confidence": 97.9,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "0305aa687a1d3b357e581aaff700660d",
+            "filesize": 26765
+        },
+        "Brown_Spot (191).jpg": {
+            "filename": "Brown_Spot (191).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 25.5,
+            "confidence": 91.1,
+            "dhash": "0000110000001100000011000000110000001100000011100000111000001110",
+            "md5": "c512cf5bd943c45f8613f45bd383da4d",
+            "filesize": 27543
+        },
+        "Brown_Spot (21).jpg": {
+            "filename": "Brown_Spot (21).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 94.8,
+            "confidence": 98.3,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "b05b319cae474d9beaa9fafbfdf19c15",
+            "filesize": 28996
+        },
+        "Brown_Spot (216).jpg": {
+            "filename": "Brown_Spot (216).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 13.4,
+            "confidence": 95.2,
+            "dhash": "0001110000011100000111000001110000011100000111000001110000011100",
+            "md5": "b7449b50e8159ae9590a2530609523a1",
+            "filesize": 29654
+        },
+        "Brown_Spot (217).jpg": {
+            "filename": "Brown_Spot (217).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 13.7,
+            "confidence": 95.3,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "623e3fb7563b39db39af00bda3f56a76",
+            "filesize": 29326
+        },
+        "Brown_Spot (252).jpg": {
+            "filename": "Brown_Spot (252).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 84.3,
+            "confidence": 96.9,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000000100",
+            "md5": "2fcfb728e5445012f8668c5664838877",
+            "filesize": 25374
+        },
+        "Brown_Spot (275).jpg": {
+            "filename": "Brown_Spot (275).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 17.5,
+            "confidence": 96.2,
+            "dhash": "0001100000011000000110000001100000011100000111000001110000011100",
+            "md5": "57353ee9051f5f913c35ecf1282b2b63",
+            "filesize": 26041
+        },
+        "Brown_Spot (33).jpg": {
+            "filename": "Brown_Spot (33).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 85,
+            "confidence": 97,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "43eb8b8affee65bae8ef02df76c7b540",
+            "filesize": 29362
+        },
+        "Brown_Spot (343).jpg": {
+            "filename": "Brown_Spot (343).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 82.6,
+            "confidence": 96.6,
+            "dhash": "0000111000001110000011100000111000001110000011100000111000001110",
+            "md5": "4b554fa66b14f442ad7ee16dbea31a63",
+            "filesize": 29493
+        },
+        "Brown_Spot (346).jpg": {
+            "filename": "Brown_Spot (346).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 92.4,
+            "confidence": 98,
+            "dhash": "0000011000001110000011100000111000001110000011100000111000001110",
+            "md5": "c9cfa237f14b149011a09aac8d72c7c3",
+            "filesize": 25601
+        },
+        "Brown_Spot (348).jpg": {
+            "filename": "Brown_Spot (348).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 87.3,
+            "confidence": 97.3,
+            "dhash": "0000011000000110000001100000110000001100000011000000110000001100",
+            "md5": "fbf22ef3904daec294580e3ccc47bf2a",
+            "filesize": 22130
+        },
+        "Brown_Spot (349).jpg": {
+            "filename": "Brown_Spot (349).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 91.2,
+            "confidence": 97.8,
+            "dhash": "0001110000011100000111000000110000001100000011000001100000011000",
+            "md5": "2f2fc455708b82d64d0dfffab4e2b317",
+            "filesize": 26273
+        },
+        "Brown_Spot (362).jpg": {
+            "filename": "Brown_Spot (362).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 93.9,
+            "confidence": 98.2,
+            "dhash": "0001011000001110000101100000111000001110000011100000111000001110",
+            "md5": "d8692b366ed2ce256887d8cce3c36171",
+            "filesize": 29514
+        },
+        "Brown_Spot (370).jpg": {
+            "filename": "Brown_Spot (370).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 52.9,
+            "confidence": 96.6,
+            "dhash": "0000010000000100000001000000010000000100000001100000011000000110",
+            "md5": "9e416868135cea57418071b4184b35c5",
+            "filesize": 31330
+        },
+        "Brown_Spot (371).jpg": {
+            "filename": "Brown_Spot (371).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 85.4,
+            "confidence": 97,
+            "dhash": "0000010000000100000001000000010000000100000011000000110000001100",
+            "md5": "cac9a71249efc55a79eb63021a51e4d9",
+            "filesize": 38396
+        },
+        "Brown_Spot (376).jpg": {
+            "filename": "Brown_Spot (376).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 93.1,
+            "confidence": 98.1,
+            "dhash": "0000111000001110000011100000111000000110000001100000011000000110",
+            "md5": "4f7baa5b2da31aa9609643bc19fcfb57",
+            "filesize": 34470
+        },
+        "Brown_Spot (378).jpg": {
+            "filename": "Brown_Spot (378).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 73.6,
+            "confidence": 95.4,
+            "dhash": "0001011000010110000101100001011000010110000101100001011000010110",
+            "md5": "a57185019fa1692138610ed398af832f",
+            "filesize": 36732
+        },
+        "Brown_Spot (381).jpg": {
+            "filename": "Brown_Spot (381).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 88.5,
+            "confidence": 97.5,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "4dcaeb9ba5634e212e2729adb0c8ddc6",
+            "filesize": 29869
+        },
+        "Brown_Spot (393).jpg": {
+            "filename": "Brown_Spot (393).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 78.8,
+            "confidence": 96.1,
+            "dhash": "0000110000001100000011000000110000001110000011100000111000001110",
+            "md5": "1c1c0869ef4e398caeeb613a4ce193af",
+            "filesize": 27993
+        },
+        "Brown_Spot (398).jpg": {
+            "filename": "Brown_Spot (398).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 75.1,
+            "confidence": 95.6,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "3e21972da8d36be11431f834b4509e7e",
+            "filesize": 19546
+        },
+        "Brown_Spot (402).jpg": {
+            "filename": "Brown_Spot (402).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 73.4,
+            "confidence": 95.4,
+            "dhash": "0001110000011100000101100001011000010110000111100001111000011110",
+            "md5": "757bf8d3bc111fa8622eee1fc775ed59",
+            "filesize": 29614
+        },
+        "Brown_Spot (403).jpg": {
+            "filename": "Brown_Spot (403).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 73.6,
+            "confidence": 95.4,
+            "dhash": "0000110000001100000011000000110000001100000011000001110000001100",
+            "md5": "4ef5dd1983bcc319cc3bc0b4fe4bd383",
+            "filesize": 31788
+        },
+        "Brown_Spot (404).jpg": {
+            "filename": "Brown_Spot (404).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 91.5,
+            "confidence": 97.9,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "01306015e113f834f63a77843dc2912f",
+            "filesize": 23408
+        },
+        "Brown_Spot (405).jpg": {
+            "filename": "Brown_Spot (405).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 92.5,
+            "confidence": 98,
+            "dhash": "0000010000000100000001000000011000000110000001100000011000000110",
+            "md5": "cd48ea79ce8185efff6d2253f51596f6",
+            "filesize": 27612
+        },
+        "Brown_Spot (406).jpg": {
+            "filename": "Brown_Spot (406).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 27.3,
+            "confidence": 91.5,
+            "dhash": "0000011000000110000001100000011000000110000001100000011000000110",
+            "md5": "5f32eea49c765da65722ade720dcba33",
+            "filesize": 32705
+        },
+        "Brown_Spot (407).jpg": {
+            "filename": "Brown_Spot (407).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 84.2,
+            "confidence": 96.9,
+            "dhash": "0000000000000000000000000011001111111111010000000000000000000000",
+            "md5": "a6523838b33f2ead6a36081ec01e495a",
+            "filesize": 26294
+        },
+        "Brown_Spot (409).jpg": {
+            "filename": "Brown_Spot (409).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 88.6,
+            "confidence": 97.5,
+            "dhash": "0001110000011100000111000001110000011100000111000001110000011100",
+            "md5": "275e999a66ea1477c26b8e13f6d552e0",
+            "filesize": 30037
+        },
+        "Brown_Spot (410).jpg": {
+            "filename": "Brown_Spot (410).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 45.8,
+            "confidence": 95.2,
+            "dhash": "0000000000000000000100011001000110100101110000000000000000000000",
+            "md5": "a47ef508c21476606531bee8a8e236f3",
+            "filesize": 30568
+        },
+        "Brown_Spot (411).jpg": {
+            "filename": "Brown_Spot (411).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 31.1,
+            "confidence": 92.2,
+            "dhash": "0000010000000100000001000000010000000100000001000000010000000100",
+            "md5": "117ed8544d037e80a18a4754446655c0",
+            "filesize": 23080
+        },
+        "Brown_Spot (412).jpg": {
+            "filename": "Brown_Spot (412).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 40.8,
+            "confidence": 94.2,
+            "dhash": "0001011000010110000111100001111000011110000111100001111000011110",
+            "md5": "d4cac30788bc9dd7c58ba7964a41d3d9",
+            "filesize": 35337
+        },
+        "Brown_Spot (413).jpg": {
+            "filename": "Brown_Spot (413).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 13.8,
+            "confidence": 95.3,
+            "dhash": "0000011000000100000001000000010000000100000001000000010000000100",
+            "md5": "672498d89e3e4074537ca1382a76d421",
+            "filesize": 29213
+        },
+        "Brown_Spot (465).jpg": {
+            "filename": "Brown_Spot (465).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.3,
+            "confidence": 94.5,
+            "dhash": "0000110000001100000111000001110000011100000011000000110000001100",
+            "md5": "a61ebb8f7c49eddb2c1ceffdacba0354",
+            "filesize": 31424
+        },
+        "Brown_Spot (468).jpg": {
+            "filename": "Brown_Spot (468).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 83.3,
+            "confidence": 96.7,
+            "dhash": "0001110000001100000011000000110000001100000011000000110000001100",
+            "md5": "a3ff970e5876f69dff54754c47512e8c",
+            "filesize": 28371
+        },
+        "Brown_Spot (49).jpg": {
+            "filename": "Brown_Spot (49).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 76,
+            "confidence": 95.7,
+            "dhash": "0001110000011100000111000001110000011100000111000001110000011100",
+            "md5": "246efc0c2a2740e0f6c9552f5c9e5d0b",
+            "filesize": 30735
+        },
+        "Brown_Spot (51).jpg": {
+            "filename": "Brown_Spot (51).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "9d6118dc7792187b1bdc1ad189cd7b12",
+            "filesize": 27652
+        },
+        "Brown_Spot (8).jpg": {
+            "filename": "Brown_Spot (8).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.4,
+            "confidence": 94.5,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "4ee38ed303e0ce6dc45c4c18018360ca",
+            "filesize": 23263
+        },
+        "Brown_Spot (87).jpg": {
+            "filename": "Brown_Spot (87).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 9.2,
+            "confidence": 94.2,
+            "dhash": "0000000000000000000000000010010000000000000000100000000000000000",
+            "md5": "10d45dbfbbb2e7e85375ac4c3a78bfeb",
+            "filesize": 30496
+        },
+        "Brown_Spot (88).jpg": {
+            "filename": "Brown_Spot (88).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 92.5,
+            "confidence": 98,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "fdce3b89f03d97c01f4b538c3bb94dfe",
+            "filesize": 27845
+        },
+        "Brown_Spot (89).jpg": {
+            "filename": "Brown_Spot (89).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 69.1,
+            "confidence": 94.8,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "bfd56a94b9f7ce8be064e6f7e0e53a52",
+            "filesize": 21770
+        },
+        "Brown_Spot (9).jpg": {
+            "filename": "Brown_Spot (9).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 21.5,
+            "confidence": 97.2,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "0160475eb46ed8492dc794d58ae64aae",
+            "filesize": 25034
+        },
+        "Brown_Spot (90).jpg": {
+            "filename": "Brown_Spot (90).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000011000000110000011100000110000001100000011000000110000001100",
+            "md5": "dfc505b2a9c48574de6d8a281d641b16",
+            "filesize": 26045
+        },
+        "Brown_Spot (91).jpg": {
+            "filename": "Brown_Spot (91).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 20.4,
+            "confidence": 96.9,
+            "dhash": "0000011000000110000001100000011000000110000001100000011000001110",
+            "md5": "ec46b0d04ced265bcf71eb35ea1d2734",
+            "filesize": 27076
+        },
+        "Brown_Spot (92).jpg": {
+            "filename": "Brown_Spot (92).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001110000011100000011000001110000011100000111000001110000011100",
+            "md5": "4e933db049fc5b3c71aa2eb022a81ba7",
+            "filesize": 23708
+        },
+        "Brown_Spot (94).jpg": {
+            "filename": "Brown_Spot (94).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 7.1,
+            "confidence": 93.7,
+            "dhash": "0000111000001110000011100000111000001110000001100000011000000110",
+            "md5": "9e02e8a01ef7386d31fa9e10b8346b1f",
+            "filesize": 28732
+        },
+        "Brown_Spot (95).jpg": {
+            "filename": "Brown_Spot (95).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 37.8,
+            "confidence": 93.6,
+            "dhash": "0000110000001100000011100000011000001110000011100000110000001100",
+            "md5": "10d6b82e121acc23129a1dbfc62a4b03",
+            "filesize": 30540
+        },
+        "Brown_Spot (96).jpg": {
+            "filename": "Brown_Spot (96).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000011000001110000001100000111000001110000001100000011100001011",
+            "md5": "b926c880a60ebdaae4c988e6100b5a4b",
+            "filesize": 27547
+        },
+        "Brown_Spot (97).jpg": {
+            "filename": "Brown_Spot (97).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001110000011100000111000001110000011100000111000001111000011110",
+            "md5": "0d41c19d0c8dd6592e4a36f3de6729ba",
+            "filesize": 28312
+        },
+        "Brown_Spot (98).jpg": {
+            "filename": "Brown_Spot (98).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 7.8,
+            "confidence": 93.9,
+            "dhash": "0000111000000110000011100000111000001100000011000000110000001100",
+            "md5": "26608106bc060806f5dcbedf46414f3a",
+            "filesize": 28767
+        },
+        "Brown_Spot_Iba (1).jpg": {
+            "filename": "Brown_Spot_Iba (1).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "b33eb5ac81941d3e4fd0bd65cf1cfa24",
+            "filesize": 22170
+        },
+        "Brown_Spot_Iba (10).jpg": {
+            "filename": "Brown_Spot_Iba (10).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000111000001110000011000000110000011100000111000001110000011100",
+            "md5": "16c687241154048778c7c3aa1e017d25",
+            "filesize": 29100
+        },
+        "Brown_Spot_Iba (11).jpg": {
+            "filename": "Brown_Spot_Iba (11).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 96.8,
+            "dhash": "0000100000001000000011000000110000001100000011000000110000001000",
+            "md5": "8364b00c272dc919c53dd4cc49ad58e0",
+            "filesize": 20348
+        },
+        "Brown_Spot_Iba (12).jpg": {
+            "filename": "Brown_Spot_Iba (12).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 39.1,
+            "confidence": 93.8,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "2c78c4dc0e273d2c3d6a13751861e0c0",
+            "filesize": 26292
+        },
+        "Brown_Spot_Iba (13).jpg": {
+            "filename": "Brown_Spot_Iba (13).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 19.8,
+            "confidence": 96.8,
+            "dhash": "0000010000000100000001100000011000000110000001100000011000000110",
+            "md5": "c37883cc516c334db1f5a933b3d6bc33",
+            "filesize": 23015
+        },
+        "Brown_Spot_Iba (14).jpg": {
+            "filename": "Brown_Spot_Iba (14).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "dc8c1bbca3ba58d5434db6f993a85be3",
+            "filesize": 25308
+        },
+        "Brown_Spot_Iba (15).jpg": {
+            "filename": "Brown_Spot_Iba (15).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 51.3,
+            "confidence": 96.3,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "c7563d38aa1aed4437d3f92aada08830",
+            "filesize": 24705
+        },
+        "Brown_Spot_Iba (16).jpg": {
+            "filename": "Brown_Spot_Iba (16).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 29.4,
+            "confidence": 91.9,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "eca56c26df63cf379301b605e97fa5ee",
+            "filesize": 21117
+        },
+        "Brown_Spot_Iba (17).jpg": {
+            "filename": "Brown_Spot_Iba (17).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 31.8,
+            "confidence": 92.4,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "05ffab2c54bd22471bd4a421aaf164e8",
+            "filesize": 20512
+        },
+        "Brown_Spot_Iba (18).jpg": {
+            "filename": "Brown_Spot_Iba (18).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 23.4,
+            "confidence": 97.6,
+            "dhash": "0000100000001100000011000000110000001100000011000000110000001100",
+            "md5": "915db173f26675ba7508c474c491b8db",
+            "filesize": 21194
+        },
+        "Brown_Spot_Iba (19).jpg": {
+            "filename": "Brown_Spot_Iba (19).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000011000000110000001100000110000001100000011000001110000011000",
+            "md5": "1e0ebd1624296953abcbd3b84585e503",
+            "filesize": 31471
+        },
+        "Brown_Spot_Iba (2).jpg": {
+            "filename": "Brown_Spot_Iba (2).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001111000011110000111100001111000001110000011000000110000001100",
+            "md5": "1e5c395c09361601a98ae6dfdfd6eed3",
+            "filesize": 31857
+        },
+        "Brown_Spot_Iba (20).jpg": {
+            "filename": "Brown_Spot_Iba (20).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000000000000000111111000010011100000000000000000000000000000000",
+            "md5": "23486d2cf70b05c7da114e0084110b82",
+            "filesize": 26337
+        },
+        "Brown_Spot_Iba (21).jpg": {
+            "filename": "Brown_Spot_Iba (21).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000100000001000000011000000110000001100000011000000110000001100",
+            "md5": "30fb0f56c069fb10a4a538382a1beea9",
+            "filesize": 19782
+        },
+        "Brown_Spot_Iba (22).jpg": {
+            "filename": "Brown_Spot_Iba (22).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 49.3,
+            "confidence": 95.9,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "3c018d50e466464b6a7d33a2a0142ea8",
+            "filesize": 21103
+        },
+        "Brown_Spot_Iba (23).jpg": {
+            "filename": "Brown_Spot_Iba (23).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 29.4,
+            "confidence": 91.9,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "4220841e76c6badc2e0370cdfb849bd8",
+            "filesize": 22839
+        },
+        "Brown_Spot_Iba (24).jpg": {
+            "filename": "Brown_Spot_Iba (24).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 38,
+            "confidence": 93.6,
+            "dhash": "0000100000001000000010000000100000001000000011000000110000001100",
+            "md5": "01e37e76cdd4fa9a50911c762db7ea94",
+            "filesize": 17020
+        },
+        "Brown_Spot_Iba (25).jpg": {
+            "filename": "Brown_Spot_Iba (25).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 47.2,
+            "confidence": 95.4,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "5128b3aa5655f211d2517baf092f2e20",
+            "filesize": 22105
+        },
+        "Brown_Spot_Iba (26).jpg": {
+            "filename": "Brown_Spot_Iba (26).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 5.6,
+            "confidence": 93.3,
+            "dhash": "0000010000000100000001000000010000000110000001100000011000000110",
+            "md5": "720caac1aa317ff562bb6e3de621e53d",
+            "filesize": 23412
+        },
+        "Brown_Spot_Iba (27).jpg": {
+            "filename": "Brown_Spot_Iba (27).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 5.8,
+            "confidence": 93.4,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "67d3b11abf68657d6398b68a265ea9ff",
+            "filesize": 26002
+        },
+        "Brown_Spot_Iba (28).jpg": {
+            "filename": "Brown_Spot_Iba (28).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "d09e565abad57f5b88d1a3d91af9cab1",
+            "filesize": 24324
+        },
+        "Brown_Spot_Iba (29).jpg": {
+            "filename": "Brown_Spot_Iba (29).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 48,
+            "confidence": 95.6,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "e0f12d92f5d06dfd4dcc4448df6e2338",
+            "filesize": 20655
+        },
+        "Brown_Spot_Iba (3).jpg": {
+            "filename": "Brown_Spot_Iba (3).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000100000001000000010000000100000001100000011000000110000001100",
+            "md5": "029c4c2c8437ea15f0652a38d9b55a23",
+            "filesize": 15387
+        },
+        "Brown_Spot_Iba (30).jpg": {
+            "filename": "Brown_Spot_Iba (30).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "51e413ef6bd4cf008ba7a230909fda50",
+            "filesize": 21378
+        },
+        "Brown_Spot_Iba (31).jpg": {
+            "filename": "Brown_Spot_Iba (31).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000001100000011000001110000011000001110000011000001100000011000",
+            "md5": "a83cf049d6173d33462f5650348336e1",
+            "filesize": 35187
+        },
+        "Brown_Spot_Iba (32).jpg": {
+            "filename": "Brown_Spot_Iba (32).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 93.8,
+            "confidence": 98.2,
+            "dhash": "0000000000000000111000001111111100000100000000000000000000000000",
+            "md5": "8c06538bedcc50603be10b348105b1be",
+            "filesize": 27011
+        },
+        "Brown_Spot_Iba (33).jpg": {
+            "filename": "Brown_Spot_Iba (33).jpg",
+            "disease": "brown_spot",
+            "severity": "severe",
+            "affected_percentage": 94.2,
+            "confidence": 98.3,
+            "dhash": "0000000011000000111110000011111100000101000000000000000000000000",
+            "md5": "6d13fa33d553bc081cec39b9b01bd925",
+            "filesize": 32716
+        },
+        "Brown_Spot_Iba (34).jpg": {
+            "filename": "Brown_Spot_Iba (34).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 26,
+            "confidence": 91.2,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "79ec9ab1f3bb1cf0e4b83fe84bef0274",
+            "filesize": 25959
+        },
+        "Brown_Spot_Iba (4).jpg": {
+            "filename": "Brown_Spot_Iba (4).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 6.9,
+            "confidence": 93.7,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "d82322028f7d9f27ef8aabbd0d9ba40a",
+            "filesize": 17629
+        },
+        "Brown_Spot_Iba (5).jpg": {
+            "filename": "Brown_Spot_Iba (5).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "d11d2e306d97ee5276b7eb12053807fa",
+            "filesize": 22421
+        },
+        "Brown_Spot_Iba (6).jpg": {
+            "filename": "Brown_Spot_Iba (6).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4.5,
+            "confidence": 93.1,
+            "dhash": "0000111000001110000011100000111000001110000011100000111000000110",
+            "md5": "2f14b97ae99715c2227e8ab301c09dda",
+            "filesize": 33664
+        },
+        "Brown_Spot_Iba (7).jpg": {
+            "filename": "Brown_Spot_Iba (7).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 5.3,
+            "confidence": 93.3,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "7d707c6895c538bf096e6a5827d060e3",
+            "filesize": 20108
+        },
+        "Brown_Spot_Iba (8).jpg": {
+            "filename": "Brown_Spot_Iba (8).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 33.7,
+            "confidence": 92.7,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "77335ea027eae2d4c6c51cf9779fd03f",
+            "filesize": 21167
+        },
+        "Brown_Spot_Iba (9).jpg": {
+            "filename": "Brown_Spot_Iba (9).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 34.7,
+            "confidence": 92.9,
+            "dhash": "0000100000001100000011000000110000001100000011000000110000001100",
+            "md5": "eb682405ea10e31cb765689f8775532d",
+            "filesize": 24184
+        },
+        "Brown_spot  (1).jpg": {
+            "filename": "Brown_spot  (1).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 44.4,
+            "confidence": 94.9,
+            "dhash": "0001000000010000000100011001000110010000000100000011000100110001",
+            "md5": "60b09446056084a8670c61710775fef3",
+            "filesize": 687030
+        },
+        "Brown_spot  (10).jpg": {
+            "filename": "Brown_spot  (10).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1000000111000000011001010010001101110000010110000100100001101100",
+            "md5": "89ccbc82449987b431cf2998bc956ced",
+            "filesize": 669120
+        },
+        "Brown_spot  (100).jpg": {
+            "filename": "Brown_spot  (100).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001101000101010100001000001110011000101001100000101110000110011",
+            "md5": "f98593f79b863d42e0d6028dbd8f29f7",
+            "filesize": 684133
+        },
+        "Brown_spot  (101).jpg": {
+            "filename": "Brown_spot  (101).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001101000101010110001000001110011000100001100000101110000010011",
+            "md5": "5d3da02bc5a13e3426e8b8d87009741d",
+            "filesize": 680414
+        },
+        "Brown_spot  (102).jpg": {
+            "filename": "Brown_spot  (102).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001101000101010110001000001110011000100001100000101110000010011",
+            "md5": "d54e0b02b234bf5da60f8ef854be98b0",
+            "filesize": 677224
+        },
+        "Brown_spot  (103).jpg": {
+            "filename": "Brown_spot  (103).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001001000101010100011000001110011000101011100010101110000110011",
+            "md5": "3b9b740fad50364f5d52963ba6d6983e",
+            "filesize": 689012
+        },
+        "Brown_spot  (104).jpg": {
+            "filename": "Brown_spot  (104).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001101000001010001000001100010000100100001110000101110001010011",
+            "md5": "f115c0a726d13eac8cda1aa42e4c724e",
+            "filesize": 682657
+        },
+        "Brown_spot  (105).jpg": {
+            "filename": "Brown_spot  (105).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 5.8,
+            "confidence": 93.4,
+            "dhash": "0000101000001010101000001100010000100100001110000101110001010011",
+            "md5": "2b0eb98e75bfcf6e990283e01a9bd7b2",
+            "filesize": 666674
+        },
+        "Brown_spot  (106).jpg": {
+            "filename": "Brown_spot  (106).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4.6,
+            "confidence": 93.1,
+            "dhash": "0001101000001010001000001100010000100100001110000101110001010010",
+            "md5": "d144e4240b17e1c9b412c01f04880d14",
+            "filesize": 682365
+        },
+        "Brown_spot  (107).jpg": {
+            "filename": "Brown_spot  (107).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 7.5,
+            "confidence": 93.8,
+            "dhash": "0001101000001010001000001100010000100100001110000101110001010010",
+            "md5": "767c2af439bd55414ea15a7ac8f1a969",
+            "filesize": 690761
+        },
+        "Brown_spot  (108).jpg": {
+            "filename": "Brown_spot  (108).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1000001111001001110001010110001001100010001100100001000100111001",
+            "md5": "4fec8fdf0f8079e97af89866b060bdf4",
+            "filesize": 654998
+        },
+        "Brown_spot  (109).jpg": {
+            "filename": "Brown_spot  (109).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1000001111001001011001010110001000110010001100100001100100111001",
+            "md5": "60e5bad33cadc4968ac0f7a5d4d718d4",
+            "filesize": 639137
+        },
+        "Brown_spot  (11).jpg": {
+            "filename": "Brown_spot  (11).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4.7,
+            "confidence": 93.1,
+            "dhash": "1100000111000000011001010011001101010000010110000100110000000100",
+            "md5": "0f21387171f9578674595fffc8bde63b",
+            "filesize": 656459
+        },
+        "Brown_spot  (110).jpg": {
+            "filename": "Brown_spot  (110).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100000111001101011001000110001000110011001100010001100100001001",
+            "md5": "46aa36fc50b7a7698e6c24d9d20bb585",
+            "filesize": 730747
+        },
+        "Brown_spot  (111).jpg": {
+            "filename": "Brown_spot  (111).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100000111001101011001010110001000110010001100010001100100011001",
+            "md5": "bf98b0d9bc8e4acd5c50c19fac767803",
+            "filesize": 678388
+        },
+        "Brown_spot  (112).jpg": {
+            "filename": "Brown_spot  (112).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4.6,
+            "confidence": 93.1,
+            "dhash": "1100000101001101011001010110001000110010001100100001100100101001",
+            "md5": "2d8e0f08e6f6237422f33b6713d32af0",
+            "filesize": 714679
+        },
+        "Brown_spot  (113).jpg": {
+            "filename": "Brown_spot  (113).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100001101000101011001010110001000110010001100100001100100101001",
+            "md5": "50a862437553b0a941cfb815dcd919a6",
+            "filesize": 714641
+        },
+        "Brown_spot  (114).jpg": {
+            "filename": "Brown_spot  (114).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100001101001101011001010110001000110010001100100001100100101001",
+            "md5": "0abb2132a4c2ea1baa1fa3ff70d2cf3e",
+            "filesize": 716974
+        },
+        "Brown_spot  (115).jpg": {
+            "filename": "Brown_spot  (115).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100000101000001011001000011001000110010000100100001100100101001",
+            "md5": "af0723dc4fe918178213dc3f0a2edf92",
+            "filesize": 708697
+        },
+        "Brown_spot  (116).jpg": {
+            "filename": "Brown_spot  (116).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 24.9,
+            "confidence": 98,
+            "dhash": "0010000001110000001100001011000010010000010110000101100000001000",
+            "md5": "34d951d23716c28bf0262889fa2a3079",
+            "filesize": 670347
+        },
+        "Brown_spot  (117).jpg": {
+            "filename": "Brown_spot  (117).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 24,
+            "confidence": 97.8,
+            "dhash": "0010000001110000001100001011000010010000010110000101100000001000",
+            "md5": "c5382e972c6f0048f2280539b3fa4c5e",
+            "filesize": 668930
+        },
+        "Brown_spot  (118).jpg": {
+            "filename": "Brown_spot  (118).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 14.5,
+            "confidence": 95.5,
+            "dhash": "1100001011000001010000010110000101100000101000101011000010110000",
+            "md5": "c7edfff3f2f5f4b7f0456938f81f1175",
+            "filesize": 734942
+        },
+        "Brown_spot  (119).jpg": {
+            "filename": "Brown_spot  (119).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 14.8,
+            "confidence": 95.6,
+            "dhash": "1100001011000001010000010110000101100000101000101011000010110000",
+            "md5": "417907f2baaf4caf0e735f9f0f081c1b",
+            "filesize": 733675
+        },
+        "Brown_spot  (12).jpg": {
+            "filename": "Brown_spot  (12).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100000101000101011000110110001001100000001100100011000000010000",
+            "md5": "72343905789d53e48b8765fd9620e27b",
+            "filesize": 612405
+        },
+        "Brown_spot  (120).jpg": {
+            "filename": "Brown_spot  (120).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 16.8,
+            "confidence": 96,
+            "dhash": "1100001011000001010000010110000101100000111000101011000010110000",
+            "md5": "1b0102d17cbb41bb98038636c031f6dd",
+            "filesize": 738729
+        },
+        "Brown_spot  (121).jpg": {
+            "filename": "Brown_spot  (121).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 16.1,
+            "confidence": 95.9,
+            "dhash": "1100001011000001010000010110000101100000101000101011000010110000",
+            "md5": "e9bf54728f74b6c3a3b80d98cca5ae1f",
+            "filesize": 722220
+        },
+        "Brown_spot  (122).jpg": {
+            "filename": "Brown_spot  (122).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 12.2,
+            "confidence": 94.9,
+            "dhash": "1100000011000001010000010110000001100000101000101011000010110000",
+            "md5": "63d61cee9ed3a034cc089d775beebbe2",
+            "filesize": 721623
+        },
+        "Brown_spot  (123).jpg": {
+            "filename": "Brown_spot  (123).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.1,
+            "confidence": 94.4,
+            "dhash": "0110000011100001011000000011000001110000101100011011000000011000",
+            "md5": "778e541ae2bdd9747160e528792fc985",
+            "filesize": 772868
+        },
+        "Brown_spot  (124).jpg": {
+            "filename": "Brown_spot  (124).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 11.4,
+            "confidence": 94.7,
+            "dhash": "0110001000100011001100000011000000110000101100011011100000011000",
+            "md5": "222179aeef39930007901f330c679149",
+            "filesize": 773681
+        },
+        "Brown_spot  (125).jpg": {
+            "filename": "Brown_spot  (125).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001000100001100100000011000000010010000000010001001001000000100",
+            "md5": "32d853f494b5113b0b68592dfe52896e",
+            "filesize": 807782
+        },
+        "Brown_spot  (126).jpg": {
+            "filename": "Brown_spot  (126).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001000100000110100000011100000000100000000010001001101000000100",
+            "md5": "7baf790c87c7f61fefdef261160bfac2",
+            "filesize": 789767
+        },
+        "Brown_spot  (127).jpg": {
+            "filename": "Brown_spot  (127).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001000100000110100000011100000000110000000010000001001000000100",
+            "md5": "2129c450dc60f5e9926f9d43cd356dbe",
+            "filesize": 806623
+        },
+        "Brown_spot  (128).jpg": {
+            "filename": "Brown_spot  (128).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4.6,
+            "confidence": 93.1,
+            "dhash": "0001000010000110110000011100000010001000000010000001001000000100",
+            "md5": "6c83c09d3712bc64898dabe0da1bb6e6",
+            "filesize": 787144
+        },
+        "Brown_spot  (129).jpg": {
+            "filename": "Brown_spot  (129).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 45,
+            "confidence": 95,
+            "dhash": "0100001100001011000111001011000010010000110110001100100011001100",
+            "md5": "3827756a42c01d9f1a358850ee5a6905",
+            "filesize": 534766
+        },
+        "Brown_spot  (13).jpg": {
+            "filename": "Brown_spot  (13).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100000101000101011000110110000101100000001100100011001000010000",
+            "md5": "fd9a83647d9bcce6ff6c1d4d96cc8ba1",
+            "filesize": 626144
+        },
+        "Brown_spot  (130).jpg": {
+            "filename": "Brown_spot  (130).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 40.1,
+            "confidence": 94,
+            "dhash": "0000000101001001100011001011000010010000110010001100100011001100",
+            "md5": "792605c585ec8f880db280761f4d84d3",
+            "filesize": 545644
+        },
+        "Brown_spot  (131).jpg": {
+            "filename": "Brown_spot  (131).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 46.9,
+            "confidence": 95.4,
+            "dhash": "0100011000010110000100001011000010010000110110001100100011001100",
+            "md5": "c2487c5ea36a9324f918d10fca85f25c",
+            "filesize": 539946
+        },
+        "Brown_spot  (132).jpg": {
+            "filename": "Brown_spot  (132).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 39.1,
+            "confidence": 93.8,
+            "dhash": "0101011110010110100111001001100010010000100110001101100011001000",
+            "md5": "17cc770f0efd38a60630b760a5eba4cb",
+            "filesize": 535837
+        },
+        "Brown_spot  (133).jpg": {
+            "filename": "Brown_spot  (133).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 13.7,
+            "confidence": 95.3,
+            "dhash": "0001110000000110000000000000111011110000000111100000010000100001",
+            "md5": "d7aa46e209a318da5c4e9b85c5141499",
+            "filesize": 714185
+        },
+        "Brown_spot  (134).jpg": {
+            "filename": "Brown_spot  (134).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 13.9,
+            "confidence": 95.3,
+            "dhash": "1000101010001000000000100000000010101110000011110001100000000100",
+            "md5": "577a7550516d46bb8b5a125536db254f",
+            "filesize": 719659
+        },
+        "Brown_spot  (135).jpg": {
+            "filename": "Brown_spot  (135).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 19.5,
+            "confidence": 96.7,
+            "dhash": "0001110000000100000101011001110101011111000000100101010000001000",
+            "md5": "701e4f10d0093b7b0c958121cdd0c599",
+            "filesize": 725525
+        },
+        "Brown_spot  (136).jpg": {
+            "filename": "Brown_spot  (136).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 23.4,
+            "confidence": 97.6,
+            "dhash": "1011001110110111001101100001000110010011001100110101101000111000",
+            "md5": "2559e4d1b2281fc77f83153743c19d24",
+            "filesize": 400740
+        },
+        "Brown_spot  (137).jpg": {
+            "filename": "Brown_spot  (137).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 23.5,
+            "confidence": 97.6,
+            "dhash": "1011001110110111001101100001000110010011000100100101101000111000",
+            "md5": "863285802b6f1810f7c3fdf58575e9f3",
+            "filesize": 396247
+        },
+        "Brown_spot  (138).jpg": {
+            "filename": "Brown_spot  (138).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 18.5,
+            "confidence": 96.4,
+            "dhash": "0000010000000001110011001000001000000001001001101000110100010001",
+            "md5": "be1e0827d2c55bbce4c562a621ac1d3d",
+            "filesize": 662349
+        },
+        "Brown_spot  (139).jpg": {
+            "filename": "Brown_spot  (139).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 24.4,
+            "confidence": 97.9,
+            "dhash": "0011010000100110101101100001011010100100000000001000101000011010",
+            "md5": "d757f56189259af5276053813a1d1841",
+            "filesize": 751687
+        },
+        "Brown_spot  (14).jpg": {
+            "filename": "Brown_spot  (14).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0010010010000011010000111010000010010010010000000010000101110100",
+            "md5": "a3bdad5d8a567a0362fdb7e39ff589de",
+            "filesize": 676552
+        },
+        "Brown_spot  (140).jpg": {
+            "filename": "Brown_spot  (140).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 14.4,
+            "confidence": 95.5,
+            "dhash": "0101011000000110100000000111111000001011000010110100101111001011",
+            "md5": "0b5070448b29bf283809a71a8d085d3f",
+            "filesize": 618536
+        },
+        "Brown_spot  (141).jpg": {
+            "filename": "Brown_spot  (141).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 20.7,
+            "confidence": 97,
+            "dhash": "0011010000000110110000100111000000111100010101110100001110010010",
+            "md5": "7374d582bcea46a1a0453bd3e7096e00",
+            "filesize": 712959
+        },
+        "Brown_spot  (142).jpg": {
+            "filename": "Brown_spot  (142).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 9.2,
+            "confidence": 94.2,
+            "dhash": "1000110010011001100110010111000001101100011010011111000010100100",
+            "md5": "23932f2243e48607e84ce394dda9f6e9",
+            "filesize": 971233
+        },
+        "Brown_spot  (143).jpg": {
+            "filename": "Brown_spot  (143).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.9,
+            "confidence": 94.6,
+            "dhash": "0010110011001101101110010111000000110100011011001111000011010110",
+            "md5": "975db0b8b074810a64ac0a99ff95fa1e",
+            "filesize": 950118
+        },
+        "Brown_spot  (144).jpg": {
+            "filename": "Brown_spot  (144).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.6,
+            "confidence": 94.5,
+            "dhash": "1001100110111011001100100110110001000000111100001010010011100000",
+            "md5": "1ff9bac5df8a30ce8a4ce813f5e69a77",
+            "filesize": 953139
+        },
+        "Brown_spot  (145).jpg": {
+            "filename": "Brown_spot  (145).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 11.6,
+            "confidence": 94.8,
+            "dhash": "0011101000011010100100101111011000111000001111100110111101110011",
+            "md5": "f9d54778776869a2e95920c665a0f9f8",
+            "filesize": 884435
+        },
+        "Brown_spot  (146).jpg": {
+            "filename": "Brown_spot  (146).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 11.8,
+            "confidence": 94.8,
+            "dhash": "0010110101101001001000001110000001100000111000100110000001100100",
+            "md5": "c0343a3e37b5c9a22f4259a2a69a5e03",
+            "filesize": 234469
+        },
+        "Brown_spot  (147).jpg": {
+            "filename": "Brown_spot  (147).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 16.2,
+            "confidence": 95.9,
+            "dhash": "0111101000110010011101000111110000011100110100001110000011101100",
+            "md5": "a335c9cc81c068a999bbde8eae04a3d7",
+            "filesize": 758862
+        },
+        "Brown_spot  (148).jpg": {
+            "filename": "Brown_spot  (148).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 15.9,
+            "confidence": 95.8,
+            "dhash": "0011111000110110000111100001011011000010001111000011110000111101",
+            "md5": "52a16818341c6c0de623446c5035adf5",
+            "filesize": 867990
+        },
+        "Brown_spot  (149).jpg": {
+            "filename": "Brown_spot  (149).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 14.9,
+            "confidence": 95.6,
+            "dhash": "0100110100011111000011110000101110000000100111000100111101001111",
+            "md5": "bc20b6c0207f1fa2a158532b0f765ba0",
+            "filesize": 885161
+        },
+        "Brown_spot  (15).jpg": {
+            "filename": "Brown_spot  (15).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100000001100010001100000011110001001100001001100000001100001010",
+            "md5": "5e548a2b554d794b8836a0aff205515b",
+            "filesize": 640289
+        },
+        "Brown_spot  (150).jpg": {
+            "filename": "Brown_spot  (150).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 18.7,
+            "confidence": 96.5,
+            "dhash": "1010010100000010000001000001001000000100000000000000101000010010",
+            "md5": "32cde5019d1c901ec024d57537cb6a68",
+            "filesize": 777452
+        },
+        "Brown_spot  (151).jpg": {
+            "filename": "Brown_spot  (151).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 16.3,
+            "confidence": 95.9,
+            "dhash": "0110111000011101110001100001111011010000000000110100010000001001",
+            "md5": "683be81c1b352e553ccb42de3242757b",
+            "filesize": 776294
+        },
+        "Brown_spot  (152).jpg": {
+            "filename": "Brown_spot  (152).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 95.4,
+            "dhash": "0101000100001100000001000000110100011000000000011110001110001110",
+            "md5": "e97ecfcbbd63a2fb977c8d9e6249c440",
+            "filesize": 688835
+        },
+        "Brown_spot  (153).jpg": {
+            "filename": "Brown_spot  (153).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 30.8,
+            "confidence": 92.2,
+            "dhash": "0000011110000011110010100011100010000110000011010011001100000000",
+            "md5": "8de6892e9a392bf68f308210093b980b",
+            "filesize": 769288
+        },
+        "Brown_spot  (154).jpg": {
+            "filename": "Brown_spot  (154).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 7.2,
+            "confidence": 93.7,
+            "dhash": "1001000010011000110010001100110011000100110001101100001011000011",
+            "md5": "9e8bc6c43f3e4cee45c35ab4749c63c7",
+            "filesize": 403408
+        },
+        "Brown_spot  (155).jpg": {
+            "filename": "Brown_spot  (155).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100110011000100110001001100010011000110110001101100001011000010",
+            "md5": "7c88a324742005ac7e0c42462c65c51f",
+            "filesize": 421519
+        },
+        "Brown_spot  (156).jpg": {
+            "filename": "Brown_spot  (156).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 9.8,
+            "confidence": 94.4,
+            "dhash": "0000110000101100010001001000011010101000000011110010000000001100",
+            "md5": "6bcd6ade7f5b79c18213c4d694fe54e4",
+            "filesize": 952459
+        },
+        "Brown_spot  (157).jpg": {
+            "filename": "Brown_spot  (157).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 7.2,
+            "confidence": 93.7,
+            "dhash": "0001110000001100001001000110001010011100001001110010001000100010",
+            "md5": "973acbe6dd2ffeafec4540395ff8bedb",
+            "filesize": 955706
+        },
+        "Brown_spot  (158).jpg": {
+            "filename": "Brown_spot  (158).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 6.7,
+            "confidence": 93.6,
+            "dhash": "0001110000001000010001000111000010001110001001110000011000100000",
+            "md5": "a44e71b0f1db4a5cba33144b0881b60a",
+            "filesize": 997404
+        },
+        "Brown_spot  (159).jpg": {
+            "filename": "Brown_spot  (159).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 6.3,
+            "confidence": 93.5,
+            "dhash": "1001100110010110100010101001101001001100000011001000011111000011",
+            "md5": "ded8932ecfe348bdfc35e1135b1286b9",
+            "filesize": 1062212
+        },
+        "Brown_spot  (16).jpg": {
+            "filename": "Brown_spot  (16).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0010000010000000111000100011000100111000001011000000011000101011",
+            "md5": "4dd579aa24632231ae186689a17f4af3",
+            "filesize": 635600
+        },
+        "Brown_spot  (160).jpg": {
+            "filename": "Brown_spot  (160).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000001000100010000101010000000011000000001000100010011000000010",
+            "md5": "cfc9e893ec9bfac09c1cca36fe4e4af0",
+            "filesize": 1247111
+        },
+        "Brown_spot  (161).jpg": {
+            "filename": "Brown_spot  (161).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 8.9,
+            "confidence": 94.1,
+            "dhash": "0100011000000110010010011000000001010010000100000000001000100001",
+            "md5": "5eb5893caab482c88e1e7f38c2124d51",
+            "filesize": 1257214
+        },
+        "Brown_spot  (162).jpg": {
+            "filename": "Brown_spot  (162).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 5.7,
+            "confidence": 93.4,
+            "dhash": "0010101000000010001001000110000001101000000100000000000100010010",
+            "md5": "d119ff575bd640a931636570e0ba2102",
+            "filesize": 1235167
+        },
+        "Brown_spot  (163).jpg": {
+            "filename": "Brown_spot  (163).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.1,
+            "confidence": 94.4,
+            "dhash": "0010010100100001001000010010011000110010001100000001000100010000",
+            "md5": "c2199259d94980075563330e31f1ffc9",
+            "filesize": 1186752
+        },
+        "Brown_spot  (164).jpg": {
+            "filename": "Brown_spot  (164).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 29.6,
+            "confidence": 91.9,
+            "dhash": "0100100110011010100110110011011111010111110100110011001110100110",
+            "md5": "bf0734c842b79692f5640e30a7244e52",
+            "filesize": 1071641
+        },
+        "Brown_spot  (165).jpg": {
+            "filename": "Brown_spot  (165).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 32.1,
+            "confidence": 92.4,
+            "dhash": "0100100100011010100110110111001111010101110100110111001110110010",
+            "md5": "f1c9768b1e22e7abbde00044ab2dff02",
+            "filesize": 1050999
+        },
+        "Brown_spot  (166).jpg": {
+            "filename": "Brown_spot  (166).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 26.8,
+            "confidence": 91.4,
+            "dhash": "1110001011100110011100110011001001100011100011110100111111001110",
+            "md5": "1b0a0250a262ca0bf58d08834a415d4d",
+            "filesize": 1053779
+        },
+        "Brown_spot  (167).jpg": {
+            "filename": "Brown_spot  (167).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 40.8,
+            "confidence": 94.2,
+            "dhash": "0010010101100101110010011000000000001000001001100010111000101011",
+            "md5": "dba708a13ad5161e75a90eeaa709078a",
+            "filesize": 1040275
+        },
+        "Brown_spot  (168).jpg": {
+            "filename": "Brown_spot  (168).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 39.5,
+            "confidence": 93.9,
+            "dhash": "0010010100100110010000011010010100111000000000100000101100100011",
+            "md5": "3a8826ec9c620a87c62b310a1bb9d341",
+            "filesize": 1055419
+        },
+        "Brown_spot  (169).jpg": {
+            "filename": "Brown_spot  (169).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 39.5,
+            "confidence": 93.9,
+            "dhash": "0010010100100110010000011010010100111000000000100000101100100011",
+            "md5": "3a8826ec9c620a87c62b310a1bb9d341",
+            "filesize": 1055419
+        },
+        "Brown_spot  (17).jpg": {
+            "filename": "Brown_spot  (17).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 5.1,
+            "confidence": 93.2,
+            "dhash": "0001100101001000000011000100010000000110010000101101001101000111",
+            "md5": "c9500a2011d0e8a384b4b9af0e97cebd",
+            "filesize": 665072
+        },
+        "Brown_spot  (170).jpg": {
+            "filename": "Brown_spot  (170).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 39.4,
+            "confidence": 93.9,
+            "dhash": "1010000101010010101000101101010010000000000001010001110111001101",
+            "md5": "d5956d847127f6235678038e3e8cf0f3",
+            "filesize": 1109672
+        },
+        "Brown_spot  (171).jpg": {
+            "filename": "Brown_spot  (171).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 39.4,
+            "confidence": 93.9,
+            "dhash": "1010000101010010101000101101010010000000000001010001110111001101",
+            "md5": "d5956d847127f6235678038e3e8cf0f3",
+            "filesize": 1109672
+        },
+        "Brown_spot  (172).jpg": {
+            "filename": "Brown_spot  (172).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 38.9,
+            "confidence": 93.8,
+            "dhash": "0010010100010011010100101001000000001000000001011001110101001001",
+            "md5": "e3d24a9be0fb748c612b89816219bd20",
+            "filesize": 1084788
+        },
+        "Brown_spot  (173).jpg": {
+            "filename": "Brown_spot  (173).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 38.9,
+            "confidence": 93.8,
+            "dhash": "0010010100010011010100101001000000001000000001011001110101001001",
+            "md5": "e3d24a9be0fb748c612b89816219bd20",
+            "filesize": 1084788
+        },
+        "Brown_spot  (174).jpg": {
+            "filename": "Brown_spot  (174).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 45.1,
+            "confidence": 95,
+            "dhash": "0010110110100011010110000000000010000011010101001001110101001001",
+            "md5": "77c97bc3003a33fa570863cd4a8806a1",
+            "filesize": 1084444
+        },
+        "Brown_spot  (175).jpg": {
+            "filename": "Brown_spot  (175).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 45.1,
+            "confidence": 95,
+            "dhash": "0010110110100011010110000000000010000011010101001001110101001001",
+            "md5": "77c97bc3003a33fa570863cd4a8806a1",
+            "filesize": 1084444
+        },
+        "Brown_spot  (176).jpg": {
+            "filename": "Brown_spot  (176).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 45.8,
+            "confidence": 95.2,
+            "dhash": "0100101110000000010110001010100101010000101001010010010110011101",
+            "md5": "f40cd75720db6aa46a8c108e79742435",
+            "filesize": 943125
+        },
+        "Brown_spot  (177).jpg": {
+            "filename": "Brown_spot  (177).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 45.8,
+            "confidence": 95.2,
+            "dhash": "0100101110000000010110001010100101010000101001010010010110011101",
+            "md5": "f40cd75720db6aa46a8c108e79742435",
+            "filesize": 943125
+        },
+        "Brown_spot  (178).jpg": {
+            "filename": "Brown_spot  (178).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 36.1,
+            "confidence": 93.2,
+            "dhash": "0000011000000010000000010000000000001010000100100000010000001000",
+            "md5": "82dc7deca71c653cabcb3041210d19c7",
+            "filesize": 972700
+        },
+        "Brown_spot  (179).jpg": {
+            "filename": "Brown_spot  (179).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 37.3,
+            "confidence": 93.5,
+            "dhash": "0000011000000010000000001000000000001000100100000010011000001000",
+            "md5": "60f3d024f754d6a15e52009c3ab1f412",
+            "filesize": 949674
+        },
+        "Brown_spot  (18).jpg": {
+            "filename": "Brown_spot  (18).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1001000110000101110000011110010101100001001100010011000001011001",
+            "md5": "80dce0e551e00d4599a567dec0988420",
+            "filesize": 636827
+        },
+        "Brown_spot  (180).jpg": {
+            "filename": "Brown_spot  (180).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 36.5,
+            "confidence": 93.3,
+            "dhash": "0100011000000010000000100000000010001000000000000010011000000000",
+            "md5": "03a0049be05bfed257a6b712c453494e",
+            "filesize": 1012146
+        },
+        "Brown_spot  (181).jpg": {
+            "filename": "Brown_spot  (181).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 19.5,
+            "confidence": 96.7,
+            "dhash": "0100100110100101100100000101100001011110000000110001100100010100",
+            "md5": "abdcba74db1682917606a308c0eaeee2",
+            "filesize": 916945
+        },
+        "Brown_spot  (182).jpg": {
+            "filename": "Brown_spot  (182).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 22.4,
+            "confidence": 97.4,
+            "dhash": "1100001001100010101100001011100010100100100101110111001100111001",
+            "md5": "fc0bbcc58507ed9f879947d5a5f5c94b",
+            "filesize": 980448
+        },
+        "Brown_spot  (183).jpg": {
+            "filename": "Brown_spot  (183).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 24.5,
+            "confidence": 97.9,
+            "dhash": "1000100011000100011000100011000001011100100011100100011100100011",
+            "md5": "297aab5e7fc1ec1c36f82e14c9ce1120",
+            "filesize": 978319
+        },
+        "Brown_spot  (184).jpg": {
+            "filename": "Brown_spot  (184).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 21.3,
+            "confidence": 97.1,
+            "dhash": "1000101111001001011000000011100001001100010001101000001100000001",
+            "md5": "da356d2bdb1755f3347bfbb139853562",
+            "filesize": 921159
+        },
+        "Brown_spot  (185).jpg": {
+            "filename": "Brown_spot  (185).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 20.6,
+            "confidence": 96.9,
+            "dhash": "0001000111001001111000000011000010111100010011100000011110000001",
+            "md5": "23be891eb75a939783237d0846fc547e",
+            "filesize": 881081
+        },
+        "Brown_spot  (186).jpg": {
+            "filename": "Brown_spot  (186).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 19.7,
+            "confidence": 96.7,
+            "dhash": "0011000100001001100010001100000000110000101111000100111001000111",
+            "md5": "9330c6ece8838a8c3cfe4999e04a6e70",
+            "filesize": 854704
+        },
+        "Brown_spot  (187).jpg": {
+            "filename": "Brown_spot  (187).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 44,
+            "confidence": 94.8,
+            "dhash": "0001000000010000000100011001000110010000000100000001000100010001",
+            "md5": "a1f5954dc0845261d0238c50bc90e62f",
+            "filesize": 706634
+        },
+        "Brown_spot  (188).jpg": {
+            "filename": "Brown_spot  (188).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4.7,
+            "confidence": 93.1,
+            "dhash": "1100000011000010010000010110011000111000111000001000100011001100",
+            "md5": "2b92b7daba6987bb7b249a22325a9b73",
+            "filesize": 981368
+        },
+        "Brown_spot  (189).jpg": {
+            "filename": "Brown_spot  (189).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 5.1,
+            "confidence": 93.2,
+            "dhash": "1100010011000010011000010110011100011100111000001000001010001000",
+            "md5": "f6f64939f863ca35cf3779005c6f999b",
+            "filesize": 996364
+        },
+        "Brown_spot  (19).jpg": {
+            "filename": "Brown_spot  (19).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001000000010000000100101000000110000000011011000011110000000011",
+            "md5": "12856ac68669c5c36e0891e6dcda5862",
+            "filesize": 607465
+        },
+        "Brown_spot  (190).jpg": {
+            "filename": "Brown_spot  (190).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 14.9,
+            "confidence": 95.6,
+            "dhash": "0100001001110000001000000011100000000001100000001111110000010100",
+            "md5": "e36efe8290d119172caca5b40325f1e8",
+            "filesize": 703315
+        },
+        "Brown_spot  (191).jpg": {
+            "filename": "Brown_spot  (191).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 15.3,
+            "confidence": 95.7,
+            "dhash": "1100001000011000001100001001000010010000101001100010100100011010",
+            "md5": "d5ca01e977a84da3a037c43990ab02e1",
+            "filesize": 677161
+        },
+        "Brown_spot  (192).jpg": {
+            "filename": "Brown_spot  (192).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.4,
+            "confidence": 94.5,
+            "dhash": "1110000110101001000100001101110011000000001111100010100100010101",
+            "md5": "19fb94957c8feaaf92e43c4e46b94523",
+            "filesize": 624275
+        },
+        "Brown_spot  (193).jpg": {
+            "filename": "Brown_spot  (193).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 19.1,
+            "confidence": 96.6,
+            "dhash": "1110110001101100000001001000000001110001000111110011110000011011",
+            "md5": "d1eda37cf461b3768fadb8db11e07aee",
+            "filesize": 765217
+        },
+        "Brown_spot  (194).jpg": {
+            "filename": "Brown_spot  (194).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 16.2,
+            "confidence": 95.9,
+            "dhash": "1110110011101100000001101000000001110000000111100001110100101010",
+            "md5": "872e03fca6a115b10139972c12adaa0b",
+            "filesize": 696731
+        },
+        "Brown_spot  (195).jpg": {
+            "filename": "Brown_spot  (195).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 13.4,
+            "confidence": 95.2,
+            "dhash": "1111000011111000011111000111110011001000110010011101100011011001",
+            "md5": "d43a5e28e727ea742232498fb333303a",
+            "filesize": 781150
+        },
+        "Brown_spot  (196).jpg": {
+            "filename": "Brown_spot  (196).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 23.7,
+            "confidence": 97.7,
+            "dhash": "0111100111111001111100100111001111010001110100101101101001011011",
+            "md5": "ef2145d67672177b8372ea51d68b13d9",
+            "filesize": 261595
+        },
+        "Brown_spot  (197).jpg": {
+            "filename": "Brown_spot  (197).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 14.8,
+            "confidence": 95.6,
+            "dhash": "0111110100111100001011000110110000101100011011000110101011111010",
+            "md5": "be38227ad0681c5219c0456e14fcd83a",
+            "filesize": 738224
+        },
+        "Brown_spot  (198).jpg": {
+            "filename": "Brown_spot  (198).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 29.2,
+            "confidence": 91.8,
+            "dhash": "1001101011010010000001100001010010000000000000000100000000011000",
+            "md5": "39150ad570f052649696ec042ab6577d",
+            "filesize": 819149
+        },
+        "Brown_spot  (199).jpg": {
+            "filename": "Brown_spot  (199).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 22.4,
+            "confidence": 97.4,
+            "dhash": "0001100000011001000010010100000110001000111100110001110001010011",
+            "md5": "407d8a4a6b3cce249b7720fdaffbc3fd",
+            "filesize": 740238
+        },
+        "Brown_spot  (2).jpg": {
+            "filename": "Brown_spot  (2).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 45.2,
+            "confidence": 95,
+            "dhash": "0001000000010000000100011001000110010000000100000011000100110001",
+            "md5": "9e26fe1cb3221715913fd2803f3b31c6",
+            "filesize": 693830
+        },
+        "Brown_spot  (20).jpg": {
+            "filename": "Brown_spot  (20).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001000000010000000100000100000111000000001100100001011000000001",
+            "md5": "8ee3c1e710b62ae9cd96b3e6b66cd6dc",
+            "filesize": 608350
+        },
+        "Brown_spot  (200).jpg": {
+            "filename": "Brown_spot  (200).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 22.1,
+            "confidence": 97.3,
+            "dhash": "1010111010101101111010101111111010111100111110001111000011110000",
+            "md5": "529cfa7527678e3995bb9f50b29d1998",
+            "filesize": 292660
+        },
+        "Brown_spot  (201).jpg": {
+            "filename": "Brown_spot  (201).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 14.5,
+            "confidence": 95.5,
+            "dhash": "1000010011001101001100111101100000110110001111010011011000010011",
+            "md5": "8fb25edee5462146ea30af0166515556",
+            "filesize": 657531
+        },
+        "Brown_spot  (202).jpg": {
+            "filename": "Brown_spot  (202).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 21.7,
+            "confidence": 97.2,
+            "dhash": "1001101101011010000000001111010001101110000001001110000000111001",
+            "md5": "ddfa3f11cf5890ad1eeb6778e2885356",
+            "filesize": 726904
+        },
+        "Brown_spot  (203).jpg": {
+            "filename": "Brown_spot  (203).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 26.1,
+            "confidence": 91.2,
+            "dhash": "0011011010100100010101001001110001001000101110010111001101110011",
+            "md5": "caf5f7ee5c96800771ee18404a831945",
+            "filesize": 1063654
+        },
+        "Brown_spot  (204).jpg": {
+            "filename": "Brown_spot  (204).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 20.5,
+            "confidence": 96.9,
+            "dhash": "1100001101110110000111000100100010110010111100001110010011000010",
+            "md5": "10a39eef00b6d55a689726fe6465addf",
+            "filesize": 1046329
+        },
+        "Brown_spot  (205).jpg": {
+            "filename": "Brown_spot  (205).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 13.3,
+            "confidence": 95.2,
+            "dhash": "1011000110100010101000101010000010100000101000101110000111001100",
+            "md5": "3e3326cefcd0353e96611c1482b92ad7",
+            "filesize": 225981
+        },
+        "Brown_spot  (206).jpg": {
+            "filename": "Brown_spot  (206).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.2,
+            "confidence": 94.4,
+            "dhash": "0100110110101111111100011101001111101000110111001101110011011010",
+            "md5": "4d767b9d3c00bafa2f3d6d515800a133",
+            "filesize": 671798
+        },
+        "Brown_spot  (207).jpg": {
+            "filename": "Brown_spot  (207).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.2,
+            "confidence": 94.4,
+            "dhash": "1000111101001111011001011011001111111000111010001100110011000110",
+            "md5": "59e7ecd541f7f790883a26d8c95fb7b6",
+            "filesize": 618696
+        },
+        "Brown_spot  (208).jpg": {
+            "filename": "Brown_spot  (208).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 19.7,
+            "confidence": 96.7,
+            "dhash": "0010111010110100101010010111101101010010111010001100110010011001",
+            "md5": "da297dbed94ee1fbdc6727138321ddf5",
+            "filesize": 909208
+        },
+        "Brown_spot  (209).jpg": {
+            "filename": "Brown_spot  (209).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 22.2,
+            "confidence": 97.3,
+            "dhash": "1011110011101101111111001111110001100110011001000010011011000110",
+            "md5": "278cef75e5e1577d9829282cb3be6713",
+            "filesize": 908292
+        },
+        "Brown_spot  (21).jpg": {
+            "filename": "Brown_spot  (21).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1001100010011001100110011001100010011000110110001101100011010000",
+            "md5": "9bf14b4255d668c381b0ae6549125d23",
+            "filesize": 664016
+        },
+        "Brown_spot  (210).jpg": {
+            "filename": "Brown_spot  (210).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 23.3,
+            "confidence": 97.6,
+            "dhash": "1011101011101100111011101111110011100110010011100110011010000110",
+            "md5": "afb07aefeb97bfe9362c2aa965705659",
+            "filesize": 915647
+        },
+        "Brown_spot  (211).jpg": {
+            "filename": "Brown_spot  (211).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 12.6,
+            "confidence": 95,
+            "dhash": "1111110000101100001011000000100000000000000100001001101000011010",
+            "md5": "e14ddd1bff1ebbdafa9e55fc8ce4a083",
+            "filesize": 869589
+        },
+        "Brown_spot  (212).jpg": {
+            "filename": "Brown_spot  (212).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 14.5,
+            "confidence": 95.5,
+            "dhash": "1011011000111100000010011010011011100000011001010010110000001100",
+            "md5": "ad30a20e9535a2410e58f4689fbdf264",
+            "filesize": 978454
+        },
+        "Brown_spot  (213).jpg": {
+            "filename": "Brown_spot  (213).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 20.8,
+            "confidence": 97,
+            "dhash": "0111101000111110000011100000100000000000000000001001100000011010",
+            "md5": "29d203319458fa8555fbba1aa40ce0d2",
+            "filesize": 1043904
+        },
+        "Brown_spot  (214).jpg": {
+            "filename": "Brown_spot  (214).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 24.7,
+            "confidence": 97.9,
+            "dhash": "0010100110100111011110001100000001000000001000000100000110000011",
+            "md5": "1dc3b9e4b07ac09670d5d30113e7f301",
+            "filesize": 875989
+        },
+        "Brown_spot  (215).jpg": {
+            "filename": "Brown_spot  (215).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 19.7,
+            "confidence": 96.7,
+            "dhash": "1001100101001101010010100001011110000000000010000000000101000101",
+            "md5": "95d2f5caa1cbfeaa810bb3bfb0e82f18",
+            "filesize": 900472
+        },
+        "Brown_spot  (216).jpg": {
+            "filename": "Brown_spot  (216).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 23.4,
+            "confidence": 97.6,
+            "dhash": "0111000011110000010001000000100000001010110000111000110110000000",
+            "md5": "03e9d4a12b85bf4341c5deb9537eec22",
+            "filesize": 878609
+        },
+        "Brown_spot  (217).jpg": {
+            "filename": "Brown_spot  (217).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.5,
+            "confidence": 94.5,
+            "dhash": "0000000001100000000000000000001000000110000001000001001000100100",
+            "md5": "25d70ed4192522f24f3a68067d059dd5",
+            "filesize": 820432
+        },
+        "Brown_spot  (218).jpg": {
+            "filename": "Brown_spot  (218).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 25.3,
+            "confidence": 91.1,
+            "dhash": "1110110011011100100110010011100111110101111001101110011111010001",
+            "md5": "fbada3af8fec8dc20840094e14a6bf0f",
+            "filesize": 828254
+        },
+        "Brown_spot  (219).jpg": {
+            "filename": "Brown_spot  (219).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 18.2,
+            "confidence": 96.4,
+            "dhash": "0010011001010110001100001111100010010011000010110010101111010101",
+            "md5": "f1e7d70b0b708f9d39f23ffb4bc8b9cf",
+            "filesize": 643718
+        },
+        "Brown_spot  (22).jpg": {
+            "filename": "Brown_spot  (22).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 7,
+            "confidence": 93.7,
+            "dhash": "0001100100011000100110000011100100011001010010000001100000001001",
+            "md5": "605f08f4822dbbb15650f91e667c3c2f",
+            "filesize": 672142
+        },
+        "Brown_spot  (220).jpg": {
+            "filename": "Brown_spot  (220).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 11.7,
+            "confidence": 94.8,
+            "dhash": "0010010000101100001100001111001011100111110011011000111000100010",
+            "md5": "36a8cf0546979d51a1b82eaf5eeac07e",
+            "filesize": 239626
+        },
+        "Brown_spot  (221).jpg": {
+            "filename": "Brown_spot  (221).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 7.4,
+            "confidence": 93.8,
+            "dhash": "0101101100011010000101101100010001110000011010100111000111110101",
+            "md5": "8b95d8d593da9dbc96d80fbd55585f4f",
+            "filesize": 972086
+        },
+        "Brown_spot  (222).jpg": {
+            "filename": "Brown_spot  (222).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 7.8,
+            "confidence": 93.9,
+            "dhash": "1001100100111001100110101110001000111000001111000011100101111010",
+            "md5": "77f3dbf9de782d3b8c5ec2753264405e",
+            "filesize": 939647
+        },
+        "Brown_spot  (223).jpg": {
+            "filename": "Brown_spot  (223).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 6.9,
+            "confidence": 93.7,
+            "dhash": "1001100111001011111100100011100000110110001111000010100001111010",
+            "md5": "73002f37a45b405f4080cb5142d1df51",
+            "filesize": 922265
+        },
+        "Brown_spot  (224).jpg": {
+            "filename": "Brown_spot  (224).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 9.5,
+            "confidence": 94.3,
+            "dhash": "0001000100010011000101001110010000111000000011111001010110100011",
+            "md5": "0b23d090b0206f039933b98666a8c5bc",
+            "filesize": 765971
+        },
+        "Brown_spot  (225).jpg": {
+            "filename": "Brown_spot  (225).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 17.7,
+            "confidence": 96.2,
+            "dhash": "0010110001000111000001011111111011000000000000111000110000001011",
+            "md5": "5dd1bae1788a8d5afa990d48a7df178a",
+            "filesize": 766489
+        },
+        "Brown_spot  (226).jpg": {
+            "filename": "Brown_spot  (226).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 28.1,
+            "confidence": 91.6,
+            "dhash": "1001000100101000010010100010110000000111000100110110011000100100",
+            "md5": "613c54795fd0bd294ce08d810ea1ff83",
+            "filesize": 812696
+        },
+        "Brown_spot  (227).jpg": {
+            "filename": "Brown_spot  (227).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 21.9,
+            "confidence": 97.3,
+            "dhash": "0000101010000001110000101110000000011000100111010001011111000101",
+            "md5": "04eb61341feaa2f6f35c4bd16c973cd7",
+            "filesize": 883196
+        },
+        "Brown_spot  (228).jpg": {
+            "filename": "Brown_spot  (228).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 96.8,
+            "dhash": "0110001100110001110110000001110000001100001011110010101100001011",
+            "md5": "028600cfaaa7a89b7a902790f99f4740",
+            "filesize": 871768
+        },
+        "Brown_spot  (229).jpg": {
+            "filename": "Brown_spot  (229).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 9.8,
+            "confidence": 94.4,
+            "dhash": "0000110000101100010001001000011010101000000011110010000000001100",
+            "md5": "5c42fe9d70967c2f141e13e36b0eaefd",
+            "filesize": 952107
+        },
+        "Brown_spot  (23).jpg": {
+            "filename": "Brown_spot  (23).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001100100011000100110100011100100011000010110000001100000001001",
+            "md5": "b3e4eb06a07272fc9a4bc2c7b92de51a",
+            "filesize": 708037
+        },
+        "Brown_spot  (230).jpg": {
+            "filename": "Brown_spot  (230).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 16.4,
+            "confidence": 95.9,
+            "dhash": "0100100100010100010100000001110000011011011001110001110101101000",
+            "md5": "e7de54fcea62171717cea82b5373bbd7",
+            "filesize": 1192513
+        },
+        "Brown_spot  (231).jpg": {
+            "filename": "Brown_spot  (231).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001100010111010010110010010100000101000010010000101100000001000",
+            "md5": "452e3ce87e02f977819fcb4918a0da82",
+            "filesize": 1035153
+        },
+        "Brown_spot  (232).jpg": {
+            "filename": "Brown_spot  (232).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1001100000011010000110010100100000101001010010000100100001001000",
+            "md5": "7be68db616477662bb70bef215ccfbcf",
+            "filesize": 1051591
+        },
+        "Brown_spot  (233).jpg": {
+            "filename": "Brown_spot  (233).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 6.1,
+            "confidence": 93.5,
+            "dhash": "0011000100110000001100000001001000010000000100010001000100011000",
+            "md5": "f80efba29f8580dec47c6a13fd6335cd",
+            "filesize": 1205449
+        },
+        "Brown_spot  (234).jpg": {
+            "filename": "Brown_spot  (234).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 23.4,
+            "confidence": 97.6,
+            "dhash": "0000001000001000000010000000100000001000111001001011111101101101",
+            "md5": "43865eb05d02be671123241c39989249",
+            "filesize": 883656
+        },
+        "Brown_spot  (235).jpg": {
+            "filename": "Brown_spot  (235).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 15.8,
+            "confidence": 95.8,
+            "dhash": "0000001000001000010010000011000010001110111100111011111000110101",
+            "md5": "092aa74142368f3f92f1a93f47f9647b",
+            "filesize": 971323
+        },
+        "Brown_spot  (236).jpg": {
+            "filename": "Brown_spot  (236).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 27.2,
+            "confidence": 91.4,
+            "dhash": "1110001011110010001100110111010001000011100011110100111111001110",
+            "md5": "e9d09beb1f09e5fee386c98a3b0de9b7",
+            "filesize": 1023971
+        },
+        "Brown_spot  (237).jpg": {
+            "filename": "Brown_spot  (237).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 24.8,
+            "confidence": 98,
+            "dhash": "1100000011000000111000000100000000000000011011000011110101101000",
+            "md5": "1244edf8ce5e719e77991fefd10b917a",
+            "filesize": 879355
+        },
+        "Brown_spot  (238).jpg": {
+            "filename": "Brown_spot  (238).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 40.8,
+            "confidence": 94.2,
+            "dhash": "0010010101100101110010011000000000001000001001100010111000101011",
+            "md5": "dba708a13ad5161e75a90eeaa709078a",
+            "filesize": 1040275
+        },
+        "Brown_spot  (239).jpg": {
+            "filename": "Brown_spot  (239).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 23.5,
+            "confidence": 97.6,
+            "dhash": "1100010001100100001000100101000010011000010011000000011010000011",
+            "md5": "e7a995544e10b540c008b5f502c0afe8",
+            "filesize": 957280
+        },
+        "Brown_spot  (24).jpg": {
+            "filename": "Brown_spot  (24).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001000100010010000100100011001100010011010100000001100000011001",
+            "md5": "395245710f59ea06c0ed8bba03a70a34",
+            "filesize": 659807
+        },
+        "Brown_spot  (240).jpg": {
+            "filename": "Brown_spot  (240).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 18.4,
+            "confidence": 96.4,
+            "dhash": "0011000100001001100010001100000001100000101110000100111001000110",
+            "md5": "9996caa8f85c359c5dcc5f6805087b03",
+            "filesize": 843969
+        },
+        "Brown_spot  (241).jpg": {
+            "filename": "Brown_spot  (241).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 19.5,
+            "confidence": 96.7,
+            "dhash": "1001001100010011000100110101001100010001010100100011101010011010",
+            "md5": "21eef2845f8448ef7aac3f2a1d4b61e0",
+            "filesize": 418420
+        },
+        "Brown_spot  (242).jpg": {
+            "filename": "Brown_spot  (242).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 18.2,
+            "confidence": 96.4,
+            "dhash": "1110000111100101011101101101000000000001000000010010000100100101",
+            "md5": "f0350ccacc5741e63fc55b56defa8001",
+            "filesize": 1065180
+        },
+        "Brown_spot  (243).jpg": {
+            "filename": "Brown_spot  (243).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 17.1,
+            "confidence": 96.1,
+            "dhash": "0001001100011011000111001110001000000100100010111100001000110010",
+            "md5": "bc8c687cad11f0094a62b152c41ce41b",
+            "filesize": 1006823
+        },
+        "Brown_spot  (244).jpg": {
+            "filename": "Brown_spot  (244).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 17.1,
+            "confidence": 96.1,
+            "dhash": "0001001100011011000111001110001000000100100010111100001000110010",
+            "md5": "bc8c687cad11f0094a62b152c41ce41b",
+            "filesize": 1006823
+        },
+        "Brown_spot  (245).jpg": {
+            "filename": "Brown_spot  (245).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 16.3,
+            "confidence": 95.9,
+            "dhash": "0000001100011011000111001100000000000000110010111101001001110010",
+            "md5": "99baa1d99f21f4477477617a364d3552",
+            "filesize": 1038711
+        },
+        "Brown_spot  (246).jpg": {
+            "filename": "Brown_spot  (246).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 19.9,
+            "confidence": 96.8,
+            "dhash": "0001100000000110100001011000000110101100110000001001010000011000",
+            "md5": "b95fcf7b3033ee352c54bddf34362181",
+            "filesize": 888517
+        },
+        "Brown_spot  (247).jpg": {
+            "filename": "Brown_spot  (247).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4.7,
+            "confidence": 93.1,
+            "dhash": "0100110111001001110100010111001000100100101001001000100010000110",
+            "md5": "ca2161e7ea2c5e678d0125c725084189",
+            "filesize": 304385
+        },
+        "Brown_spot  (248).jpg": {
+            "filename": "Brown_spot  (248).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 5,
+            "confidence": 93.2,
+            "dhash": "1011001101011001111010111101101011000000000011101001110100100101",
+            "md5": "fb7381383624c3353f3557dfc11d1fd2",
+            "filesize": 783392
+        },
+        "Brown_spot  (249).jpg": {
+            "filename": "Brown_spot  (249).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 6.1,
+            "confidence": 93.5,
+            "dhash": "1000101011000011011100101011001011010101001101011101001111100001",
+            "md5": "03c52055222a98e02145f3c688ebac6e",
+            "filesize": 863468
+        },
+        "Brown_spot  (25).jpg": {
+            "filename": "Brown_spot  (25).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0101000100010010000100101011001100010011010110000001100000011001",
+            "md5": "615b9e2be397636a0b7c2f9046a4b535",
+            "filesize": 660361
+        },
+        "Brown_spot  (250).jpg": {
+            "filename": "Brown_spot  (250).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 6.9,
+            "confidence": 93.7,
+            "dhash": "1000101010101011011100100011001010110101001101011101001111100101",
+            "md5": "1409df6cceed5beb6ff491428486c4a2",
+            "filesize": 848159
+        },
+        "Brown_spot  (251).jpg": {
+            "filename": "Brown_spot  (251).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 5.1,
+            "confidence": 93.2,
+            "dhash": "1001001011010010001000111010010110010101110001111110000111110011",
+            "md5": "69d4793ea599ca4bd7d511832f72ab00",
+            "filesize": 810783
+        },
+        "Brown_spot  (252).jpg": {
+            "filename": "Brown_spot  (252).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 7.4,
+            "confidence": 93.8,
+            "dhash": "1011101010111000100110101011100010101010011010010110111111101100",
+            "md5": "065f3759e98b0c3a95a46a738ef4c755",
+            "filesize": 1010041
+        },
+        "Brown_spot  (253).jpg": {
+            "filename": "Brown_spot  (253).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 6.7,
+            "confidence": 93.6,
+            "dhash": "1100010011000000010000010100010101011000111000001000100010011000",
+            "md5": "e761671def13efc73598e385b01789cd",
+            "filesize": 1029200
+        },
+        "Brown_spot  (254).jpg": {
+            "filename": "Brown_spot  (254).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4.8,
+            "confidence": 93.2,
+            "dhash": "1100000001000001010001010001111101111100111110001100100010001000",
+            "md5": "0d5ec25edaec36e4de8c255ef3024cbe",
+            "filesize": 992062
+        },
+        "Brown_spot  (255).jpg": {
+            "filename": "Brown_spot  (255).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 17.4,
+            "confidence": 96.2,
+            "dhash": "1000000100101000001100000000000011110000001111110100100000001011",
+            "md5": "bd8419ad3fc06f1a03deba28115e01b3",
+            "filesize": 664870
+        },
+        "Brown_spot  (256).jpg": {
+            "filename": "Brown_spot  (256).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 22.7,
+            "confidence": 97.4,
+            "dhash": "1100110011100100011001000001011000000000110000000011110000011110",
+            "md5": "66d3cf9c6adc2ca7d820ccb09f6aeb66",
+            "filesize": 804415
+        },
+        "Brown_spot  (257).jpg": {
+            "filename": "Brown_spot  (257).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 17.1,
+            "confidence": 96.1,
+            "dhash": "1011001101111000011110000111110001111100101011000110110001111110",
+            "md5": "ceda4efadb06b4737d0ed20c9e3bfcd4",
+            "filesize": 692235
+        },
+        "Brown_spot  (258).jpg": {
+            "filename": "Brown_spot  (258).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 17.6,
+            "confidence": 96.2,
+            "dhash": "1111001101100010011010000111100001111100001111000110110000101110",
+            "md5": "584275e2ca1f47e8643cf59a15dd2861",
+            "filesize": 741605
+        },
+        "Brown_spot  (259).jpg": {
+            "filename": "Brown_spot  (259).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 24.7,
+            "confidence": 97.9,
+            "dhash": "1000010111000011011001000111001001010000001110001011110001110110",
+            "md5": "7234c5fd00b10697674210012ff1cd48",
+            "filesize": 976682
+        },
+        "Brown_spot  (26).jpg": {
+            "filename": "Brown_spot  (26).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0101000100010010000100100011001100010011010100000001100000011001",
+            "md5": "d3aad977faf302491caedf20393f613d",
+            "filesize": 640462
+        },
+        "Brown_spot  (260).jpg": {
+            "filename": "Brown_spot  (260).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 29.5,
+            "confidence": 91.9,
+            "dhash": "1000011011000101011000111011000010011001100011000101111001011111",
+            "md5": "ba19a7531e88d932b7e144c0f424a687",
+            "filesize": 944315
+        },
+        "Brown_spot  (261).jpg": {
+            "filename": "Brown_spot  (261).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 26.8,
+            "confidence": 91.4,
+            "dhash": "1100011000101101001011010000101101000000110011000111001110011110",
+            "md5": "6aba32b77a3f191935785d12ccbb5255",
+            "filesize": 697062
+        },
+        "Brown_spot  (262).jpg": {
+            "filename": "Brown_spot  (262).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 19.4,
+            "confidence": 96.7,
+            "dhash": "0010011110110110101101000111000001101100101110101110101011000111",
+            "md5": "81f11509ddb56681dc44f9b721b0c89d",
+            "filesize": 852958
+        },
+        "Brown_spot  (263).jpg": {
+            "filename": "Brown_spot  (263).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 16.3,
+            "confidence": 95.9,
+            "dhash": "1101011000011001011000111011010111110100100011101011011000000111",
+            "md5": "20d90a33fb537846ab7258dc8a4c599b",
+            "filesize": 965797
+        },
+        "Brown_spot  (264).jpg": {
+            "filename": "Brown_spot  (264).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 18.5,
+            "confidence": 96.4,
+            "dhash": "1011110000010110000111101001011011000000111000000100110110001101",
+            "md5": "6aaa30ce4ec761a16997ef6fa378c9f6",
+            "filesize": 988512
+        },
+        "Brown_spot  (265).jpg": {
+            "filename": "Brown_spot  (265).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 16.8,
+            "confidence": 96,
+            "dhash": "1011000001011000101000000000000000000000000011000101100100001100",
+            "md5": "54d27a00e270b7ece6142c066469129c",
+            "filesize": 920142
+        },
+        "Brown_spot  (266).jpg": {
+            "filename": "Brown_spot  (266).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 19.6,
+            "confidence": 96.7,
+            "dhash": "1001010001010110011101101101001101100101101101110010000101100001",
+            "md5": "d96065ed77d2ec6788a86a5e8a9c7fa3",
+            "filesize": 1083507
+        },
+        "Brown_spot  (267).jpg": {
+            "filename": "Brown_spot  (267).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 16.7,
+            "confidence": 96,
+            "dhash": "0001101000001010000100101000001000111000100111101001111000011110",
+            "md5": "378cb0ee5ebb64ce469462a060f865ac",
+            "filesize": 900487
+        },
+        "Brown_spot  (27).jpg": {
+            "filename": "Brown_spot  (27).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0011010100110010101100100011001100110010011100000101000101010011",
+            "md5": "5171ca5ddf45c92ce3ef17ae58493ae4",
+            "filesize": 620582
+        },
+        "Brown_spot  (28).jpg": {
+            "filename": "Brown_spot  (28).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0011010100110010101100100011001100110010011100000111000101110011",
+            "md5": "87110ae784bd1cce51dd5f5b1eba61e2",
+            "filesize": 631511
+        },
+        "Brown_spot  (29).jpg": {
+            "filename": "Brown_spot  (29).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0011010100110010101100100011001100110010011100000111000101110011",
+            "md5": "9a72477dda8b923c16ce4cc898afc702",
+            "filesize": 649389
+        },
+        "Brown_spot  (3).jpg": {
+            "filename": "Brown_spot  (3).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 12.9,
+            "confidence": 95.1,
+            "dhash": "1000100100100100000100011000101110000000100111000001000100001001",
+            "md5": "2508dffcaa92fd0f4e694090ea76ae71",
+            "filesize": 665842
+        },
+        "Brown_spot  (30).jpg": {
+            "filename": "Brown_spot  (30).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0100100010111000000110000001101110011000000110001001101001110011",
+            "md5": "5b39961501b8b7d703e59eaf13399e7a",
+            "filesize": 664700
+        },
+        "Brown_spot  (31).jpg": {
+            "filename": "Brown_spot  (31).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0100100010111000000110000001101010011000010110011001101001110011",
+            "md5": "b64d41f3eb45e9fa54da28ce5b08e9e9",
+            "filesize": 671658
+        },
+        "Brown_spot  (32).jpg": {
+            "filename": "Brown_spot  (32).jpg",
+            "disease": "brown_spot",
+            "severity": "moderate",
+            "affected_percentage": 27,
+            "confidence": 91.4,
+            "dhash": "1001000100010000000110010001100100011000010110000010100000011100",
+            "md5": "0309b6b043ffc1c33e0e932073475e41",
+            "filesize": 730454
+        },
+        "Brown_spot  (33).jpg": {
+            "filename": "Brown_spot  (33).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 21.2,
+            "confidence": 97.1,
+            "dhash": "1011000100010000000100010011100100011000010110000000100000011000",
+            "md5": "5645503c42f575b0740f5c3147e2f9f4",
+            "filesize": 744187
+        },
+        "Brown_spot  (34).jpg": {
+            "filename": "Brown_spot  (34).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 22.2,
+            "confidence": 97.3,
+            "dhash": "0100100101000100011000010010000100110010010100100001000000011000",
+            "md5": "156eaaca00797462c6cecf6298492c97",
+            "filesize": 700766
+        },
+        "Brown_spot  (35).jpg": {
+            "filename": "Brown_spot  (35).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 20.6,
+            "confidence": 96.9,
+            "dhash": "0100100101100100001000010011000100010010010100000001100000011000",
+            "md5": "f6c9063263901016d0bcbe5e14d06568",
+            "filesize": 664360
+        },
+        "Brown_spot  (36).jpg": {
+            "filename": "Brown_spot  (36).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 22.6,
+            "confidence": 97.4,
+            "dhash": "1001101100101001001000000001001000000000111000001010001001011010",
+            "md5": "0814a6dc299c7d99affbb3f2f4dd446a",
+            "filesize": 729115
+        },
+        "Brown_spot  (37).jpg": {
+            "filename": "Brown_spot  (37).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 20.9,
+            "confidence": 97,
+            "dhash": "0001101100101001001000000001001000000000111000001010001001011010",
+            "md5": "9c9046f997eadaca3fd7211056c44c25",
+            "filesize": 718178
+        },
+        "Brown_spot  (38).jpg": {
+            "filename": "Brown_spot  (38).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100000101000100111000010010000000110000001100100111100000101000",
+            "md5": "73ba55696d9b25ddb496dc86ec94c3d4",
+            "filesize": 659585
+        },
+        "Brown_spot  (39).jpg": {
+            "filename": "Brown_spot  (39).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100000101000100111000010010000000110000000100100111100000101000",
+            "md5": "33f29d9a3bea2136d0711c21ab21b139",
+            "filesize": 664065
+        },
+        "Brown_spot  (4).jpg": {
+            "filename": "Brown_spot  (4).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 17.1,
+            "confidence": 96.1,
+            "dhash": "1000100100100100000100011000101110000001100110000101000100001001",
+            "md5": "0a334d057f1be32258487a810e63360b",
+            "filesize": 659836
+        },
+        "Brown_spot  (40).jpg": {
+            "filename": "Brown_spot  (40).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 12.1,
+            "confidence": 94.9,
+            "dhash": "0101100100111001000110011011100110011100001011001011110010001100",
+            "md5": "6f005cedaaba44eea3a108b0a330f1e5",
+            "filesize": 640547
+        },
+        "Brown_spot  (41).jpg": {
+            "filename": "Brown_spot  (41).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 12.8,
+            "confidence": 95.1,
+            "dhash": "0101100100111001000110011011110110011100001011000001110011001100",
+            "md5": "3ed513c21e01105ed6441c0e4c59db2b",
+            "filesize": 625578
+        },
+        "Brown_spot  (42).jpg": {
+            "filename": "Brown_spot  (42).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 12.6,
+            "confidence": 95,
+            "dhash": "0101100100111001000110010011110110011100001011001011110001001100",
+            "md5": "39cb289e7c6508025fa26863ef59ee0c",
+            "filesize": 633183
+        },
+        "Brown_spot  (43).jpg": {
+            "filename": "Brown_spot  (43).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 9.4,
+            "confidence": 94.3,
+            "dhash": "0110001011110010011100110011100100011001101110001010110000101100",
+            "md5": "963fb638d0ebd32224a1d8536612994f",
+            "filesize": 669996
+        },
+        "Brown_spot  (44).jpg": {
+            "filename": "Brown_spot  (44).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 9.4,
+            "confidence": 94.3,
+            "dhash": "0110001011110010011100110011100100011001001110001000110000101100",
+            "md5": "6cd4fd2a79cd42ca8953b0de85624828",
+            "filesize": 672392
+        },
+        "Brown_spot  (45).jpg": {
+            "filename": "Brown_spot  (45).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 7,
+            "confidence": 93.7,
+            "dhash": "0110001011110010011100110011100100011001101110001010110000101110",
+            "md5": "8d5732b425461a75caf9da87e8415b64",
+            "filesize": 675357
+        },
+        "Brown_spot  (46).jpg": {
+            "filename": "Brown_spot  (46).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 9.1,
+            "confidence": 94.2,
+            "dhash": "0110001011110010011100110011100100011001001110001000110000101100",
+            "md5": "9d8e59f7e9d5b35b4f72815a130affb9",
+            "filesize": 665496
+        },
+        "Brown_spot  (47).jpg": {
+            "filename": "Brown_spot  (47).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.8,
+            "confidence": 94.6,
+            "dhash": "0111001001110010011100010011000100011001101110001010110000001110",
+            "md5": "5f9bdd8a12631d64ace42da4701b5116",
+            "filesize": 656143
+        },
+        "Brown_spot  (48).jpg": {
+            "filename": "Brown_spot  (48).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 8.3,
+            "confidence": 94,
+            "dhash": "0110001010110010011100110011000100011001001110001000110000100110",
+            "md5": "4ee9dc14c4dca21372804f319be77218",
+            "filesize": 676809
+        },
+        "Brown_spot  (49).jpg": {
+            "filename": "Brown_spot  (49).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1110001001110010011100100111100010110000011111000011100000001110",
+            "md5": "2cbebd762a32043ea6d7c0fac6705a68",
+            "filesize": 659221
+        },
+        "Brown_spot  (5).jpg": {
+            "filename": "Brown_spot  (5).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 14.7,
+            "confidence": 95.5,
+            "dhash": "0110000101100001101100011011000101111000001110001000110001101100",
+            "md5": "a75453cb5af3c5afbfb333f9471ba489",
+            "filesize": 725474
+        },
+        "Brown_spot  (50).jpg": {
+            "filename": "Brown_spot  (50).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1110001001010010011100110111100010110000101101000011100000001110",
+            "md5": "ac70de02c60e7b9b060b5ede14ea924d",
+            "filesize": 648564
+        },
+        "Brown_spot  (51).jpg": {
+            "filename": "Brown_spot  (51).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1110001001000010011100100111100010110000001101000011110000001110",
+            "md5": "824f76d003141443d95325caeb5b6f85",
+            "filesize": 647712
+        },
+        "Brown_spot  (52).jpg": {
+            "filename": "Brown_spot  (52).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0010000110100001001000100110000001100000111001100110000010100000",
+            "md5": "570ece43b8cd9ce30b26251624cc250d",
+            "filesize": 665478
+        },
+        "Brown_spot  (53).jpg": {
+            "filename": "Brown_spot  (53).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0011000110100001001000100110000001100000111001100110000010100000",
+            "md5": "2eb1552dc2d3c94b07153cf860aa1827",
+            "filesize": 665109
+        },
+        "Brown_spot  (54).jpg": {
+            "filename": "Brown_spot  (54).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0011000110100001001000100110000001100000111000100110000010100000",
+            "md5": "7bf9ac577c584fb6eee3157922c4ea82",
+            "filesize": 654701
+        },
+        "Brown_spot  (55).jpg": {
+            "filename": "Brown_spot  (55).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0010000110100001001000100110000001100000111001100110000010100000",
+            "md5": "d4cfcd01325e070d8e897e24f640277e",
+            "filesize": 661103
+        },
+        "Brown_spot  (56).jpg": {
+            "filename": "Brown_spot  (56).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0011000110110001001100000110000000100000111000100110000010100000",
+            "md5": "ef6d678a85cd51c0476a6c64d553af3c",
+            "filesize": 640100
+        },
+        "Brown_spot  (57).jpg": {
+            "filename": "Brown_spot  (57).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001100110111001101110001011100000011000011110000111100000011000",
+            "md5": "66bb6a9dbafcc74a41dac8ee622a310e",
+            "filesize": 681943
+        },
+        "Brown_spot  (58).jpg": {
+            "filename": "Brown_spot  (58).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001100010011001001110001011100000011000011110000001100000011000",
+            "md5": "2d388cff9636313ac22b0162a64f9eb4",
+            "filesize": 688320
+        },
+        "Brown_spot  (59).jpg": {
+            "filename": "Brown_spot  (59).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001100010011001001110101011100000011000011110000011100000011000",
+            "md5": "6f2b18115c0b41c911be2adf8ec627c4",
+            "filesize": 673696
+        },
+        "Brown_spot  (6).jpg": {
+            "filename": "Brown_spot  (6).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 15.3,
+            "confidence": 95.7,
+            "dhash": "0110000101100001101100011011000100111000001110001000110001101100",
+            "md5": "a6ec47866bf8c1acbc98cefbc455ceb8",
+            "filesize": 718878
+        },
+        "Brown_spot  (60).jpg": {
+            "filename": "Brown_spot  (60).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000100010011001001010000001100001011000001110000001100000011001",
+            "md5": "4b48a4d0fc956f06eaeb73b7bb14517f",
+            "filesize": 688334
+        },
+        "Brown_spot  (61).jpg": {
+            "filename": "Brown_spot  (61).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000110010011001001010000001100001001000001010000101100000011001",
+            "md5": "5783844ac707fdf766d0f74f74ac8362",
+            "filesize": 704805
+        },
+        "Brown_spot  (62).jpg": {
+            "filename": "Brown_spot  (62).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000110011011101001011000001110001001100001011000001110000001000",
+            "md5": "b6c61ecafb2b190ad8d9cb10820d3f68",
+            "filesize": 701906
+        },
+        "Brown_spot  (63).jpg": {
+            "filename": "Brown_spot  (63).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000110011011001001010000001100001011000001110000001100000011001",
+            "md5": "798f58bc0b8fd89c969a629d132f0f1a",
+            "filesize": 692003
+        },
+        "Brown_spot  (64).jpg": {
+            "filename": "Brown_spot  (64).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 7.3,
+            "confidence": 93.8,
+            "dhash": "0001100010111000001110000100100000111000100110000101100010111000",
+            "md5": "92ce89ded7583f118b467d5e6ce1b137",
+            "filesize": 690555
+        },
+        "Brown_spot  (65).jpg": {
+            "filename": "Brown_spot  (65).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 6.4,
+            "confidence": 93.5,
+            "dhash": "0001100010111001001110000100100000111000100110000101100010111000",
+            "md5": "31c868881a61e17ece516fd36a47c45b",
+            "filesize": 682304
+        },
+        "Brown_spot  (66).jpg": {
+            "filename": "Brown_spot  (66).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 9.2,
+            "confidence": 94.2,
+            "dhash": "0011100100011001101110000001100001101100001110001101100001111000",
+            "md5": "dfe8dca833e9004faec924c35619dc3b",
+            "filesize": 652120
+        },
+        "Brown_spot  (67).jpg": {
+            "filename": "Brown_spot  (67).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 12.3,
+            "confidence": 95,
+            "dhash": "0011100100011001101110001001100001101100001110001001100001111000",
+            "md5": "3203e1967822fa47d693da569591e6b5",
+            "filesize": 632500
+        },
+        "Brown_spot  (68).jpg": {
+            "filename": "Brown_spot  (68).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 11.6,
+            "confidence": 94.8,
+            "dhash": "0011100100011001101110001001100001101000001110001011100001111000",
+            "md5": "35be8efea3e93694e99456c8b6edc626",
+            "filesize": 643595
+        },
+        "Brown_spot  (69).jpg": {
+            "filename": "Brown_spot  (69).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 12.5,
+            "confidence": 95,
+            "dhash": "1001100001011001001110000111100010011000111011000001100000011000",
+            "md5": "2fdd835e71f3541299887c2aaa8cc5f6",
+            "filesize": 615984
+        },
+        "Brown_spot  (7).jpg": {
+            "filename": "Brown_spot  (7).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 15.1,
+            "confidence": 95.6,
+            "dhash": "0110000101100101101100011011000001111000001110001000110001101100",
+            "md5": "efdc62bdc008145c44e8df58bbc2138a",
+            "filesize": 723111
+        },
+        "Brown_spot  (70).jpg": {
+            "filename": "Brown_spot  (70).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 12.1,
+            "confidence": 94.9,
+            "dhash": "0101100100111001000110001011100010111000000110000001100001111000",
+            "md5": "19415206747dd3bf0a49fe8aeb1fa41b",
+            "filesize": 628239
+        },
+        "Brown_spot  (71).jpg": {
+            "filename": "Brown_spot  (71).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 14.1,
+            "confidence": 95.4,
+            "dhash": "0011100010011000100110000001100001111000100110001011100000011000",
+            "md5": "0b0bafd5d571a0e398844044f161fcbd",
+            "filesize": 615866
+        },
+        "Brown_spot  (72).jpg": {
+            "filename": "Brown_spot  (72).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 10.5,
+            "confidence": 94.5,
+            "dhash": "0111001010110000001100010101001100010010000100100001100101011001",
+            "md5": "3c182214f853d167c6208e91c035a4fd",
+            "filesize": 674836
+        },
+        "Brown_spot  (73).jpg": {
+            "filename": "Brown_spot  (73).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 11.6,
+            "confidence": 94.8,
+            "dhash": "0111001010110000000100000101001100010011000110100001100101011001",
+            "md5": "321a4d4e7b249dfb35deb04ea1114d51",
+            "filesize": 644608
+        },
+        "Brown_spot  (74).jpg": {
+            "filename": "Brown_spot  (74).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 17.2,
+            "confidence": 96.1,
+            "dhash": "0011000010011000000110000101101100011011000110000100100101001001",
+            "md5": "6493d4138c0e399d4338032153106f80",
+            "filesize": 652171
+        },
+        "Brown_spot  (75).jpg": {
+            "filename": "Brown_spot  (75).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 21.4,
+            "confidence": 97.1,
+            "dhash": "0001001101010010100100010101000100110001000100110001101100010110",
+            "md5": "780a3bd7bd94084caf3972f4aca4a3d5",
+            "filesize": 701853
+        },
+        "Brown_spot  (76).jpg": {
+            "filename": "Brown_spot  (76).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 22.1,
+            "confidence": 97.3,
+            "dhash": "1001001101010011110100010101000100011001000110110001101000011110",
+            "md5": "163d7b79bec8f4cb078e2877876dc8bc",
+            "filesize": 700515
+        },
+        "Brown_spot  (77).jpg": {
+            "filename": "Brown_spot  (77).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 23.5,
+            "confidence": 97.6,
+            "dhash": "1001001101010010110100010101100100011001000110110001101000011110",
+            "md5": "0115fd840f52ce80303a6e7396369336",
+            "filesize": 698575
+        },
+        "Brown_spot  (78).jpg": {
+            "filename": "Brown_spot  (78).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 22.9,
+            "confidence": 97.5,
+            "dhash": "1001001101010011110100010101100100111001000110110001101000011110",
+            "md5": "fcad7ddbe4bbb4c9e85a9f32c0c57725",
+            "filesize": 698020
+        },
+        "Brown_spot  (79).jpg": {
+            "filename": "Brown_spot  (79).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 22.2,
+            "confidence": 97.3,
+            "dhash": "0001001101010010110100010101000100010001000100110001101000011110",
+            "md5": "9bf810f686dbdbe49a8336c66eb82d2b",
+            "filesize": 701956
+        },
+        "Brown_spot  (8).jpg": {
+            "filename": "Brown_spot  (8).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100000101100100011000010011001000011000010110000100110000000100",
+            "md5": "63484afc66241ec5480df831a35c8160",
+            "filesize": 659856
+        },
+        "Brown_spot  (80).jpg": {
+            "filename": "Brown_spot  (80).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0110001001100010001000100110010000100100101001000011001001110010",
+            "md5": "4020db89a2cc59103b67f22c693b1eb4",
+            "filesize": 717284
+        },
+        "Brown_spot  (81).jpg": {
+            "filename": "Brown_spot  (81).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0110001001100010001000100110010000100100101001000011001001110010",
+            "md5": "d2571d9b7084aae0eaac8ac4f494e1ee",
+            "filesize": 720219
+        },
+        "Brown_spot  (82).jpg": {
+            "filename": "Brown_spot  (82).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0110001001100010001000101110010000100100101001000011001001110010",
+            "md5": "ec0b849c5956f0fde8112031665112c7",
+            "filesize": 715601
+        },
+        "Brown_spot  (83).jpg": {
+            "filename": "Brown_spot  (83).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0110001001100000011000101110010000100100101001000011001001110010",
+            "md5": "4fb8b9d554362e28ece8be72001df38a",
+            "filesize": 713048
+        },
+        "Brown_spot  (84).jpg": {
+            "filename": "Brown_spot  (84).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0110001001100010001000101110010000100100101001000011001001110010",
+            "md5": "fe7429e07c03187682dbdfd712bfc165",
+            "filesize": 716066
+        },
+        "Brown_spot  (85).jpg": {
+            "filename": "Brown_spot  (85).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0110001001100000001000001110010000100100101001000011001001110010",
+            "md5": "7a00a499bcb7018e50c8b00cb6795646",
+            "filesize": 711190
+        },
+        "Brown_spot  (86).jpg": {
+            "filename": "Brown_spot  (86).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001001000110010101100101110010000100100001001000011000001100010",
+            "md5": "d7fe6d05d5fcf030f62d0cce5530e139",
+            "filesize": 691203
+        },
+        "Brown_spot  (87).jpg": {
+            "filename": "Brown_spot  (87).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001001000110010101100101110010000100100001001000011000101100010",
+            "md5": "2010b4ab85b9de6639fdd8e66b5301d4",
+            "filesize": 689448
+        },
+        "Brown_spot  (88).jpg": {
+            "filename": "Brown_spot  (88).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001001001110010101100101111010000110100001001000011000000100010",
+            "md5": "4ace6f9dddad3edab39388154fc13866",
+            "filesize": 689591
+        },
+        "Brown_spot  (89).jpg": {
+            "filename": "Brown_spot  (89).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001011001110010001100101110010000100100001001000011001001100010",
+            "md5": "67984687e7505188157054ec60438a26",
+            "filesize": 690356
+        },
+        "Brown_spot  (9).jpg": {
+            "filename": "Brown_spot  (9).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1100000101100100011000010011001000011000010110000100110000000100",
+            "md5": "eea6a2df4bcc96a38c96e0c1353d6425",
+            "filesize": 678834
+        },
+        "Brown_spot  (90).jpg": {
+            "filename": "Brown_spot  (90).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001011001110010101100101110010000100100001001000010000000100010",
+            "md5": "e784cec5c4ce0f945a2f6fb77e766d19",
+            "filesize": 689321
+        },
+        "Brown_spot  (91).jpg": {
+            "filename": "Brown_spot  (91).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001001000110010101100101110010000100100001001000011000001100010",
+            "md5": "e0e879f660ae85ce4ba92306ecf7af59",
+            "filesize": 689444
+        },
+        "Brown_spot  (92).jpg": {
+            "filename": "Brown_spot  (92).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001001000110010101100101110010000100100001001000010000001100010",
+            "md5": "5fa48543ab5661c437078b1e37b4301b",
+            "filesize": 690903
+        },
+        "Brown_spot  (93).jpg": {
+            "filename": "Brown_spot  (93).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001011001110010101100101110010000100100001001000010000000100010",
+            "md5": "f5b29c0bfe9f9ade87973b1faaa75bf9",
+            "filesize": 690893
+        },
+        "Brown_spot  (94).jpg": {
+            "filename": "Brown_spot  (94).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4.3,
+            "confidence": 93,
+            "dhash": "0100101001011010010010101100010001000100010001000110101001000000",
+            "md5": "8cd432de46e28391bad6e6cef8c1dde3",
+            "filesize": 661488
+        },
+        "Brown_spot  (95).jpg": {
+            "filename": "Brown_spot  (95).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4.1,
+            "confidence": 93,
+            "dhash": "0100001001011010010010101100010001000100010001000100001001000000",
+            "md5": "17286be5c83eaef2522e5f6f3b5fa590",
+            "filesize": 664989
+        },
+        "Brown_spot  (96).jpg": {
+            "filename": "Brown_spot  (96).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 5,
+            "confidence": 93.2,
+            "dhash": "0100001001011010010010100100010001000100011001100110001001100000",
+            "md5": "8b37f3904a28ca919c952866fb2172db",
+            "filesize": 663540
+        },
+        "Brown_spot  (97).jpg": {
+            "filename": "Brown_spot  (97).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0100011001001010010010100110010001100100011011000110001001100010",
+            "md5": "f6a7af45e3bf69e5779f093f48c5386f",
+            "filesize": 642198
+        },
+        "Brown_spot  (98).jpg": {
+            "filename": "Brown_spot  (98).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4.3,
+            "confidence": 93,
+            "dhash": "0100011001011010010010100100010001000100010001000100001001000010",
+            "md5": "a33dda14494d629eb3175627c2ead9f8",
+            "filesize": 663942
+        },
+        "Brown_spot  (99).jpg": {
+            "filename": "Brown_spot  (99).jpg",
+            "disease": "brown_spot",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0001101010100010100011000001110011000101011100010101110000110011",
+            "md5": "572a594a272f3abfe42a5e68e1762be4",
+            "filesize": 691097
+        }
+    }
+}

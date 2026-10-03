@@ -1,0 +1,2445 @@
+{
+    "disease": "sheath_blight",
+    "total": 271,
+    "images": {
+        "Sheath_blight  (1).jpg": {
+            "filename": "Sheath_blight  (1).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 93.1,
+            "md5": "1538d0b17b69c89485208f2ffe54607c",
+            "filesize": 1219807
+        },
+        "Sheath_blight  (10).jpg": {
+            "filename": "Sheath_blight  (10).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 94,
+            "md5": "fb43cfb73eda868553e0e9b918f87b14",
+            "filesize": 782421
+        },
+        "Sheath_blight  (100).jpg": {
+            "filename": "Sheath_blight  (100).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 97,
+            "md5": "12fb9cdd910f41f2879a503fd1b7b684",
+            "filesize": 1262198
+        },
+        "Sheath_blight  (101).jpg": {
+            "filename": "Sheath_blight  (101).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 47,
+            "confidence": 97.1,
+            "md5": "f02e26293e10ef4bce35f96d1e3fb836",
+            "filesize": 1221833
+        },
+        "Sheath_blight  (102).jpg": {
+            "filename": "Sheath_blight  (102).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 77,
+            "confidence": 97.2,
+            "md5": "b52c886b2eb6b0856b13025be2653a8a",
+            "filesize": 1238502
+        },
+        "Sheath_blight  (103).jpg": {
+            "filename": "Sheath_blight  (103).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 97.3,
+            "md5": "646292c7c24df30dd018c44fa89be825",
+            "filesize": 1218763
+        },
+        "Sheath_blight  (104).jpg": {
+            "filename": "Sheath_blight  (104).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 50,
+            "confidence": 97.4,
+            "md5": "aaf4326c12bf853084d14f9678b781b0",
+            "filesize": 1230608
+        },
+        "Sheath_blight  (105).jpg": {
+            "filename": "Sheath_blight  (105).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 80,
+            "confidence": 97.5,
+            "md5": "50c0027210978857941560312362e1a3",
+            "filesize": 1432349
+        },
+        "Sheath_blight  (106).jpg": {
+            "filename": "Sheath_blight  (106).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 97.6,
+            "md5": "2a884d832d88dbea8a9a99e914951b06",
+            "filesize": 1455906
+        },
+        "Sheath_blight  (107).jpg": {
+            "filename": "Sheath_blight  (107).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 53,
+            "confidence": 97.7,
+            "md5": "18786eb16c75376d1bfb6161296d1912",
+            "filesize": 1415440
+        },
+        "Sheath_blight  (108).jpg": {
+            "filename": "Sheath_blight  (108).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 83,
+            "confidence": 97.8,
+            "md5": "35fcb0f93581fd68cb7b09ee14565ed3",
+            "filesize": 1393242
+        },
+        "Sheath_blight  (109).jpg": {
+            "filename": "Sheath_blight  (109).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 97.9,
+            "md5": "e062833dc2346d17116f423497002734",
+            "filesize": 1234246
+        },
+        "Sheath_blight  (11).jpg": {
+            "filename": "Sheath_blight  (11).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 41,
+            "confidence": 94.1,
+            "md5": "bef4ebc6f7f61bf08b5d7535bf705cad",
+            "filesize": 1167402
+        },
+        "Sheath_blight  (110).jpg": {
+            "filename": "Sheath_blight  (110).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 56,
+            "confidence": 98,
+            "md5": "7682358a38c2432e9ed669179342aad2",
+            "filesize": 1275522
+        },
+        "Sheath_blight  (111).jpg": {
+            "filename": "Sheath_blight  (111).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 86,
+            "confidence": 98.1,
+            "md5": "762391c5adc71de4a9a97778ce00976d",
+            "filesize": 1220957
+        },
+        "Sheath_blight  (112).jpg": {
+            "filename": "Sheath_blight  (112).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 98.2,
+            "md5": "cd7254c23f05e4883eb2421eb1c98357",
+            "filesize": 1074970
+        },
+        "Sheath_blight  (113).jpg": {
+            "filename": "Sheath_blight  (113).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 31,
+            "confidence": 98.3,
+            "md5": "77ce4c13895255e48467a5feb04e9336",
+            "filesize": 1066349
+        },
+        "Sheath_blight  (114).jpg": {
+            "filename": "Sheath_blight  (114).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 89,
+            "confidence": 98.4,
+            "md5": "bd4757e9a1855c59240eb7de597b1d58",
+            "filesize": 1100717
+        },
+        "Sheath_blight  (115).jpg": {
+            "filename": "Sheath_blight  (115).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 98.5,
+            "md5": "98852d47833585fa00392c2dd3878c16",
+            "filesize": 1217587
+        },
+        "Sheath_blight  (116).jpg": {
+            "filename": "Sheath_blight  (116).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 34,
+            "confidence": 98.6,
+            "md5": "3c0288e42ab37b0840144f82515d958f",
+            "filesize": 1177708
+        },
+        "Sheath_blight  (117).jpg": {
+            "filename": "Sheath_blight  (117).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 92,
+            "confidence": 98.7,
+            "md5": "2998e645187eb90f3c07c1bcb8d686d8",
+            "filesize": 1249990
+        },
+        "Sheath_blight  (118).jpg": {
+            "filename": "Sheath_blight  (118).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 98.8,
+            "md5": "7d90ccec13a88317ba2a112874ee5bd8",
+            "filesize": 1322165
+        },
+        "Sheath_blight  (119).jpg": {
+            "filename": "Sheath_blight  (119).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 37,
+            "confidence": 98.9,
+            "md5": "c68012fcce250b69c2c713da7c2b2ced",
+            "filesize": 1309699
+        },
+        "Sheath_blight  (12).jpg": {
+            "filename": "Sheath_blight  (12).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 77,
+            "confidence": 94.2,
+            "md5": "22c2e3aa0d900546f80355e16e1f3d80",
+            "filesize": 1034186
+        },
+        "Sheath_blight  (120).jpg": {
+            "filename": "Sheath_blight  (120).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 65,
+            "confidence": 93,
+            "md5": "e1958fd8d1404a9542c687067280b960",
+            "filesize": 1195117
+        },
+        "Sheath_blight  (121).jpg": {
+            "filename": "Sheath_blight  (121).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 93.1,
+            "md5": "06bdb998bf8e10621beba3260fa5b4be",
+            "filesize": 1166453
+        },
+        "Sheath_blight  (122).jpg": {
+            "filename": "Sheath_blight  (122).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 40,
+            "confidence": 93.2,
+            "md5": "2dcbbcb90038c5334efc26120985b1de",
+            "filesize": 1220061
+        },
+        "Sheath_blight  (123).jpg": {
+            "filename": "Sheath_blight  (123).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 68,
+            "confidence": 93.3,
+            "md5": "2da350983b8890750c32aca944c6ef7c",
+            "filesize": 1355642
+        },
+        "Sheath_blight  (124).jpg": {
+            "filename": "Sheath_blight  (124).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 93.4,
+            "md5": "f2ec17790e608308933949c2f7576263",
+            "filesize": 1413386
+        },
+        "Sheath_blight  (125).jpg": {
+            "filename": "Sheath_blight  (125).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 43,
+            "confidence": 93.5,
+            "md5": "ad36e90d17817f2ea946c25d3b3b2ce0",
+            "filesize": 1267760
+        },
+        "Sheath_blight  (126).jpg": {
+            "filename": "Sheath_blight  (126).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 71,
+            "confidence": 93.6,
+            "md5": "40a9f585d890a89926b5570e5709e18e",
+            "filesize": 949230
+        },
+        "Sheath_blight  (127).jpg": {
+            "filename": "Sheath_blight  (127).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 93.7,
+            "md5": "ec63fa4c947cf7c82ebb5161cf29c81a",
+            "filesize": 1083948
+        },
+        "Sheath_blight  (128).jpg": {
+            "filename": "Sheath_blight  (128).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 46,
+            "confidence": 93.8,
+            "md5": "ed19674ea4b51ce0b0a473d1e109f0ed",
+            "filesize": 1174044
+        },
+        "Sheath_blight  (129).jpg": {
+            "filename": "Sheath_blight  (129).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 74,
+            "confidence": 93.9,
+            "md5": "34320e7f665a6cd196b9081c628af58a",
+            "filesize": 1126518
+        },
+        "Sheath_blight  (13).jpg": {
+            "filename": "Sheath_blight  (13).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 94.3,
+            "md5": "ed1a0bce2f05e6906c5acaf8a4f96d42",
+            "filesize": 941335
+        },
+        "Sheath_blight  (130).jpg": {
+            "filename": "Sheath_blight  (130).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 94,
+            "md5": "3f964d0dc5b2325b369e5c34997ef149",
+            "filesize": 941594
+        },
+        "Sheath_blight  (131).jpg": {
+            "filename": "Sheath_blight  (131).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 49,
+            "confidence": 94.1,
+            "md5": "296c5ad7216ca17c0b8b580297c202c3",
+            "filesize": 1255524
+        },
+        "Sheath_blight  (132).jpg": {
+            "filename": "Sheath_blight  (132).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 77,
+            "confidence": 94.2,
+            "md5": "f6d2def2f2e8999e97c2abf98adf617d",
+            "filesize": 1283044
+        },
+        "Sheath_blight  (133).jpg": {
+            "filename": "Sheath_blight  (133).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 94.3,
+            "md5": "936968806723187c94b2bfec1ff6aae3",
+            "filesize": 1287535
+        },
+        "Sheath_blight  (134).jpg": {
+            "filename": "Sheath_blight  (134).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 52,
+            "confidence": 94.4,
+            "md5": "27c234c6f8b5c4bb561bec719a8acb22",
+            "filesize": 1268869
+        },
+        "Sheath_blight  (135).jpg": {
+            "filename": "Sheath_blight  (135).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 80,
+            "confidence": 94.5,
+            "md5": "7cd983a77fbfc2ef1f4995d25506c53f",
+            "filesize": 1089052
+        },
+        "Sheath_blight  (136).jpg": {
+            "filename": "Sheath_blight  (136).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 94.6,
+            "md5": "2699c1b5d535a6fc010cd0eb2c13b9f1",
+            "filesize": 1068607
+        },
+        "Sheath_blight  (137).jpg": {
+            "filename": "Sheath_blight  (137).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 55,
+            "confidence": 94.7,
+            "md5": "506b69bc9dcbf91460447428bc40b387",
+            "filesize": 1090900
+        },
+        "Sheath_blight  (138).jpg": {
+            "filename": "Sheath_blight  (138).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 83,
+            "confidence": 94.8,
+            "md5": "7feff5e45113b56beee41bbe2d21202b",
+            "filesize": 1096675
+        },
+        "Sheath_blight  (139).jpg": {
+            "filename": "Sheath_blight  (139).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 94.9,
+            "md5": "a84fdbfc12ca798ca967fdbf2202d211",
+            "filesize": 1094057
+        },
+        "Sheath_blight  (14).jpg": {
+            "filename": "Sheath_blight  (14).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 44,
+            "confidence": 94.4,
+            "md5": "58978107f9e810c994e48c685d92d4bd",
+            "filesize": 949976
+        },
+        "Sheath_blight  (140).jpg": {
+            "filename": "Sheath_blight  (140).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 30,
+            "confidence": 95,
+            "md5": "5bc518966ff769bd7381042a6e19ecd1",
+            "filesize": 1122271
+        },
+        "Sheath_blight  (141).jpg": {
+            "filename": "Sheath_blight  (141).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 86,
+            "confidence": 95.1,
+            "md5": "903bfb21ea3e7ec3f6773923f139fadb",
+            "filesize": 1113380
+        },
+        "Sheath_blight  (142).jpg": {
+            "filename": "Sheath_blight  (142).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 95.2,
+            "md5": "0193b8766c9cd5ad6cdf83a84afa3de7",
+            "filesize": 1132024
+        },
+        "Sheath_blight  (143).jpg": {
+            "filename": "Sheath_blight  (143).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 33,
+            "confidence": 95.3,
+            "md5": "474bdf3275cdc7c94adc1818985d41fe",
+            "filesize": 1156136
+        },
+        "Sheath_blight  (144).jpg": {
+            "filename": "Sheath_blight  (144).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 89,
+            "confidence": 95.4,
+            "md5": "6132ac9f3fff3b02ebd652413fc01d47",
+            "filesize": 1133843
+        },
+        "Sheath_blight  (145).jpg": {
+            "filename": "Sheath_blight  (145).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 95.5,
+            "md5": "fd5514e0b097cacb599ac46df86c535d",
+            "filesize": 1156243
+        },
+        "Sheath_blight  (146).jpg": {
+            "filename": "Sheath_blight  (146).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 36,
+            "confidence": 95.6,
+            "md5": "1d7a04e8292ace37d98a0159f48173a9",
+            "filesize": 1092935
+        },
+        "Sheath_blight  (147).jpg": {
+            "filename": "Sheath_blight  (147).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 92,
+            "confidence": 95.7,
+            "md5": "3994b5dca034ab4a0a98c6fb0325e8b6",
+            "filesize": 1120223
+        },
+        "Sheath_blight  (148).jpg": {
+            "filename": "Sheath_blight  (148).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 95.8,
+            "md5": "848b298326bc74298ea727353c775c3a",
+            "filesize": 1126621
+        },
+        "Sheath_blight  (149).jpg": {
+            "filename": "Sheath_blight  (149).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 39,
+            "confidence": 95.9,
+            "md5": "1fc68d8811ec69bbc09e2b43eec8450d",
+            "filesize": 1138063
+        },
+        "Sheath_blight  (15).jpg": {
+            "filename": "Sheath_blight  (15).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 80,
+            "confidence": 94.5,
+            "md5": "d83d65e0f1d417004245d5c2bff28fa6",
+            "filesize": 1064488
+        },
+        "Sheath_blight  (150).jpg": {
+            "filename": "Sheath_blight  (150).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 65,
+            "confidence": 96,
+            "md5": "fc94aee8f637f53277683a7ff092e9c7",
+            "filesize": 1132286
+        },
+        "Sheath_blight  (151).jpg": {
+            "filename": "Sheath_blight  (151).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 96.1,
+            "md5": "8b30d11233545ef62ba38a8c077c0cd8",
+            "filesize": 1115128
+        },
+        "Sheath_blight  (152).jpg": {
+            "filename": "Sheath_blight  (152).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 42,
+            "confidence": 96.2,
+            "md5": "d6edfe0044620d6a8ac1ed97cc43b72e",
+            "filesize": 1159073
+        },
+        "Sheath_blight  (153).jpg": {
+            "filename": "Sheath_blight  (153).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 68,
+            "confidence": 96.3,
+            "md5": "da9c8501a26dfa59bad4c469419c5ab9",
+            "filesize": 1159700
+        },
+        "Sheath_blight  (154).jpg": {
+            "filename": "Sheath_blight  (154).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 96.4,
+            "md5": "727ce6c0ba133f489137cd0603f78032",
+            "filesize": 1123853
+        },
+        "Sheath_blight  (155).jpg": {
+            "filename": "Sheath_blight  (155).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 45,
+            "confidence": 96.5,
+            "md5": "494c1ba8e92487b900ebccfe9f16d893",
+            "filesize": 1070297
+        },
+        "Sheath_blight  (156).jpg": {
+            "filename": "Sheath_blight  (156).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 71,
+            "confidence": 96.6,
+            "md5": "906487096104b6119ccf722a873aadf7",
+            "filesize": 1025608
+        },
+        "Sheath_blight  (157).jpg": {
+            "filename": "Sheath_blight  (157).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 96.7,
+            "md5": "f6ed8460ec19bc0b649a483883374b56",
+            "filesize": 1039960
+        },
+        "Sheath_blight  (158).jpg": {
+            "filename": "Sheath_blight  (158).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 48,
+            "confidence": 96.8,
+            "md5": "0f3679f6f071a4f6db60d3fddc7c9f94",
+            "filesize": 1070372
+        },
+        "Sheath_blight  (159).jpg": {
+            "filename": "Sheath_blight  (159).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 74,
+            "confidence": 96.9,
+            "md5": "d7ff60c7f3a716f83144ef1beebff118",
+            "filesize": 1102389
+        },
+        "Sheath_blight  (16).jpg": {
+            "filename": "Sheath_blight  (16).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 94.6,
+            "md5": "5921796fa2a1ebe11b5a809f5cbc59eb",
+            "filesize": 991919
+        },
+        "Sheath_blight  (160).jpg": {
+            "filename": "Sheath_blight  (160).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 97,
+            "md5": "de0df964c33053ac5b810db78faae7b3",
+            "filesize": 930346
+        },
+        "Sheath_blight  (161).jpg": {
+            "filename": "Sheath_blight  (161).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 51,
+            "confidence": 97.1,
+            "md5": "fd48dfa9d46ba714c8e250ca3e0a5c0d",
+            "filesize": 1109714
+        },
+        "Sheath_blight  (162).jpg": {
+            "filename": "Sheath_blight  (162).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 77,
+            "confidence": 97.2,
+            "md5": "545ee840ac84c6f4931c8f01100d15f3",
+            "filesize": 1081184
+        },
+        "Sheath_blight  (163).jpg": {
+            "filename": "Sheath_blight  (163).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 97.3,
+            "md5": "cc9e8b64ef974711d5ea7c00362bf92c",
+            "filesize": 1104451
+        },
+        "Sheath_blight  (164).jpg": {
+            "filename": "Sheath_blight  (164).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 54,
+            "confidence": 97.4,
+            "md5": "e6d5e3fadf498fc4419095f05df59ae1",
+            "filesize": 697570
+        },
+        "Sheath_blight  (165).jpg": {
+            "filename": "Sheath_blight  (165).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 80,
+            "confidence": 97.5,
+            "md5": "493e6b3742e98695e467986378a6da86",
+            "filesize": 772207
+        },
+        "Sheath_blight  (166).jpg": {
+            "filename": "Sheath_blight  (166).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 97.6,
+            "md5": "3304c12cb41fa8fb5097015f253c089e",
+            "filesize": 930144
+        },
+        "Sheath_blight  (167).jpg": {
+            "filename": "Sheath_blight  (167).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 57,
+            "confidence": 97.7,
+            "md5": "580c85d72ca02325bd5ee78fa7723008",
+            "filesize": 901923
+        },
+        "Sheath_blight  (168).jpg": {
+            "filename": "Sheath_blight  (168).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 83,
+            "confidence": 97.8,
+            "md5": "03fc074470b7252de8bda8644a7180d8",
+            "filesize": 911679
+        },
+        "Sheath_blight  (169).jpg": {
+            "filename": "Sheath_blight  (169).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 97.9,
+            "md5": "32744b5fb838091c20fb814c01f404ad",
+            "filesize": 900476
+        },
+        "Sheath_blight  (17).jpg": {
+            "filename": "Sheath_blight  (17).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 47,
+            "confidence": 94.7,
+            "md5": "a209e401cfc89e92877b96b758cda4c8",
+            "filesize": 922728
+        },
+        "Sheath_blight  (170).jpg": {
+            "filename": "Sheath_blight  (170).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 32,
+            "confidence": 98,
+            "md5": "5f0c9e22f5213fe6979ef06dfaad50d4",
+            "filesize": 992456
+        },
+        "Sheath_blight  (171).jpg": {
+            "filename": "Sheath_blight  (171).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 86,
+            "confidence": 98.1,
+            "md5": "ebafe226a2148fd896395297fe671bfa",
+            "filesize": 988889
+        },
+        "Sheath_blight  (172).jpg": {
+            "filename": "Sheath_blight  (172).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 98.2,
+            "md5": "53cabc3da6aec09ba08d36bc6aea7dbd",
+            "filesize": 1035008
+        },
+        "Sheath_blight  (173).jpg": {
+            "filename": "Sheath_blight  (173).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 35,
+            "confidence": 98.3,
+            "md5": "b1b7b9a7e77299a38ef617bbb4e2acc8",
+            "filesize": 1035762
+        },
+        "Sheath_blight  (174).jpg": {
+            "filename": "Sheath_blight  (174).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 89,
+            "confidence": 98.4,
+            "md5": "37d00a57a43ad2c6a2f090e9a624b049",
+            "filesize": 969501
+        },
+        "Sheath_blight  (175).jpg": {
+            "filename": "Sheath_blight  (175).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 98.5,
+            "md5": "105acc176f1385b1703c8e105503a036",
+            "filesize": 802941
+        },
+        "Sheath_blight  (176).jpg": {
+            "filename": "Sheath_blight  (176).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 38,
+            "confidence": 98.6,
+            "md5": "5c713b44ecb314977f5665f394c39f02",
+            "filesize": 779564
+        },
+        "Sheath_blight  (177).jpg": {
+            "filename": "Sheath_blight  (177).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 92,
+            "confidence": 98.7,
+            "md5": "ad76eaa09e7f339b82a48dd18d3d7594",
+            "filesize": 820624
+        },
+        "Sheath_blight  (178).jpg": {
+            "filename": "Sheath_blight  (178).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 98.8,
+            "md5": "bf2fb677ed9bc644f61bdee2327893b8",
+            "filesize": 806565
+        },
+        "Sheath_blight  (179).jpg": {
+            "filename": "Sheath_blight  (179).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 41,
+            "confidence": 98.9,
+            "md5": "c058eb92e9481cd149958a3f646792b3",
+            "filesize": 828184
+        },
+        "Sheath_blight  (18).jpg": {
+            "filename": "Sheath_blight  (18).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 83,
+            "confidence": 94.8,
+            "md5": "3b0b5f9c005ad3d6daf54eaf849f94b3",
+            "filesize": 927630
+        },
+        "Sheath_blight  (180).jpg": {
+            "filename": "Sheath_blight  (180).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 65,
+            "confidence": 93,
+            "md5": "753137ffd651ce6043c6919d07391358",
+            "filesize": 673251
+        },
+        "Sheath_blight  (181).jpg": {
+            "filename": "Sheath_blight  (181).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 93.1,
+            "md5": "1c35127a3466a6966089c44c18f106c0",
+            "filesize": 974172
+        },
+        "Sheath_blight  (182).jpg": {
+            "filename": "Sheath_blight  (182).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 44,
+            "confidence": 93.2,
+            "md5": "a2fbe97a77d4f429e972f054bf23033c",
+            "filesize": 964223
+        },
+        "Sheath_blight  (183).jpg": {
+            "filename": "Sheath_blight  (183).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 68,
+            "confidence": 93.3,
+            "md5": "3ba222075d63ff95fc4087e9d27066f8",
+            "filesize": 1188849
+        },
+        "Sheath_blight  (184).jpg": {
+            "filename": "Sheath_blight  (184).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 93.4,
+            "md5": "4c12af855efad32b7516ea326859eb5c",
+            "filesize": 1278397
+        },
+        "Sheath_blight  (185).jpg": {
+            "filename": "Sheath_blight  (185).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 47,
+            "confidence": 93.5,
+            "md5": "7458daf90b40409af190cd98bf41772d",
+            "filesize": 6254735
+        },
+        "Sheath_blight  (186).jpg": {
+            "filename": "Sheath_blight  (186).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 71,
+            "confidence": 93.6,
+            "md5": "9d92ae1a27089ddff53dae76d865b3f7",
+            "filesize": 4359829
+        },
+        "Sheath_blight  (187).jpg": {
+            "filename": "Sheath_blight  (187).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 93.7,
+            "md5": "0c60ca3892e17f5b7b31cae980684d2e",
+            "filesize": 233109
+        },
+        "Sheath_blight  (188).jpg": {
+            "filename": "Sheath_blight  (188).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 50,
+            "confidence": 93.8,
+            "md5": "76894307104d2300b4096666269de8ca",
+            "filesize": 863590
+        },
+        "Sheath_blight  (189).jpg": {
+            "filename": "Sheath_blight  (189).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 74,
+            "confidence": 93.9,
+            "md5": "b63fd734b5323d783b1fa2ea9c70936a",
+            "filesize": 872379
+        },
+        "Sheath_blight  (19).jpg": {
+            "filename": "Sheath_blight  (19).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 94.9,
+            "md5": "9cf89d0505da215ce9bedecdb1539b27",
+            "filesize": 968130
+        },
+        "Sheath_blight  (190).jpg": {
+            "filename": "Sheath_blight  (190).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 94,
+            "md5": "4c5f522bbc1f20324d785bf96af41f31",
+            "filesize": 789365
+        },
+        "Sheath_blight  (191).jpg": {
+            "filename": "Sheath_blight  (191).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 53,
+            "confidence": 94.1,
+            "md5": "a5827589240864aa5904de16a8b87d1e",
+            "filesize": 848243
+        },
+        "Sheath_blight  (192).jpg": {
+            "filename": "Sheath_blight  (192).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 77,
+            "confidence": 94.2,
+            "md5": "d5df84206061187feaeb0325f21093f4",
+            "filesize": 756266
+        },
+        "Sheath_blight  (193).jpg": {
+            "filename": "Sheath_blight  (193).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 94.3,
+            "md5": "7c9f592fd1b7fa95724a8f14122ecf84",
+            "filesize": 915287
+        },
+        "Sheath_blight  (194).jpg": {
+            "filename": "Sheath_blight  (194).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 56,
+            "confidence": 94.4,
+            "md5": "fad0a71f4fa46a2bd9a32a6204b90d12",
+            "filesize": 1009558
+        },
+        "Sheath_blight  (195).jpg": {
+            "filename": "Sheath_blight  (195).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 80,
+            "confidence": 94.5,
+            "md5": "6a7104c17cda50df2f40643b1f07c5a4",
+            "filesize": 929256
+        },
+        "Sheath_blight  (196).jpg": {
+            "filename": "Sheath_blight  (196).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 94.6,
+            "md5": "07075cfacab949b3055b85fdfe5f1957",
+            "filesize": 899177
+        },
+        "Sheath_blight  (197).jpg": {
+            "filename": "Sheath_blight  (197).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 31,
+            "confidence": 94.7,
+            "md5": "2aedb76e8b3c934e110d297e97922c8f",
+            "filesize": 941188
+        },
+        "Sheath_blight  (198).jpg": {
+            "filename": "Sheath_blight  (198).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 83,
+            "confidence": 94.8,
+            "md5": "cbd6f8b52db0cb49b310af6ecfd6a06a",
+            "filesize": 937955
+        },
+        "Sheath_blight  (199).jpg": {
+            "filename": "Sheath_blight  (199).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 94.9,
+            "md5": "e88a4e8c3e355aded7e5e71906e62732",
+            "filesize": 941876
+        },
+        "Sheath_blight  (2).jpg": {
+            "filename": "Sheath_blight  (2).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 32,
+            "confidence": 93.2,
+            "md5": "ec6ef3a21471258efa625dc532dac85e",
+            "filesize": 1134904
+        },
+        "Sheath_blight  (20).jpg": {
+            "filename": "Sheath_blight  (20).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 50,
+            "confidence": 95,
+            "md5": "584d949d8a85b5b4573751fa82754517",
+            "filesize": 1123160
+        },
+        "Sheath_blight  (200).jpg": {
+            "filename": "Sheath_blight  (200).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 34,
+            "confidence": 95,
+            "md5": "4699c6358d9af4465b7c279391c92c40",
+            "filesize": 1030416
+        },
+        "Sheath_blight  (201).jpg": {
+            "filename": "Sheath_blight  (201).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 86,
+            "confidence": 95.1,
+            "md5": "d5c581b2d361c14bfec9dea3c8d86bc3",
+            "filesize": 1024394
+        },
+        "Sheath_blight  (202).jpg": {
+            "filename": "Sheath_blight  (202).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 95.2,
+            "md5": "79b41f470b73e0b29cdc4795044b7ba1",
+            "filesize": 1008771
+        },
+        "Sheath_blight  (203).jpg": {
+            "filename": "Sheath_blight  (203).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 37,
+            "confidence": 95.3,
+            "md5": "ea62ed9c1f4e699baac6046bea865ec2",
+            "filesize": 959051
+        },
+        "Sheath_blight  (204).jpg": {
+            "filename": "Sheath_blight  (204).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 89,
+            "confidence": 95.4,
+            "md5": "41bd1d33a93098ba2164aaeadd16dadc",
+            "filesize": 923984
+        },
+        "Sheath_blight  (205).jpg": {
+            "filename": "Sheath_blight  (205).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 95.5,
+            "md5": "170d31a0f117d1f9ab894b16a707f196",
+            "filesize": 850279
+        },
+        "Sheath_blight  (206).jpg": {
+            "filename": "Sheath_blight  (206).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 40,
+            "confidence": 95.6,
+            "md5": "54115c3faf15361ad316a2a9c1139579",
+            "filesize": 927819
+        },
+        "Sheath_blight  (207).jpg": {
+            "filename": "Sheath_blight  (207).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 92,
+            "confidence": 95.7,
+            "md5": "dcf7d95fc42568e293e4587f804b743d",
+            "filesize": 913336
+        },
+        "Sheath_blight  (208).jpg": {
+            "filename": "Sheath_blight  (208).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 95.8,
+            "md5": "3589154d18a0eefaa527bcbe1ac3121c",
+            "filesize": 916830
+        },
+        "Sheath_blight  (209).jpg": {
+            "filename": "Sheath_blight  (209).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 43,
+            "confidence": 95.9,
+            "md5": "dc6fd33b893987caaa16530b0d0a8fd2",
+            "filesize": 915184
+        },
+        "Sheath_blight  (21).jpg": {
+            "filename": "Sheath_blight  (21).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 86,
+            "confidence": 95.1,
+            "md5": "17e4b07fb828d1f32d9a0c66cd864ee4",
+            "filesize": 1306052
+        },
+        "Sheath_blight  (210).jpg": {
+            "filename": "Sheath_blight  (210).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 65,
+            "confidence": 96,
+            "md5": "c41a4ea9ff81e9b3050261e4693b6761",
+            "filesize": 183772
+        },
+        "Sheath_blight  (211).jpg": {
+            "filename": "Sheath_blight  (211).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 96.1,
+            "md5": "203cfbf72f1ca0c8217bdd4145591ada",
+            "filesize": 795905
+        },
+        "Sheath_blight  (212).jpg": {
+            "filename": "Sheath_blight  (212).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 46,
+            "confidence": 96.2,
+            "md5": "f1a88ad8bd22b265f42c2c6015f6520f",
+            "filesize": 239649
+        },
+        "Sheath_blight  (213).jpg": {
+            "filename": "Sheath_blight  (213).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 68,
+            "confidence": 96.3,
+            "md5": "45acf440be916259e62b9c0e5da05b27",
+            "filesize": 883779
+        },
+        "Sheath_blight  (214).jpg": {
+            "filename": "Sheath_blight  (214).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 96.4,
+            "md5": "8095aa1fd3947bf87ee6f8b1403172bc",
+            "filesize": 872004
+        },
+        "Sheath_blight  (215).jpg": {
+            "filename": "Sheath_blight  (215).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 49,
+            "confidence": 96.5,
+            "md5": "f37fe52376921989694863ade8a1c04c",
+            "filesize": 1115313
+        },
+        "Sheath_blight  (216).jpg": {
+            "filename": "Sheath_blight  (216).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 71,
+            "confidence": 96.6,
+            "md5": "7ffad3b0e1604c689432b846480a92e0",
+            "filesize": 1017503
+        },
+        "Sheath_blight  (217).jpg": {
+            "filename": "Sheath_blight  (217).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 96.7,
+            "md5": "08b7768127229eaaad9491eab06d7a17",
+            "filesize": 988934
+        },
+        "Sheath_blight  (218).jpg": {
+            "filename": "Sheath_blight  (218).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 52,
+            "confidence": 96.8,
+            "md5": "f6da84afca63af750c4e970fbdc9abc8",
+            "filesize": 1000731
+        },
+        "Sheath_blight  (219).jpg": {
+            "filename": "Sheath_blight  (219).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 74,
+            "confidence": 96.9,
+            "md5": "d100b9910e31bbfa73aa815e7eba36a5",
+            "filesize": 1023936
+        },
+        "Sheath_blight  (22).jpg": {
+            "filename": "Sheath_blight  (22).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 95.2,
+            "md5": "b512f6ed54eeb3544b5b66ef7bcaa69a",
+            "filesize": 328903
+        },
+        "Sheath_blight  (220).jpg": {
+            "filename": "Sheath_blight  (220).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 97,
+            "md5": "e74c7b45c0eb4850c70ce0adcc58b6f5",
+            "filesize": 1097401
+        },
+        "Sheath_blight  (221).jpg": {
+            "filename": "Sheath_blight  (221).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 55,
+            "confidence": 97.1,
+            "md5": "64b8890cfec546371b809e3b2c6e29c6",
+            "filesize": 1081913
+        },
+        "Sheath_blight  (222).jpg": {
+            "filename": "Sheath_blight  (222).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 77,
+            "confidence": 97.2,
+            "md5": "cde06fe91d51ead95bc49be4d396b7c5",
+            "filesize": 925280
+        },
+        "Sheath_blight  (223).jpg": {
+            "filename": "Sheath_blight  (223).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 97.3,
+            "md5": "6caa5030e8c67403eed55e45f2abd7be",
+            "filesize": 831837
+        },
+        "Sheath_blight  (224).jpg": {
+            "filename": "Sheath_blight  (224).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 30,
+            "confidence": 97.4,
+            "md5": "c3fb9e4ad6b256293cd5ad70cc7b2253",
+            "filesize": 834132
+        },
+        "Sheath_blight  (225).jpg": {
+            "filename": "Sheath_blight  (225).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 80,
+            "confidence": 97.5,
+            "md5": "cb13e7c955fc23a3be7e3e9c01ef436d",
+            "filesize": 781144
+        },
+        "Sheath_blight  (226).jpg": {
+            "filename": "Sheath_blight  (226).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 97.6,
+            "md5": "79e7c65a5e4725b6e84dafeb3afd23ab",
+            "filesize": 840923
+        },
+        "Sheath_blight  (227).jpg": {
+            "filename": "Sheath_blight  (227).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 33,
+            "confidence": 97.7,
+            "md5": "2a0379e01dc11a33ec966f36ef2563ff",
+            "filesize": 986265
+        },
+        "Sheath_blight  (228).jpg": {
+            "filename": "Sheath_blight  (228).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 83,
+            "confidence": 97.8,
+            "md5": "f66431f44e51656aded1056bd05176b7",
+            "filesize": 410530
+        },
+        "Sheath_blight  (229).jpg": {
+            "filename": "Sheath_blight  (229).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 97.9,
+            "md5": "a066828f80e6c6770d54db525f26f6e0",
+            "filesize": 1152401
+        },
+        "Sheath_blight  (23).jpg": {
+            "filename": "Sheath_blight  (23).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 53,
+            "confidence": 95.3,
+            "md5": "f0c4ec2c080783378f88eb8bee8d0b93",
+            "filesize": 1317044
+        },
+        "Sheath_blight  (230).jpg": {
+            "filename": "Sheath_blight  (230).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 36,
+            "confidence": 98,
+            "md5": "5a33d2d297295ae6358adfae9cd34229",
+            "filesize": 1160847
+        },
+        "Sheath_blight  (231).jpg": {
+            "filename": "Sheath_blight  (231).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 86,
+            "confidence": 98.1,
+            "md5": "8c74a73c47b18aaf8279583c54ddf7a0",
+            "filesize": 219622
+        },
+        "Sheath_blight  (232).jpg": {
+            "filename": "Sheath_blight  (232).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 98.2,
+            "md5": "7ab80a7f1fbb71a2007493d3f312d04b",
+            "filesize": 111275
+        },
+        "Sheath_blight  (233).jpg": {
+            "filename": "Sheath_blight  (233).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 39,
+            "confidence": 98.3,
+            "md5": "8bedb053c40f3bbdbca52fb0932f84cd",
+            "filesize": 184435
+        },
+        "Sheath_blight  (234).jpg": {
+            "filename": "Sheath_blight  (234).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 89,
+            "confidence": 98.4,
+            "md5": "4e012eff0ac2a69f4cda31aa0ae699eb",
+            "filesize": 1138671
+        },
+        "Sheath_blight  (235).jpg": {
+            "filename": "Sheath_blight  (235).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 98.5,
+            "md5": "67adfcd7a024ad98840b106ded9398db",
+            "filesize": 71557
+        },
+        "Sheath_blight  (236).jpg": {
+            "filename": "Sheath_blight  (236).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 42,
+            "confidence": 98.6,
+            "md5": "b93662afffb4e201adfc8eba34a541ea",
+            "filesize": 1161984
+        },
+        "Sheath_blight  (237).jpg": {
+            "filename": "Sheath_blight  (237).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 92,
+            "confidence": 98.7,
+            "md5": "584f0c86208adab7a9ccda4c9e8cca7a",
+            "filesize": 1153689
+        },
+        "Sheath_blight  (238).jpg": {
+            "filename": "Sheath_blight  (238).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 98.8,
+            "md5": "e74e7b18775456b09d58f778b88afc10",
+            "filesize": 1158317
+        },
+        "Sheath_blight  (239).jpg": {
+            "filename": "Sheath_blight  (239).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 45,
+            "confidence": 98.9,
+            "md5": "b08cd6d8f69d0254f5c0ada558009049",
+            "filesize": 863606
+        },
+        "Sheath_blight  (24).jpg": {
+            "filename": "Sheath_blight  (24).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 89,
+            "confidence": 95.4,
+            "md5": "41bf6cffae7013946f93c45a6243da27",
+            "filesize": 470523
+        },
+        "Sheath_blight  (240).jpg": {
+            "filename": "Sheath_blight  (240).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 65,
+            "confidence": 93,
+            "md5": "8b57b850bf44cff793da6d17bfe486f8",
+            "filesize": 882504
+        },
+        "Sheath_blight  (241).jpg": {
+            "filename": "Sheath_blight  (241).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 93.1,
+            "md5": "6906654cf66b0957746dbc5a2d83b253",
+            "filesize": 879054
+        },
+        "Sheath_blight  (242).jpg": {
+            "filename": "Sheath_blight  (242).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 48,
+            "confidence": 93.2,
+            "md5": "43724c98b44411398b58d377106fcbc6",
+            "filesize": 869884
+        },
+        "Sheath_blight  (243).jpg": {
+            "filename": "Sheath_blight  (243).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 68,
+            "confidence": 93.3,
+            "md5": "1c1ec1690bc00d0daeec29468297eb94",
+            "filesize": 891698
+        },
+        "Sheath_blight  (244).jpg": {
+            "filename": "Sheath_blight  (244).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 93.4,
+            "md5": "1079cc2aca14f5c1cd86dd8907f15093",
+            "filesize": 883875
+        },
+        "Sheath_blight  (245).jpg": {
+            "filename": "Sheath_blight  (245).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 51,
+            "confidence": 93.5,
+            "md5": "1561e0106106dc881efb3fc4ccb034be",
+            "filesize": 871114
+        },
+        "Sheath_blight  (246).jpg": {
+            "filename": "Sheath_blight  (246).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 71,
+            "confidence": 93.6,
+            "md5": "bbb7ecf7382eb585c30cf04ba44be09c",
+            "filesize": 696233
+        },
+        "Sheath_blight  (247).jpg": {
+            "filename": "Sheath_blight  (247).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 93.7,
+            "md5": "eeae3732f7ea0c7edaa339fdcd2e9e60",
+            "filesize": 690290
+        },
+        "Sheath_blight  (248).jpg": {
+            "filename": "Sheath_blight  (248).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 54,
+            "confidence": 93.8,
+            "md5": "d9307d8151d5a77324508174f94869a9",
+            "filesize": 768551
+        },
+        "Sheath_blight  (249).jpg": {
+            "filename": "Sheath_blight  (249).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 74,
+            "confidence": 93.9,
+            "md5": "56e096f5619d0e6be584e1628bd42d4e",
+            "filesize": 728086
+        },
+        "Sheath_blight  (25).jpg": {
+            "filename": "Sheath_blight  (25).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 95.5,
+            "md5": "17b49a901874203cb23172b9cb9a8d1e",
+            "filesize": 448222
+        },
+        "Sheath_blight  (250).jpg": {
+            "filename": "Sheath_blight  (250).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 94,
+            "md5": "1fcda95a562e14e7ceea4ec18363eb0f",
+            "filesize": 726553
+        },
+        "Sheath_blight  (251).jpg": {
+            "filename": "Sheath_blight  (251).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 57,
+            "confidence": 94.1,
+            "md5": "e459b2692351b18da54db2c60bf0825c",
+            "filesize": 191330
+        },
+        "Sheath_blight  (252).jpg": {
+            "filename": "Sheath_blight  (252).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 77,
+            "confidence": 94.2,
+            "md5": "14687aa8bbd7d76f56202d2a5eadc98f",
+            "filesize": 752938
+        },
+        "Sheath_blight  (253).jpg": {
+            "filename": "Sheath_blight  (253).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 94.3,
+            "md5": "f8dc0543ec2232b35fe19d2c4c761f71",
+            "filesize": 680565
+        },
+        "Sheath_blight  (254).jpg": {
+            "filename": "Sheath_blight  (254).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 32,
+            "confidence": 94.4,
+            "md5": "71724bbc6e57ccd1eb42f7aa2b075e20",
+            "filesize": 705489
+        },
+        "Sheath_blight  (255).jpg": {
+            "filename": "Sheath_blight  (255).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 80,
+            "confidence": 94.5,
+            "md5": "33f75fb49f2af0d81701447aeaf53ada",
+            "filesize": 650791
+        },
+        "Sheath_blight  (256).jpg": {
+            "filename": "Sheath_blight  (256).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 94.6,
+            "md5": "e4b279511b8d3decee5e92266b10c7f4",
+            "filesize": 1128402
+        },
+        "Sheath_blight  (257).jpg": {
+            "filename": "Sheath_blight  (257).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 35,
+            "confidence": 94.7,
+            "md5": "efeb919bf1cd5dd9e70573d92733c9fd",
+            "filesize": 1170740
+        },
+        "Sheath_blight  (258).jpg": {
+            "filename": "Sheath_blight  (258).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 83,
+            "confidence": 94.8,
+            "md5": "cf43b3d0eace5bb4daaffa1a08aad8a2",
+            "filesize": 1186809
+        },
+        "Sheath_blight  (259).jpg": {
+            "filename": "Sheath_blight  (259).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 94.9,
+            "md5": "423e36d8594c3d4aa0bb52a5cc954bd2",
+            "filesize": 1166716
+        },
+        "Sheath_blight  (26).jpg": {
+            "filename": "Sheath_blight  (26).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 56,
+            "confidence": 95.6,
+            "md5": "c6951a8662add0dae22640fd95d6ff89",
+            "filesize": 1215884
+        },
+        "Sheath_blight  (260).jpg": {
+            "filename": "Sheath_blight  (260).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 38,
+            "confidence": 95,
+            "md5": "043c3a8a522866c733cd3d3a1c3d9dbf",
+            "filesize": 438399
+        },
+        "Sheath_blight  (261).jpg": {
+            "filename": "Sheath_blight  (261).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 86,
+            "confidence": 95.1,
+            "md5": "d767151cd277f5a1eb1e6bf2b8be783c",
+            "filesize": 441904
+        },
+        "Sheath_blight  (262).jpg": {
+            "filename": "Sheath_blight  (262).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 95.2,
+            "md5": "47908b5725f1f05cbf91da8c851b1979",
+            "filesize": 420710
+        },
+        "Sheath_blight  (263).jpg": {
+            "filename": "Sheath_blight  (263).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 41,
+            "confidence": 95.3,
+            "md5": "d00e786dd30f8d70c75c4f6f98ffdf45",
+            "filesize": 1159941
+        },
+        "Sheath_blight  (264).jpg": {
+            "filename": "Sheath_blight  (264).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 89,
+            "confidence": 95.4,
+            "md5": "e8f2a585bf9f9af9c6c6e028eb6e489a",
+            "filesize": 1307298
+        },
+        "Sheath_blight  (265).jpg": {
+            "filename": "Sheath_blight  (265).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 95.5,
+            "md5": "265a4567f49492202af8b886eb46bd59",
+            "filesize": 143235
+        },
+        "Sheath_blight  (266).jpg": {
+            "filename": "Sheath_blight  (266).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 44,
+            "confidence": 95.6,
+            "md5": "53579e08083767addcd658440a8fe49b",
+            "filesize": 1272351
+        },
+        "Sheath_blight  (267).jpg": {
+            "filename": "Sheath_blight  (267).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 92,
+            "confidence": 95.7,
+            "md5": "d02be6c80160180a2fa420850eea379f",
+            "filesize": 1274078
+        },
+        "Sheath_blight  (268).jpg": {
+            "filename": "Sheath_blight  (268).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 95.8,
+            "md5": "90f7413cb3a1683e039a51cb825c8e10",
+            "filesize": 1289124
+        },
+        "Sheath_blight  (269).jpg": {
+            "filename": "Sheath_blight  (269).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 47,
+            "confidence": 95.9,
+            "md5": "c9283dff686fde52dff2f1f5e0290c2d",
+            "filesize": 1285869
+        },
+        "Sheath_blight  (27).jpg": {
+            "filename": "Sheath_blight  (27).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 92,
+            "confidence": 95.7,
+            "md5": "b5de3ff25b07a1cbe9f77d979b7ecf24",
+            "filesize": 1225382
+        },
+        "Sheath_blight  (270).jpg": {
+            "filename": "Sheath_blight  (270).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 65,
+            "confidence": 96,
+            "md5": "1aa5af47bdb4c0a1ee154e97f483c5e3",
+            "filesize": 148801
+        },
+        "Sheath_blight  (271).jpg": {
+            "filename": "Sheath_blight  (271).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 96.1,
+            "md5": "9652b93b83d99bec553d50896c37542d",
+            "filesize": 220332
+        },
+        "Sheath_blight  (28).jpg": {
+            "filename": "Sheath_blight  (28).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 95.8,
+            "md5": "d0a3bae84057117cd8e6007355c478ba",
+            "filesize": 1333700
+        },
+        "Sheath_blight  (29).jpg": {
+            "filename": "Sheath_blight  (29).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 31,
+            "confidence": 95.9,
+            "md5": "1a1a6c6f39885a3b6336fcf373ef40cd",
+            "filesize": 1310219
+        },
+        "Sheath_blight  (3).jpg": {
+            "filename": "Sheath_blight  (3).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 68,
+            "confidence": 93.3,
+            "md5": "89ad2279dd838322724d64f511cc3571",
+            "filesize": 1171515
+        },
+        "Sheath_blight  (30).jpg": {
+            "filename": "Sheath_blight  (30).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 65,
+            "confidence": 96,
+            "md5": "204464c71fc6c37d2817b9cd6edfbe69",
+            "filesize": 1297441
+        },
+        "Sheath_blight  (31).jpg": {
+            "filename": "Sheath_blight  (31).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 96.1,
+            "md5": "753ff0c827995a2d8eb2def640e5a8a9",
+            "filesize": 1393646
+        },
+        "Sheath_blight  (32).jpg": {
+            "filename": "Sheath_blight  (32).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 34,
+            "confidence": 96.2,
+            "md5": "92189eef3956a7c9104bb6c7f9737bae",
+            "filesize": 1299950
+        },
+        "Sheath_blight  (33).jpg": {
+            "filename": "Sheath_blight  (33).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 68,
+            "confidence": 96.3,
+            "md5": "37e7717b65a87deeaddb422275c9a371",
+            "filesize": 1395955
+        },
+        "Sheath_blight  (34).jpg": {
+            "filename": "Sheath_blight  (34).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 96.4,
+            "md5": "6018cabfeb6907a8bc8d37f596ccf030",
+            "filesize": 1372854
+        },
+        "Sheath_blight  (35).jpg": {
+            "filename": "Sheath_blight  (35).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 37,
+            "confidence": 96.5,
+            "md5": "1f7f47fa612e508febd805271944d489",
+            "filesize": 1250043
+        },
+        "Sheath_blight  (36).jpg": {
+            "filename": "Sheath_blight  (36).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 71,
+            "confidence": 96.6,
+            "md5": "1f7f47fa612e508febd805271944d489",
+            "filesize": 1250043
+        },
+        "Sheath_blight  (37).jpg": {
+            "filename": "Sheath_blight  (37).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 96.7,
+            "md5": "a4bc32d897b7cc544cccf63460c45c09",
+            "filesize": 1256865
+        },
+        "Sheath_blight  (38).jpg": {
+            "filename": "Sheath_blight  (38).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 40,
+            "confidence": 96.8,
+            "md5": "a90d090af3275adf8a303a5214090688",
+            "filesize": 1318478
+        },
+        "Sheath_blight  (39).jpg": {
+            "filename": "Sheath_blight  (39).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 74,
+            "confidence": 96.9,
+            "md5": "827553bcf34a5784b90973e4cb77af87",
+            "filesize": 1257040
+        },
+        "Sheath_blight  (4).jpg": {
+            "filename": "Sheath_blight  (4).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 93.4,
+            "md5": "72af7a5d6e0577c0ef1ad2ac2f043580",
+            "filesize": 1146543
+        },
+        "Sheath_blight  (40).jpg": {
+            "filename": "Sheath_blight  (40).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 97,
+            "md5": "015f9ec12b4ce0bf4dbb69b49b4d8099",
+            "filesize": 1205279
+        },
+        "Sheath_blight  (41).jpg": {
+            "filename": "Sheath_blight  (41).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 43,
+            "confidence": 97.1,
+            "md5": "8330c866c38f48ff1cf230fec4240983",
+            "filesize": 1260867
+        },
+        "Sheath_blight  (42).jpg": {
+            "filename": "Sheath_blight  (42).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 77,
+            "confidence": 97.2,
+            "md5": "c832ed35b018163b8eb619bc1bbe633b",
+            "filesize": 1117447
+        },
+        "Sheath_blight  (43).jpg": {
+            "filename": "Sheath_blight  (43).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 97.3,
+            "md5": "4931653ba532ab1ab0792be0c5649228",
+            "filesize": 1071964
+        },
+        "Sheath_blight  (44).jpg": {
+            "filename": "Sheath_blight  (44).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 46,
+            "confidence": 97.4,
+            "md5": "3809b946f1f03ac752fd884037b50d16",
+            "filesize": 1102699
+        },
+        "Sheath_blight  (45).jpg": {
+            "filename": "Sheath_blight  (45).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 80,
+            "confidence": 97.5,
+            "md5": "b5e7da49eebc5eaa9eee58b73686d318",
+            "filesize": 1047799
+        },
+        "Sheath_blight  (46).jpg": {
+            "filename": "Sheath_blight  (46).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 97.6,
+            "md5": "369bc093f4546c5ec779321b3fc23ea8",
+            "filesize": 1083622
+        },
+        "Sheath_blight  (47).jpg": {
+            "filename": "Sheath_blight  (47).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 49,
+            "confidence": 97.7,
+            "md5": "cc4d034efc38da6b1441bc84bf9c2889",
+            "filesize": 1121957
+        },
+        "Sheath_blight  (48).jpg": {
+            "filename": "Sheath_blight  (48).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 83,
+            "confidence": 97.8,
+            "md5": "4e6406efdd4a49cb01bb75c10aea75ad",
+            "filesize": 1084532
+        },
+        "Sheath_blight  (49).jpg": {
+            "filename": "Sheath_blight  (49).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 97.9,
+            "md5": "7d5466a61028d69bd0c9200e9e4cc491",
+            "filesize": 1098420
+        },
+        "Sheath_blight  (5).jpg": {
+            "filename": "Sheath_blight  (5).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 35,
+            "confidence": 93.5,
+            "md5": "7c5e98ee9eec60fbf7001ff18080d994",
+            "filesize": 1140390
+        },
+        "Sheath_blight  (50).jpg": {
+            "filename": "Sheath_blight  (50).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 52,
+            "confidence": 98,
+            "md5": "ac60e358a187827e34a79af7a8ff0bb8",
+            "filesize": 1047562
+        },
+        "Sheath_blight  (51).jpg": {
+            "filename": "Sheath_blight  (51).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 86,
+            "confidence": 98.1,
+            "md5": "351e1a49117b56d1bd2e6731d472a316",
+            "filesize": 213840
+        },
+        "Sheath_blight  (52).jpg": {
+            "filename": "Sheath_blight  (52).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 98.2,
+            "md5": "8a71d49d00e5b3ae31c7c75d6f7f306a",
+            "filesize": 694717
+        },
+        "Sheath_blight  (53).jpg": {
+            "filename": "Sheath_blight  (53).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 55,
+            "confidence": 98.3,
+            "md5": "ed1ef0c8d1277e59b90c25875fca51ff",
+            "filesize": 714022
+        },
+        "Sheath_blight  (54).jpg": {
+            "filename": "Sheath_blight  (54).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 89,
+            "confidence": 98.4,
+            "md5": "71bd7ed31bf098969918fcd55b77e6f4",
+            "filesize": 1062654
+        },
+        "Sheath_blight  (55).jpg": {
+            "filename": "Sheath_blight  (55).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 98.5,
+            "md5": "69c661dbd3959a853e0e6646b6c6d8d0",
+            "filesize": 974550
+        },
+        "Sheath_blight  (56).jpg": {
+            "filename": "Sheath_blight  (56).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 30,
+            "confidence": 98.6,
+            "md5": "075aa4b046770cd21d69153f89d46674",
+            "filesize": 873485
+        },
+        "Sheath_blight  (57).jpg": {
+            "filename": "Sheath_blight  (57).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 92,
+            "confidence": 98.7,
+            "md5": "1e329a37db51cf49b3fa6ea60bc3636d",
+            "filesize": 1165048
+        },
+        "Sheath_blight  (58).jpg": {
+            "filename": "Sheath_blight  (58).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 98.8,
+            "md5": "5bb80e4fccf8c37bb7c0ed837acd1a52",
+            "filesize": 1156728
+        },
+        "Sheath_blight  (59).jpg": {
+            "filename": "Sheath_blight  (59).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 33,
+            "confidence": 98.9,
+            "md5": "e01861d8147fa379a56d03f3202422c3",
+            "filesize": 849679
+        },
+        "Sheath_blight  (6).jpg": {
+            "filename": "Sheath_blight  (6).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 71,
+            "confidence": 93.6,
+            "md5": "c46d8eeda604e2a77e6b60cbd92d9f73",
+            "filesize": 975082
+        },
+        "Sheath_blight  (60).jpg": {
+            "filename": "Sheath_blight  (60).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 65,
+            "confidence": 93,
+            "md5": "651e5c5d6f14a3474da760b3e5b66a78",
+            "filesize": 856040
+        },
+        "Sheath_blight  (61).jpg": {
+            "filename": "Sheath_blight  (61).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 93.1,
+            "md5": "ef6611bb3cebf5a187eacd7ecd734a10",
+            "filesize": 842877
+        },
+        "Sheath_blight  (62).jpg": {
+            "filename": "Sheath_blight  (62).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 36,
+            "confidence": 93.2,
+            "md5": "2c480849e382df68e9050c3b7cf3a175",
+            "filesize": 811373
+        },
+        "Sheath_blight  (63).jpg": {
+            "filename": "Sheath_blight  (63).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 68,
+            "confidence": 93.3,
+            "md5": "aef65bbee0a3bdca234f4ad4f952ef7c",
+            "filesize": 815888
+        },
+        "Sheath_blight  (64).jpg": {
+            "filename": "Sheath_blight  (64).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 93.4,
+            "md5": "9366a196d0d4109d0732aed309ffe866",
+            "filesize": 937863
+        },
+        "Sheath_blight  (65).jpg": {
+            "filename": "Sheath_blight  (65).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 39,
+            "confidence": 93.5,
+            "md5": "436287a21b2cf6e521e397b0a591e69b",
+            "filesize": 893921
+        },
+        "Sheath_blight  (66).jpg": {
+            "filename": "Sheath_blight  (66).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 71,
+            "confidence": 93.6,
+            "md5": "1d0372cd229855fb6065054e0de6258c",
+            "filesize": 1002838
+        },
+        "Sheath_blight  (67).jpg": {
+            "filename": "Sheath_blight  (67).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 93.7,
+            "md5": "9513f3d0f5005d33c3d32da5eaf72ccb",
+            "filesize": 1055407
+        },
+        "Sheath_blight  (68).jpg": {
+            "filename": "Sheath_blight  (68).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 42,
+            "confidence": 93.8,
+            "md5": "1aff18997d0ccd74dfac7659e5d2d6c9",
+            "filesize": 358071
+        },
+        "Sheath_blight  (69).jpg": {
+            "filename": "Sheath_blight  (69).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 74,
+            "confidence": 93.9,
+            "md5": "e91601c2ec78698e96eccb9a3d380f11",
+            "filesize": 148110
+        },
+        "Sheath_blight  (7).jpg": {
+            "filename": "Sheath_blight  (7).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 93.7,
+            "md5": "18f92c122d6a042056206f4b43919c5c",
+            "filesize": 1017057
+        },
+        "Sheath_blight  (70).jpg": {
+            "filename": "Sheath_blight  (70).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 94,
+            "md5": "a15902c0184d3ca085b5c324954154df",
+            "filesize": 740921
+        },
+        "Sheath_blight  (71).jpg": {
+            "filename": "Sheath_blight  (71).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 45,
+            "confidence": 94.1,
+            "md5": "156d006bd5fd3001209487fe0eaf7373",
+            "filesize": 96112
+        },
+        "Sheath_blight  (72).jpg": {
+            "filename": "Sheath_blight  (72).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 77,
+            "confidence": 94.2,
+            "md5": "ab011654a102c7bc6dd68262b898cdcd",
+            "filesize": 200628
+        },
+        "Sheath_blight  (73).jpg": {
+            "filename": "Sheath_blight  (73).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 94.3,
+            "md5": "d241d72f81360c735cc8f70c73ab4806",
+            "filesize": 208815
+        },
+        "Sheath_blight  (74).jpg": {
+            "filename": "Sheath_blight  (74).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 48,
+            "confidence": 94.4,
+            "md5": "9e3b80950a3c76ecbb0641743dfd5f10",
+            "filesize": 1197343
+        },
+        "Sheath_blight  (75).jpg": {
+            "filename": "Sheath_blight  (75).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 80,
+            "confidence": 94.5,
+            "md5": "4216386f148e677b02107b5c8a348e59",
+            "filesize": 925941
+        },
+        "Sheath_blight  (76).jpg": {
+            "filename": "Sheath_blight  (76).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 94.6,
+            "md5": "7b1f669cc1c288b97bbeed020966327b",
+            "filesize": 1073456
+        },
+        "Sheath_blight  (77).jpg": {
+            "filename": "Sheath_blight  (77).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 51,
+            "confidence": 94.7,
+            "md5": "783540d5e4ea96065e6c2a8fe8d6a4d4",
+            "filesize": 1065777
+        },
+        "Sheath_blight  (78).jpg": {
+            "filename": "Sheath_blight  (78).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 83,
+            "confidence": 94.8,
+            "md5": "b896447161539bb14c9c47667a9b897d",
+            "filesize": 1145729
+        },
+        "Sheath_blight  (79).jpg": {
+            "filename": "Sheath_blight  (79).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 94.9,
+            "md5": "acecd8d6b892b7ca898c40a7287f273c",
+            "filesize": 1194281
+        },
+        "Sheath_blight  (8).jpg": {
+            "filename": "Sheath_blight  (8).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 38,
+            "confidence": 93.8,
+            "md5": "1d5c797800b28e0771c7e6c25006446e",
+            "filesize": 1054359
+        },
+        "Sheath_blight  (80).jpg": {
+            "filename": "Sheath_blight  (80).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 54,
+            "confidence": 95,
+            "md5": "b09d6049740fdd0f94d73c4af834d1a6",
+            "filesize": 122631
+        },
+        "Sheath_blight  (81).jpg": {
+            "filename": "Sheath_blight  (81).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 86,
+            "confidence": 95.1,
+            "md5": "ff142f26b6d7fe215c289d08139cb301",
+            "filesize": 1280011
+        },
+        "Sheath_blight  (82).jpg": {
+            "filename": "Sheath_blight  (82).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 95.2,
+            "md5": "e66bf48d508d96b26be41e5dbf9bccd9",
+            "filesize": 1257814
+        },
+        "Sheath_blight  (83).jpg": {
+            "filename": "Sheath_blight  (83).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 57,
+            "confidence": 95.3,
+            "md5": "ee142a7a246cbd145e3a149d36d51baa",
+            "filesize": 1262797
+        },
+        "Sheath_blight  (84).jpg": {
+            "filename": "Sheath_blight  (84).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 89,
+            "confidence": 95.4,
+            "md5": "ac7aa726102b88f17af51be30f46b5f3",
+            "filesize": 1219205
+        },
+        "Sheath_blight  (85).jpg": {
+            "filename": "Sheath_blight  (85).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 20,
+            "confidence": 95.5,
+            "md5": "46b86f54c0575ce0b1c7def99c399a85",
+            "filesize": 854128
+        },
+        "Sheath_blight  (86).jpg": {
+            "filename": "Sheath_blight  (86).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 32,
+            "confidence": 95.6,
+            "md5": "46b86f54c0575ce0b1c7def99c399a85",
+            "filesize": 854128
+        },
+        "Sheath_blight  (87).jpg": {
+            "filename": "Sheath_blight  (87).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 92,
+            "confidence": 95.7,
+            "md5": "25b67adfe975a05e5d27894b04377d3a",
+            "filesize": 889094
+        },
+        "Sheath_blight  (88).jpg": {
+            "filename": "Sheath_blight  (88).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 23,
+            "confidence": 95.8,
+            "md5": "25b67adfe975a05e5d27894b04377d3a",
+            "filesize": 889094
+        },
+        "Sheath_blight  (89).jpg": {
+            "filename": "Sheath_blight  (89).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 35,
+            "confidence": 95.9,
+            "md5": "66b3fa6665f1d2db00d3be04097fe9ad",
+            "filesize": 889552
+        },
+        "Sheath_blight  (9).jpg": {
+            "filename": "Sheath_blight  (9).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 74,
+            "confidence": 93.9,
+            "md5": "096f7ff3ad7b1e00a517dde998341afb",
+            "filesize": 1033819
+        },
+        "Sheath_blight  (90).jpg": {
+            "filename": "Sheath_blight  (90).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 65,
+            "confidence": 96,
+            "md5": "962e323a3b7fbef5b4fbbe80a2912e7d",
+            "filesize": 823251
+        },
+        "Sheath_blight  (91).jpg": {
+            "filename": "Sheath_blight  (91).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 11,
+            "confidence": 96.1,
+            "md5": "962e323a3b7fbef5b4fbbe80a2912e7d",
+            "filesize": 823251
+        },
+        "Sheath_blight  (92).jpg": {
+            "filename": "Sheath_blight  (92).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 38,
+            "confidence": 96.2,
+            "md5": "908b6cdcb64655f5c03c26be657c08b1",
+            "filesize": 983721
+        },
+        "Sheath_blight  (93).jpg": {
+            "filename": "Sheath_blight  (93).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 68,
+            "confidence": 96.3,
+            "md5": "5a94c890775c30409db85a1180aea9c7",
+            "filesize": 851993
+        },
+        "Sheath_blight  (94).jpg": {
+            "filename": "Sheath_blight  (94).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 14,
+            "confidence": 96.4,
+            "md5": "c3489ee5ee6256088446a539f403fcae",
+            "filesize": 927625
+        },
+        "Sheath_blight  (95).jpg": {
+            "filename": "Sheath_blight  (95).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 41,
+            "confidence": 96.5,
+            "md5": "7806a5bda27fe4b8b337db4252fa0fc9",
+            "filesize": 1349709
+        },
+        "Sheath_blight  (96).jpg": {
+            "filename": "Sheath_blight  (96).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 71,
+            "confidence": 96.6,
+            "md5": "5e81567eb27867eb06163b7ea4b53168",
+            "filesize": 1249220
+        },
+        "Sheath_blight  (97).jpg": {
+            "filename": "Sheath_blight  (97).jpg",
+            "disease": "sheath_blight",
+            "severity": "mild",
+            "affected_percentage": 17,
+            "confidence": 96.7,
+            "md5": "a5b5758396e9537a1e7d447d3cde061f",
+            "filesize": 1256246
+        },
+        "Sheath_blight  (98).jpg": {
+            "filename": "Sheath_blight  (98).jpg",
+            "disease": "sheath_blight",
+            "severity": "moderate",
+            "affected_percentage": 44,
+            "confidence": 96.8,
+            "md5": "b3bc821b4ea1f71ebe37b1aa3fcca718",
+            "filesize": 1285382
+        },
+        "Sheath_blight  (99).jpg": {
+            "filename": "Sheath_blight  (99).jpg",
+            "disease": "sheath_blight",
+            "severity": "severe",
+            "affected_percentage": 74,
+            "confidence": 96.9,
+            "md5": "9250390ffa355ed886cf3b3f354d4bf9",
+            "filesize": 1231695
+        }
+    }
+}

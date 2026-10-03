@@ -1,0 +1,131 @@
+{
+    "generated_at": "2026-10-01 13:15:38",
+    "total": 12,
+    "severity_distribution": {
+        "mild": 7,
+        "moderate": 2,
+        "severe": 3
+    },
+    "images": {
+        "Leaf_Blast (132).jpg": {
+            "filename": "Leaf_Blast (132).jpg",
+            "disease": "blast",
+            "severity": "mild",
+            "affected_percentage": 13.4,
+            "confidence": 95.2,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "f0933580be326dfbff77940d83165039",
+            "filesize": 25440
+        },
+        "Leaf_Blast (139).jpg": {
+            "filename": "Leaf_Blast (139).jpg",
+            "disease": "blast",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "1000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "e1bcbed7c3e233d359ba99f165688ff4",
+            "filesize": 22206
+        },
+        "Leaf_Blast (160).jpg": {
+            "filename": "Leaf_Blast (160).jpg",
+            "disease": "blast",
+            "severity": "moderate",
+            "affected_percentage": 35.4,
+            "confidence": 93.1,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "abe5900557f80e13a849f97e4f1e9458",
+            "filesize": 26609
+        },
+        "Leaf_Blast (351).jpg": {
+            "filename": "Leaf_Blast (351).jpg",
+            "disease": "blast",
+            "severity": "mild",
+            "affected_percentage": 9.7,
+            "confidence": 94.3,
+            "dhash": "0000111000001110000011100000111000001110000111100001111000011100",
+            "md5": "d27999e7e3debd1d780df7074cb09b9e",
+            "filesize": 28806
+        },
+        "Leaf_Blast (408).jpg": {
+            "filename": "Leaf_Blast (408).jpg",
+            "disease": "blast",
+            "severity": "severe",
+            "affected_percentage": 82.9,
+            "confidence": 96.7,
+            "dhash": "0001111000011110000111100001111000011110000111100001110000011100",
+            "md5": "9208918f8e868ffb75b2e47fcb258ec9",
+            "filesize": 37192
+        },
+        "Leaf_Blast (416).jpg": {
+            "filename": "Leaf_Blast (416).jpg",
+            "disease": "blast",
+            "severity": "mild",
+            "affected_percentage": 9.1,
+            "confidence": 94.2,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "6a93288d917c325484e74be421bfb2cf",
+            "filesize": 21242
+        },
+        "Leaf_Blast (505).jpg": {
+            "filename": "Leaf_Blast (505).jpg",
+            "disease": "blast",
+            "severity": "mild",
+            "affected_percentage": 7,
+            "confidence": 93.7,
+            "dhash": "0000110000001100000011000000110000001100000011100000011000000110",
+            "md5": "4596b2f141404ad263ecedcb8740383b",
+            "filesize": 29350
+        },
+        "Leaf_Blast (506).jpg": {
+            "filename": "Leaf_Blast (506).jpg",
+            "disease": "blast",
+            "severity": "severe",
+            "affected_percentage": 95.3,
+            "confidence": 98.4,
+            "dhash": "0000110000001100000011000000110000001100000011100000111000001110",
+            "md5": "81cc5048bef4d88261adba64d0a31851",
+            "filesize": 30523
+        },
+        "Leaf_Blast (508).jpg": {
+            "filename": "Leaf_Blast (508).jpg",
+            "disease": "blast",
+            "severity": "mild",
+            "affected_percentage": 5.6,
+            "confidence": 93.3,
+            "dhash": "0000110000001100000011000000110000001100000011000001110000001100",
+            "md5": "4f792a88959204d316c97ffb9c2507c1",
+            "filesize": 27399
+        },
+        "Leaf_Blast (552).jpg": {
+            "filename": "Leaf_Blast (552).jpg",
+            "disease": "blast",
+            "severity": "moderate",
+            "affected_percentage": 35.3,
+            "confidence": 93.1,
+            "dhash": "0000010000000100000001000000010000010100000011000000110000001100",
+            "md5": "03584927bee6f0d1a4b9886f549648e7",
+            "filesize": 34001
+        },
+        "Leaf_Blast (564).jpg": {
+            "filename": "Leaf_Blast (564).jpg",
+            "disease": "blast",
+            "severity": "mild",
+            "affected_percentage": 4,
+            "confidence": 93,
+            "dhash": "0000011000000110000001100000011000000110000001100000011000000110",
+            "md5": "4f40dde77f9e7f4828bd010b8a257ad8",
+            "filesize": 33622
+        },
+        "Leaf_Blast (565).jpg": {
+            "filename": "Leaf_Blast (565).jpg",
+            "disease": "blast",
+            "severity": "severe",
+            "affected_percentage": 90.7,
+            "confidence": 97.8,
+            "dhash": "0000110000001100000011000000110000001100000011000000110000001100",
+            "md5": "805243e791795eee5ef20075485fe820",
+            "filesize": 27513
+        }
+    }
+}
