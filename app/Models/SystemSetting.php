@@ -26,45 +26,53 @@ class SystemSetting extends Model
      */
     public static function get(string $key, $default = null)
     {
-        $setting = Cache::remember("system_setting_{$key}", 3600, function () use ($key) {
-            return static::where('key', $key)->first();
-        });
+        try {
+            $setting = Cache::remember("system_setting_{$key}", 3600, function () use ($key) {
+                return static::where('key', $key)->first();
+            });
 
-        if (!$setting) {
+            if (!$setting) {
+                return $default;
+            }
+
+            return match ($setting->type) {
+                'integer', 'int' => (int) $setting->value,
+                'boolean', 'bool' => filter_var($setting->value, FILTER_VALIDATE_BOOLEAN),
+                'json' => json_decode($setting->value, true),
+                'float' => (float) $setting->value,
+                default => $setting->value,
+            };
+        } catch (\Throwable $e) {
             return $default;
         }
-
-        return match ($setting->type) {
-            'integer', 'int' => (int) $setting->value,
-            'boolean', 'bool' => filter_var($setting->value, FILTER_VALIDATE_BOOLEAN),
-            'json' => json_decode($setting->value, true),
-            'float' => (float) $setting->value,
-            default => $setting->value,
-        };
     }
 
     /**
      * Set / update a setting value by key.
      */
-    public static function set(string $key, $value, ?string $type = null, ?string $label = null, ?string $group = 'security', ?string $description = null): self
+    public static function set(string $key, $value, ?string $type = null, ?string $label = null, ?string $group = 'security', ?string $description = null): ?self
     {
-        $valString = is_array($value) || is_object($value) ? json_encode($value) : (string) $value;
+        try {
+            $valString = is_array($value) || is_object($value) ? json_encode($value) : (string) $value;
 
-        $attributes = ['value' => $valString];
-        if ($type !== null) $attributes['type'] = $type;
-        if ($label !== null) $attributes['label'] = $label;
-        if ($group !== null) $attributes['group'] = $group;
-        if ($description !== null) $attributes['description'] = $description;
+            $attributes = ['value' => $valString];
+            if ($type !== null) $attributes['type'] = $type;
+            if ($label !== null) $attributes['label'] = $label;
+            if ($group !== null) $attributes['group'] = $group;
+            if ($description !== null) $attributes['description'] = $description;
 
-        $setting = static::updateOrCreate(
-            ['key' => $key],
-            $attributes
-        );
+            $setting = static::updateOrCreate(
+                ['key' => $key],
+                $attributes
+            );
 
-        Cache::forget("system_setting_{$key}");
-        Cache::forget('system_security_settings_all');
+            Cache::forget("system_setting_{$key}");
+            Cache::forget('system_security_settings_all');
 
-        return $setting;
+            return $setting;
+        } catch (\Throwable $e) {
+            return null;
+        }
     }
 
     /**
