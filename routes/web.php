@@ -8,5 +8,4 @@ Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallbac
 
 Route::get('/{any?}', function () {
     return view('rice-detector');
-})->where('any', '^(?!api|sanctum|auth/google|storage|images|css|js|build|manifest\.json|sw\.js|up).*$');
-
+})->where('any', '^(?!api|v1|sanctum|auth/google|storage|images|css|js|build|manifest\.json|sw\.js|up).*$');
