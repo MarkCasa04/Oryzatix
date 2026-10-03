@@ -5,6 +5,12 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// Force HTTPS behind Vercel edge proxy
+if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') {
+    $_SERVER['HTTPS'] = 'on';
+    $_SERVER['SERVER_PORT'] = 443;
+}
+
 // Prepare storage directories in /tmp for Vercel serverless environment
 $tmpStorage = '/tmp/storage';
 if (!is_dir($tmpStorage)) {
@@ -15,9 +21,6 @@ if (!is_dir($tmpStorage)) {
     @mkdir($tmpStorage . '/logs', 0755, true);
     @mkdir($tmpStorage . '/app/public', 0755, true);
 }
-
-// Ensure SCRIPT_NAME points to root index.php
-$_SERVER['SCRIPT_NAME'] = '/index.php';
 
 // Register the Composer autoloader...
 require __DIR__ . '/../vendor/autoload.php';
