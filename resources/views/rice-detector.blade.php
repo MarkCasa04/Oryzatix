@@ -77,6 +77,27 @@
     token: @json($tokenParam ?: session('auth_token', null)),
     googleLoginSuccess: @json(session('google_login_success', false) || request()->query('google_login') === '1'),
   };
+  (function() {
+    try {
+      var urlParams = new URLSearchParams(window.location.search);
+      var paramToken = urlParams.get('auth_token');
+      var paramUserRaw = urlParams.get('auth_user');
+      if (paramUserRaw) {
+        var user = JSON.parse(atob(decodeURIComponent(paramUserRaw)));
+        if (user && user.id) {
+          window.INITIAL_AUTH.user = user;
+          sessionStorage.setItem('oryzatix_is_logged_in', 'true');
+          localStorage.setItem('oryzatix_is_logged_in', 'true');
+          localStorage.setItem('oryzatix_cached_user', JSON.stringify(user));
+        }
+      }
+      if (paramToken) {
+        window.INITIAL_AUTH.token = paramToken;
+        sessionStorage.setItem('oryzatix_auth_token', paramToken);
+        localStorage.setItem('oryzatix_auth_token', paramToken);
+      }
+    } catch(e) {}
+  })();
 </script>
 </head>
 <body>
@@ -85,7 +106,7 @@
 <input type="hidden" id="chatLanguage" value="tagalog">
 <input type="hidden" id="uiLanguage" value="english">
 
-<div class="web-app-shell auth-mode">
+<div class="web-app-shell {{ $currentUserData ? '' : 'auth-mode' }}">
 
   <!-- ═══════════ DESKTOP NAVIGATION SIDEBAR ═══════════ -->
   <aside class="web-sidebar">

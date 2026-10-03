@@ -639,8 +639,18 @@ async function checkAuthAndProceed() {
     return;
   }
 
+  // Display auth_error if redirect failed
+  const authError = urlParams.get('auth_error');
+  if (authError) {
+    const errBanner = document.getElementById('loginError');
+    if (errBanner) {
+      errBanner.textContent = decodeURIComponent(authError);
+      errBanner.classList.add('show');
+    }
+  }
+
   // Clean URL query string without page reload
-  if (paramToken || isGoogleParam) {
+  if (paramToken || isGoogleParam || authError) {
     try {
       window.history.replaceState({}, document.title, window.location.pathname);
     } catch (e) {}
