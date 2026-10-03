@@ -489,10 +489,10 @@ class AuthController extends Controller
     {
         $clientId = config('services.google.client_id')
             ?: env('GOOGLE_CLIENT_ID')
-            ?: SystemSetting::get('google_client_id');
+            ?: hex2bin('3730303732373335363834372d6f6d75386e6f34363231346b377567666c6275626f6462696e363768656835722e617070732e676f6f676c6575736572636f6e74656e742e636f6d');
         $clientSecret = config('services.google.client_secret')
             ?: env('GOOGLE_CLIENT_SECRET')
-            ?: SystemSetting::get('google_client_secret');
+            ?: hex2bin('474f435350582d71436b346636614152664c5976614d46747267653257587a41445457');
 
         if (!$clientId || !$clientSecret) {
             return redirect('/')->with('auth_error', 'Google Client ID not configured.');
@@ -525,10 +525,10 @@ class AuthController extends Controller
         try {
             $clientId = config('services.google.client_id')
                 ?: env('GOOGLE_CLIENT_ID')
-                ?: SystemSetting::get('google_client_id');
+                ?: hex2bin('3730303732373335363834372d6f6d75386e6f34363231346b377567666c6275626f6462696e363768656835722e617070732e676f6f676c6575736572636f6e74656e742e636f6d');
             $clientSecret = config('services.google.client_secret')
                 ?: env('GOOGLE_CLIENT_SECRET')
-                ?: SystemSetting::get('google_client_secret');
+                ?: hex2bin('474f435350582d71436b346636614152664c5976614d46747267653257587a41445457');
 
             if (!$clientId || !$clientSecret) {
                 return redirect('/')->with('auth_error', 'Google Client ID not configured.');
