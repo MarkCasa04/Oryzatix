@@ -168,120 +168,130 @@ class AuthController extends Controller
 
     public function login(Request $request): JsonResponse
     {
-        $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string',
-            'device' => 'nullable|in:web,mobile',
-        ]);
+        try {
+            $request->validate([
+                'email' => 'required|string',
+                'password' => 'required|string',
+                'device' => 'nullable|in:web,mobile',
+            ]);
 
-        $loginInput = trim($request->email);
-        $security = SystemSetting::getSecuritySettings();
-        $maxAttempts = (int) ($security['max_login_attempts'] ?? 3);
-        $baseLockoutDuration = (int) ($security['lockout_duration_seconds'] ?? 30);
+            $loginInput = trim($request->email);
+            $security = SystemSetting::getSecuritySettings();
+            $maxAttempts = (int) ($security['max_login_attempts'] ?? 3);
+            $baseLockoutDuration = (int) ($security['lockout_duration_seconds'] ?? 30);
 
-        $lockoutKey = $this->getLoginLockoutKey($request, $loginInput);
-        $attemptsKey = $this->getLoginAttemptsKey($request, $loginInput);
-        $lockoutTierKey = $this->getLoginLockoutTierKey($request, $loginInput);
+            $lockoutKey = $this->getLoginLockoutKey($request, $loginInput);
+            $attemptsKey = $this->getLoginAttemptsKey($request, $loginInput);
+            $lockoutTierKey = $this->getLoginLockoutTierKey($request, $loginInput);
 
-        // 1. Check if user/IP is currently in lockout penalty
-        if (Cache::has($lockoutKey)) {
-            $lockoutUntil = (int) Cache::get($lockoutKey);
-            $now = time();
-            $remainingSeconds = max(1, $lockoutUntil - $now);
+            // 1. Check if user/IP is currently in lockout penalty
+            if (Cache::has($lockoutKey)) {
+                $lockoutUntil = (int) Cache::get($lockoutKey);
+                $now = time();
+                $remainingSeconds = max(1, $lockoutUntil - $now);
 
-            if ($lockoutUntil > $now) {
-                $durationLabel = $this->formatDurationLabel($remainingSeconds);
+                if ($lockoutUntil > $now) {
+                    $durationLabel = $this->formatDurationLabel($remainingSeconds);
+                    return response()->json([
+                        'success' => false,
+                        'locked' => true,
+                        'remaining_seconds' => $remainingSeconds,
+                        'lockout_duration' => $remainingSeconds,
+                        'max_attempts' => $maxAttempts,
+                        'attempts_used' => $maxAttempts,
+                        'remaining_attempts' => 0,
+                        'message' => "Too many failed login attempts. Your login is temporarily locked out. Please wait {$durationLabel} before trying again.",
+                        'message_en' => "Too many failed login attempts. Your login is temporarily locked out. Please wait {$durationLabel} before trying again.",
+                    ], 429);
+                } else {
+                    Cache::forget($lockoutKey);
+                }
+            }
+
+            $user = User::where('email', strtolower($loginInput))
+                ->orWhere('name', $loginInput)
+                ->first();
+
+            // 2. Credentials match -> Successful login
+            if ($user && Hash::check($request->password, $user->password)) {
+                // Reset failed attempts, lockouts & escalation tier on valid credentials
+                Cache::forget($attemptsKey);
+                Cache::forget($lockoutKey);
+                Cache::forget($lockoutTierKey);
+
+                if ($request->hasSession()) {
+                    Auth::guard('web')->login($user);
+                    $request->session()->regenerate();
+                }
+
+                $token = $user->createToken('auth_token')->plainTextToken;
+
+                $response = [
+                    'success' => true,
+                    'user' => $this->formatUser($user),
+                    'token' => $token,
+                    'message' => 'Login successful!',
+                ];
+
+                return response()->json($response);
+            }
+
+            // 3. Invalid credentials -> Increment attempt counter
+            $attemptsUsed = (int) Cache::get($attemptsKey, 0) + 1;
+            Cache::put($attemptsKey, $attemptsUsed, now()->addMinutes(30));
+
+            if ($attemptsUsed >= $maxAttempts) {
+                $currentTier = (int) Cache::get($lockoutTierKey, 0);
+                $calculatedDuration = $this->calculateLockoutDuration($baseLockoutDuration, $currentTier);
+
+                // Trigger penalty lockout with progressive escalation
+                $lockoutUntil = time() + $calculatedDuration;
+                Cache::put($lockoutKey, $lockoutUntil, now()->addSeconds($calculatedDuration));
+                Cache::forget($attemptsKey);
+                // Advance lockout escalation tier for next potential penalty
+                Cache::put($lockoutTierKey, $currentTier + 1, now()->addHours(2));
+
+                $durationLabel = $this->formatDurationLabel($calculatedDuration);
+
                 return response()->json([
                     'success' => false,
                     'locked' => true,
-                    'remaining_seconds' => $remainingSeconds,
-                    'lockout_duration' => $remainingSeconds,
+                    'remaining_seconds' => $calculatedDuration,
+                    'lockout_duration' => $calculatedDuration,
                     'max_attempts' => $maxAttempts,
                     'attempts_used' => $maxAttempts,
                     'remaining_attempts' => 0,
-                    'message' => "Too many failed login attempts. Your login is temporarily locked out. Please wait {$durationLabel} before trying again.",
-                    'message_en' => "Too many failed login attempts. Your login is temporarily locked out. Please wait {$durationLabel} before trying again.",
+                    'lockout_tier' => $currentTier + 1,
+                    'message' => "You have reached the limit of {$maxAttempts} incorrect password attempts. Login is locked out for {$durationLabel}. Please wait before trying again.",
+                    'message_en' => "You have reached the limit of {$maxAttempts} incorrect password attempts. Login is locked out for {$durationLabel}. Please wait before trying again.",
                 ], 429);
-            } else {
-                Cache::forget($lockoutKey);
-            }
-        }
-
-        $user = User::where('email', strtolower($loginInput))
-            ->orWhere('name', $loginInput)
-            ->first();
-
-        // 2. Credentials match -> Successful login
-        if ($user && Hash::check($request->password, $user->password)) {
-            // Reset failed attempts, lockouts & escalation tier on valid credentials
-            Cache::forget($attemptsKey);
-            Cache::forget($lockoutKey);
-            Cache::forget($lockoutTierKey);
-
-            if ($request->hasSession()) {
-                Auth::guard('web')->login($user);
-                $request->session()->regenerate();
             }
 
-            $token = $user->createToken('auth_token')->plainTextToken;
-
-            $response = [
-                'success' => true,
-                'user' => $this->formatUser($user),
-                'token' => $token,
-                'message' => 'Login successful!',
-            ];
-
-            return response()->json($response);
-        }
-
-        // 3. Invalid credentials -> Increment attempt counter
-        $attemptsUsed = (int) Cache::get($attemptsKey, 0) + 1;
-        Cache::put($attemptsKey, $attemptsUsed, now()->addMinutes(30));
-
-        if ($attemptsUsed >= $maxAttempts) {
+            $remainingAttempts = $maxAttempts - $attemptsUsed;
             $currentTier = (int) Cache::get($lockoutTierKey, 0);
-            $calculatedDuration = $this->calculateLockoutDuration($baseLockoutDuration, $currentTier);
-
-            // Trigger penalty lockout with progressive escalation
-            $lockoutUntil = time() + $calculatedDuration;
-            Cache::put($lockoutKey, $lockoutUntil, now()->addSeconds($calculatedDuration));
-            Cache::forget($attemptsKey);
-            // Advance lockout escalation tier for next potential penalty
-            Cache::put($lockoutTierKey, $currentTier + 1, now()->addHours(2));
-
-            $durationLabel = $this->formatDurationLabel($calculatedDuration);
+            $nextDuration = $this->calculateLockoutDuration($baseLockoutDuration, $currentTier);
+            $durationLabel = $this->formatDurationLabel($nextDuration);
 
             return response()->json([
                 'success' => false,
-                'locked' => true,
-                'remaining_seconds' => $calculatedDuration,
-                'lockout_duration' => $calculatedDuration,
+                'locked' => false,
+                'remaining_seconds' => 0,
+                'attempts_used' => $attemptsUsed,
                 'max_attempts' => $maxAttempts,
-                'attempts_used' => $maxAttempts,
-                'remaining_attempts' => 0,
+                'remaining_attempts' => $remainingAttempts,
                 'lockout_tier' => $currentTier + 1,
-                'message' => "You have reached the limit of {$maxAttempts} incorrect password attempts. Login is locked out for {$durationLabel}. Please wait before trying again.",
-                'message_en' => "You have reached the limit of {$maxAttempts} incorrect password attempts. Login is locked out for {$durationLabel}. Please wait before trying again.",
-            ], 429);
+                'message' => "Invalid username/email or password. You have {$remainingAttempts} attempts remaining before a {$durationLabel} lockout.",
+                'message_en' => "Invalid username/email or password. You have {$remainingAttempts} attempts remaining before a {$durationLabel} lockout.",
+            ], 401);
+        } catch (ValidationException $e) {
+            throw $e;
+        } catch (\Throwable $e) {
+            Log::error('Login error: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Login error: ' . $e->getMessage(),
+            ], 500);
         }
-
-        $remainingAttempts = $maxAttempts - $attemptsUsed;
-        $currentTier = (int) Cache::get($lockoutTierKey, 0);
-        $nextDuration = $this->calculateLockoutDuration($baseLockoutDuration, $currentTier);
-        $durationLabel = $this->formatDurationLabel($nextDuration);
-
-        return response()->json([
-            'success' => false,
-            'locked' => false,
-            'remaining_seconds' => 0,
-            'attempts_used' => $attemptsUsed,
-            'max_attempts' => $maxAttempts,
-            'remaining_attempts' => $remainingAttempts,
-            'lockout_tier' => $currentTier + 1,
-            'message' => "Invalid username/email or password. You have {$remainingAttempts} attempts remaining before a {$durationLabel} lockout.",
-            'message_en' => "Invalid username/email or password. You have {$remainingAttempts} attempts remaining before a {$durationLabel} lockout.",
-        ], 401);
     }
 
     public function logout(Request $request): JsonResponse
