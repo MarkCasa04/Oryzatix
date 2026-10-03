@@ -493,12 +493,15 @@ class AuthController extends Controller
         }
 
         $mode = $request->query('mode', 'login');
-        $redirectUrl = route('auth.google.callback') . '?mode=' . urlencode($mode);
+        $redirectUrl = route('auth.google.callback');
 
         return Socialite::driver('google')
             ->stateless()
             ->redirectUrl($redirectUrl)
-            ->with(['prompt' => 'select_account'])
+            ->with([
+                'prompt' => 'select_account',
+                'state' => $mode,
+            ])
             ->redirect();
     }
 
@@ -510,8 +513,8 @@ class AuthController extends Controller
                 return redirect('/')->with('auth_error', 'Google Client ID not configured.');
             }
 
-            $mode = $request->query('mode', session('google_auth_mode', 'login'));
-            $redirectUrl = route('auth.google.callback') . '?mode=' . urlencode($mode);
+            $redirectUrl = route('auth.google.callback');
+            $mode = $request->query('state', 'login');
 
             $googleUser = Socialite::driver('google')
                 ->stateless()
