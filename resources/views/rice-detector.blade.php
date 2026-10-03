@@ -36,7 +36,16 @@
       } catch (\Throwable $e) {}
   }
 
-  if ($u) {
+  if (!$u && request()->query('auth_user')) {
+      try {
+          $decoded = json_decode(base64_decode(request()->query('auth_user')), true);
+          if ($decoded && isset($decoded['id'], $decoded['email'])) {
+              $currentUserData = $decoded;
+          }
+      } catch (\Throwable $e) {}
+  }
+
+  if ($u && !$currentUserData) {
       $roleLabel = match($u->role) {
           'farmer' => 'Rice Farmer',
           'agri_worker' => 'Agricultural Extension Worker',

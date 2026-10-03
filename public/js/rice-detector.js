@@ -599,7 +599,19 @@ function navigateAfterAuth() {
 async function checkAuthAndProceed() {
   const urlParams = new URLSearchParams(window.location.search);
   const paramToken = urlParams.get('auth_token');
+  const paramUserRaw = urlParams.get('auth_user');
   const isGoogleParam = urlParams.get('google_login') === '1';
+
+  let paramUser = null;
+  if (paramUserRaw) {
+    try {
+      paramUser = JSON.parse(atob(decodeURIComponent(paramUserRaw)));
+    } catch (e) {
+      try {
+        paramUser = JSON.parse(atob(paramUserRaw));
+      } catch (e2) {}
+    }
+  }
 
   if (paramToken) {
     setAuthToken(paramToken);
@@ -607,7 +619,28 @@ async function checkAuthAndProceed() {
       sessionStorage.setItem('oryzatix_is_logged_in', 'true');
       localStorage.setItem('oryzatix_is_logged_in', 'true');
     } catch (e) {}
-    // Clean URL query string without page reload
+  }
+
+  // If user data is directly passed in URL callback, log in instantly without waiting for fetch
+  if (paramUser && paramUser.id) {
+    currentUser = paramUser;
+    try {
+      sessionStorage.setItem('oryzatix_is_logged_in', 'true');
+      localStorage.setItem('oryzatix_is_logged_in', 'true');
+      if (typeof window !== 'undefined' && window.localStorage) {
+        window.localStorage.setItem('oryzatix_cached_user', JSON.stringify(paramUser));
+      }
+    } catch (e) {}
+    applyUserToUI();
+    try {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } catch (e) {}
+    navigateAfterAuth();
+    return;
+  }
+
+  // Clean URL query string without page reload
+  if (paramToken || isGoogleParam) {
     try {
       window.history.replaceState({}, document.title, window.location.pathname);
     } catch (e) {}

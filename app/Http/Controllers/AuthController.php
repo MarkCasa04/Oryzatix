@@ -566,10 +566,18 @@ class AuthController extends Controller
                 'services.google.redirect' => $redirectUrl,
             ]);
 
-            $googleUser = Socialite::driver('google')
-                ->stateless()
-                ->redirectUrl($redirectUrl)
-                ->user();
+            $guzzle = new \GuzzleHttp\Client([
+                'verify' => false,
+                'timeout' => 25,
+            ]);
+
+            /** @var \Laravel\Socialite\Two\GoogleProvider $provider */
+            $provider = Socialite::driver('google');
+            $provider->setHttpClient($guzzle);
+            $provider->stateless();
+            $provider->redirectUrl($redirectUrl);
+
+            $googleUser = $provider->user();
 
             $email = strtolower(trim($googleUser->getEmail()));
             $name = $googleUser->getName() ?: explode('@', $email)[0];
@@ -604,17 +612,22 @@ class AuthController extends Controller
 
             $authToken = $user->createToken('auth_token')->plainTextToken;
 
-            $redirectHome = $baseUrl . '/?auth_token=' . urlencode($authToken) . '&google_login=1';
+            $formattedUser = $this->formatUser($user);
+            $userPayload = base64_encode(json_encode($formattedUser));
+
+            $redirectHome = $baseUrl . '/?auth_token=' . urlencode($authToken) . '&auth_user=' . urlencode($userPayload) . '&google_login=1';
 
             return redirect($redirectHome)
                 ->with('google_login_success', true)
                 ->with('auth_token', $authToken);
         } catch (\Throwable $e) {
             Log::error('Google Socialite error: ' . $e->getMessage());
+            error_log('Google Socialite error: ' . $e->getMessage());
             $isHttps = $request->secure() || $request->header('X-Forwarded-Proto') === 'https' || str_contains($request->getHost(), 'vercel.app');
             $scheme = $isHttps ? 'https://' : 'http://';
             $baseUrl = rtrim($scheme . $request->getHttpHost() . ($request->getBaseUrl() ?: ''), '/');
-            return redirect($baseUrl . '/')->with('auth_error', 'Failed to authenticate with Google: ' . $e->getMessage());
+            return redirect($baseUrl . '/?auth_error=' . urlencode($e->getMessage()))
+                ->with('auth_error', 'Failed to authenticate with Google: ' . $e->getMessage());
         }
     }
 
