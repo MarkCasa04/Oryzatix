@@ -487,13 +487,28 @@ class AuthController extends Controller
 
     public function redirectToGoogle(Request $request)
     {
-        $clientId = config('services.google.client_id');
-        if (!$clientId) {
+        $clientId = config('services.google.client_id')
+            ?: env('GOOGLE_CLIENT_ID')
+            ?: SystemSetting::get('google_client_id');
+        $clientSecret = config('services.google.client_secret')
+            ?: env('GOOGLE_CLIENT_SECRET')
+            ?: SystemSetting::get('google_client_secret');
+
+        if (!$clientId || !$clientSecret) {
             return redirect('/')->with('auth_error', 'Google Client ID not configured.');
         }
 
         $mode = $request->query('mode', 'login');
-        $redirectUrl = route('auth.google.callback');
+        $isHttps = $request->secure() || $request->header('X-Forwarded-Proto') === 'https' || str_contains($request->getHost(), 'vercel.app');
+        $scheme = $isHttps ? 'https://' : 'http://';
+        $baseUrl = rtrim($scheme . $request->getHttpHost() . ($request->getBaseUrl() ?: ''), '/');
+        $redirectUrl = $baseUrl . '/auth/google/callback';
+
+        config([
+            'services.google.client_id' => $clientId,
+            'services.google.client_secret' => $clientSecret,
+            'services.google.redirect' => $redirectUrl,
+        ]);
 
         return Socialite::driver('google')
             ->stateless()
@@ -508,13 +523,27 @@ class AuthController extends Controller
     public function handleGoogleCallback(Request $request)
     {
         try {
-            $clientId = config('services.google.client_id');
-            if (!$clientId) {
+            $clientId = config('services.google.client_id')
+                ?: env('GOOGLE_CLIENT_ID')
+                ?: SystemSetting::get('google_client_id');
+            $clientSecret = config('services.google.client_secret')
+                ?: env('GOOGLE_CLIENT_SECRET')
+                ?: SystemSetting::get('google_client_secret');
+
+            if (!$clientId || !$clientSecret) {
                 return redirect('/')->with('auth_error', 'Google Client ID not configured.');
             }
 
-            $redirectUrl = route('auth.google.callback');
-            $mode = $request->query('state', 'login');
+            $isHttps = $request->secure() || $request->header('X-Forwarded-Proto') === 'https' || str_contains($request->getHost(), 'vercel.app');
+            $scheme = $isHttps ? 'https://' : 'http://';
+            $baseUrl = rtrim($scheme . $request->getHttpHost() . ($request->getBaseUrl() ?: ''), '/');
+            $redirectUrl = $baseUrl . '/auth/google/callback';
+
+            config([
+                'services.google.client_id' => $clientId,
+                'services.google.client_secret' => $clientSecret,
+                'services.google.redirect' => $redirectUrl,
+            ]);
 
             $googleUser = Socialite::driver('google')
                 ->stateless()
@@ -554,12 +583,17 @@ class AuthController extends Controller
 
             $authToken = $user->createToken('auth_token')->plainTextToken;
 
-            return redirect('/?auth_token=' . urlencode($authToken) . '&google_login=1')
+            $redirectHome = $baseUrl . '/?auth_token=' . urlencode($authToken) . '&google_login=1';
+
+            return redirect($redirectHome)
                 ->with('google_login_success', true)
                 ->with('auth_token', $authToken);
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             Log::error('Google Socialite error: ' . $e->getMessage());
-            return redirect('/')->with('auth_error', 'Failed to authenticate with Google: ' . $e->getMessage());
+            $isHttps = $request->secure() || $request->header('X-Forwarded-Proto') === 'https' || str_contains($request->getHost(), 'vercel.app');
+            $scheme = $isHttps ? 'https://' : 'http://';
+            $baseUrl = rtrim($scheme . $request->getHttpHost() . ($request->getBaseUrl() ?: ''), '/');
+            return redirect($baseUrl . '/')->with('auth_error', 'Failed to authenticate with Google: ' . $e->getMessage());
         }
     }
 
