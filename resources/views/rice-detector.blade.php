@@ -122,19 +122,19 @@
 
     <nav class="sidebar-menu">
       <!-- FARMER DASHBOARD -->
-      <button class="sidebar-nav-btn active" id="sidebarFarmerHomeBtn" data-screen="home" onclick="showScreen('home'); loadHomeRecentScans();">
+      <button class="sidebar-nav-btn {{ (!$currentUserData || $currentUserData['role'] === 'farmer') ? 'active' : '' }}" id="sidebarFarmerHomeBtn" data-screen="home" onclick="showScreen('home'); loadHomeRecentScans();" style="{{ ($currentUserData && $currentUserData['role'] !== 'farmer') ? 'display:none;' : '' }}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <span data-en="Dashboard" data-tl="Dashboard">Dashboard</span>
       </button>
 
       <!-- ADMIN DASHBOARD (Top Primary Dashboard for Admin) -->
-      <button class="sidebar-nav-btn" id="sidebarAdminHomeBtn" data-screen="admin-dashboard" onclick="showScreen('admin-dashboard'); loadAdminDashboard();" style="display: none;">
+      <button class="sidebar-nav-btn {{ ($currentUserData && $currentUserData['role'] === 'admin') ? 'active' : '' }}" id="sidebarAdminHomeBtn" data-screen="admin-dashboard" onclick="showScreen('admin-dashboard'); loadAdminDashboard();" style="{{ ($currentUserData && $currentUserData['role'] === 'admin') ? 'display:flex;' : 'display:none;' }}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         <span data-en="Admin Dashboard" data-tl="Admin Dashboard">Admin Dashboard</span>
       </button>
 
       <!-- STAFF / EXTENSION WORKER DASHBOARD (Top Primary Dashboard for Staff) -->
-      <button class="sidebar-nav-btn" id="sidebarStaffHomeBtn" data-screen="staff-dashboard" onclick="showScreen('staff-dashboard'); loadStaffDashboard();" style="display: none;">
+      <button class="sidebar-nav-btn {{ ($currentUserData && $currentUserData['role'] === 'agri_worker') ? 'active' : '' }}" id="sidebarStaffHomeBtn" data-screen="staff-dashboard" onclick="showScreen('staff-dashboard'); loadStaffDashboard();" style="{{ ($currentUserData && $currentUserData['role'] === 'agri_worker') ? 'display:flex;' : 'display:none;' }}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
         <span data-en="Staff Dashboard" data-tl="Staff Dashboard">Staff Dashboard</span>
       </button>
@@ -160,7 +160,7 @@
       </button>
 
       <!-- ADMIN ONLY SECTION -->
-      <div id="sidebarAdminGroup" style="display: none; display: contents;">
+      <div id="sidebarAdminGroup" style="{{ ($currentUserData && $currentUserData['role'] === 'admin') ? 'display:block;' : 'display:none;' }}">
         <button class="sidebar-nav-btn" data-screen="admin-users" onclick="showScreen('admin-users'); loadAdminUsers();">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           <span data-en="User Accounts" data-tl="Mga Account">User Management</span>
@@ -209,19 +209,19 @@
 
     <nav class="drawer-menu sidebar-menu">
       <!-- FARMER DASHBOARD -->
-      <button class="sidebar-nav-btn active" id="drawerFarmerHomeBtn" data-screen="home" onclick="showScreen('home'); loadHomeRecentScans(); closeMobileDrawer();">
+      <button class="sidebar-nav-btn {{ (!$currentUserData || $currentUserData['role'] === 'farmer') ? 'active' : '' }}" id="drawerFarmerHomeBtn" data-screen="home" onclick="showScreen('home'); loadHomeRecentScans(); closeMobileDrawer();" style="{{ ($currentUserData && $currentUserData['role'] !== 'farmer') ? 'display:none;' : '' }}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
         <span data-en="Dashboard" data-tl="Dashboard">Dashboard</span>
       </button>
 
       <!-- ADMIN DASHBOARD -->
-      <button class="sidebar-nav-btn" id="drawerAdminHomeBtn" data-screen="admin-dashboard" onclick="showScreen('admin-dashboard'); loadAdminDashboard(); closeMobileDrawer();" style="display: none;">
+      <button class="sidebar-nav-btn {{ ($currentUserData && $currentUserData['role'] === 'admin') ? 'active' : '' }}" id="drawerAdminHomeBtn" data-screen="admin-dashboard" onclick="showScreen('admin-dashboard'); loadAdminDashboard(); closeMobileDrawer();" style="{{ ($currentUserData && $currentUserData['role'] === 'admin') ? 'display:flex;' : 'display:none;' }}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         <span data-en="Admin Dashboard" data-tl="Admin Dashboard">Admin Dashboard</span>
       </button>
 
       <!-- STAFF DASHBOARD -->
-      <button class="sidebar-nav-btn" id="drawerStaffHomeBtn" data-screen="staff-dashboard" onclick="showScreen('staff-dashboard'); loadStaffDashboard(); closeMobileDrawer();" style="display: none;">
+      <button class="sidebar-nav-btn {{ ($currentUserData && $currentUserData['role'] === 'agri_worker') ? 'active' : '' }}" id="drawerStaffHomeBtn" data-screen="staff-dashboard" onclick="showScreen('staff-dashboard'); loadStaffDashboard(); closeMobileDrawer();" style="{{ ($currentUserData && $currentUserData['role'] === 'agri_worker') ? 'display:flex;' : 'display:none;' }}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
         <span data-en="Staff Dashboard" data-tl="Staff Dashboard">Staff Dashboard</span>
       </button>
@@ -247,7 +247,32 @@
       </button>
 
       <!-- ADMIN ONLY SECTION -->
-      <div id="drawerAdminGroup" style="display: none; display: contents;">
+      <div id="drawerAdminGroup" style="{{ ($currentUserData && $currentUserData['role'] === 'admin') ? 'display:block;' : 'display:none;' }}">
+        <button class="sidebar-nav-btn" data-screen="admin-users" onclick="showScreen('admin-users'); loadAdminUsers(); closeMobileDrawer();">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span data-en="User Accounts" data-tl="Mga Account">User Management</span>
+        </button>
+
+        <button class="sidebar-nav-btn" data-screen="admin-diseases" onclick="showScreen('admin-diseases'); loadAdminDiseases(); closeMobileDrawer();">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span data-en="Disease Management" data-tl="Pamamahala ng Sakit">Disease Info</span>
+        </button>
+
+        <button class="sidebar-nav-btn" data-screen="admin-scans-logs" onclick="showScreen('admin-scans-logs'); loadAdminScansLogs(); closeMobileDrawer();">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span data-en="Detection Logs" data-tl="Mga Tala ng Scan">Detection Records</span>
+        </button>
+
+        <button class="sidebar-nav-btn" data-screen="admin-reports" onclick="showScreen('admin-reports'); loadAdminReports(); closeMobileDrawer();">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          <span data-en="Reports & Analytics" data-tl="Ulat at Analytics">Reports & Analytics</span>
+        </button>
+
+        <button class="sidebar-nav-btn" data-screen="admin-chatbot" onclick="showScreen('admin-chatbot'); loadAdminChatbot(); closeMobileDrawer();">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          <span data-en="Chatbot FAQ / AI" data-tl="Chatbot at FAQ">Chatbot Manager</span>
+        </button>
+      </div>
         <button class="sidebar-nav-btn" data-screen="admin-users" onclick="showScreen('admin-users'); loadAdminUsers(); closeMobileDrawer();">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           <span data-en="User Accounts" data-tl="Mga Account">User Management</span>
@@ -402,7 +427,7 @@
     <div class="web-page-content">
 
       <!-- ═══════════ SCREEN 1: LOGIN ═══════════ -->
-      <section class="screen active" id="login">
+      <section class="screen {{ $currentUserData ? '' : 'active' }}" id="login">
         <div class="auth-web-card">
           <div class="auth-header-card">
             <div class="auth-logo-badge">
@@ -680,7 +705,7 @@
       </section>
 
       <!-- ═══════════ SCREEN 4: HOME / DASHBOARD ═══════════ -->
-      <section class="screen" id="home">
+      <section class="screen {{ ($currentUserData && $currentUserData['role'] === 'farmer') ? 'active' : '' }}" id="home">
         <div class="dashboard-welcome-header">
           <div class="dwh-user">
             <h2 id="homeUserName">Mang Juan</h2>
@@ -1015,7 +1040,7 @@
       </section>
 
       <!-- ═══════════ SCREEN 10B: STAFF EXTENSION WORKER DASHBOARD ═══════════ -->
-      <section class="screen" id="staff-dashboard">
+      <section class="screen {{ ($currentUserData && $currentUserData['role'] === 'agri_worker') ? 'active' : '' }}" id="staff-dashboard">
         <div class="staff-header-banner">
           <div class="staff-banner-content">
             <div class="staff-badge-pill">
@@ -1194,7 +1219,7 @@
       </section>
 
       <!-- ═══════════ SCREEN 10C: ADMIN EXECUTIVE DASHBOARD ═══════════ -->
-      <section class="screen" id="admin-dashboard">
+      <section class="screen {{ ($currentUserData && $currentUserData['role'] === 'admin') ? 'active' : '' }}" id="admin-dashboard">
         <div class="admin-header-banner">
           <div class="admin-banner-content">
             <div class="admin-badge-pill">
