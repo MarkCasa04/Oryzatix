@@ -62,6 +62,7 @@ class RiceScanController extends Controller
 
     private function computeDHash(string $imagePath): ?string
     {
+        if (!function_exists('imagecreatetruecolor') || !function_exists('imagecolorat') || !function_exists('imagesx')) return null;
         if (!file_exists($imagePath)) return null;
         $info = @getimagesize($imagePath);
         if (!$info) return null;
@@ -871,6 +872,9 @@ class RiceScanController extends Controller
         ];
 
         try {
+            if (!function_exists('imagecreatetruecolor') || !function_exists('imagecolorat') || !function_exists('imagesx')) {
+                return $result;
+            }
             if (!file_exists($imagePath)) {
                 return $result;
             }
@@ -1076,6 +1080,7 @@ class RiceScanController extends Controller
         ];
 
         try {
+            if (!function_exists('imagecreatetruecolor') || !function_exists('imagecolorat') || !function_exists('imagesx')) return $default;
             if (!file_exists($imagePath)) return $default;
             $info = @getimagesize($imagePath);
             if (!$info) return $default;
@@ -1154,7 +1159,7 @@ class RiceScanController extends Controller
                 'lesion_pixels' => $blightPixels,
                 'raw_ratio' => round($rawRatio, 1),
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             return $default;
         }
     }
@@ -1174,6 +1179,7 @@ class RiceScanController extends Controller
         ];
 
         try {
+            if (!function_exists('imagecreatetruecolor') || !function_exists('imagecolorat') || !function_exists('imagesx')) return $default;
             if (!file_exists($imagePath)) return $default;
             $info = @getimagesize($imagePath);
             if (!$info) return $default;
@@ -1252,7 +1258,7 @@ class RiceScanController extends Controller
                 'lesion_pixels' => $tungroPixels,
                 'raw_ratio' => round($rawRatio, 1),
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             return $default;
         }
     }
@@ -1273,6 +1279,7 @@ class RiceScanController extends Controller
         ];
 
         try {
+            if (!function_exists('imagecreatetruecolor') || !function_exists('imagecolorat') || !function_exists('imagesx')) return $default;
             if (!file_exists($imagePath)) return $default;
             $info = @getimagesize($imagePath);
             if (!$info) return $default;
@@ -1351,7 +1358,7 @@ class RiceScanController extends Controller
                 'lesion_pixels' => $blastLesionPixels,
                 'raw_ratio' => round($rawRatio, 1),
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             return $default;
         }
     }
@@ -1372,6 +1379,7 @@ class RiceScanController extends Controller
         ];
 
         try {
+            if (!function_exists('imagecreatetruecolor') || !function_exists('imagecolorat') || !function_exists('imagesx')) return $default;
             if (!file_exists($imagePath)) return $default;
             $info = @getimagesize($imagePath);
             if (!$info) return $default;
@@ -1449,7 +1457,7 @@ class RiceScanController extends Controller
                 'lesion_pixels' => $brownSpotPixels,
                 'raw_ratio' => round($rawRatio, 1),
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             return $default;
         }
     }
@@ -1469,6 +1477,7 @@ class RiceScanController extends Controller
         ];
 
         try {
+            if (!function_exists('imagecreatetruecolor') || !function_exists('imagecolorat') || !function_exists('imagesx')) return $default;
             if (!file_exists($imagePath)) return $default;
             $info = @getimagesize($imagePath);
             if (!$info) return $default;
@@ -1547,7 +1556,7 @@ class RiceScanController extends Controller
                 'lesion_pixels' => $sheathBlightPixels,
                 'raw_ratio' => round($rawRatio, 1),
             ];
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             return $default;
         }
     }
@@ -1794,7 +1803,7 @@ class RiceScanController extends Controller
                     }
                 }
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             Log::warning('Scan analysis warning: ' . $e->getMessage());
             $selectedDiseaseKey = 'blast';
             $calculatedSeverity = 'moderate';
@@ -1865,7 +1874,7 @@ class RiceScanController extends Controller
                 $scanId = $scan->id;
                 $saved = true;
             }
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             Log::error('Failed to save scan to database: ' . $e->getMessage());
         }
 
