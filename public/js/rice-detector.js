@@ -1943,62 +1943,55 @@ async function uploadAndAnalyze(file) {
     if (sc) sc.innerHTML = '';
   });
 
+  // Progressive visual feedback for steps 1, 2, 3
+  const stepDelays = [400, 950, 1500];
+  stepDelays.forEach((delay, idx) => {
+    setTimeout(() => {
+      const stepEl = document.getElementById('step' + (idx + 1));
+      if (stepEl) {
+        stepEl.classList.add('done');
+        const sc = stepEl.querySelector('.step-check');
+        if (sc) sc.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+      }
+    }, delay);
+  });
+
   const formData = new FormData();
   formData.append('image', file);
 
-  let gotResponse = false;
-  let responseData = null;
-
-  await ensureCsrfCookie();
-  fetch(apiUrl('/rice-detector/upload'), {
-    method: 'POST',
-    credentials: 'include',
-    headers: authHeaders(),
-    body: formData,
-  })
-    .then(r => r.json())
-    .then(data => {
-      gotResponse = true;
-      responseData = data;
-    })
-    .catch(err => {
-      gotResponse = true;
-      responseData = { success: false, recognized: false, message: 'Server connection error during image analysis.' };
+  try {
+    await ensureCsrfCookie();
+    const res = await fetch(apiUrl('/rice-detector/upload'), {
+      method: 'POST',
+      credentials: 'include',
+      headers: authHeaders(),
+      body: formData,
     });
 
-  const steps = ['step1', 'step2', 'step3', 'step4'];
-  steps.forEach((s, i) => {
-    setTimeout(() => {
-      const el = document.getElementById(s);
-      if (!el) return;
-      el.classList.add('done');
-      const sc = el.querySelector('.step-check');
+    const data = await res.json();
+
+    // Mark step 4 as complete
+    const step4 = document.getElementById('step4');
+    if (step4) {
+      step4.classList.add('done');
+      const sc = step4.querySelector('.step-check');
       if (sc) sc.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
-      if (i === steps.length - 1) {
-        setTimeout(() => {
-          let attempts = 0;
-          const check = () => {
-            if (gotResponse) {
-              if (responseData && responseData.success && responseData.recognized !== false && responseData.scan && responseData.scan.disease) {
-                if (!responseData.scan.image_url && localFileUrl) {
-                  responseData.scan.image_url = localFileUrl;
-                }
-                applyScanResult(responseData.scan);
-              } else {
-                showUnrecognizedScreen(responseData);
-              }
-            } else if (attempts < 15) {
-              attempts++;
-              setTimeout(check, 200);
-            } else {
-              showUnrecognizedScreen({ message: 'Analysis timed out or image not recognized.' });
-            }
-          };
-          check();
-        }, 500);
+    }
+
+    setTimeout(() => {
+      if (data && data.success && data.recognized !== false && data.scan && data.scan.disease) {
+        if (!data.scan.image_url && localFileUrl) {
+          data.scan.image_url = localFileUrl;
+        }
+        applyScanResult(data.scan);
+      } else {
+        showUnrecognizedScreen(data);
       }
-    }, 550 * (i + 1));
-  });
+    }, 450);
+  } catch (err) {
+    console.error('Upload and scan error:', err);
+    showUnrecognizedScreen({ message: 'Network connection issue or analysis timed out. Please check your connection and retry.' });
+  }
 }
 
 function showUnrecognizedScreen(data) {
