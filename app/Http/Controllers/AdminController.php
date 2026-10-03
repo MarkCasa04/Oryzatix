@@ -1012,9 +1012,27 @@ class AdminController extends Controller
     {
         $imageUrl = null;
         if ($disease->image_path) {
-            $imageUrl = str_starts_with($disease->image_path, 'http') || str_starts_with($disease->image_path, 'images/')
-                ? asset($disease->image_path)
-                : asset('storage/' . $disease->image_path);
+            if (str_starts_with($disease->image_path, 'http://') || str_starts_with($disease->image_path, 'https://') || str_starts_with($disease->image_path, 'data:')) {
+                $imageUrl = $disease->image_path;
+            } elseif (str_starts_with($disease->image_path, 'images/')) {
+                $imageUrl = asset($disease->image_path);
+            } else {
+                $fn = basename($disease->image_path);
+                $code = strtolower($disease->code ?: 'blast');
+                if (file_exists(public_path('images/diseases/' . $fn))) {
+                    $imageUrl = asset('images/diseases/' . $fn);
+                } elseif (file_exists(public_path("images/diseases/{$code}.webp"))) {
+                    $imageUrl = asset("images/diseases/{$code}.webp");
+                } elseif (file_exists(public_path("images/diseases/{$code}.jpg"))) {
+                    $imageUrl = asset("images/diseases/{$code}.jpg");
+                } else {
+                    $imageUrl = asset('storage/' . $disease->image_path);
+                }
+            }
+        } else {
+            $code = strtolower($disease->code ?: 'blast');
+            $ext = ($code === 'tungro' || $code === 'healthy' || $code === 'sheath_blight') ? 'jpg' : 'webp';
+            $imageUrl = asset("images/diseases/{$code}.{$ext}");
         }
 
         return [
