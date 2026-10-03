@@ -441,7 +441,10 @@ class RiceScanController extends Controller
             return $this->blbDatasetMetadata;
         }
 
-        $path = storage_path('app/datasets/blb_dataset_metadata.json');
+        $path = file_exists(storage_path('app/datasets/blb_dataset_metadata.json'))
+            ? storage_path('app/datasets/blb_dataset_metadata.json')
+            : base_path('storage/app/datasets/blb_dataset_metadata.json');
+
         if (file_exists($path)) {
             $data = json_decode(file_get_contents($path), true);
             $this->blbDatasetMetadata = $data['images'] ?? [];
@@ -491,7 +494,10 @@ class RiceScanController extends Controller
             return $this->tungroDatasetMetadata;
         }
 
-        $path = storage_path('app/datasets/tungro_dataset_metadata.json');
+        $path = file_exists(storage_path('app/datasets/tungro_dataset_metadata.json'))
+            ? storage_path('app/datasets/tungro_dataset_metadata.json')
+            : base_path('storage/app/datasets/tungro_dataset_metadata.json');
+
         if (file_exists($path)) {
             $data = json_decode(file_get_contents($path), true);
             $this->tungroDatasetMetadata = $data['images'] ?? [];
@@ -540,7 +546,10 @@ class RiceScanController extends Controller
             return $this->blastDatasetMetadata;
         }
 
-        $path = storage_path('app/datasets/blast_dataset_metadata.json');
+        $path = file_exists(storage_path('app/datasets/blast_dataset_metadata.json'))
+            ? storage_path('app/datasets/blast_dataset_metadata.json')
+            : base_path('storage/app/datasets/blast_dataset_metadata.json');
+
         if (file_exists($path)) {
             $data = json_decode(file_get_contents($path), true);
             $this->blastDatasetMetadata = $data['images'] ?? [];
@@ -591,7 +600,10 @@ class RiceScanController extends Controller
             return $this->brownSpotDatasetMetadata;
         }
 
-        $path = storage_path('app/datasets/brown_spot_dataset_metadata.json');
+        $path = file_exists(storage_path('app/datasets/brown_spot_dataset_metadata.json'))
+            ? storage_path('app/datasets/brown_spot_dataset_metadata.json')
+            : base_path('storage/app/datasets/brown_spot_dataset_metadata.json');
+
         if (file_exists($path)) {
             $data = json_decode(file_get_contents($path), true);
             $this->brownSpotDatasetMetadata = $data['images'] ?? [];
@@ -641,7 +653,10 @@ class RiceScanController extends Controller
             return $this->healthyDatasetMetadata;
         }
 
-        $path = storage_path('app/datasets/healthy_dataset_metadata.json');
+        $path = file_exists(storage_path('app/datasets/healthy_dataset_metadata.json'))
+            ? storage_path('app/datasets/healthy_dataset_metadata.json')
+            : base_path('storage/app/datasets/healthy_dataset_metadata.json');
+
         if (file_exists($path)) {
             $data = json_decode(file_get_contents($path), true);
             $this->healthyDatasetMetadata = $data['images'] ?? [];
@@ -1485,7 +1500,18 @@ class RiceScanController extends Controller
                     }
                 }
 
-                // ── STRICT REJECTION: If NOT in dataset/database, DO NOT SHOW ANY RESULT
+                // ── STEP 4: Intelligent Computer Vision & Pixel Color Lesion Analysis ──
+                if ($matchedBy === 'fallback' && file_exists($fullPath)) {
+                    $pixelAnalysis = $this->analyzeImagePixels($fullPath);
+                    $leafRatio = $pixelAnalysis['leaf_ratio'] ?? 0;
+                    if ($leafRatio >= 0.03 && !empty($pixelAnalysis['disease_key'])) {
+                        $selectedDiseaseKey = $pixelAnalysis['disease_key'];
+                        $confidence = (float)($pixelAnalysis['confidence'] ?? 88.5);
+                        $matchedBy = 'pixel_color_signature';
+                    }
+                }
+
+                // ── STRICT REJECTION: Only if NOT a rice leaf at all ──
                 if ($matchedBy === 'fallback') {
                     return $this->unsupportedScanResponse($imageUrl, 'not_in_dataset');
                 }
