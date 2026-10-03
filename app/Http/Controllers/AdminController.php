@@ -7,11 +7,13 @@ use App\Models\RiceScan;
 use App\Models\Disease;
 use App\Models\ChatMessage;
 use App\Models\ChatbotKnowledge;
+use App\Models\SystemSetting;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Validation\Rule;
 use Carbon\Carbon;
 use Exception;
@@ -208,16 +210,26 @@ class AdminController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+                'regex:/^[a-zA-Z0-9._%+-]+@gmail\.com$/i'
+            ],
             'password' => 'required|string|min:6',
             'role' => 'required|in:farmer,agri_worker,admin',
             'location' => 'nullable|string|max:255',
+        ], [
+            'email.regex' => 'Tanging valid na Gmail address (@gmail.com) ang pinapayagan.',
+            'email.unique' => 'Ang Gmail address na ito ay rehistrado na.',
         ]);
 
         try {
             $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
+                'name' => trim($request->name),
+                'email' => strtolower(trim($request->email)),
                 'password' => $request->password,
                 'role' => $request->role,
                 'location' => $request->location,
@@ -255,12 +267,20 @@ class AdminController extends Controller
 
         $request->validate([
             'name' => 'sometimes|string|max:255',
-            'email' => ['sometimes', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'email' => [
+                'sometimes',
+                'email',
+                'max:255',
+                'regex:/^[a-zA-Z0-9._%+-]+@gmail\.com$/i',
+                Rule::unique('users')->ignore($user->id)
+            ],
             'role' => 'sometimes|in:farmer,agri_worker,admin',
             'location' => 'nullable|string|max:255',
             'password' => 'nullable|string|min:6',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'remove_avatar' => 'nullable',
+        ], [
+            'email.regex' => 'Tanging valid na Gmail address (@gmail.com) ang pinapayagan.',
         ]);
 
         try {
@@ -401,18 +421,34 @@ class AdminController extends Controller
     {
         if ($res = $this->checkAdmin($request)) return $res;
 
+        $name = trim((string)$request->name);
+        $code = $request->code ? strtolower(str_replace(' ', '_', trim($request->code))) : \Illuminate\Support\Str::slug($name, '_');
+        if (empty($code)) {
+            $code = 'disease_' . time();
+        }
+
+        // Ensure unique code
+        $originalCode = $code;
+        $counter = 1;
+        while (Disease::where('code', $code)->exists()) {
+            $code = "{$originalCode}_{$counter}";
+            $counter++;
+        }
+
+        $status = in_array($request->status, ['active', '1', 1, true, 'true'], true) ? 'active' : 'inactive';
+        if ($request->has('is_active')) {
+            $status = in_array($request->is_active, ['active', '1', 1, true, 'true'], true) ? 'active' : 'inactive';
+        }
+
+        $treatment = $request->recommended_treatment ?: $request->treatment;
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'code' => 'required|string|max:100|unique:diseases,code',
             'scientific_name' => 'nullable|string|max:255',
             'description' => 'nullable|string',
             'symptoms' => 'nullable|string',
             'causes' => 'nullable|string',
             'prevention' => 'nullable|string',
-            'recommended_treatment' => 'nullable|string',
-            'chemical_treatments' => 'nullable',
-            'organic_treatments' => 'nullable',
-            'status' => 'required|in:active,inactive',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
@@ -426,18 +462,18 @@ class AdminController extends Controller
             $org = is_string($request->organic_treatments) ? json_decode($request->organic_treatments, true) : $request->organic_treatments;
 
             $disease = Disease::create([
-                'name' => $request->name,
-                'code' => strtolower(str_replace(' ', '_', $request->code)),
+                'name' => $name,
+                'code' => $code,
                 'scientific_name' => $request->scientific_name,
                 'image_path' => $imagePath,
                 'description' => $request->description,
                 'symptoms' => $request->symptoms,
                 'causes' => $request->causes,
                 'prevention' => $request->prevention,
-                'recommended_treatment' => $request->recommended_treatment,
+                'recommended_treatment' => $treatment,
                 'chemical_treatments' => $chem,
                 'organic_treatments' => $org,
-                'status' => $request->status,
+                'status' => $status,
             ]);
 
             return response()->json([
@@ -469,9 +505,9 @@ class AdminController extends Controller
             'causes' => 'nullable|string',
             'prevention' => 'nullable|string',
             'recommended_treatment' => 'nullable|string',
+            'treatment' => 'nullable|string',
             'chemical_treatments' => 'nullable',
             'organic_treatments' => 'nullable',
-            'status' => 'sometimes|in:active,inactive',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
@@ -483,8 +519,16 @@ class AdminController extends Controller
             if ($request->has('symptoms')) $disease->symptoms = $request->symptoms;
             if ($request->has('causes')) $disease->causes = $request->causes;
             if ($request->has('prevention')) $disease->prevention = $request->prevention;
-            if ($request->has('recommended_treatment')) $disease->recommended_treatment = $request->recommended_treatment;
-            if ($request->filled('status')) $disease->status = $request->status;
+            
+            if ($request->has('recommended_treatment') || $request->has('treatment')) {
+                $disease->recommended_treatment = $request->recommended_treatment ?: $request->treatment;
+            }
+
+            if ($request->has('status')) {
+                $disease->status = in_array($request->status, ['active', '1', 1, true, 'true'], true) ? 'active' : 'inactive';
+            } elseif ($request->has('is_active')) {
+                $disease->status = in_array($request->is_active, ['active', '1', 1, true, 'true'], true) ? 'active' : 'inactive';
+            }
 
             if ($request->has('chemical_treatments')) {
                 $disease->chemical_treatments = is_string($request->chemical_treatments) ? json_decode($request->chemical_treatments, true) : $request->chemical_treatments;
@@ -975,10 +1019,91 @@ class AdminController extends Controller
             'causes' => $disease->causes,
             'prevention' => $disease->prevention,
             'recommended_treatment' => $disease->recommended_treatment,
+            'treatment' => $disease->recommended_treatment,
             'chemical_treatments' => $disease->chemical_treatments,
             'organic_treatments' => $disease->organic_treatments,
             'status' => $disease->status,
+            'is_active' => $disease->status === 'active',
             'created_at' => $disease->created_at ? $disease->created_at->format('M j, Y') : 'N/A',
         ];
+    }
+
+    /**
+     * 7. Security Settings (Login Attempts & Lockout Duration)
+     */
+    public function getSecuritySettings(Request $request): JsonResponse
+    {
+        if ($err = $this->checkAdmin($request)) return $err;
+
+        $maxAttempts = (int) SystemSetting::get('max_login_attempts', 3);
+        $lockoutSeconds = (int) SystemSetting::get('lockout_duration_seconds', 30);
+
+        return response()->json([
+            'success' => true,
+            'settings' => [
+                'max_login_attempts' => $maxAttempts,
+                'lockout_duration_seconds' => $lockoutSeconds,
+                'preset_attempts' => [3, 5, 10],
+                'preset_durations' => [
+                    ['seconds' => 30, 'label' => '30 Seconds (Default)'],
+                    ['seconds' => 60, 'label' => '1 Minute (60 Seconds)'],
+                    ['seconds' => 120, 'label' => '2 Minutes (120 Seconds)'],
+                    ['seconds' => 300, 'label' => '5 Minutes (300 Seconds)'],
+                ],
+            ],
+            'message' => 'Security settings loaded successfully.',
+        ]);
+    }
+
+    public function updateSecuritySettings(Request $request): JsonResponse
+    {
+        if ($err = $this->checkAdmin($request)) return $err;
+
+        $validated = $request->validate([
+            'max_login_attempts' => 'required|integer|min:1|max:20',
+            'lockout_duration_seconds' => 'required|integer|min:5|max:3600',
+        ]);
+
+        SystemSetting::set(
+            'max_login_attempts',
+            $validated['max_login_attempts'],
+            'integer',
+            'Maximum Failed Login Attempts',
+            'security',
+            'Number of consecutive incorrect password attempts before the account is temporarily locked out.'
+        );
+
+        SystemSetting::set(
+            'lockout_duration_seconds',
+            $validated['lockout_duration_seconds'],
+            'integer',
+            'Lockout Penalty Duration (Seconds)',
+            'security',
+            'Duration in seconds the user must wait before attempting to sign in again.'
+        );
+
+        Cache::forget('system_setting_max_login_attempts');
+        Cache::forget('system_setting_lockout_duration_seconds');
+
+        return response()->json([
+            'success' => true,
+            'settings' => [
+                'max_login_attempts' => (int) $validated['max_login_attempts'],
+                'lockout_duration_seconds' => (int) $validated['lockout_duration_seconds'],
+            ],
+            'message' => 'Login Security Settings updated successfully! The new limit is ' . $validated['max_login_attempts'] . ' attempts and ' . $validated['lockout_duration_seconds'] . ' seconds base penalty.',
+        ]);
+    }
+
+    public function resetLockouts(Request $request): JsonResponse
+    {
+        if ($err = $this->checkAdmin($request)) return $err;
+
+        Cache::flush();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Lahat ng kasalukuyang naka-lockout na IP at account ay matagumpay na na-reset.',
+        ]);
     }
 }

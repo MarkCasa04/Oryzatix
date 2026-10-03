@@ -203,9 +203,11 @@ const SCREEN_TITLES = {
   'admin-scans-logs': { en: 'Detection Records & Logs',    tl: 'Mga Tala ng Diagnosis Scan' },
   'admin-reports':    { en: 'Reports & Analytics',         tl: 'Mga Ulat at Pagsusuri' },
   'admin-chatbot':    { en: 'Chatbot & FAQ Management',    tl: 'Pamamahala ng Chatbot at FAQ' },
-  profile:            { en: 'Profile & Settings',          tl: 'Profile at Mga Setting' },
+  'admin-settings':   { en: 'Account & App Settings',      tl: 'Mga Setting ng Account at App' },
+  profile:            { en: 'Account & App Settings',      tl: 'Mga Setting ng Account at App' },
   login:              { en: 'Sign In',                     tl: 'Mag-Log In' },
   register:           { en: 'Create Account',              tl: 'Gumawa ng Account' },
+  'forgot-password':  { en: 'Forgot Password',             tl: 'Nakalimutan ang Password' },
   splash:             { en: 'ORYZATIX',                    tl: 'ORYZATIX' },
 };
 
@@ -231,7 +233,7 @@ function setActiveSidebar(screenId) {
   }
 }
 
-const AUTH_SCREENS = ['login', 'register', 'splash'];
+const AUTH_SCREENS = ['login', 'register', 'splash', 'forgot-password'];
 
 function setAuthMode(isAuthScreen) {
   const appShell = document.querySelector('.web-app-shell, .app-shell');
@@ -258,6 +260,18 @@ function showScreen(id) {
   setAuthMode(isAuth);
   setActiveSidebar(id);
 
+  if (!isAuth) {
+    try {
+      sessionStorage.setItem('oryzatix_active_screen', id);
+      sessionStorage.removeItem('oryzatix_active_auth_screen');
+    } catch (e) {}
+  } else {
+    try {
+      sessionStorage.removeItem('oryzatix_active_screen');
+      sessionStorage.setItem('oryzatix_active_auth_screen', id);
+    } catch (e) {}
+  }
+
   // Sync Mobile Bottom Nav Buttons
   document.querySelectorAll('.mobile-bottom-nav .mobile-nav-btn').forEach(btn => {
     const match = btn.getAttribute('data-screen') === id;
@@ -275,7 +289,16 @@ function showScreen(id) {
     stopAiSpeech();
   }
 
-  if (id === 'admin-dashboard') {
+  if (id === 'home') {
+    loadHomeRecentScans();
+  } else if (id === 'history') {
+    loadHistory();
+  } else if (id === 'treatment') {
+    loadCurrentTreatment();
+  } else if (id === 'consultation') {
+    loadChatMessages();
+    if (typeof initAiVoiceMuteUI === 'function') initAiVoiceMuteUI();
+  } else if (id === 'admin-dashboard') {
     loadAdminDashboard();
   } else if (id === 'admin-users') {
     loadAdminUsers();
@@ -287,11 +310,30 @@ function showScreen(id) {
     loadAdminReports();
   } else if (id === 'admin-chatbot') {
     loadAdminChatbot();
+  } else if (id === 'admin-settings') {
+    showScreen('profile');
+    return;
+  } else if (id === 'profile') {
+    const secMenuItem = document.getElementById('profileSecurityMenuItem');
+    if (secMenuItem) {
+      secMenuItem.style.display = (currentUser && currentUser.role === 'admin') ? 'flex' : 'none';
+    }
   } else if (id === 'staff-dashboard') {
     loadStaffDashboard();
-  } else if (id === 'consultation') {
-    if (typeof initAiVoiceMuteUI === 'function') initAiVoiceMuteUI();
-  } else if (id === 'login' || id === 'register') {
+  } else if (id === 'results') {
+    if (!currentScanResult) {
+      try {
+        const savedScan = (typeof sessionStorage !== 'undefined') ? sessionStorage.getItem('oryzatix_last_scan_result') : null;
+        if (savedScan) {
+          applyScanResult(JSON.parse(savedScan));
+        }
+      } catch (e) {}
+    }
+  } else if (id === 'login') {
+    resetAuthForms();
+    checkLoginLockoutState();
+    fetchSecurityConfig();
+  } else if (id === 'register') {
     resetAuthForms();
   }
 
@@ -472,17 +514,58 @@ function closeModal(modalId) {
   if (m) m.classList.remove('show');
 }
 
-// Close modals when clicking backdrop
+/* ═══════════ TOPBAR USER PROFILE & SETTINGS DROPDOWN ═══════════ */
+function toggleTopbarUserDropdown(e) {
+  if (e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  const dd = document.getElementById('topbarUserDropdown');
+  const btn = document.getElementById('topbarUserBtn');
+  if (!dd) return;
+
+  const isCurrentlyOpen = dd.style.display === 'block';
+  if (isCurrentlyOpen) {
+    dd.style.display = 'none';
+    if (btn) {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.classList.remove('active');
+    }
+  } else {
+    dd.style.display = 'block';
+    if (btn) {
+      btn.setAttribute('aria-expanded', 'true');
+      btn.classList.add('active');
+    }
+  }
+}
+
+function closeTopbarUserDropdown() {
+  const dd = document.getElementById('topbarUserDropdown');
+  const btn = document.getElementById('topbarUserBtn');
+  if (dd) dd.style.display = 'none';
+  if (btn) {
+    btn.setAttribute('aria-expanded', 'false');
+    btn.classList.remove('active');
+  }
+}
+
+// Close modals when clicking backdrop, or close topbar dropdown on outside click
 window.addEventListener('click', function(e) {
   if (e.target.classList && e.target.classList.contains('modal-backdrop')) {
     e.target.classList.remove('show');
   }
+  const userMenuWrap = document.getElementById('topbarUserMenuWrap');
+  if (userMenuWrap && !userMenuWrap.contains(e.target)) {
+    closeTopbarUserDropdown();
+  }
 });
 
-// Close modals on Escape key
+// Close modals and dropdowns on Escape key
 window.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     document.querySelectorAll('.modal-backdrop.show').forEach(m => m.classList.remove('show'));
+    closeTopbarUserDropdown();
     closeMobileDrawer();
   }
 });
@@ -506,31 +589,69 @@ function navigateAfterAuth() {
 }
 
 async function checkAuthAndProceed() {
-  const token = getAuthToken();
-  if (!token) {
-    showScreen('login');
+  const isSessionLoggedIn = (typeof sessionStorage !== 'undefined') && sessionStorage.getItem('oryzatix_is_logged_in') === 'true';
+  const isGoogleCallback = !!(window.INITIAL_AUTH && window.INITIAL_AUTH.googleLoginSuccess);
+  const savedScreen = (typeof sessionStorage !== 'undefined') ? sessionStorage.getItem('oryzatix_active_screen') : null;
+  const savedAuthScreen = (typeof sessionStorage !== 'undefined') ? sessionStorage.getItem('oryzatix_active_auth_screen') : null;
+
+  // 1. If user is in an active session OR returning from a successful Google OAuth login
+  if ((isSessionLoggedIn || isGoogleCallback) && window.INITIAL_AUTH && window.INITIAL_AUTH.user) {
+    try {
+      sessionStorage.setItem('oryzatix_is_logged_in', 'true');
+    } catch (e) {}
+    currentUser = window.INITIAL_AUTH.user;
+    if (window.INITIAL_AUTH.token) {
+      setAuthToken(window.INITIAL_AUTH.token);
+    }
+    applyUserToUI();
+
+    if (savedScreen && !AUTH_SCREENS.includes(savedScreen) && document.getElementById(savedScreen)) {
+      showScreen(savedScreen);
+    } else {
+      navigateAfterAuth();
+    }
     return;
   }
 
-  fetch(apiUrl('/auth/user'), {
-    credentials: 'include',
-    headers: authHeaders(),
-  })
-    .then(r => r.json())
-    .then(data => {
-      if (data && data.success && data.user) {
-        currentUser = data.user;
-        applyUserToUI();
-        navigateAfterAuth();
-      } else {
-        setAuthToken(null);
-        showScreen('login');
+  // 2. If session is flagged as logged in and a token exists, verify with /auth/user
+  if (isSessionLoggedIn) {
+    const token = getAuthToken();
+    if (token) {
+      try {
+        const res = await fetch(apiUrl('/auth/user'), {
+          credentials: 'include',
+          headers: authHeaders(),
+        });
+        const data = await res.json();
+        if (res.ok && data && data.success && data.user) {
+          currentUser = data.user;
+          applyUserToUI();
+          if (savedScreen && !AUTH_SCREENS.includes(savedScreen) && document.getElementById(savedScreen)) {
+            showScreen(savedScreen);
+          } else {
+            navigateAfterAuth();
+          }
+          return;
+        }
+      } catch (e) {
+        console.warn('Auth token verification error:', e);
       }
-    })
-    .catch(() => {
-      setAuthToken(null);
-      showScreen('login');
-    });
+    }
+  }
+
+  // 3. User is NOT in an active session or is on an auth screen (login, register, forgot-password)
+  setAuthToken(null);
+  currentUser = null;
+  if (typeof sessionStorage !== 'undefined') {
+    sessionStorage.removeItem('oryzatix_is_logged_in');
+    sessionStorage.removeItem('oryzatix_active_screen');
+    sessionStorage.removeItem('oryzatix_last_scan_result');
+  }
+  resetAuthForms();
+  const targetAuthScreen = (savedAuthScreen && AUTH_SCREENS.includes(savedAuthScreen) && document.getElementById(savedAuthScreen))
+    ? savedAuthScreen
+    : 'login';
+  showScreen(targetAuthScreen);
 }
 
 function applyUserToUI() {
@@ -559,6 +680,72 @@ function applyUserToUI() {
       avatar.innerHTML = `<img src="${u.avatar_url}" alt="${escapeHtml(u.name)}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
     } else {
       avatar.textContent = initials;
+    }
+  }
+
+  // Topbar user trigger avatar & meta
+  const topbarUserAvatarImg = document.getElementById('topbarUserAvatarImg');
+  const topbarUserAvatarInitials = document.getElementById('topbarUserAvatarInitials');
+  if (topbarUserAvatarImg && topbarUserAvatarInitials) {
+    if (u.avatar_url) {
+      topbarUserAvatarImg.src = u.avatar_url;
+      topbarUserAvatarImg.style.display = 'block';
+      topbarUserAvatarInitials.style.display = 'none';
+    } else {
+      topbarUserAvatarImg.src = '';
+      topbarUserAvatarImg.style.display = 'none';
+      topbarUserAvatarInitials.textContent = initials;
+      topbarUserAvatarInitials.style.display = 'block';
+    }
+  }
+  const topbarUserName = document.getElementById('topbarUserName');
+  if (topbarUserName) topbarUserName.textContent = u.name || 'Mang Juan';
+  const topbarUserRole = document.getElementById('topbarUserRole');
+  if (topbarUserRole) {
+    topbarUserRole.setAttribute('data-en', roleObj.en);
+    topbarUserRole.setAttribute('data-tl', roleObj.tl);
+    const curLang = (document.getElementById('uiLanguage') || {}).value || 'english';
+    topbarUserRole.textContent = curLang === 'english' ? roleObj.en : roleObj.tl;
+  }
+
+  // Topbar dropdown user card details
+  const dropdownAvatar = document.getElementById('dropdownAvatar');
+  if (dropdownAvatar) {
+    if (u.avatar_url) {
+      dropdownAvatar.innerHTML = `<img src="${u.avatar_url}" alt="${escapeHtml(u.name)}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">`;
+    } else {
+      dropdownAvatar.textContent = initials;
+    }
+  }
+  const dropdownUserName = document.getElementById('dropdownUserName');
+  if (dropdownUserName) dropdownUserName.textContent = u.name || 'Mang Juan';
+  const dropdownUserEmail = document.getElementById('dropdownUserEmail');
+  if (dropdownUserEmail) dropdownUserEmail.textContent = u.email || 'user@oryzatix.ph';
+  const dropdownUserRoleBadge = document.getElementById('dropdownUserRoleBadge');
+  if (dropdownUserRoleBadge) dropdownUserRoleBadge.textContent = roleObj.en;
+  const dropdownLocationText = document.getElementById('dropdownLocationText');
+  if (dropdownLocationText) dropdownLocationText.textContent = u.location || 'Roxas, Oriental Mindoro';
+
+  // Edit profile display preview sync
+  const editProfileDisplayName = document.getElementById('editProfileDisplayName');
+  if (editProfileDisplayName) editProfileDisplayName.textContent = u.name || 'User';
+  const editProfileDisplayRole = document.getElementById('editProfileDisplayRole');
+  if (editProfileDisplayRole) editProfileDisplayRole.textContent = roleObj.en + (u.location ? ' · ' + u.location : ' · Roxas, Oriental Mindoro');
+  const editProfilePhotoImg = document.getElementById('editProfilePhotoImg');
+  const editProfilePhotoInitials = document.getElementById('editProfilePhotoInitials');
+  const btnRemoveProfilePhoto = document.getElementById('btnRemoveProfilePhoto');
+  if (editProfilePhotoImg && editProfilePhotoInitials) {
+    if (u.avatar_url) {
+      editProfilePhotoImg.src = u.avatar_url;
+      editProfilePhotoImg.style.display = 'block';
+      editProfilePhotoInitials.style.display = 'none';
+      if (btnRemoveProfilePhoto) btnRemoveProfilePhoto.style.display = 'inline-flex';
+    } else {
+      editProfilePhotoImg.src = '';
+      editProfilePhotoImg.style.display = 'none';
+      editProfilePhotoInitials.textContent = initials;
+      editProfilePhotoInitials.style.display = 'block';
+      if (btnRemoveProfilePhoto) btnRemoveProfilePhoto.style.display = 'none';
     }
   }
 
@@ -626,6 +813,11 @@ function applyUserToUI() {
     drawerAdminGroup.style.display = (u.role === 'admin') ? 'block' : 'none';
   }
 
+  const secMenuItem = document.getElementById('profileSecurityMenuItem');
+  if (secMenuItem) {
+    secMenuItem.style.display = (u.role === 'admin') ? 'flex' : 'none';
+  }
+
   // Mobile Bottom Nav Sync
   const mobHomeBtn = document.querySelector('.mobile-bottom-nav .mobile-nav-btn[data-screen="home"], .mobile-bottom-nav .mobile-nav-btn[data-screen="staff-dashboard"], .mobile-bottom-nav .mobile-nav-btn[data-screen="admin-dashboard"]');
   if (mobHomeBtn) {
@@ -660,6 +852,498 @@ function applyUserToUI() {
   }
 }
 
+function isValidGmail(email) {
+  if (!email) return false;
+  return /^[a-zA-Z0-9._%+-]+@gmail\.com$/i.test(email.trim());
+}
+
+let currentGoogleAuthMode = 'login';
+
+/* ═══════════ GOOGLE / GMAIL 1-TAP AUTHENTICATION ═══════════ */
+function handleGoogleCredentialResponse(response) {
+  if (response && response.credential) {
+    executeGoogleLogin('', '', response.credential);
+  }
+}
+
+function initGoogleIdentityServices() {
+  const meta = document.querySelector('meta[name="google-signin-client_id"]');
+  const clientId = meta ? meta.getAttribute('content') : '';
+  if (window.google && window.google.accounts && window.google.accounts.id && clientId) {
+    try {
+      google.accounts.id.initialize({
+        client_id: clientId,
+        callback: handleGoogleCredentialResponse,
+        auto_select: false,
+      });
+
+      const btnWrapper = document.getElementById('googleOfficialBtnWrapper');
+      if (btnWrapper) {
+        google.accounts.id.renderButton(btnWrapper, {
+          theme: 'outline',
+          size: 'large',
+          type: 'standard',
+          shape: 'rectangular',
+          text: 'signin_with',
+          logo_alignment: 'left',
+          width: 320,
+        });
+      }
+    } catch (e) {
+      console.warn('Google Identity Services notice:', e);
+    }
+  }
+}
+
+async function openGoogleAuthModal(mode = 'login') {
+  currentGoogleAuthMode = mode || 'login';
+  const err = document.getElementById('googleAuthError');
+  if (err) { err.classList.remove('show'); err.textContent = ''; }
+
+  const meta = document.querySelector('meta[name="google-signin-client_id"]');
+  const clientId = meta ? meta.getAttribute('content') : '';
+
+  // If official Google Client ID is configured and Google SDK is loaded, render button and trigger native prompt
+  if (window.google && window.google.accounts && window.google.accounts.id && clientId) {
+    try {
+      google.accounts.id.initialize({
+        client_id: clientId,
+        callback: handleGoogleCredentialResponse,
+        auto_select: false,
+      });
+
+      const btnWrapper = document.getElementById('googleOfficialBtnWrapper');
+      if (btnWrapper) {
+        btnWrapper.innerHTML = '';
+        google.accounts.id.renderButton(btnWrapper, {
+          theme: 'outline',
+          size: 'large',
+          type: 'standard',
+          shape: 'rectangular',
+          text: currentGoogleAuthMode === 'register' ? 'signup_with' : 'signin_with',
+          logo_alignment: 'left',
+          width: 320,
+        });
+      }
+
+      google.accounts.id.prompt();
+    } catch (e) {}
+  }
+
+  openModal('modalGoogleAuth');
+}
+
+async function executeGoogleLogin(email, name, idToken) {
+  const errBanner = document.getElementById('googleAuthError');
+  if (errBanner) { errBanner.classList.remove('show'); errBanner.textContent = ''; }
+
+  try {
+    await ensureCsrfCookie();
+    const res = await fetch(apiUrl('/auth/google-login'), {
+      method: 'POST',
+      credentials: 'include',
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ email, name, id_token: idToken, mode: currentGoogleAuthMode }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data && data.success) {
+      if (currentGoogleAuthMode === 'register' || data.requires_login) {
+        closeModal('modalGoogleAuth');
+        resetAuthForms();
+        showScreen('login');
+        showLoginSuccess(data.message || 'Account has been created successfully! Please sign in with Continue with Google.', 3000);
+        return;
+      }
+
+      currentUser = data.user;
+      if (data.token) setAuthToken(data.token);
+      applyUserToUI();
+      closeModal('modalGoogleAuth');
+      resetAuthForms();
+      navigateAfterAuth();
+    } else {
+      let msg = (data && data.message) ? data.message : 'Walang account na nakarehistro para sa Google account na ito. Mangyaring magrehistro muna.';
+      if (errBanner) {
+        errBanner.textContent = msg;
+        errBanner.classList.add('show');
+      }
+    }
+  } catch (err) {
+    console.error('Google Sign-in error:', err);
+    if (errBanner) {
+      errBanner.textContent = 'Hindi makakonekta sa server. Pakisuri ang koneksyon.';
+      errBanner.classList.add('show');
+    }
+  }
+}
+
+function handleCustomGoogleLogin(e) {
+  if (e) e.preventDefault();
+  const input = document.getElementById('googleCustomEmail');
+  const email = (input ? input.value : '').trim().toLowerCase();
+  const errBanner = document.getElementById('googleAuthError');
+
+  if (!email || !isValidGmail(email)) {
+    if (errBanner) {
+      errBanner.textContent = 'Pakilagay ang inyong valid na Gmail address (@gmail.com).';
+      errBanner.classList.add('show');
+    }
+    return;
+  }
+
+  executeGoogleLogin(email, '');
+}
+
+/* ═══════════ FORGOT PASSWORD & OTP HANDLERS ═══════════ */
+async function handleSendOtp(e) {
+  if (e) e.preventDefault();
+  const emailInput = document.getElementById('forgotEmail');
+  const email = (emailInput ? emailInput.value : '').trim().toLowerCase();
+  const btn = document.getElementById('btnSendOtp');
+  const errBanner = document.getElementById('forgotError');
+  const okBanner = document.getElementById('forgotSuccess');
+
+  if (errBanner) { errBanner.classList.remove('show'); errBanner.textContent = ''; }
+  if (okBanner) { okBanner.classList.remove('show'); okBanner.textContent = ''; }
+
+  if (!email || !isValidGmail(email)) {
+    if (errBanner) {
+      errBanner.textContent = 'Please enter a valid email address.';
+      errBanner.classList.add('show');
+    }
+    return;
+  }
+
+  if (btn) { btn.disabled = true; btn.textContent = 'Sending Verification Code...'; }
+
+  try {
+    await ensureCsrfCookie();
+    const res = await fetch(apiUrl('/auth/forgot-password'), {
+      method: 'POST',
+      credentials: 'include',
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data && data.success) {
+      const step1 = document.getElementById('forgotStep1');
+      const step2 = document.getElementById('forgotStep2');
+      const sentText = document.getElementById('forgotSentEmailText');
+      if (step1) step1.style.display = 'none';
+      if (step2) step2.style.display = 'block';
+      if (sentText) sentText.textContent = email;
+
+      const otpField = document.getElementById('forgotOtp');
+      if (otpField) {
+        otpField.value = '';
+        otpField.focus();
+      }
+
+      if (okBanner) {
+        okBanner.textContent = data.message || 'A 6-digit verification code has been sent to your email!';
+        okBanner.classList.add('show');
+      }
+    } else {
+      let msg = (data && data.message) ? data.message : 'Unable to process request. Please check your email address.';
+      if (errBanner) {
+        errBanner.textContent = msg;
+        errBanner.classList.add('show');
+      }
+    }
+  } catch (err) {
+    console.error('Send OTP error:', err);
+    if (errBanner) {
+      errBanner.textContent = 'Cannot connect to the server. Please check your connection.';
+      errBanner.classList.add('show');
+    }
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Send Verification Code'; }
+  }
+}
+
+async function handleResetPassword(e) {
+  if (e) e.preventDefault();
+  const emailInput = document.getElementById('forgotEmail');
+  const email = (emailInput ? emailInput.value : '').trim().toLowerCase();
+  const token = (document.getElementById('forgotOtp') || {}).value || '';
+  const password = (document.getElementById('forgotNewPassword') || {}).value || '';
+  const password_confirmation = (document.getElementById('forgotNewPasswordConfirm') || {}).value || '';
+
+  const btn = document.getElementById('btnResetPassword');
+  const errBanner = document.getElementById('forgotError');
+  const okBanner = document.getElementById('forgotSuccess');
+
+  if (errBanner) { errBanner.classList.remove('show'); errBanner.textContent = ''; }
+  if (okBanner) { okBanner.classList.remove('show'); okBanner.textContent = ''; }
+
+  if (!token || token.length !== 6) {
+    if (errBanner) {
+      errBanner.textContent = 'Please enter the 6-digit verification code from your email.';
+      errBanner.classList.add('show');
+    }
+    return;
+  }
+
+  if (!password || password.length < 6) {
+    if (errBanner) {
+      errBanner.textContent = 'New password must be at least 6 characters.';
+      errBanner.classList.add('show');
+    }
+    return;
+  }
+
+  if (password !== password_confirmation) {
+    if (errBanner) {
+      errBanner.textContent = 'New password and confirm password do not match.';
+      errBanner.classList.add('show');
+    }
+    return;
+  }
+
+  if (btn) { btn.disabled = true; btn.textContent = 'Resetting Password...'; }
+
+  try {
+    await ensureCsrfCookie();
+    const res = await fetch(apiUrl('/auth/reset-password'), {
+      method: 'POST',
+      credentials: 'include',
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({ email, token, password, password_confirmation }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data && data.success) {
+      const resetEmail = email;
+      resetAuthForms();
+      showScreen('login');
+      showLoginSuccess(data.message || 'Your password has been successfully reset! Please log in with your new password.', 3000);
+      const loginEmailField = document.getElementById('loginEmail');
+      if (loginEmailField && resetEmail) {
+        loginEmailField.value = resetEmail;
+      }
+      const loginPassField = document.getElementById('loginPassword');
+      if (loginPassField) {
+        loginPassField.focus();
+      }
+    } else {
+      let msg = (data && data.message) ? data.message : 'Invalid or expired verification code. Please try again.';
+      if (errBanner) {
+        errBanner.textContent = msg;
+        errBanner.classList.add('show');
+      }
+    }
+  } catch (err) {
+    console.error('Reset password error:', err);
+    if (errBanner) {
+      errBanner.textContent = 'Cannot connect to the server. Please check your connection.';
+      errBanner.classList.add('show');
+    }
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = 'Reset Password & Sign In'; }
+  }
+}
+
+function handleResendOtp() {
+  handleSendOtp();
+}
+
+function changeForgotEmail() {
+  const step1 = document.getElementById('forgotStep1');
+  const step2 = document.getElementById('forgotStep2');
+  if (step1) step1.style.display = 'block';
+  if (step2) step2.style.display = 'none';
+  const errBanner = document.getElementById('forgotError');
+  const okBanner = document.getElementById('forgotSuccess');
+  if (errBanner) { errBanner.classList.remove('show'); errBanner.textContent = ''; }
+  if (okBanner) { okBanner.classList.remove('show'); okBanner.textContent = ''; }
+}
+
+let loginLockoutInterval = null;
+let currentSecurityConfig = { max_login_attempts: 3, lockout_duration_seconds: 30 };
+
+async function fetchSecurityConfig() {
+  try {
+    const res = await fetch(apiUrl('/auth/security-config'), {
+      headers: authHeaders(),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.success) {
+        currentSecurityConfig = {
+          max_login_attempts: data.max_login_attempts || 3,
+          lockout_duration_seconds: data.lockout_duration_seconds || 30,
+        };
+        if (data.is_locked && data.remaining_seconds > 0) {
+          startLoginLockoutTimer(data.remaining_seconds, data.lockout_duration_seconds);
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('Could not fetch security config:', e);
+  }
+}
+
+function checkLoginLockoutState() {
+  const storedUntil = parseInt(localStorage.getItem('oryzatix_login_lockout_until') || '0', 10);
+  const now = Date.now();
+  if (storedUntil > now) {
+    const remainingSeconds = Math.ceil((storedUntil - now) / 1000);
+    const totalDuration = parseInt(localStorage.getItem('oryzatix_login_lockout_total') || '30', 10);
+    startLoginLockoutTimer(remainingSeconds, totalDuration);
+  } else {
+    clearLoginLockoutUI();
+  }
+}
+
+function startLoginLockoutTimer(remainingSeconds, totalDuration = 30, customMsg = '') {
+  if (loginLockoutInterval) clearInterval(loginLockoutInterval);
+
+  const lockoutCard = document.getElementById('loginLockoutCard');
+  const timerDisplay = document.getElementById('loginLockoutTimer');
+  const progressFill = document.getElementById('loginLockoutProgress');
+  const lockoutMsg = document.getElementById('loginLockoutMsg');
+  const attemptsBadge = document.getElementById('loginAttemptsBadge');
+  const btn = document.getElementById('loginBtn');
+  const passwordInput = document.getElementById('loginPassword');
+  const emailInput = document.getElementById('loginEmail');
+  const errBanner = document.getElementById('loginError');
+
+  if (errBanner) {
+    errBanner.classList.remove('show');
+    errBanner.textContent = '';
+  }
+  if (attemptsBadge) attemptsBadge.style.display = 'none';
+
+  if (lockoutCard) lockoutCard.style.display = 'block';
+  if (lockoutMsg && customMsg) lockoutMsg.textContent = customMsg;
+
+  // Persist lockout timestamp to localStorage
+  const expireAt = Date.now() + (remainingSeconds * 1000);
+  localStorage.setItem('oryzatix_login_lockout_until', expireAt.toString());
+  localStorage.setItem('oryzatix_login_lockout_total', totalDuration.toString());
+
+  let currentSec = remainingSeconds;
+
+  const updateUI = () => {
+    if (currentSec <= 0) {
+      clearInterval(loginLockoutInterval);
+      loginLockoutInterval = null;
+      localStorage.removeItem('oryzatix_login_lockout_until');
+      localStorage.removeItem('oryzatix_login_lockout_total');
+
+      if (lockoutCard) lockoutCard.style.display = 'none';
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = 'Sign In';
+      }
+      if (passwordInput) passwordInput.disabled = false;
+      if (emailInput) emailInput.disabled = false;
+
+      const errBanner = document.getElementById('loginError');
+      if (errBanner) { errBanner.classList.remove('show'); errBanner.textContent = ''; }
+      showLoginSuccess('Lockout period ended. You may now sign in again.', 3000);
+      return;
+    }
+
+    const mins = Math.floor(currentSec / 60);
+    const secs = currentSec % 60;
+    const timeStr = (mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs;
+
+    if (timerDisplay) timerDisplay.textContent = timeStr;
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Locked out (' + timeStr + ')...';
+    }
+    if (passwordInput) passwordInput.disabled = true;
+
+    if (progressFill) {
+      const pct = Math.max(0, Math.min(100, (currentSec / totalDuration) * 100));
+      progressFill.style.width = pct + '%';
+    }
+
+    currentSec--;
+  };
+
+  updateUI();
+  loginLockoutInterval = setInterval(updateUI, 1000);
+}
+
+function clearLoginLockoutUI() {
+  if (loginLockoutInterval) {
+    clearInterval(loginLockoutInterval);
+    loginLockoutInterval = null;
+  }
+  localStorage.removeItem('oryzatix_login_lockout_until');
+  localStorage.removeItem('oryzatix_login_lockout_total');
+
+  const lockoutCard = document.getElementById('loginLockoutCard');
+  const attemptsBadge = document.getElementById('loginAttemptsBadge');
+  const btn = document.getElementById('loginBtn');
+  const passwordInput = document.getElementById('loginPassword');
+  const emailInput = document.getElementById('loginEmail');
+
+  if (lockoutCard) lockoutCard.style.display = 'none';
+  if (attemptsBadge) attemptsBadge.style.display = 'none';
+  if (btn) {
+    btn.disabled = false;
+    btn.textContent = 'Sign In';
+  }
+  if (passwordInput) passwordInput.disabled = false;
+  if (emailInput) emailInput.disabled = false;
+}
+
+let loginErrorTimeout = null;
+let loginSuccessTimeout = null;
+
+function showLoginError(msg, autoHideMs = 3000) {
+  const errBanner = document.getElementById('loginError');
+  const attemptsBadge = document.getElementById('loginAttemptsBadge');
+  if (loginErrorTimeout) {
+    clearTimeout(loginErrorTimeout);
+    loginErrorTimeout = null;
+  }
+  if (errBanner) {
+    errBanner.textContent = msg;
+    errBanner.classList.add('show');
+  }
+  if (autoHideMs && autoHideMs > 0) {
+    loginErrorTimeout = setTimeout(() => {
+      if (errBanner) {
+        errBanner.classList.remove('show');
+        errBanner.textContent = '';
+      }
+      if (attemptsBadge && !loginLockoutInterval) {
+        attemptsBadge.style.display = 'none';
+      }
+    }, autoHideMs);
+  }
+}
+
+function showLoginSuccess(msg, autoHideMs = 3000) {
+  const okBanner = document.getElementById('loginSuccess');
+  if (loginSuccessTimeout) {
+    clearTimeout(loginSuccessTimeout);
+    loginSuccessTimeout = null;
+  }
+  if (okBanner) {
+    okBanner.textContent = msg;
+    okBanner.classList.add('show');
+  }
+  if (autoHideMs && autoHideMs > 0) {
+    loginSuccessTimeout = setTimeout(() => {
+      if (okBanner) {
+        okBanner.classList.remove('show');
+        okBanner.textContent = '';
+      }
+    }, autoHideMs);
+  }
+}
+
 async function handleLogin(e) {
   if (e) {
     if (e.preventDefault) e.preventDefault();
@@ -668,26 +1352,31 @@ async function handleLogin(e) {
 
   const emailEl = document.getElementById('loginEmail');
   const passwordEl = document.getElementById('loginPassword');
-  const email = (emailEl ? emailEl.value : '').trim().toLowerCase();
+  let email = (emailEl ? emailEl.value : '').trim();
   const password = passwordEl ? passwordEl.value : '';
   const btn = document.getElementById('loginBtn');
   const errBanner = document.getElementById('loginError');
   const okBanner = document.getElementById('loginSuccess');
+  const attemptsBadge = document.getElementById('loginAttemptsBadge');
+  const attemptsText = document.getElementById('loginAttemptsText');
 
+  if (loginErrorTimeout) {
+    clearTimeout(loginErrorTimeout);
+    loginErrorTimeout = null;
+  }
   if (errBanner) { errBanner.classList.remove('show'); errBanner.textContent = ''; }
   if (okBanner) { okBanner.classList.remove('show'); okBanner.textContent = ''; }
+  if (attemptsBadge) { attemptsBadge.style.display = 'none'; }
 
   if (!email || !password) {
-    if (errBanner) {
-      errBanner.textContent = 'Please enter both your email address and password.';
-      errBanner.classList.add('show');
-    }
+    showLoginError('Please enter your username or email address and password.', 3000);
     return;
   }
 
   if (btn) { btn.disabled = true; btn.textContent = 'Signing in...'; }
 
   try {
+    await ensureCsrfCookie();
     const res = await fetch(apiUrl('/auth/login'), {
       method: 'POST',
       credentials: 'include',
@@ -698,8 +1387,12 @@ async function handleLogin(e) {
     const data = await res.json();
 
     if (res.ok && data && data.success) {
+      clearLoginLockoutUI();
       currentUser = data.user;
       if (data.token) setAuthToken(data.token);
+      try {
+        sessionStorage.setItem('oryzatix_is_logged_in', 'true');
+      } catch (e) {}
       applyUserToUI();
       if (okBanner) {
         okBanner.textContent = data.message || 'Login successful!';
@@ -708,21 +1401,41 @@ async function handleLogin(e) {
       resetAuthForms();
       navigateAfterAuth();
     } else {
-      let msg = 'Invalid email or password. Please try again.';
-      if (data && data.message) msg = data.message;
-      if (errBanner) {
-        errBanner.textContent = msg;
-        errBanner.classList.add('show');
+      // 1. Check if user is locked out (HTTP 429 or data.locked)
+      if (res.status === 429 || (data && data.locked)) {
+        const remainingSec = data.remaining_seconds || 30;
+        const totalDuration = data.lockout_duration || remainingSec;
+        const lockMsg = data.message_en || data.message || 'Too many failed login attempts. Login is temporarily locked out.';
+        startLoginLockoutTimer(remainingSec, totalDuration, lockMsg);
+        if (errBanner) {
+          errBanner.classList.remove('show');
+          errBanner.textContent = '';
+        }
+        return;
       }
+
+      // 2. Check remaining attempts warning (HTTP 401 with remaining_attempts)
+      if (data && typeof data.remaining_attempts !== 'undefined' && data.remaining_attempts > 0) {
+        if (attemptsBadge && attemptsText) {
+          attemptsBadge.style.display = 'flex';
+          attemptsBadge.classList.toggle('severe', data.remaining_attempts <= 1);
+          attemptsText.textContent = `Remaining login attempts before lockout: ${data.remaining_attempts} / ${data.max_attempts || 3}`;
+        }
+      }
+
+      let msg = 'Invalid username/email or password. Please try again.';
+      if (data && data.errors) {
+        msg = Object.values(data.errors).flat().join(' ');
+      } else if (data && (data.message_en || data.message)) {
+        msg = data.message_en || data.message;
+      }
+      showLoginError(msg, 3000);
     }
   } catch (err) {
     console.error('Login error:', err);
-    if (errBanner) {
-      errBanner.textContent = 'Unable to connect to server. Please verify your connection.';
-      errBanner.classList.add('show');
-    }
+    showLoginError('Could not connect to the server. Please check your network connection.', 3000);
   } finally {
-    if (btn) { btn.disabled = false; btn.textContent = 'Sign In'; }
+    if (btn && !loginLockoutInterval) { btn.disabled = false; btn.textContent = 'Sign In'; }
   }
 }
 
@@ -736,16 +1449,8 @@ async function handleRegister(e) {
   const emailEl = document.getElementById('regEmail');
   const roleEl = document.getElementById('regRole');
   const locEl = document.getElementById('regLocation');
-  const pwEl = document.getElementById('regPassword');
-  const pwConfEl = document.getElementById('regPasswordConfirm');
-
-  const name = (nameEl ? nameEl.value : '').trim();
-  const email = (emailEl ? emailEl.value : '').trim().toLowerCase();
-  const role = roleEl ? roleEl.value : 'farmer';
-  const location = locEl ? locEl.value.trim() : '';
-  const password = pwEl ? pwEl.value : '';
-  const password_confirmation = pwConfEl ? pwConfEl.value : '';
-
+  const passEl = document.getElementById('regPassword');
+  const passConfirmEl = document.getElementById('regPasswordConfirm');
   const btn = document.getElementById('regBtn');
   const errBanner = document.getElementById('registerError');
   const okBanner = document.getElementById('registerSuccess');
@@ -753,9 +1458,16 @@ async function handleRegister(e) {
   if (errBanner) { errBanner.classList.remove('show'); errBanner.textContent = ''; }
   if (okBanner) { okBanner.classList.remove('show'); okBanner.textContent = ''; }
 
+  const name = nameEl ? nameEl.value.trim() : '';
+  const email = emailEl ? emailEl.value.trim().toLowerCase() : '';
+  const role = roleEl ? roleEl.value : 'farmer';
+  const location = locEl ? locEl.value.trim() : '';
+  const password = passEl ? passEl.value : '';
+  const password_confirmation = passConfirmEl ? passConfirmEl.value : '';
+
   if (!name || !email || !password || !password_confirmation) {
     if (errBanner) {
-      errBanner.textContent = 'Please fill out all required fields.';
+      errBanner.textContent = 'Pakipunan ang lahat ng kinakailangang impormasyon.';
       errBanner.classList.add('show');
     }
     return;
@@ -763,7 +1475,7 @@ async function handleRegister(e) {
 
   if (password.length < 6) {
     if (errBanner) {
-      errBanner.textContent = 'Password must be at least 6 characters long.';
+      errBanner.textContent = 'Ang password ay dapat hindi bababa sa 6 na karakter.';
       errBanner.classList.add('show');
     }
     return;
@@ -771,7 +1483,7 @@ async function handleRegister(e) {
 
   if (password !== password_confirmation) {
     if (errBanner) {
-      errBanner.textContent = 'Passwords do not match.';
+      errBanner.textContent = 'Hindi nagtutugma ang Password at Confirm Password.';
       errBanner.classList.add('show');
     }
     return;
@@ -780,6 +1492,7 @@ async function handleRegister(e) {
   if (btn) { btn.disabled = true; btn.textContent = 'Creating Account...'; }
 
   try {
+    await ensureCsrfCookie();
     const res = await fetch(apiUrl('/auth/register'), {
       method: 'POST',
       credentials: 'include',
@@ -790,17 +1503,20 @@ async function handleRegister(e) {
     const data = await res.json();
 
     if (res.ok && data && data.success) {
-      currentUser = data.user;
-      if (data.token) setAuthToken(data.token);
-      applyUserToUI();
-      if (okBanner) {
-        okBanner.textContent = data.message || 'Account created successfully!';
-        okBanner.classList.add('show');
-      }
+      const createdEmail = email;
       resetAuthForms();
-      navigateAfterAuth();
+      showScreen('login');
+      showLoginSuccess(data.message || 'Account has been created successfully! Please sign in with your credentials.', 3000);
+      const loginEmailField = document.getElementById('loginEmail');
+      if (loginEmailField && createdEmail) {
+        loginEmailField.value = createdEmail;
+      }
+      const loginPassField = document.getElementById('loginPassword');
+      if (loginPassField) {
+        loginPassField.focus();
+      }
     } else {
-      let msg = 'Registration failed. Email may already be in use.';
+      let msg = 'Hindi ma-proseso ang pagrehistro. Pakisuri ang impormasyon.';
       if (data && data.errors) {
         msg = Object.values(data.errors).flat().join(' ');
       } else if (data && data.message) {
@@ -812,15 +1528,16 @@ async function handleRegister(e) {
       }
     }
   } catch (err) {
-    console.error('Registration error:', err);
+    console.error('Register error:', err);
     if (errBanner) {
-      errBanner.textContent = 'Unable to connect to server. Please try again.';
+      errBanner.textContent = 'Hindi makakonekta sa server. Pakisuri ang koneksyon.';
       errBanner.classList.add('show');
     }
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = 'Create Account'; }
   }
 }
+
 
 async function handleUpdateProfile(e) {
   if (e) e.preventDefault();
@@ -972,6 +1689,26 @@ function resetAuthForms() {
     regOk.textContent = '';
   }
 
+  // Clear Forgot Password fields
+  const forgotEmail = document.getElementById('forgotEmail');
+  if (forgotEmail) forgotEmail.value = '';
+  const forgotOtp = document.getElementById('forgotOtp');
+  if (forgotOtp) forgotOtp.value = '';
+  const forgotNewPass = document.getElementById('forgotNewPassword');
+  if (forgotNewPass) forgotNewPass.value = '';
+  const forgotNewPassConf = document.getElementById('forgotNewPasswordConfirm');
+  if (forgotNewPassConf) forgotNewPassConf.value = '';
+
+  const forgotStep1 = document.getElementById('forgotStep1');
+  const forgotStep2 = document.getElementById('forgotStep2');
+  if (forgotStep1) forgotStep1.style.display = 'block';
+  if (forgotStep2) forgotStep2.style.display = 'none';
+
+  const forgotErr = document.getElementById('forgotError');
+  if (forgotErr) { forgotErr.classList.remove('show'); forgotErr.textContent = ''; }
+  const forgotOk = document.getElementById('forgotSuccess');
+  if (forgotOk) { forgotOk.classList.remove('show'); forgotOk.textContent = ''; }
+
   // Reset submit buttons
   const loginBtn = document.getElementById('loginBtn');
   if (loginBtn) {
@@ -1011,6 +1748,10 @@ async function confirmLogoutAction() {
     .finally(() => {
       setAuthToken(null);
       currentUser = null;
+      if (typeof sessionStorage !== 'undefined') {
+        sessionStorage.removeItem('oryzatix_is_logged_in');
+        sessionStorage.removeItem('oryzatix_active_screen');
+      }
       resetAuthForms();
       const adminGroup = document.getElementById('sidebarAdminGroup');
       if (adminGroup) adminGroup.style.display = 'none';
@@ -1245,12 +1986,14 @@ function showUnrecognizedScreen(data) {
   const msgEl = document.getElementById('unrecMessage');
   if (msgEl) {
     const curLang = (document.getElementById('uiLanguage') || {}).value || 'english';
-    if (data && data.message_tl && curLang === 'tagalog') {
+    if (curLang === 'tagalog' && data && data.message_tl) {
       msgEl.textContent = data.message_tl;
+    } else if (data && data.message_en) {
+      msgEl.textContent = data.message_en;
     } else if (data && data.message) {
       msgEl.textContent = data.message;
     } else {
-      msgEl.textContent = 'The uploaded image is not included in our trained rice disease dataset or could not be recognized as a valid rice leaf condition. No disease diagnosis was generated.';
+      msgEl.textContent = 'Cannot read or diagnose this image because it is not found in the system dataset or database.';
     }
   }
   showScreen('unrecognized-result');
@@ -1441,6 +2184,11 @@ function getDefaultTreatments(key, severity = 'moderate') {
 
 function applyScanResult(scan) {
   currentScanResult = scan;
+  try {
+    if (typeof sessionStorage !== 'undefined' && scan) {
+      sessionStorage.setItem('oryzatix_last_scan_result', JSON.stringify(scan));
+    }
+  } catch (e) {}
 
   const imgCard = document.getElementById('resultImageCard');
   if (imgCard) {
@@ -2020,11 +2768,13 @@ function goToHistoryPage(page) {
   renderHistoryList(currentFilteredHistory);
 }
 
-function setHistoryFilter(filter, btn) {
-  activeHistoryFilter = filter;
+function setHistoryFilter(filter) {
+  activeHistoryFilter = filter || 'all';
   historyCurrentPage = 1;
-  document.querySelectorAll('.history-filter-chips .history-chip').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
+  const select = document.getElementById('historyFilterSelect');
+  if (select && select.value !== activeHistoryFilter) {
+    select.value = activeHistoryFilter;
+  }
   filterHistoryList();
 }
 
@@ -2121,9 +2871,14 @@ async function loadHomeRecentScans() {
         if (lower.includes('healthy')) thumbCls = 'healthy';
         else if (lower.includes('blight') || lower.includes('blb') || lower.includes('brown')) thumbCls = 'blb';
         let sevCls = 'severe';
-        if (s.severity === 'healthy') sevCls = 'mild';
+        if (s.severity === 'healthy') sevCls = 'healthy';
+        else if (s.severity === 'mild') sevCls = 'mild';
         else if (s.severity === 'moderate') sevCls = 'moderate';
-        const sevLabel = (s.severity || 'severe').charAt(0).toUpperCase() + (s.severity || 'severe').slice(1);
+        
+        let sevLabel = 'Severe (>60%)';
+        if (s.severity === 'healthy') sevLabel = 'Healthy';
+        else if (s.severity === 'mild') sevLabel = 'Mild (≤25%)';
+        else if (s.severity === 'moderate') sevLabel = 'Moderate (26-60%)';
         const thumbContent = s.image_url
           ? '<img src="' + escapeHtml(s.image_url) + '" alt="' + escapeHtml(s.disease) + '" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">'
           : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M7 12h10"/></svg>';
@@ -2436,19 +3191,84 @@ async function sendMessage() {
 }
 
 function appendAIBubble(content, language, container) {
+  const currentLang = language || 'tagalog';
+  const targetLang = (currentLang.toLowerCase() === 'tagalog') ? 'english' : 'tagalog';
+  const targetLabel = (targetLang === 'english') ? 'Translate to English' : 'Translate to Tagalog';
+
   const aiBubble = document.createElement('div');
   aiBubble.className = 'chat-bubble ai fade-in';
-  aiBubble.setAttribute('data-lang', language);
+  aiBubble.setAttribute('data-lang', currentLang);
+  aiBubble.setAttribute('data-raw-content', content);
   aiBubble.innerHTML =
     '<div class="chat-text-content">' + formatAiMessage(content) + '</div>' +
     '<div class="chat-bubble-footer">' +
-      '<button class="audio-speaker-btn" onclick="toggleSpeechBubble(this)" title="Read aloud / Stop">' +
+      '<button type="button" class="translate-bubble-btn" onclick="translateAiBubble(this)" title="Translate message">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>' +
+        '<span>' + targetLabel + '</span>' +
+      '</button>' +
+      '<button type="button" class="audio-speaker-btn" onclick="toggleSpeechBubble(this)" title="Read aloud / Stop">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>' +
         '<span>Read</span>' +
       '</button>' +
     '</div>';
   container.appendChild(aiBubble);
   container.scrollTop = container.scrollHeight;
+}
+
+async function translateAiBubble(btn) {
+  const bubble = btn.closest('.chat-bubble.ai');
+  if (!bubble) return;
+  const contentEl = bubble.querySelector('.chat-text-content');
+  if (!contentEl) return;
+
+  const currentLang = (bubble.getAttribute('data-lang') || 'tagalog').toLowerCase();
+  const targetLang = (currentLang === 'tagalog') ? 'english' : 'tagalog';
+
+  const rawContent = bubble.getAttribute('data-raw-content') || contentEl.innerText || contentEl.textContent;
+  if (!rawContent || !rawContent.trim()) return;
+
+  // Set loading state on button
+  btn.disabled = true;
+  btn.classList.add('translating');
+  const labelSpan = btn.querySelector('span');
+  const originalLabel = labelSpan ? labelSpan.textContent : '';
+  if (labelSpan) labelSpan.textContent = 'Translating...';
+
+  try {
+    await ensureCsrfCookie();
+    const res = await fetch(apiUrl('/consultation/translate'), {
+      method: 'POST',
+      credentials: 'include',
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({
+        text: rawContent,
+        target_language: targetLang
+      })
+    });
+
+    const data = await res.json();
+    if (data && data.success && data.translated_text) {
+      // Update bubble content and speech language
+      contentEl.innerHTML = formatAiMessage(data.translated_text);
+      bubble.setAttribute('data-lang', targetLang);
+      bubble.setAttribute('data-raw-content', data.translated_text);
+
+      // Flip button label to the other language
+      const newTargetLang = (targetLang === 'english') ? 'tagalog' : 'english';
+      const newLabel = (newTargetLang === 'english') ? 'Translate to English' : 'Translate to Tagalog';
+      if (labelSpan) labelSpan.textContent = newLabel;
+    } else {
+      alert('Hindi ma-proseso ang translation sa ngayon. Pakisubukan muli.');
+      if (labelSpan) labelSpan.textContent = originalLabel;
+    }
+  } catch (err) {
+    console.error('Translation error:', err);
+    alert('Translation error. Please check your internet connection.');
+    if (labelSpan) labelSpan.textContent = originalLabel;
+  } finally {
+    btn.disabled = false;
+    btn.classList.remove('translating');
+  }
 }
 
 function detectLanguage(text, defaultLang) {
@@ -2678,51 +3498,47 @@ function renderAdminRecentScansTable(scans) {
   if (!tbody) return;
 
   if (!scans || scans.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" class="empty-table-msg">No disease scans recorded in system yet.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" class="empty-table-msg">No disease scans recorded in system yet.</td></tr>';
     return;
   }
 
   tbody.innerHTML = scans.map(s => {
     const isHealthy = s.severity === 'healthy';
-    const sevCls = isHealthy ? 'healthy' : (s.severity === 'severe' ? 'severe' : 'moderate');
-    const sevBadgeStyle = isHealthy
-      ? 'background: var(--green-100); color: var(--brand-green);'
-      : (s.severity === 'severe' ? 'background: var(--red-100); color: var(--red-700);' : 'background: var(--amber-100); color: var(--amber-800);');
+    const sevBadge = isHealthy
+      ? '<span class="badge-pill" style="background:var(--green-100); color:var(--brand-green);">Healthy</span>'
+      : (s.severity === 'severe'
+        ? '<span class="badge-pill" style="background:var(--red-100); color:var(--red-700);">Severe (>60%)</span>'
+        : (s.severity === 'mild'
+          ? '<span class="badge-pill" style="background:var(--green-100); color:var(--brand-green);">Mild (≤25%)</span>'
+          : '<span class="badge-pill" style="background:var(--amber-100); color:var(--amber-800);">Moderate (26-60%)</span>'));
 
     const thumbHtml = s.image_url
-      ? `<img src="${s.image_url}" alt="Leaf Specimen" style="width: 38px; height: 38px; border-radius: 8px; object-fit: cover; border: 1px solid var(--neutral-200);">`
+      ? `<img src="${s.image_url}" alt="Leaf Specimen" style="width: 38px; height: 38px; border-radius: 8px; object-fit: cover; border: 1px solid var(--neutral-200); cursor: pointer;" onclick="openAdminScanPreview(${s.id})">`
       : `<div style="width: 38px; height: 38px; border-radius: 8px; background: var(--neutral-100); display: flex; align-items: center; justify-content: center; color: var(--neutral-400); font-size: 16px;">🌿</div>`;
-
-    const advBadge = s.has_advisory
-      ? `<span class="badge-pill" style="background: var(--blue-100); color: var(--blue-700);">Advised</span>`
-      : `<span class="badge-pill" style="background: var(--neutral-100); color: var(--neutral-500);">Standard AI</span>`;
 
     return `
       <tr>
-        <td>
-          <div style="display: flex; align-items: center; gap: 10px;">
-            ${thumbHtml}
-            <div>
-              <div style="font-weight: 700; color: var(--neutral-800);">Scan #${s.id}</div>
-              <div style="font-size: 11px; color: var(--neutral-500);">${escapeHtml(s.time_ago || '')}</div>
-            </div>
-          </div>
+        <td style="width: 65px;">
+          ${thumbHtml}
         </td>
         <td>
           <div style="font-weight: 700; color: var(--neutral-800);">${escapeHtml(s.farmer_name)}</div>
           <div style="font-size: 11.5px; color: var(--neutral-500);">${escapeHtml(s.location)}</div>
         </td>
         <td>
-          <span class="badge-pill" style="${sevBadgeStyle}; margin-bottom: 2px;">
-            ${escapeHtml(s.disease_name)}
-          </span>
+          <div style="font-weight: 700; color: var(--brand-green);">${escapeHtml(s.disease_name)}</div>
           <div style="font-size: 10.5px; font-style: italic; color: var(--neutral-500);">${escapeHtml(s.scientific_name)}</div>
         </td>
         <td>
           <strong>${s.confidence ? s.confidence.toFixed(1) + '%' : 'N/A'}</strong>
         </td>
-        <td>${advBadge}</td>
+        <td>${sevBadge}</td>
         <td><span style="font-size: 12px; color: var(--neutral-500);">${escapeHtml(s.created_at)}</span></td>
+        <td style="text-align: center;">
+          <button class="action-icon-btn" onclick="openAdminScanPreview(${s.id})" title="View Details" style="color:var(--brand-green); margin: 0 auto;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </td>
       </tr>
     `;
   }).join('');
@@ -2936,7 +3752,9 @@ async function openAdminUserScansModal(userId, userName) {
             ? '<span class="badge-pill" style="background:var(--green-100); color:var(--brand-green);">Healthy</span>'
             : (s.severity === 'severe'
               ? '<span class="badge-pill" style="background:var(--red-100); color:var(--red-700);">Severe</span>'
-              : '<span class="badge-pill" style="background:var(--amber-100); color:var(--amber-800);">Moderate</span>');
+              : (s.severity === 'mild'
+                ? '<span class="badge-pill" style="background:var(--green-100); color:var(--brand-green);">Mild</span>'
+                : '<span class="badge-pill" style="background:var(--amber-100); color:var(--amber-800);">Moderate</span>'));
 
           return `
             <tr>
@@ -3158,8 +3976,19 @@ async function loadAdminDiseases() {
     .then(data => {
       if (data && data.success && data.data) {
         adminDiseasesList = data.data.diseases || [];
+        
         const countAll = document.getElementById('adminDiseasesCountAll');
         if (countAll) countAll.textContent = adminDiseasesList.length;
+
+        const activeCount = adminDiseasesList.filter(d => d.status === 'active' || d.is_active).length;
+        const inactiveCount = adminDiseasesList.length - activeCount;
+
+        const tabActive = document.getElementById('adminTabDiseaseActive');
+        if (tabActive) tabActive.innerHTML = `<span>Active (${activeCount})</span>`;
+
+        const tabInactive = document.getElementById('adminTabDiseaseInactive');
+        if (tabInactive) tabInactive.innerHTML = `<span>Inactive (${inactiveCount})</span>`;
+
         renderAdminDiseasesGrid();
       } else {
         if (container) container.innerHTML = '<div class="empty-table-msg">Failed to load disease library.</div>';
@@ -3183,53 +4012,60 @@ function renderAdminDiseasesGrid() {
 
   let list = adminDiseasesList;
   if (activeDiseaseFilter === 'active') {
-    list = list.filter(d => d.is_active);
+    list = list.filter(d => d.status === 'active' || d.is_active);
   } else if (activeDiseaseFilter === 'inactive') {
-    list = list.filter(d => !d.is_active);
+    list = list.filter(d => d.status !== 'active' && !d.is_active);
   }
 
   if (list.length === 0) {
-    container.innerHTML = '<div class="empty-table-msg">No disease records match this filter.</div>';
+    container.innerHTML = '<div class="empty-table-msg" style="grid-column: 1 / -1; padding: 40px 20px; text-align: center; color: var(--neutral-500); background: #fff; border-radius: 12px; border: 1px dashed var(--neutral-300);">No disease records match this filter. Click <strong>"Add Disease Info"</strong> to add a new disease.</div>';
     return;
   }
 
   container.innerHTML = list.map(d => {
-    const isActive = d.is_active;
+    const isActive = d.status === 'active' || d.is_active;
     const imgHtml = d.image_url
-      ? `<img src="${d.image_url}" alt="${escapeHtml(d.name)}" style="width:100%; height:160px; object-fit:cover; border-radius:10px 10px 0 0;">`
-      : `<div style="width:100%; height:130px; background:var(--neutral-100); display:flex; align-items:center; justify-content:center; color:var(--neutral-400); font-size:28px; border-radius:10px 10px 0 0;">🌾</div>`;
+      ? `<img src="${d.image_url}" alt="${escapeHtml(d.name)}" style="width:100%; height:160px; object-fit:cover; border-radius:10px 10px 0 0; cursor:pointer;" onclick="openAdminViewDiseaseModal(${d.id})">`
+      : `<div style="width:100%; height:130px; background:var(--neutral-100); display:flex; align-items:center; justify-content:center; color:var(--neutral-400); font-size:28px; border-radius:10px 10px 0 0; cursor:pointer;" onclick="openAdminViewDiseaseModal(${d.id})">🌾</div>`;
+
+    const treatmentPreview = d.recommended_treatment || d.treatment || 'N/A';
 
     return `
-      <div class="admin-disease-card" style="background:#fff; border:1px solid var(--neutral-200); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; box-shadow:var(--shadow-sm);">
+      <div class="admin-disease-card" style="background:#fff; border:1px solid var(--neutral-200); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; box-shadow:var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s;">
         ${imgHtml}
         <div style="padding:16px; flex:1; display:flex; flex-direction:column;">
           <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
-            <div>
+            <div style="cursor:pointer;" onclick="openAdminViewDiseaseModal(${d.id})">
               <h3 style="margin:0; font-size:16px; font-weight:800; color:var(--neutral-900);">${escapeHtml(d.name)}</h3>
               <div style="font-size:12px; font-style:italic; color:var(--neutral-500); margin-top:2px;">${escapeHtml(d.scientific_name || '')}</div>
             </div>
-            <span class="badge-pill" style="${isActive ? 'background:var(--green-100); color:var(--brand-green);' : 'background:var(--neutral-100); color:var(--neutral-500);'}">
+            <span class="badge-pill" style="${isActive ? 'background:var(--green-100); color:var(--brand-green); font-weight:700;' : 'background:var(--neutral-100); color:var(--neutral-500);'}">
               ${isActive ? 'Active' : 'Inactive'}
             </span>
           </div>
 
           <p style="font-size:12.5px; color:var(--neutral-600); line-height:1.5; margin:8px 0; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;">
-            ${escapeHtml(d.description)}
+            ${escapeHtml(d.description || 'No description provided.')}
           </p>
 
           <div style="background:var(--neutral-50); border:1px solid var(--neutral-200); border-radius:8px; padding:10px; margin-top:auto; font-size:12px;">
-            <div style="margin-bottom:4px;"><strong style="color:var(--brand-green);">🩺 Treatment:</strong> <span style="color:var(--neutral-700);">${escapeHtml(d.treatment ? d.treatment.slice(0, 90) + '...' : 'N/A')}</span></div>
+            <div style="margin-bottom:4px;"><strong style="color:var(--brand-green);">🩺 Treatment:</strong> <span style="color:var(--neutral-700);">${escapeHtml(treatmentPreview.length > 90 ? treatmentPreview.slice(0, 90) + '...' : treatmentPreview)}</span></div>
           </div>
 
           <div style="display:flex; justify-content:space-between; align-items:center; margin-top:14px; padding-top:12px; border-top:1px solid var(--neutral-100);">
-            <button class="panel-action-btn" onclick="toggleAdminDiseaseStatus(${d.id})" style="font-size:11.5px; padding:4px 8px;">
-              ${isActive ? 'Deactivate' : 'Activate'}
-            </button>
             <div style="display:flex; gap:6px;">
-              <button class="action-icon-btn edit" onclick="openAdminEditDiseaseModal(${JSON.stringify(d).replace(/"/g, '&quot;')})" title="Edit Disease">
+              <button class="panel-action-btn" onclick="openAdminViewDiseaseModal(${d.id})" style="font-size:11.5px; padding:4px 8px; background:var(--neutral-100); color:var(--neutral-700);">
+                View Details
+              </button>
+              <button class="panel-action-btn" onclick="toggleAdminDiseaseStatus(${d.id})" style="font-size:11.5px; padding:4px 8px;">
+                ${isActive ? 'Deactivate' : 'Activate'}
+              </button>
+            </div>
+            <div style="display:flex; gap:6px;">
+              <button class="action-icon-btn edit" onclick="openAdminEditDiseaseModalById(${d.id})" title="Edit Disease">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
               </button>
-              <button class="action-icon-btn delete" onclick="handleAdminDeleteDisease(${d.id}, '${escapeHtml(d.name)}')" title="Delete Disease">
+              <button class="action-icon-btn delete" onclick="handleAdminDeleteDisease(${d.id}, '${escapeHtml(d.name).replace(/'/g, "\\'")}')" title="Delete Disease">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
               </button>
             </div>
@@ -3238,6 +4074,104 @@ function renderAdminDiseasesGrid() {
       </div>
     `;
   }).join('');
+}
+
+function openAdminViewDiseaseModal(id) {
+  const d = adminDiseasesList.find(item => item.id == id);
+  if (!d) return;
+
+  const titleEl = document.getElementById('adminViewDiseaseTitle');
+  const sciEl = document.getElementById('adminViewDiseaseSciTitle');
+  const contentEl = document.getElementById('adminViewDiseaseContent');
+
+  if (titleEl) titleEl.textContent = d.name;
+  if (sciEl) sciEl.textContent = d.scientific_name ? `Scientific: ${d.scientific_name}` : 'Rice Pathogen';
+
+  const isActive = d.status === 'active' || d.is_active;
+  const imgHtml = d.image_url
+    ? `<img src="${d.image_url}" alt="${escapeHtml(d.name)}" style="width:100%; max-height:220px; object-fit:cover; border-radius:10px; margin-bottom:14px; border:1px solid var(--neutral-200);">`
+    : '';
+
+  let chemHtml = '';
+  if (Array.isArray(d.chemical_treatments) && d.chemical_treatments.length > 0) {
+    chemHtml = `
+      <div style="margin-top:10px;">
+        <h5 style="margin:0 0 6px 0; font-size:13px; color:var(--blue-700); font-weight:700;">🧪 Chemical Fungicides / Bactericides:</h5>
+        <ul style="margin:0; padding-left:18px; font-size:12.5px; color:var(--neutral-700); line-height:1.6;">
+          ${d.chemical_treatments.map(c => `<li><strong>${escapeHtml(c.title || c.name || '')}</strong>: ${escapeHtml(c.rate || c.dosage || '')} <em>(${escapeHtml(c.timing || '')})</em></li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  let orgHtml = '';
+  if (Array.isArray(d.organic_treatments) && d.organic_treatments.length > 0) {
+    orgHtml = `
+      <div style="margin-top:10px;">
+        <h5 style="margin:0 0 6px 0; font-size:13px; color:var(--green-700); font-weight:700;">🌿 Organic & Cultural Measures:</h5>
+        <ul style="margin:0; padding-left:18px; font-size:12.5px; color:var(--neutral-700); line-height:1.6;">
+          ${d.organic_treatments.map(o => `<li><strong>${escapeHtml(o.title || o.name || '')}</strong>: ${escapeHtml(o.rate || o.dosage || '')} <em>(${escapeHtml(o.timing || '')})</em></li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  if (contentEl) {
+    contentEl.innerHTML = `
+      ${imgHtml}
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <span style="font-size:12px; color:var(--neutral-500);"><strong>Code:</strong> <code>${escapeHtml(d.code || 'N/A')}</code></span>
+        <span class="badge-pill" style="${isActive ? 'background:var(--green-100); color:var(--brand-green);' : 'background:var(--neutral-100); color:var(--neutral-500);'} font-weight:700;">
+          ${isActive ? 'Status: Active' : 'Status: Inactive'}
+        </span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div>
+          <h4 style="margin:0 0 4px 0; font-size:13.5px; color:var(--neutral-900); font-weight:700;">📖 Description</h4>
+          <p style="margin:0; font-size:12.5px; color:var(--neutral-700); line-height:1.5;">${escapeHtml(d.description || 'No description provided.')}</p>
+        </div>
+
+        ${d.symptoms ? `
+          <div>
+            <h4 style="margin:0 0 4px 0; font-size:13.5px; color:var(--neutral-900); font-weight:700;">🔍 Symptoms & Diagnostic Visual Keys</h4>
+            <p style="margin:0; font-size:12.5px; color:var(--neutral-700); line-height:1.5;">${escapeHtml(d.symptoms)}</p>
+          </div>
+        ` : ''}
+
+        ${d.causes ? `
+          <div>
+            <h4 style="margin:0 0 4px 0; font-size:13.5px; color:var(--neutral-900); font-weight:700;">⚠️ Causes & Favorable Conditions</h4>
+            <p style="margin:0; font-size:12.5px; color:var(--neutral-700); line-height:1.5;">${escapeHtml(d.causes)}</p>
+          </div>
+        ` : ''}
+
+        ${d.prevention ? `
+          <div>
+            <h4 style="margin:0 0 4px 0; font-size:13.5px; color:var(--neutral-900); font-weight:700;">🛡️ Prevention Strategies</h4>
+            <p style="margin:0; font-size:12.5px; color:var(--neutral-700); line-height:1.5;">${escapeHtml(d.prevention)}</p>
+          </div>
+        ` : ''}
+
+        <div>
+          <h4 style="margin:0 0 4px 0; font-size:13.5px; color:var(--brand-green); font-weight:700;">🩺 Recommended Treatment Protocol</h4>
+          <p style="margin:0; font-size:12.5px; color:var(--neutral-700); line-height:1.5;">${escapeHtml(d.recommended_treatment || d.treatment || 'No treatment guidelines registered.')}</p>
+          ${chemHtml}
+          ${orgHtml}
+        </div>
+      </div>
+    `;
+  }
+
+  const deleteBtn = document.getElementById('adminViewDiseaseDeleteBtn');
+  if (deleteBtn) {
+    deleteBtn.onclick = () => {
+      closeModal('modalAdminViewDisease');
+      handleAdminDeleteDisease(d.id, d.name);
+    };
+  }
+
+  openModal('modalAdminViewDisease');
 }
 
 async function handleAdminAddDisease(e) {
@@ -3267,8 +4201,10 @@ async function handleAdminAddDisease(e) {
   formData.append('symptoms', symptoms);
   formData.append('causes', causes);
   formData.append('prevention', prevention);
+  formData.append('recommended_treatment', treatment);
   formData.append('treatment', treatment);
-  formData.append('is_active', status);
+  formData.append('status', status === '1' || status === 'active' ? 'active' : 'inactive');
+  formData.append('is_active', status === '1' || status === 'active' ? '1' : '0');
   if (imgInput && imgInput.files[0]) {
     formData.append('image', imgInput.files[0]);
   }
@@ -3283,7 +4219,7 @@ async function handleAdminAddDisease(e) {
     .then(r => r.json())
     .then(data => {
       if (data && data.success) {
-        ok.textContent = data.message || 'Disease created successfully!';
+        ok.textContent = data.message || 'Disease record created successfully!';
         ok.classList.add('show');
         document.getElementById('adminAddDiseaseForm').reset();
         loadAdminDiseases();
@@ -3305,8 +4241,10 @@ async function handleAdminAddDisease(e) {
     });
 }
 
-function openAdminEditDiseaseModal(d) {
+function openAdminEditDiseaseModalById(id) {
+  const d = adminDiseasesList.find(item => item.id == id);
   if (!d) return;
+
   document.getElementById('adminEditDiseaseId').value = d.id;
   document.getElementById('adminEditDiseaseName').value = d.name || '';
   document.getElementById('adminEditDiseaseSciName').value = d.scientific_name || '';
@@ -3314,8 +4252,10 @@ function openAdminEditDiseaseModal(d) {
   document.getElementById('adminEditDiseaseSymptoms').value = d.symptoms || '';
   document.getElementById('adminEditDiseaseCauses').value = d.causes || '';
   document.getElementById('adminEditDiseasePrevention').value = d.prevention || '';
-  document.getElementById('adminEditDiseaseTreatment').value = d.treatment || '';
-  document.getElementById('adminEditDiseaseStatus').value = d.is_active ? '1' : '0';
+  document.getElementById('adminEditDiseaseTreatment').value = d.recommended_treatment || d.treatment || '';
+  
+  const isActive = d.status === 'active' || d.is_active;
+  document.getElementById('adminEditDiseaseStatus').value = isActive ? '1' : '0';
 
   const err = document.getElementById('adminEditDiseaseError');
   const ok = document.getElementById('adminEditDiseaseSuccess');
@@ -3353,8 +4293,10 @@ async function handleAdminEditDisease(e) {
   formData.append('symptoms', symptoms);
   formData.append('causes', causes);
   formData.append('prevention', prevention);
+  formData.append('recommended_treatment', treatment);
   formData.append('treatment', treatment);
-  formData.append('is_active', status);
+  formData.append('status', status === '1' || status === 'active' ? 'active' : 'inactive');
+  formData.append('is_active', status === '1' || status === 'active' ? '1' : '0');
   if (imgInput && imgInput.files[0]) {
     formData.append('image', imgInput.files[0]);
   }
@@ -3369,7 +4311,7 @@ async function handleAdminEditDisease(e) {
     .then(r => r.json())
     .then(data => {
       if (data && data.success) {
-        ok.textContent = data.message || 'Disease updated successfully!';
+        ok.textContent = data.message || 'Disease record updated successfully!';
         ok.classList.add('show');
         loadAdminDiseases();
         setTimeout(() => {
@@ -3529,7 +4471,9 @@ function renderAdminScansLogsTable(scans) {
       ? '<span class="badge-pill" style="background:var(--green-100); color:var(--brand-green);">Healthy</span>'
       : (s.severity === 'severe'
         ? '<span class="badge-pill" style="background:var(--red-100); color:var(--red-700);">Severe (>60%)</span>'
-        : '<span class="badge-pill" style="background:var(--amber-100); color:var(--amber-800);">Moderate (26-60%)</span>');
+        : (s.severity === 'mild'
+          ? '<span class="badge-pill" style="background:var(--green-100); color:var(--brand-green);">Mild (≤25%)</span>'
+          : '<span class="badge-pill" style="background:var(--amber-100); color:var(--amber-800);">Moderate (26-60%)</span>'));
 
     const thumbHtml = s.image_url
       ? `<img src="${s.image_url}" alt="Leaf Specimen" style="width:42px; height:42px; border-radius:8px; object-fit:cover; border:1px solid var(--neutral-200); cursor:pointer;" onclick="openAdminScanPreview(${s.id})">`
@@ -3574,6 +4518,12 @@ function openAdminScanPreview(scanId) {
   const content = document.getElementById('adminScanPreviewContent');
   if (content) {
     const isHealthy = scan.severity === 'healthy';
+    const sev = (scan.severity || 'healthy').toLowerCase();
+    let sevDisplay = 'HEALTHY';
+    if (sev === 'mild') sevDisplay = 'MILD (≤ 25%)';
+    else if (sev === 'moderate') sevDisplay = 'MODERATE (26% - 60%)';
+    else if (sev === 'severe') sevDisplay = 'SEVERE (> 60%)';
+
     content.innerHTML = `
       <div style="text-align:center; margin-bottom:14px;">
         ${scan.image_url ? `<img src="${scan.image_url}" alt="Specimen" style="max-width:100%; max-height:260px; border-radius:10px; object-fit:contain; border:1px solid var(--neutral-200);">` : ''}
@@ -3583,7 +4533,7 @@ function openAdminScanPreview(scanId) {
         <div><strong>Location:</strong> ${escapeHtml(scan.location)}</div>
         <div><strong>Predicted Result:</strong> <span style="color:var(--brand-green); font-weight:700;">${escapeHtml(scan.disease_name)}</span></div>
         <div><strong>Confidence / Accuracy:</strong> ${scan.confidence ? scan.confidence.toFixed(1) + '%' : 'N/A'}</div>
-        <div><strong>Severity Assessment:</strong> ${escapeHtml(scan.severity || 'healthy').toUpperCase()}</div>
+        <div><strong>Severity Assessment:</strong> <span style="font-weight:700;">${sevDisplay}</span></div>
         <div><strong>Scan Date:</strong> ${escapeHtml(scan.created_at)}</div>
         ${scan.notes ? `<div style="margin-top:8px; padding-top:8px; border-top:1px solid var(--neutral-200);"><strong>Staff Advisory:</strong> ${escapeHtml(scan.notes)}</div>` : ''}
       </div>
@@ -4269,12 +5219,18 @@ function openStaffAdvisoryModal(scanId) {
 
   const preview = document.getElementById('staffAdvisoryPreview');
   if (preview) {
+    const sev = (scan.severity || 'healthy').toLowerCase();
+    let sevDisplay = 'HEALTHY';
+    if (sev === 'mild') sevDisplay = 'MILD (≤ 25%)';
+    else if (sev === 'moderate') sevDisplay = 'MODERATE (26% - 60%)';
+    else if (sev === 'severe') sevDisplay = 'SEVERE (> 60%)';
+
     preview.innerHTML = `
       <div style="display:flex; align-items:center; gap:12px;">
         ${scan.image_url ? `<img src="${scan.image_url}" style="width:50px; height:50px; border-radius:6px; object-fit:cover;">` : ''}
         <div>
           <div style="font-weight:700; font-size:14px; color:var(--neutral-900);">${escapeHtml(scan.farmer_name)} · <span style="font-weight:500; font-size:12px; color:var(--neutral-500);">${escapeHtml(scan.location)}</span></div>
-          <div style="font-size:13px; font-weight:700; color:var(--brand-green); margin-top:2px;">${escapeHtml(scan.disease_name)} (${(scan.severity || 'healthy').toUpperCase()})</div>
+          <div style="font-size:13px; font-weight:700; color:var(--brand-green); margin-top:2px;">${escapeHtml(scan.disease_name)} (${sevDisplay})</div>
         </div>
       </div>
     `;
@@ -4348,8 +5304,235 @@ async function handleStaffAdvisorySubmit(e) {
     });
 }
 
+/* ═══════════ LIVE REAL-TIME CLOCK WIDGET ═══════════ */
+function initLiveClock() {
+  const dateEl = document.getElementById('topbarLiveDate');
+  const timeEl = document.getElementById('topbarLiveTime');
+  if (!dateEl && !timeEl) return;
+
+  function updateClock() {
+    const now = new Date();
+    
+    // Format Date: e.g. "Thu, Oct 1, 2026"
+    const dateOptions = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+    const dateStr = now.toLocaleDateString('en-US', dateOptions);
+
+    // Format Time: e.g. "08:38:52 AM"
+    const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+    const timeStr = now.toLocaleTimeString('en-US', timeOptions);
+
+    if (dateEl) dateEl.textContent = dateStr;
+    if (timeEl) timeEl.textContent = timeStr;
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
+}
+
+/* ═══════════ 11F: ADMIN LOGIN SECURITY & LOCKOUT SETTINGS ═══════════ */
+let adminCurrentSecurity = { max_login_attempts: 3, lockout_duration_seconds: 30 };
+
+async function loadAdminSecuritySettings() {
+  const successBanner = document.getElementById('adminSecuritySuccessBanner');
+  const errBanner = document.getElementById('adminSecurityErrorBanner');
+  if (successBanner) { successBanner.classList.remove('show'); successBanner.textContent = ''; }
+  if (errBanner) { errBanner.classList.remove('show'); errBanner.textContent = ''; }
+
+  try {
+    const res = await fetch(apiUrl('/admin/security-settings'), {
+      headers: authHeaders(),
+    });
+    const data = await res.json();
+    if (res.ok && data && data.success && data.settings) {
+      adminCurrentSecurity = data.settings;
+      renderAdminSecurityUI(adminCurrentSecurity);
+    }
+  } catch (e) {
+    console.error('Failed to load admin security settings:', e);
+  }
+}
+
+function renderAdminSecurityUI(settings) {
+  const maxAtt = settings.max_login_attempts || 3;
+  const lockSec = settings.lockout_duration_seconds || 30;
+
+  const dispMax = document.getElementById('dispActiveMaxAttempts');
+  const dispLock = document.getElementById('dispActiveLockoutSeconds');
+  const inputMax = document.getElementById('adminMaxAttemptsInput');
+  const inputLock = document.getElementById('adminLockoutDurationInput');
+
+  if (dispMax) dispMax.textContent = maxAtt + ' Attempts';
+  if (dispLock) {
+    let durStr = lockSec + ' Seconds';
+    if (lockSec >= 60) {
+      const mins = Math.round((lockSec / 60) * 10) / 10;
+      durStr = mins + (mins === 1 ? ' Minute' : ' Minutes');
+    }
+    dispLock.textContent = durStr;
+  }
+
+  if (inputMax) inputMax.value = maxAtt;
+  if (inputLock) inputLock.value = lockSec;
+
+  syncAttemptPills(maxAtt);
+  syncDurationPills(lockSec);
+}
+
+function selectAttemptPreset(num, btnEl) {
+  const input = document.getElementById('adminMaxAttemptsInput');
+  if (input) input.value = num;
+  syncAttemptPills(num);
+}
+
+function selectDurationPreset(seconds, btnEl) {
+  const input = document.getElementById('adminLockoutDurationInput');
+  if (input) input.value = seconds;
+  syncDurationPills(seconds);
+}
+
+function onCustomAttemptChange() {
+  const input = document.getElementById('adminMaxAttemptsInput');
+  const val = parseInt(input ? input.value : '0', 10);
+  syncAttemptPills(val);
+}
+
+function onCustomDurationChange() {
+  const input = document.getElementById('adminLockoutDurationInput');
+  const val = parseInt(input ? input.value : '0', 10);
+  syncDurationPills(val);
+}
+
+function syncAttemptPills(val) {
+  document.querySelectorAll('#attemptPillsContainer .sec-preset-pill').forEach(btn => {
+    const txt = (btn.textContent || '').trim();
+    const match = txt.startsWith(val + ' ');
+    btn.classList.toggle('active', match);
+  });
+}
+
+function syncDurationPills(val) {
+  document.querySelectorAll('#durationPillsContainer .sec-preset-pill').forEach(btn => {
+    const txt = (btn.textContent || '').trim();
+    let match = false;
+    if (val === 30 && txt.startsWith('30')) match = true;
+    else if (val === 60 && txt.startsWith('1 Minute')) match = true;
+    else if (val === 120 && txt.startsWith('2 Minutes')) match = true;
+    else if (val === 300 && txt.startsWith('5 Minutes')) match = true;
+    btn.classList.toggle('active', match);
+  });
+}
+
+let adminSecuritySuccessTimeout = null;
+let adminSecurityErrorTimeout = null;
+
+function showAdminSecuritySuccess(msg, autoHideMs = 3000) {
+  const successBanner = document.getElementById('adminSecuritySuccessBanner');
+  if (adminSecuritySuccessTimeout) {
+    clearTimeout(adminSecuritySuccessTimeout);
+    adminSecuritySuccessTimeout = null;
+  }
+  if (successBanner) {
+    successBanner.textContent = msg;
+    successBanner.classList.add('show');
+  }
+  if (autoHideMs && autoHideMs > 0) {
+    adminSecuritySuccessTimeout = setTimeout(() => {
+      if (successBanner) {
+        successBanner.classList.remove('show');
+        successBanner.textContent = '';
+      }
+    }, autoHideMs);
+  }
+}
+
+function showAdminSecurityError(msg, autoHideMs = 3000) {
+  const errBanner = document.getElementById('adminSecurityErrorBanner');
+  if (adminSecurityErrorTimeout) {
+    clearTimeout(adminSecurityErrorTimeout);
+    adminSecurityErrorTimeout = null;
+  }
+  if (errBanner) {
+    errBanner.textContent = msg;
+    errBanner.classList.add('show');
+  }
+  if (autoHideMs && autoHideMs > 0) {
+    adminSecurityErrorTimeout = setTimeout(() => {
+      if (errBanner) {
+        errBanner.classList.remove('show');
+        errBanner.textContent = '';
+      }
+    }, autoHideMs);
+  }
+}
+
+async function saveAdminSecuritySettings() {
+  const inputMax = document.getElementById('adminMaxAttemptsInput');
+  const inputLock = document.getElementById('adminLockoutDurationInput');
+  const btn = document.getElementById('btnSaveSecuritySettings');
+  const successBanner = document.getElementById('adminSecuritySuccessBanner');
+  const errBanner = document.getElementById('adminSecurityErrorBanner');
+
+  if (adminSecuritySuccessTimeout) {
+    clearTimeout(adminSecuritySuccessTimeout);
+    adminSecuritySuccessTimeout = null;
+  }
+  if (adminSecurityErrorTimeout) {
+    clearTimeout(adminSecurityErrorTimeout);
+    adminSecurityErrorTimeout = null;
+  }
+  if (successBanner) { successBanner.classList.remove('show'); successBanner.textContent = ''; }
+  if (errBanner) { errBanner.classList.remove('show'); errBanner.textContent = ''; }
+
+  const maxAttempts = parseInt(inputMax ? inputMax.value : '3', 10);
+  const lockoutSeconds = parseInt(inputLock ? inputLock.value : '30', 10);
+
+  if (isNaN(maxAttempts) || maxAttempts < 1 || maxAttempts > 20) {
+    showAdminSecurityError('Maximum attempts must be between 1 and 20.', 3000);
+    return;
+  }
+
+  if (isNaN(lockoutSeconds) || lockoutSeconds < 5 || lockoutSeconds > 3600) {
+    showAdminSecurityError('Lockout penalty must be between 5 seconds and 3600 seconds.', 3000);
+    return;
+  }
+
+  if (btn) { btn.disabled = true; btn.textContent = 'Saving...'; }
+
+  try {
+    const res = await fetch(apiUrl('/admin/security-settings'), {
+      method: 'POST',
+      headers: authHeaders({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify({
+        max_login_attempts: maxAttempts,
+        lockout_duration_seconds: lockoutSeconds,
+      }),
+    });
+
+    const data = await res.json();
+    if (res.ok && data && data.success) {
+      showAdminSecuritySuccess(data.message || 'Login Security Settings updated successfully!', 3000);
+      if (data.settings) {
+        adminCurrentSecurity = data.settings;
+        renderAdminSecurityUI(adminCurrentSecurity);
+      }
+    } else {
+      showAdminSecurityError((data && data.message) ? data.message : 'Failed to update security settings.', 3000);
+    }
+  } catch (e) {
+    console.error('Failed to save security settings:', e);
+    showAdminSecurityError('Could not connect to the server. Please check your connection.', 3000);
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg><span>Save Security Settings</span>';
+    }
+  }
+}
+
 /* ═══════════ INITIALIZATION ═══════════ */
 document.addEventListener('DOMContentLoaded', function () {
+  initLiveClock();
+
   const savedLang = window.localStorage ? window.localStorage.getItem('oryzatix_ui_lang') : null;
   if (savedLang) setUILanguage(savedLang);
 
@@ -4361,6 +5544,9 @@ document.addEventListener('DOMContentLoaded', function () {
   if (typeof initAiVoiceMuteUI === 'function') {
     initAiVoiceMuteUI();
   }
+
+  checkLoginLockoutState();
+  fetchSecurityConfig();
 
   checkAuthAndProceed();
 });

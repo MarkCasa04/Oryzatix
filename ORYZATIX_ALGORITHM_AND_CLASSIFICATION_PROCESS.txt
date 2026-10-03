@@ -1,0 +1,87 @@
+========================================================================================
+            ORYZATIX: SYSTEM ALGORITHM & RICE DISEASE CLASSIFICATION PROCESS
+========================================================================================
+
+1. ANONG ALGORITHM ANG GAMIT SA SYSTEM?
+----------------------------------------------------------------------------------------
+Ang Oryzatix ay gumagamit ng kombinasyon ng Deep Learning (Artificial Intelligence) at 
+Computer Vision / Image Processing algorithms:
+
+A. MobileNet Convolutional Neural Network (CNN)
+   - Isang lightweight at high-speed deep learning neural network architecture na 
+     idinisenyo para sa mobile at web-based real-time image classification.
+   - Depthwise Separable Convolutions: Hinahati ang convolution sa dalawang proseso:
+     * Depthwise Convolution: Nag-aaplay ng single filter sa bawat color channel (RGB).
+     * Pointwise Convolution (1x1): Pinagsasama ang mga filtered channels para 
+       makabuo ng bagong feature map.
+   - Bentahe: Napakabilis mag-diagnose (1 hanggang 2 segundo) kahit sa mababang hardware 
+     resources nang hindi nababawasan ang classification accuracy.
+
+B. Image Processing & Perceptual Hashing (dHash)
+   - dHash (Difference Hash) & Hamming Distance: Sinusuri ang structural gradients at 
+     edges ng dahon para sa boundary checking at mabilisang dataset verification.
+   - Color Space & Lesion Segmentation: Sinusukat ang ratio ng kulay (Green vs. Brown, 
+     Yellow-Orange, Gray necrotic patches) upang matukoy ang porsyento ng pinsala sa dahon.
+
+
+========================================================================================
+2. STEP-BY-STEP NA PROSESO: PAANO NINA-CLASSIFY ANG SAKIT NG PALAY?
+========================================================================================
+
+HAKBANG 1: Pagkuha ng Larawan (Image Acquisition)
+----------------------------------------------------------------------------------------
+- Kinukunan ng magsasaka ang dahon ng palay gamit ang camera o nag-a-upload ng larawan sa 
+  Oryzatix web application.
+
+HAKBANG 2: Pre-processing ng Larawan
+----------------------------------------------------------------------------------------
+- Resizing: Ginagawang standard dimensions (224 x 224 pixels) ang imahe upang magtugma 
+  sa input tensor ng MobileNet model.
+- Pixel Normalization: Ang pixel values (0 - 255) ay nina-normalize patungong range na 
+  [0.0, 1.0] o [-1.0, 1.0] para sa mas mabilis at stable na mathematical computation.
+- Noise Reduction: Tinatanggal ang unnecessary background noise upang ang dahon lamang 
+  ang masuri ng neural network.
+
+HAKBANG 3: Feature Extraction gamit ang MobileNet
+----------------------------------------------------------------------------------------
+- Ang mga convolutional layers ng MobileNet ay kumukuha ng:
+  * Low-Level Features: Mga gilid (edges), linya, texture, at kulay ng dahon.
+  * High-Level Visual Signatures: Kinikilala ang natatanging anyo ng mga sakit:
+    1. Leaf Blast (Magnaporthe oryzae): May hugis-bangkang sugat (spindle-shaped lesions) 
+       na may abong gitna at mapulang gilid.
+    2. Bacterial Leaf Blight - BLB (Xanthomonas oryzae): Mala-alon na paninilaw at 
+       panunuyo mula sa dulo pababa sa gilid ng dahon (water-soaked wavy margins).
+    3. Brown Spot (Bipolaris oryzae): Maraming maliliit, bilog o hugis-itlog na maitim-
+       kayumangging batik na may manilaw-nilaw na paligid (chlorotic halo).
+    4. Rice Tungro Disease (RTBV/RTSV): Malawakang dilaw-kahel (yellow-orange) na kulay 
+       sa mga dahon kasama ang pagkabansot ng suwi.
+    5. Healthy Rice Leaf: Malusog, matingkad na berde, at walang anumang impeksyon.
+
+HAKBANG 4: Classification gamit ang Softmax Layer
+----------------------------------------------------------------------------------------
+- Sa output layer ng neural network, ginagamit ang Softmax Activation Function:
+  Kinakalkula nito ang probability percentage (0% - 100%) sa bawat isa sa 5 classes.
+- Ang class na may pinakamataas na confidence score ang itinalagang opisyal na diagnosis 
+  ng system (halimbawa: Leaf Blast - 96.5% Confidence).
+
+HAKBANG 5: Pagtukoy sa Antas ng Pinsala (Severity Level Assessment)
+----------------------------------------------------------------------------------------
+- Sinusukat ng system ang kabuuang apektadong bahagi ng dahon (Leaf Area Affected %):
+  * Healthy: 0% pinsala (Optimal Crop Health)
+  * Mild (≤ 25%): Maagang yugto ng impeksyon
+  * Moderate (26% – 60%): Katamtamang yugto ng impeksyon
+  * Severe (> 60%): Malubhang yugto / malawak na pagkasunog ng dahon
+
+HAKBANG 6: Pagbibigay ng Solusyon at Rekomendasyon (Management Recommendations)
+----------------------------------------------------------------------------------------
+- Batay sa natukoy na sakit at severity level, awtomatikong inilalabas ng system ang:
+  * Chemical Controls: DA-PhilRice approved fungicides / bactericides / insecticides 
+    kasama ang tamang dosage per litro at per ektarya.
+  * Organic & Cultural Practices: Alternate Wetting and Drying (AWD), Leaf Color Chart 
+    (LCC) para sa balanseng pataba, at paggamit ng certified resistant varieties.
+  * DA-PhilRice AI Chatbot: Maaaring magtanong ang magsasaka gamit ang boses o text sa 
+    Tagalog o English para sa agarang gabay.
+
+========================================================================================
+                              ORYZATIX SYSTEM DOCUMENTATION
+========================================================================================

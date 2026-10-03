@@ -14,65 +14,144 @@ class ConsultationController extends Controller
 {
     private $diseaseResponses = [
         'blast' => [
-            'tagalog' => 'Para sa Leaf Blast, inirerekomenda ko ang mga sumusunod: 1) Mag-spray ng Tricyclazole fungicide (1-2 ml/L tubig). 2) Iwasan ang sobrang nitrogen fertilizer. 3) Gumamit ng resistant varieties tulad ng PSB Rc18. 4) Panatilihin ang tamang drainage ng field. May iba ka pa bang katanungan?',
-            'english' => 'For Leaf Blast, I recommend: 1) Spray with Tricyclazole fungicide (1-2 ml/L water). 2) Avoid excessive nitrogen fertilizer. 3) Use resistant varieties like PSB Rc18. 4) Maintain proper field drainage. Do you have any other questions?',
+            'tagalog' => "### 🌾 Gabay sa Rice Leaf Blast / Neck Blast (*Magnaporthe oryzae*)\n\n" .
+                "**Mga Sintomas:** Hugis-brilyante (diamond / spindle-shaped) na mga sugat na may abong gitna at mapulang kayumangging gilid sa dahon o leeg ng uhay.\n\n" .
+                "**1. Kemikal na Lunas (Fungicides):**\n" .
+                "• **Tricyclazole 75% WP** (hal. Beam, Blast-Off): **0.6 – 0.8 g / Litro** ng tubig (10–12 g bawat 16L knapsack sprayer).\n" .
+                "• **Isoprothiolane 40% EC** (hal. Fuji-One): **1.5 – 2.0 ml / Litro** ng tubig (25–30 ml bawat 16L sprayer).\n" .
+                "• **Azoxystrobin + Difenoconazole**: **1.0 ml / Litro** ng tubig.\n\n" .
+                "**2. Kultural at Organikong Pamamahala:**\n" .
+                "• **Itigil ang sobrang Urea (Nitrogen):** Ang labis na nitrogen ay nagpapadali sa paglambot ng dahon kaya mabilis kapitan ng amag.\n" .
+                "• **Mag-apply ng Potash (0-0-60):** 30–40 kg/ha upang patibayin ang cell walls ng dahon.\n" .
+                "• **Panatilihing may mababaw na tubig (3–5 cm):** Huwag hayaang matuyuan ang bukid sa panahon ng pagsusuwi (tillering).\n" .
+                "• **Resistant Varieties:** Magtanim ng mga barayti tulad ng **PSB Rc18**, **NSIC Rc222**, o **NSIC Rc160**.",
+            'english' => "### 🌾 Rice Leaf Blast / Neck Blast Guide (*Magnaporthe oryzae*)\n\n" .
+                "**Symptoms:** Spindle-shaped/diamond lesions with gray centers and reddish-brown margins on leaves, leaf collars, and panicle necks.\n\n" .
+                "**1. Chemical Treatments (Fungicides):**\n" .
+                "• **Tricyclazole 75% WP**: **0.6 – 0.8 g / Liter** of water (10–12 g per 16L knapsack sprayer).\n" .
+                "• **Isoprothiolane 40% EC**: **1.5 – 2.0 ml / Liter** of water (25–30 ml per 16L sprayer).\n" .
+                "• **Azoxystrobin + Difenoconazole**: **1.0 ml / Liter** of water.\n\n" .
+                "**2. Cultural & Agronomic Management:**\n" .
+                "• **Suspend Nitrogen Topdressing:** Avoid excess urea which creates lush, succulent leaf tissue.\n" .
+                "• **Apply Muriate of Potash (0-0-60 @ 30–40 kg/ha):** Strengthens silica and epidermal cell walls.\n" .
+                "• **Maintain Shallow Water (3–5 cm):** Prevent drought stress during tillering.\n" .
+                "• **Resistant Varieties:** Plant certified varieties such as **PSB Rc18**, **NSIC Rc222**, or **NSIC Rc160**.",
         ],
         'blight' => [
-            'tagalog' => 'Para sa Bacterial Leaf Blight: 1) Mag-apply ng Streptomycin Sulfate (100-200 ppm). 2) Gumamit ng resistant varieties na may Xa4/Xa7 genes. 3) Alisin at sunugin ang mga infected na dahon. 4) Iwasan ang sobrang pagbaha sa field.',
-            'english' => 'For Bacterial Leaf Blight: 1) Apply Streptomycin Sulfate (100-200 ppm). 2) Use resistant varieties with Xa4/Xa7 genes. 3) Remove and burn infected leaves. 4) Avoid over-flooding the field.',
+            'tagalog' => "### 🌾 Gabay sa Bacterial Leaf Blight / BLB (*Xanthomonas oryzae pv. oryzae*)\n\n" .
+                "**Mga Sintomas:** Wavy o kulubot na naninilaw hanggang nagiging puti/kulay-dayami na mga guhit na nagsisimula sa dulo o gilid ng dahon patungong ibaba.\n\n" .
+                "**1. Lunas Batay sa Severity Level:**\n" .
+                "• **Mild (≤25%):** Mag-spray ng **Copper Hydroxide 77% WP** (**2.0 – 2.5 g / L**) o **Kasugamycin 2% SL** (**2.0 ml / L**). Agad itigil ang pag-abono ng Urea.\n" .
+                "• **Moderate (26% – 60%):** Mag-apply ng **Streptomycin Sulfate + Oxytetracycline** (**1.5 – 2.0 g / L**) o **Zinc Thiazole 20% SC** (**1.5 – 2.0 ml / L**). I-drain o patuyuin ang palayan ng 2–3 araw.\n" .
+                "• **Severe (>60%):** Therapeutic **Streptomycin** (**2.0 – 2.5 g / L**) o tank-mix ng Zinc Thiazole at Copper Hydroxide.\n\n" .
+                "**2. Pag-iwas at Pangmatagalang Solusyon:**\n" .
+                "• **I-drain ang bukid:** Ang nakatenggang tubig-baha ay nagpapabilis ng pagkalat ng bakterya.\n" .
+                "• **Resistant Varieties:** Gumamit ng binhi na may panlaban sa BLB tulad ng **PSB Rc82**, **NSIC Rc152**, o **NSIC Rc222**.",
+            'english' => "### 🌾 Bacterial Leaf Blight (BLB) Guide (*Xanthomonas oryzae pv. oryzae*)\n\n" .
+                "**Symptoms:** Water-soaked to yellowish stripes with wavy margins starting from leaf tips and margins, later turning grayish-white like bleached straw.\n\n" .
+                "**1. Severity-Calibrated Treatments:**\n" .
+                "• **Mild (≤25%):** Apply **Copper Hydroxide 77% WP** (**2.0–2.5 g/L**) or **Kasugamycin 2% SL** (**2.0 ml/L**). Immediately halt nitrogen topdressing.\n" .
+                "• **Moderate (26%–60%):** Spray **Streptomycin Sulfate + Oxytetracycline** (**1.5–2.0 g/L**) or **Zinc Thiazole 20% SC** (**1.5–2.0 ml/L**). Drain field for 2–3 days.\n" .
+                "• **Severe (>60%):** Therapeutic **Streptomycin** (**2.0–2.5 g/L**) combined with strict field drainage and sanitation.\n\n" .
+                "**2. Prevention & Agronomy:**\n" .
+                "• **Water Drainage:** Prevent stagnant floodwater from spreading bacterial ooze.\n" .
+                "• **Plant Resistant Cultivars:** Use **PSB Rc82**, **NSIC Rc152**, or **NSIC Rc222**.",
         ],
         'brown' => [
-            'tagalog' => 'Para sa Brown Spot: 1) Mag-apply ng Propiconazole (1 ml/L). 2) Itama ang nutrient deficiency lalo na ang potassium. 3) Gumamit ng Bacillus subtilis (5-10 g/L). 4) Gumamit ng tolerant varieties tulad ng PSB Rc14.',
-            'english' => 'For Brown Spot: 1) Apply Propiconazole (1 ml/L). 2) Correct nutrient deficiencies especially potassium. 3) Use Bacillus subtilis (5-10 g/L). 4) Plant tolerant varieties like PSB Rc14.',
+            'tagalog' => "### 🌾 Gabay sa Brown Spot (*Bipolaris oryzae*)\n\n" .
+                "**Mga Sintomas:** Pabilog o hugis-itlog na dark brown spots na may dilaw na halo sa paligid. Pangunahing sanhi ng mahinang lupa at kakulangan sa sustansya.\n\n" .
+                "**1. Gamot at Pagsugpo:**\n" .
+                "• **Mancozeb 80% WP**: **2.0 – 2.5 g / L** ng tubig (30–40 g bawat 16L knapsack sprayer).\n" .
+                "• **Propiconazole 25% EC**: **0.75 – 1.0 ml / L** ng tubig (15 ml bawat 16L sprayer).\n" .
+                "• **Azoxystrobin + Difenoconazole**: **1.0 ml / L** ng tubig.\n\n" .
+                "**2. Pagpapabuti ng Sustansya sa Lupa:**\n" .
+                "• **Kakulangan sa Potassium:** Mag-abono ng **Muriate of Potash (0-0-60 @ 30–40 kg/ha)**.\n" .
+                "• **Kakulangan sa Zinc:** Maglagay ng **Zinc Sulfate (25 kg/ha)** bago magtanim o sa basal stage.\n" .
+                "• **Organikong Pataba:** Maglagay ng 2–3 tonelada bawat ektarya ng compost o pinunong dayami upang mapataas ang Silica (Si).",
+            'english' => "### 🌾 Brown Spot Disease Guide (*Bipolaris oryzae*)\n\n" .
+                "**Symptoms:** Small, circular to oval dark-brown lesions with yellowish halo. Primary indicator of poor soil fertility and potassium/zinc deficiency.\n\n" .
+                "**1. Fungicide Treatments:**\n" .
+                "• **Mancozeb 80% WP**: **2.0 – 2.5 g / L** (30–40 g per 16L sprayer).\n" .
+                "• **Propiconazole 25% EC**: **0.75 – 1.0 ml / L** (15 ml per 16L sprayer).\n" .
+                "• **Azoxystrobin + Difenoconazole**: **1.0 ml / L**.\n\n" .
+                "**2. Soil Fertility Rectification:**\n" .
+                "• **Potassium Supplementation:** Apply **Muriate of Potash (0-0-60 @ 30–40 kg/ha)** split into basal and panicle initiation.\n" .
+                "• **Zinc Supplementation:** Apply **Zinc Sulfate (25 kg/ha)**.\n" .
+                "• **Soil Conditioning:** Incorporate 2–3 tons/ha organic compost or rice hull ash for silica boost.",
         ],
         'tungro' => [
-            'tagalog' => 'Para sa Rice Tungro: 1) Kontrolin ang green leafhopper vectors gamit ang Imidacloprid (0.5-1 ml/L). 2) Gumamit ng resistant varieties tulad ng PSB Rc10 o NSIC Rc160. 3) Magsagawa ng synchronous planting. 4) Alisin agad ang mga infected na halaman.',
-            'english' => 'For Rice Tungro: 1) Control green leafhopper vectors with Imidacloprid (0.5-1 ml/L). 2) Use resistant varieties like PSB Rc10 o NSIC Rc160. 3) Practice synchronous planting. 4) Remove infected plants immediately.',
+            'tagalog' => "### 🌾 Gabay sa Rice Tungro Disease (RTV)\n\n" .
+                "**Mga Sintomas:** Pagkabansot ng palay, pagkaunti ng suwi, at paninilaw hanggang pagka-orange ng mga dahon mula sa dulo. Dulot ng virus na hatid ng **Green Leafhopper (GLH)**.\n\n" .
+                "**1. Pagsugpo sa Insekto (GLH Vector Control):**\n" .
+                "• **Dinotefuran 20% SG**: **0.5 – 1.0 g / L** ng tubig (10–15 g bawat 16L sprayer).\n" .
+                "• **Imidacloprid 17.8% SL**: **0.5 – 0.75 ml / L** ng tubig.\n" .
+                "• **Buprofezin 25% SC**: **1.5 – 2.0 ml / L** ng tubig (pumipigil sa paglaki ng mga batang insekto).\n\n" .
+                "**2. Kultural at Paglilinis (Rogueing):**\n" .
+                "• **Bunutin at Ibaon (Rogueing):** Agad bunutin at ibaon sa putik ang mga palay na apektado ng Tungro upang hindi na maging imbakan ng virus.\n" .
+                "• **Sabayang Pagtatanim (Synchronous Planting):** Magtanim sa loob ng 2 linggo kasabay ng mga katabing bukid.\n" .
+                "• **Resistant Varieties:** Gumamit ng **NSIC Rc160**, **PSB Rc10**, o **NSIC Rc222**.",
+            'english' => "### 🌾 Rice Tungro Virus (RTV) Guide\n\n" .
+                "**Symptoms:** Severe stunting, reduced tillering, and yellow-to-orange leaf discoloration starting from the tips. Transmitted by the **Green Leafhopper (GLH)** (*Nephotettix virescens*).\n\n" .
+                "**1. Vector Control (Insecticides):**\n" .
+                "• **Dinotefuran 20% SG**: **0.5 – 1.0 g / L** (10–15 g per 16L knapsack sprayer).\n" .
+                "• **Imidacloprid 17.8% SL**: **0.5 – 0.75 ml / L**.\n" .
+                "• **Buprofezin 25% SC**: **1.5 – 2.0 ml / L** (insect growth regulator).\n\n" .
+                "**2. Cultural & Sanitation Practices:**\n" .
+                "• **Systematic Rogueing:** Immediately uproot and bury infected plants into deep mud.\n" .
+                "• **Synchronous Planting:** Plant within 2 weeks of neighboring fields to break vector cycles.\n" .
+                "• **Resistant Varieties:** Plant **NSIC Rc160**, **PSB Rc10**, or **NSIC Rc222**.",
         ],
-        'mildew' => [
-            'tagalog' => 'Para sa Downy Mildew: 1) Gumamit ng Metalaxyl bilang seed treatment (2 g/kg) o foliar spray. 2) Siguraduhing maayos ang field drainage. 3) Gumamit ng mas malawak na planting spacing. 4) Iwasan ang waterlogged conditions.',
-            'english' => 'For Downy Mildew: 1) Use Metalaxyl as seed treatment (2 g/kg) or foliar spray. 2) Ensure proper field drainage. 3) Use wider planting spacing. 4) Avoid waterlogged conditions.',
+        'sheath' => [
+            'tagalog' => "### 🌾 Gabay sa Sheath Blight (*Rhizoctonia solani*)\n\n" .
+                "**Mga Sintomas:** Hugis-itlog o parang 'snake-skin' na mga batik na may dark brown border sa may bandang ibaba ng puno at saha malapit sa tubig.\n\n" .
+                "**1. Mabisang Gamot:**\n" .
+                "• **Validamycin 3% L**: **2.0 – 2.5 ml / L** ng tubig (35–40 ml bawat 16L knapsack sprayer).\n" .
+                "• **Hexaconazole 5% SC**: **1.5 – 2.0 ml / L** ng tubig.\n" .
+                "• **Azoxystrobin + Difenoconazole**: **1.0 ml / L** ng tubig.\n\n" .
+                "**2. Pamamahala sa Bukid:**\n" .
+                "• **Tamang agwat sa pagtatanim:** Panatilihin ang 20 cm x 20 cm distansya para makasingaw ang hangin.\n" .
+                "• **Iwasan ang labis na Urea:** Bawasan ang nitrogen sa panahon ng pagbubuntis.",
+            'english' => "### 🌾 Rice Sheath Blight Guide (*Rhizoctonia solani*)\n\n" .
+                "**Symptoms:** Oval to irregular greenish-gray water-soaked lesions resembling snake-skin patterns on lower leaf sheaths near the water line.\n\n" .
+                "**1. Recommended Fungicides:**\n" .
+                "• **Validamycin 3% L**: **2.0 – 2.5 ml / L** (35–40 ml per 16L knapsack sprayer).\n" .
+                "• **Hexaconazole 5% SC**: **1.5 – 2.0 ml / L**.\n" .
+                "• **Azoxystrobin + Difenoconazole**: **1.0 ml / L**.\n\n" .
+                "**2. Agronomic Management:**\n" .
+                "• **Plant Spacing:** Maintain 20 cm x 20 cm spacing to improve aeration.\n" .
+                "• **Nitrogen Moderation:** Do not over-apply urea during reproductive stages.",
         ],
-        'hispa' => [
-            'tagalog' => 'Para sa Rice Hispa: 1) Mag-spray ng Chlorpyrifos (2 ml/L) o Lambda-Cyhalothrin (0.5 ml/L). 2) Gumamit ng Beauveria bassiana (3-5 g/L) bilang biological control. 3) Pumutol at sunugin ang mga heavily infested na dahon. 4) Iwasan ang sobrang nitrogen.',
-            'english' => 'For Rice Hispa: 1) Spray Chlorpyrifos (2 ml/L) or Lambda-Cyhalothrin (0.5 ml/L). 2) Use Beauveria bassiana (3-5 g/L) as biological control. 3) Prune and burn heavily infested leaves. 4) Avoid excessive nitrogen.',
+        'fertilizer' => [
+            'tagalog' => "### 🌾 Gabay sa Tamang Pag-aabono ng Palay (DA-PhilRice PalayCheck)\n\n" .
+                "**1. Basal Application (0 – 14 Araw Matapos Magtanim):**\n" .
+                "• Maglagay ng **Complete Fertilizer (14-14-14)** o **16-20-0** upang mapalakas ang mga ugat.\n" .
+                "• Maglagay ng **Zinc Sulfate (25 kg/ha)** kung ang lupa ay kulang sa zinc o maputik.\n\n" .
+                "**2. Early Tillering (21 – 28 Araw / Pagsusuwi):**\n" .
+                "• Maglagay ng **Urea (46-0-0)** o **Ammonium Sulfate (21-0-0)** batay sa Leaf Color Chart (LCC).\n\n" .
+                "**3. Panicle Initiation (40 – 50 Araw / Pagbubuntis):**\n" .
+                "• Mag-abono ng **Muriate of Potash (0-0-60 @ 30–40 kg/ha)** kasama ang kalahating sako ng Urea upang maging malaman at mabigat ang butil.",
+            'english' => "### 🌾 Rice Crop Fertilization Schedule (DA-PhilRice PalayCheck)\n\n" .
+                "**1. Basal Stage (0–14 Days After Transplanting):**\n" .
+                "• Apply **Complete (14-14-14)** or **16-20-0** for vigorous root establishment.\n" .
+                "• Apply **Zinc Sulfate (25 kg/ha)** in poorly drained soils.\n\n" .
+                "**2. Mid-Tillering Stage (21–28 DAT):**\n" .
+                "• Apply calibrated **Urea (46-0-0)** guided by the Leaf Color Chart (LCC).\n\n" .
+                "**3. Panicle Initiation Stage (40–50 DAT):**\n" .
+                "• Topdress **Muriate of Potash (0-0-60 @ 30–40 kg/ha)** mixed with nitrogen to maximize grain filling and weight.",
         ],
-        'smut' => [
-            'tagalog' => 'Para sa Leaf Smut: 1) Mag-apply ng Propiconazole + Difenoconazole (1 ml/L). 2) Sumunod sa balanced fertilization, iwasan ang sobrang nitrogen. 3) Gumamit ng clean seeds at resistant varieties. 4) Maaari ding gumamit ng compost tea + garlic extract spray.',
-            'english' => 'For Leaf Smut: 1) Apply Propiconazole + Difenoconazole (1 ml/L). 2) Follow balanced fertilization, avoid excess nitrogen. 3) Use clean seeds and resistant varieties. 4) You can also use compost tea + garlic extract spray.',
-        ],
-        'treatment' => [
-            'tagalog' => 'Mayroon akong kumpletong listahan ng mga treatment options batay sa pamantayan ng DA-PhilRice! Mayroon tayong Mild (≤25%), Moderate (26%-60%), at Severe (>60%) treatments para sa Leaf Blast, Bacterial Leaf Blight, Brown Spot, at Tungro. Aling sakit ang nais mong malaman ang gamot at dosage?',
-            'english' => 'I have a complete list of treatment options based on DA-PhilRice standards! We provide Mild (≤25%), Moderate (26%-60%), and Severe (>60%) treatments for Leaf Blast, Bacterial Leaf Blight, Brown Spot, and Tungro. Which disease would you like dosage details for?',
-        ],
-        'overwatering' => [
-            'tagalog' => 'Tungkol sa Sobrang Tubig / Baha (Overwatering): Ang nakatenggang tubig ay nagpapataas ng halumigmig (humidity) sa palayan at nagdudulot ng root rot at pagkalat ng Bacterial Leaf Blight (BLB). Rekomendasyon ng DA-PhilRice: 1) Isagawa ang Alternate Wetting and Drying (AWD). 2) Patuyuin ang bukid nang 2-3 araw para sumingaw ang nakalalasong hydrogen sulfide at magkaroon ng hangin ang mga ugat.',
-            'english' => 'Regarding Overwatering / Waterlogging: Stagnant water increases canopy humidity, causes root asphyxiation, and accelerates the spread of Bacterial Leaf Blight (BLB). DA-PhilRice recommendations: 1) Practice Alternate Wetting and Drying (AWD). 2) Drain the field for 2–3 days to release toxic hydrogen sulfide and aerate root systems.',
-        ],
-        'nitrogen' => [
-            'tagalog' => 'Tungkol sa Sobrang Pataba / Mataba sa Urea (Nitrogen Overload): Ang labis na Urea (46-0-0) ay nagpapadali sa paglambot at pagiging makatas (succulent) ng dahon kaya madaling kapitan ng Leaf Blast at Sheath Blight. Rekomendasyon ng DA-PhilRice: 1) Agarang itigil ang topdressing ng Urea. 2) Gamitin ang Leaf Color Chart (LCC) para sa tamang timpla. 3) Mag-abono ng Muriate of Potash (0-0-60 @ 30-40 kg/ha) upang patibayin ang cell walls ng dahon.',
-            'english' => 'Regarding Excess Nitrogen / Fertilizer Overload: Excessive Urea (46-0-0) produces soft, succulent leaf tissue highly vulnerable to Leaf Blast and Sheath Blight. DA-PhilRice recommendations: 1) Immediately halt nitrogen topdressing. 2) Use the Leaf Color Chart (LCC) for calibrated application. 3) Apply Muriate of Potash (0-0-60 @ 30–40 kg/ha) to strengthen leaf cell walls.',
-        ],
-        'drought' => [
-            'tagalog' => 'Tungkol sa Tuyo / Kulang sa Tubig (Water Stress / Drought): Ang tuyong lupa sa panahon ng pagsusuwi (tillering) ay nagpapahina sa natural na resistensya ng palay at nagpapabilis sa impeksyon ng Leaf Blast at Brown Spot. Rekomendasyon: 1) Panatilihin ang mababaw na patubig (3-5 cm) sa vegetative stage. 2) Huwag hayaang magbitak-bitak ang lupa. 3) Maglagay ng Carbonized Rice Hull (CRH) o dayami para mapanatili ang moisture.',
-            'english' => 'Regarding Drought / Dry Soil Stress: Water deficit during the vegetative/tillering stage impairs nutrient absorption and predisposes rice to Leaf Blast and Brown Spot. Recommendations: 1) Maintain shallow continuous water (3–5 cm) during tillering. 2) Avoid severe soil cracking. 3) Incorporate Carbonized Rice Hull (CRH) or organic mulch to retain soil moisture.',
-        ],
-        'deficiency' => [
-            'tagalog' => 'Tungkol sa Kakulangan sa Sustansya (Nutrient Deficiency - Potassium/Zinc/Silica): Ito ang pangunahing sanhi ng Brown Spot (Bipolaris oryzae) at paninilaw ng dahon. Rekomendasyon ng DA-PhilRice: 1) Maglagay ng Muriate of Potash (0-0-60 @ 30-40 kg/ha) na hinati sa basal at panicle initiation. 2) Mag-apply ng Zinc Sulfate (25 kg/ha). 3) Maglagay ng compost (2-3 t/ha) o pinunong dayami para sa Silica.',
-            'english' => 'Regarding Nutrient Deficiency (Potassium, Zinc, Silica): Soil nutrient deficiency is the primary predisposing factor for Brown Spot (Bipolaris oryzae). DA-PhilRice recommendations: 1) Apply Muriate of Potash (0-0-60 @ 30–40 kg/ha) split into basal and panicle initiation. 2) Apply Zinc Sulfate (25 kg/ha). 3) Incorporate compost (2–3 t/ha) or rice hull ash for silica supplementation.',
-        ],
-    ];
-
-    private $genericResponses = [
-        'tagalog' => [
-            'Salamat sa iyong tanong! Ang pag-aalaga ng palay ay nangangailangan ng tamang impormasyon. Anong partikular na aspeto ng rice farming ang gusto mong malaman?',
-            'Magandang tanong iyan! Para sa pinakamahusay na resulta, siguraduhing sundin ang mga rekomendasyon ng inyong Municipal Agriculture Office. May iba ka pa bang gustong itanong tungkol sa pagtatanim?',
-            'Naiintindihan ko ang iyong pag-aalala. Tandaan na ang maagang pagtukoy ng sakit ay mahalaga para sa epektibong paggamot. Gusto mo bang malaman ang mga senyales ng mga karaniwang sakit ng palay?',
-        ],
-        'english' => [
-            'Thank you for your question! Rice farming requires proper information. What specific aspect of rice farming would you like to know about?',
-            'That is a great question! For best results, be sure to follow your Municipal Agriculture Office recommendations. Do you have any other questions about farming?',
-            'I understand your concern. Remember that early detection of disease is crucial for effective treatment. Would you like to know the symptoms of common rice diseases?',
+        'awd' => [
+            'tagalog' => "### 🌾 Patubig: Alternate Wetting and Drying (AWD)\n\n" .
+                "Ang **AWD** ay pamamaraan ng DA-PhilRice upang makatipid ng 30% sa tubig at maiwasan ang mga sakit tulad ng Bacterial Leaf Blight at root rot:\n\n" .
+                "1. Magbaon ng butas-butas na **Observation Well (PVC pipe)** na may lalim na 15 cm sa putik.\n" .
+                "2. Magpatubig ng **3–5 cm** sa ibabaw ng lupa.\n" .
+                "3. Hayaang bumaba ang tubig hanggang umabot sa **15 cm sa ilalim ng lupa** bago magpatubig muli.\n" .
+                "4. *Paalala:* Panatilihing laging may 3–5 cm na tubig sa panahon ng **pamumulaklak (flowering)** hanggang **paggagatas (milky stage)**.",
+            'english' => "### 🌾 Controlled Irrigation: Alternate Wetting and Drying (AWD)\n\n" .
+                "**AWD** is a DA-PhilRice water-saving technology that reduces water usage by 30% while aerating roots to prevent BLB and root rot:\n\n" .
+                "1. Install a perforated **Field Water Tube (15 cm below soil surface)**.\n" .
+                "2. Flood the field to **3–5 cm** ponded depth.\n" .
+                "3. Allow water to naturally recede until it drops to **15 cm below soil surface** before re-irrigating.\n" .
+                "4. *Important:* Maintain continuous 3–5 cm shallow water during the **flowering and grain-filling stages**.",
         ],
     ];
 
@@ -114,6 +193,10 @@ class ConsultationController extends Controller
         $language = $request->input('language');
         $userId = auth()->id();
 
+        // 1. Generate accurate agronomic response first
+        $aiResponse = $this->generateResponse($userMessage, $language, $userId);
+
+        // 2. Persist user message and AI response in database
         try {
             ChatMessage::create([
                 'user_id' => $userId,
@@ -121,13 +204,7 @@ class ConsultationController extends Controller
                 'content' => $userMessage,
                 'language' => $language,
             ]);
-        } catch (Exception $e) {
-        }
 
-        $aiResponse = $this->generateResponse($userMessage, $language, $userId);
-
-        $time = now()->format('g:i A');
-        try {
             $aiMsg = ChatMessage::create([
                 'user_id' => $userId,
                 'role' => 'ai',
@@ -136,6 +213,7 @@ class ConsultationController extends Controller
             ]);
             $time = $aiMsg->created_at->format('g:i A');
         } catch (Exception $e) {
+            $time = now()->format('g:i A');
         }
 
         return response()->json([
@@ -162,7 +240,7 @@ class ConsultationController extends Controller
 
     private function generateResponse(string $message, string $language, ?int $userId = null): string
     {
-        // 1. Primary: Google Gemini API (Domain Grounded with strict guardrails)
+        // 1. Primary: Google Gemini API with PhilRice domain grounding
         $geminiResponse = $this->callGeminiApi($message, $language, $userId);
         if (!empty($geminiResponse)) {
             return $geminiResponse;
@@ -185,86 +263,63 @@ class ConsultationController extends Controller
                 foreach ($qWords as $qw) {
                     if (str_contains($msg, $qw)) $matches++;
                 }
-                if (($totalWords > 0 && ($matches / $totalWords) >= 0.6) || str_contains($msg, $itemQ)) {
+                if (($totalWords > 0 && ($matches / $totalWords) >= 0.5) || str_contains($msg, $itemQ)) {
                     return $item->answer;
                 }
             }
         } catch (Exception $e) {
         }
 
-        // 3. Environmental & Cultural Causes (Overwatering, Nitrogen, Drought, Deficiency)
-        if (str_contains($msg, 'overwater') || str_contains($msg, 'sobrang tubig') || str_contains($msg, 'baha') || str_contains($msg, 'nakatengga') || str_contains($msg, 'waterlog') || str_contains($msg, 'awd')) {
-            if (isset($this->diseaseResponses['overwatering'][$language])) {
-                return $this->diseaseResponses['overwatering'][$language];
-            }
-        }
-
-        if (str_contains($msg, 'mataba') || str_contains($msg, 'urea') || str_contains($msg, 'nitrogen') || str_contains($msg, 'sobrang pataba') || str_contains($msg, 'sobrang abono') || str_contains($msg, 'lcc') || str_contains($msg, 'leaf color')) {
-            if (isset($this->diseaseResponses['nitrogen'][$language])) {
-                return $this->diseaseResponses['nitrogen'][$language];
-            }
-        }
-
-        if (str_contains($msg, 'tuyo') || str_contains($msg, 'tagtuyot') || str_contains($msg, 'drought') || str_contains($msg, 'kulang sa tubig') || str_contains($msg, 'water stress') || str_contains($msg, 'dry')) {
-            if (isset($this->diseaseResponses['drought'][$language])) {
-                return $this->diseaseResponses['drought'][$language];
-            }
-        }
-
-        if (str_contains($msg, 'sustansya') || str_contains($msg, 'potassium') || str_contains($msg, 'potash') || str_contains($msg, 'zinc') || str_contains($msg, 'silica') || str_contains($msg, 'deficiency') || str_contains($msg, 'kulang sa pataba')) {
-            if (isset($this->diseaseResponses['deficiency'][$language])) {
-                return $this->diseaseResponses['deficiency'][$language];
-            }
-        }
-
-        // 4. Specific Rice Diseases
+        // 3. Robust Agronomic Fallback Matcher
         if (str_contains($msg, 'blast') || str_contains($msg, 'amag') || str_contains($msg, 'magnaporthe')) {
-            if (isset($this->diseaseResponses['blast'][$language])) {
-                return $this->diseaseResponses['blast'][$language];
-            }
+            return $this->diseaseResponses['blast'][$language] ?? $this->diseaseResponses['blast']['tagalog'];
         }
 
         if (str_contains($msg, 'blight') || str_contains($msg, 'blb') || str_contains($msg, 'xanthomonas') || str_contains($msg, 'bacterial')) {
-            if (isset($this->diseaseResponses['blight'][$language])) {
-                return $this->diseaseResponses['blight'][$language];
-            }
+            return $this->diseaseResponses['blight'][$language] ?? $this->diseaseResponses['blight']['tagalog'];
         }
 
-        if (str_contains($msg, 'brown') || str_contains($msg, 'bipolaris') || str_contains($msg, 'spot')) {
-            if (isset($this->diseaseResponses['brown'][$language])) {
-                return $this->diseaseResponses['brown'][$language];
-            }
+        if (str_contains($msg, 'brown') || str_contains($msg, 'bipolaris') || str_contains($msg, 'spot') || str_contains($msg, 'batik')) {
+            return $this->diseaseResponses['brown'][$language] ?? $this->diseaseResponses['brown']['tagalog'];
         }
 
-        if (str_contains($msg, 'tungro') || str_contains($msg, 'leafhopper') || str_contains($msg, 'glh') || str_contains($msg, 'rtbv') || str_contains($msg, 'rtsv')) {
-            if (isset($this->diseaseResponses['tungro'][$language])) {
-                return $this->diseaseResponses['tungro'][$language];
-            }
+        if (str_contains($msg, 'tungro') || str_contains($msg, 'leafhopper') || str_contains($msg, 'glh') || str_contains($msg, 'nangangagat') || str_contains($msg, 'orange') || str_contains($msg, 'dilaw')) {
+            return $this->diseaseResponses['tungro'][$language] ?? $this->diseaseResponses['tungro']['tagalog'];
         }
 
-        if (str_contains($msg, 'healthy') || str_contains($msg, 'malusog')) {
-            return ($language === 'tagalog')
-                ? 'Para mapanatiling malusog ang palay: 1) Panatilihin ang balanseng NPK fertilizer at regular na LCC monitoring. 2) Gamitin ang AWD patubig. 3) Panatilihing malinis ang mga pilapil laban sa peste at damo. 4) Mag-apply ng organikong compost (2-3 t/ha).'
-                : 'To maintain healthy rice crops: 1) Practice balanced NPK fertilization with regular LCC monitoring. 2) Use AWD irrigation. 3) Keep bunds and levees clean from weed vectors. 4) Apply organic compost (2–3 t/ha).';
+        if (str_contains($msg, 'sheath') || str_contains($msg, 'rhizoctonia') || str_contains($msg, 'saha')) {
+            return $this->diseaseResponses['sheath'][$language] ?? $this->diseaseResponses['sheath']['tagalog'];
         }
 
-        if (str_contains($msg, 'gamot') || str_contains($msg, 'treatment') || str_contains($msg, 'lunas') || str_contains($msg, 'dosage') || str_contains($msg, 'rekomendasyon')) {
-            if (isset($this->diseaseResponses['treatment'][$language])) {
-                return $this->diseaseResponses['treatment'][$language];
-            }
+        if (str_contains($msg, 'abono') || str_contains($msg, 'pataba') || str_contains($msg, 'fertilizer') || str_contains($msg, 'urea') || str_contains($msg, 'potash') || str_contains($msg, 'zinc') || str_contains($msg, 'complete') || str_contains($msg, '14-14-14')) {
+            return $this->diseaseResponses['fertilizer'][$language] ?? $this->diseaseResponses['fertilizer']['tagalog'];
         }
 
-        // Off-topic or unrecognized general questions fallback
+        if (str_contains($msg, 'tubig') || str_contains($msg, 'patubig') || str_contains($msg, 'awd') || str_contains($msg, 'water') || str_contains($msg, 'baha') || str_contains($msg, 'tuyo')) {
+            return $this->diseaseResponses['awd'][$language] ?? $this->diseaseResponses['awd']['tagalog'];
+        }
+
         if ($language === 'tagalog') {
-            return "Paumanhin po, ako po ay si Oryzatix AI Agronomist na nakalaan lamang para sumagot sa mga katanungan tungkol sa mga sakit ng palay (Bacterial Leaf Blight, Rice Tungro, Brown Spot, Sheath Blight, Leaf Blast), pangangalaga sa malusog na palay, at ang mga kaukulang lunas at gamot ayon sa pamantayan ng DA-PhilRice. May maitutulong po ba ako tungkol sa inyong palayan?";
+            return "Magandang araw! Ako po ang **Oryzatix AI Agronomist**, ang inyong katuwang sa siyentipiko at praktikal na pamamahala ng palayan ayon sa pamantayan ng **DA-PhilRice** at **IRRI**.\n\n" .
+                "Maaari po kayong magtanong tungkol sa:\n" .
+                "• **Mga Sakit ng Palay:** Bacterial Leaf Blight (BLB), Leaf Blast, Rice Tungro, Brown Spot, at Sheath Blight.\n" .
+                "• **Mga Gamot at Peste:** Fungicides, Insecticides laban sa Green Leafhopper/Stem Borer, tamang dosage bawat 16L sprayer.\n" .
+                "• **Tamang Pag-aabono at Sustansya:** Iskedyul ng Basal (14-14-14), Urea (46-0-0), Potash (0-0-60), Zinc Sulfate, at Leaf Color Chart (LCC).\n" .
+                "• **Patubig at Pamamahala:** Alternate Wetting and Drying (AWD) at certified inbred/hybrid seed varieties.\n\n" .
+                "Ano po ang partikular na sitwasyon o katanungan ninyo sa inyong palayan?";
         }
 
-        return "I apologize, but I am specifically designed as the Oryzatix AI Agronomist to only assist with rice leaf diseases (Bacterial Leaf Blight, Rice Tungro, Brown Spot, Sheath Blight, Leaf Blast), healthy rice crop care, and their respective treatment recommendations under DA-PhilRice standards. How can I assist you with your rice crop today?";
+        return "Greetings! I am the **Oryzatix AI Agronomist**, your intelligent agricultural assistant grounded in **DA-PhilRice** and **IRRI** rice production standards.\n\n" .
+            "You can consult me on:\n" .
+            "• **Rice Leaf Diseases:** Bacterial Leaf Blight (BLB), Rice Leaf Blast, Rice Tungro Disease, Brown Spot, and Sheath Blight.\n" .
+            "• **Pesticides & Dosages:** Approved active ingredients, fungicides, bactericides, and knapsack spray calibrations.\n" .
+            "• **Fertilizer & Soil Management:** Basal NPK, Urea topdressing, Potassium (MOP), Zinc deficiency solutions, and Leaf Color Chart (LCC).\n" .
+            "• **Water & Agronomy:** Alternate Wetting and Drying (AWD) and recommended certified seeds.\n\n" .
+            "How may I assist you with your rice crop today?";
     }
 
     /**
-     * Call Google Gemini REST API with domain-restricted grounding prompt.
-     * Returns null if API key is not configured or if API call fails, allowing seamless fallback.
+     * Call Google Gemini REST API with domain-grounded agronomic prompt.
      */
     private function callGeminiApi(string $userMessage, string $language, ?int $userId = null): ?string
     {
@@ -273,30 +328,40 @@ class ConsultationController extends Controller
             return null;
         }
 
-        $model = config('services.gemini.model') ?: env('GEMINI_MODEL', 'gemini-1.5-flash');
-
         $systemPrompt = $this->buildGeminiSystemPrompt($language);
 
-        // Fetch recent conversation history (up to last 6 messages) for conversational continuity
+        // Fetch recent conversation history and construct strict alternating multiturn contents
         $contents = [];
         if ($userId) {
             try {
-                $recentMessages = ChatMessage::where('user_id', $userId)
+                $pastMessages = ChatMessage::where('user_id', $userId)
                     ->orderBy('created_at', 'desc')
                     ->limit(6)
                     ->get()
                     ->reverse();
 
-                foreach ($recentMessages as $msg) {
+                $lastRole = null;
+                foreach ($pastMessages as $msg) {
+                    $turnRole = $msg->role === 'ai' ? 'model' : 'user';
+                    // Skip consecutive duplicate roles to guarantee strict alternating requirement
+                    if ($turnRole === $lastRole) {
+                        continue;
+                    }
                     $contents[] = [
-                        'role' => $msg->role === 'ai' ? 'model' : 'user',
+                        'role' => $turnRole,
                         'parts' => [
-                            ['text' => $msg->content]
+                            ['text' => (string)$msg->content]
                         ]
                     ];
+                    $lastRole = $turnRole;
                 }
             } catch (Exception $e) {
             }
+        }
+
+        // Ensure history doesn't end with a user turn before adding current message
+        if (!empty($contents) && end($contents)['role'] === 'user') {
+            array_pop($contents);
         }
 
         // Add current user message
@@ -316,20 +381,20 @@ class ConsultationController extends Controller
             'contents' => $contents,
             'generationConfig' => [
                 'temperature' => 0.2,
-                'topP' => 0.8,
+                'topP' => 0.85,
                 'topK' => 40,
-                'maxOutputTokens' => 800,
+                'maxOutputTokens' => 2048,
             ]
         ];
 
-        $configuredModel = config('services.gemini.model') ?: env('GEMINI_MODEL', 'gemini-3.6-flash');
-        $modelsToTry = array_unique([$configuredModel, 'gemini-3.6-flash', 'gemini-3.7-flash', 'gemini-3.5-flash', 'gemini-flash-latest']);
+        $configuredModel = config('services.gemini.model') ?: env('GEMINI_MODEL', 'gemini-flash-lite-latest');
+        $modelsToTry = array_unique([$configuredModel, 'gemini-flash-lite-latest', 'gemini-3.1-flash-lite', 'gemini-3.8-flash', 'gemini-3.5-flash-lite', 'gemini-flash-latest']);
 
         foreach ($modelsToTry as $mName) {
             try {
                 $url = "https://generativelanguage.googleapis.com/v1beta/models/{$mName}:generateContent?key={$apiKey}";
 
-                $response = Http::timeout(12)->post($url, $payload);
+                $response = Http::timeout(15)->post($url, $payload);
 
                 if ($response->successful()) {
                     $data = $response->json();
@@ -355,72 +420,149 @@ class ConsultationController extends Controller
     }
 
     /**
-     * Build strict domain-restricted system prompt for Oryzatix Rice Disease Consultation.
+     * Build strict domain-restricted system prompt for Oryzatix Rice Disease & Agronomy Consultation.
      */
     private function buildGeminiSystemPrompt(string $language): string
     {
         return <<<PROMPT
-You are "Oryzatix AI Agronomist" (Oryzatix AI Konsultasyon), an expert agricultural AI assistant dedicated EXCLUSIVELY to rice farming and rice leaf diseases in the Philippines according to Department of Agriculture - Philippine Rice Research Institute (DA-PhilRice) standards.
+You are "Oryzatix AI Agronomist" (Oryzatix AI Konsultasyon), an expert agricultural and crop protection specialist dedicated EXCLUSIVELY to rice farming (Oryza sativa) in the Philippines, adhering strictly to Department of Agriculture - Philippine Rice Research Institute (DA-PhilRice) and International Rice Research Institute (IRRI) PalayCheck standards.
 
 =======================================================
-STRICT SCOPE & DOMAIN BOUNDARY (CRITICAL RULE):
+1. SCOPE & DOMAIN EXPERTISE (RICE FARMING ONLY):
 =======================================================
-1. YOU MUST ONLY ANSWER QUESTIONS STRICTLY RELATED TO:
-   a) Rice Leaf Diseases in the Oryzatix system:
-      • Bacterial Leaf Blight (BLB) — Xanthomonas oryzae pv. oryzae
-      • Rice Tungro Disease — Rice Tungro Bacilliform Virus (RTBV) + Rice Tungro Spherical Virus (RTSV), transmitted by Green Leafhopper (Nephotettix virescens)
-      • Rice Brown Spot — Bipolaris oryzae / Cochliobolus miyabeanus
-      • Sheath Blight — Rhizoctonia solani
-      • Rice Leaf Blast — Magnaporthe oryzae
-   b) Healthy Rice Leaf Care & Maintenance (AWD irrigation, balanced N-P-K, Leaf Color Chart LCC, MOP 0-0-60 potash, Zinc Sulfate, organic compost).
-   c) Severity Levels (Mild ≤ 25%, Moderate 26%–60%, Severe > 60%) and their corresponding Chemical (exact active ingredients, fungicides, bactericides, insecticides, dosages) and Organic/Cultural treatments.
-   d) Causes, prevention, crop sanitation, water management, and agronomic practices for rice crops.
-
-2. IMMEDIATE POLITE REFUSAL FOR OFF-TOPIC QUESTIONS:
-   If the user asks about ANY topic NOT related to rice crops, rice leaf diseases, rice soil nutrients, or agricultural management (for example: coding, math, politics, celebrity news, movies, cooking non-rice recipes, assignments, or diseases of non-rice plants like tomato, banana, mango, corn):
-   You MUST POLITELY REFUSE to answer, stating that you are strictly dedicated to rice disease consultation and treatment in Oryzatix.
-
-   • If language is 'tagalog', reply with:
-     "Paumanhin po, ako po ay si Oryzatix AI Agronomist na nakalaan lamang para sumagot sa mga katanungan tungkol sa mga sakit ng palay (Bacterial Leaf Blight, Rice Tungro, Brown Spot, Sheath Blight, Leaf Blast), pangangalaga sa malusog na palay, at ang mga kaukulang lunas at gamot ayon sa pamantayan ng DA-PhilRice. May maitutulong po ba ako tungkol sa inyong palayan?"
-
-   • If language is 'english', reply with:
-     "I apologize, but I am specifically designed as the Oryzatix AI Agronomist to only assist with rice leaf diseases (Bacterial Leaf Blight, Rice Tungro, Brown Spot, Sheath Blight, Leaf Blast), healthy rice crop care, and their respective treatment recommendations under DA-PhilRice standards. How can I assist you with your rice crop today?"
-
-=======================================================
-KNOWLEDGE BASE & TREATMENT DOSAGE GUIDELINES:
-=======================================================
-• Bacterial Leaf Blight (BLB):
-  - Mild (≤25%): Copper Hydroxide 77% WP (2.0–2.5 g/L), Kasugamycin 2% SL (2.0 ml/L). Suspend top-dress nitrogen.
-  - Moderate (26%-60%): Streptomycin Sulfate + Oxytetracycline (Plantomycin / Agrimycin @ 150–200 ppm / 1.5–2.0 g/L), Zinc Thiazole 20% SC (1.5–2.0 ml/L). Field drainage for 2-3 days.
-  - Severe (>60%): Therapeutic Streptomycin (2.0–2.5 g/L), Zinc Thiazole + Copper Hydroxide tank mix. Plant resistant varieties next season (PSB Rc82, NSIC Rc152).
-
-• Rice Tungro Disease:
-  - Mild (≤25%): Imidacloprid 17.8% SL (0.5–0.75 ml/L), Thiamethoxam 25% WG (0.2–0.3 g/L). Synchronous planting within 2 weeks, yellow sticky vector traps (20-25/ha).
-  - Moderate (26%-60%): Dinotefuran 20% SG (0.5–1.0 g/L), Clothianidin + Pymetrozine (1.0 g/L), Buprofezin 25% SC (1.5–2.0 ml/L). Selective rogueing, Neem Seed Kernel Extract (NSKE 5%).
-  - Severe (>60%): Etofenprox 10% EC (1.5–2.0 ml/L), Fipronil 5% SC. Systemic rogueing, switch to resistant varieties (NSIC Rc160, PSB Rc10), 30-day post-harvest fallow & deep plowing.
-
-• Brown Spot:
-  - Mild (≤25%): Mancozeb 80% WP (2.0–2.5 g/L), Propiconazole 25% EC (0.75–1.0 ml/L). Apply Muriate of Potash (30–40 kg K₂O/ha) & Zinc Sulfate (25 kg/ha).
-  - Moderate (26%-60%): Tebuconazole 250 EC (0.75–1.0 ml/L), Azoxystrobin + Difenoconazole (1.0 ml/L), Hexaconazole 5% SC (1.5–2.0 ml/L). Split potassium topdress, AWD water aeration.
-  - Severe (>60%): Propiconazole + Difenoconazole tank mix (1.5–2.0 g/L) to prevent pecky rice grain rot. Hot water seed treatment (52-54°C for 15 mins), agricultural lime (200-300 kg/ha).
-
-• Rice Leaf Blast:
-  - Tricyclazole 75% WP (0.6–0.8 g/L), Isoprothiolane 40% EC (1.5–2.0 ml/L), Azoxystrobin (1.0 ml/L). Immediate nitrogen suspension, silicon fertilization.
-
-• Sheath Blight:
-  - Validamycin 3% L (2.0–2.5 ml/L), Hexaconazole 5% SC (1.5–2.0 ml/L), Azoxystrobin + Difenoconazole (1.0 ml/L). Wide spacing (20x20 cm), Trichoderma harzianum bio-spray.
+You provide authoritative, practical, and highly accurate answers on:
+1. RICE DISEASES & SYMPTOMS:
+   - Bacterial Leaf Blight (BLB) (*Xanthomonas oryzae pv. oryzae*)
+   - Rice Tungro Disease (RTBV/RTSV virus transmitted by Green Leafhopper *Nephotettix virescens*)
+   - Rice Brown Spot (*Bipolaris oryzae / Cochliobolus miyabeanus*)
+   - Rice Leaf Blast & Neck Blast (*Magnaporthe oryzae*)
+   - Sheath Blight (*Rhizoctonia solani*)
+   - False Smut, Bakanae, and Narrow Brown Leaf Spot.
+2. PEST MANAGEMENT & VECTORS:
+   - Green Leafhopper (GLH), Brown Planthopper (BPH), Yellow Stem Borer, Rice Bug (Atangya / *Leptocorisa acuta*), Rice Hispa, Armyworms.
+3. SOIL NUTRIENTS & FERTILIZER SCHEDULE (PalayCheck System):
+   - Basal: Complete 14-14-14 or 16-20-0 for root vigor.
+   - Early Tillering: Urea 46-0-0 / Ammonium Sulfate 21-0-0 calibrated with Leaf Color Chart (LCC).
+   - Panicle Initiation: Muriate of Potash (0-0-60 @ 30–40 kg/ha) for grain density and cell-wall disease defense.
+   - Zinc Deficiency: Zinc Sulfate (25 kg/ha) for reddish-brown/rusty leaves in flooded soil.
+4. WATER & CULTURAL MANAGEMENT:
+   - Alternate Wetting and Drying (AWD) irrigation technology using observation wells.
+   - Certified seed varieties (e.g., NSIC Rc222, PSB Rc82, NSIC Rc160, PSB Rc18, NSIC Rc152).
+   - Crop sanitation, synchronous community planting, and rogueing of viral crops.
+5. DOSAGES & SEVERITY-CALIBRATED TREATMENTS:
+   - Mild (≤ 25%), Moderate (26%–60%), Severe (> 60%).
+   - Always state both concentrations (per Liter) and practical farmer measurements (per 16-Liter Knapsack Sprayer).
 
 =======================================================
-LANGUAGE & FORMATTING:
+2. STRICT GUARDRAIL & REFUSAL POLICY:
 =======================================================
-• Requested Language: {$language}
-• If 'tagalog', speak in natural, helpful Tagalog/Filipino easily understood by Filipino rice farmers.
-• If 'english', provide clear, structured, and actionable agronomic explanations.
-• FORMATTING RULES:
-  - Always organize your response into distinct, well-spaced paragraphs with empty line breaks between topics.
-  - Use bullet points (• or -) or numbered steps (1., 2.) for actions, dosages, and recommendations so it is clean and easy to read.
-  - Never clump all sentences together into one long, solid wall of text.
-  - Use bold formatting (**active ingredient**, **dosage**) for critical medicine names and measurements.
+If the user asks about ANY topic NOT related to rice agriculture, rice pests, rice soil/fertilizers, water management, or farming (such as coding, general math, movies, celebrities, politics, gaming, non-agricultural homework, or non-rice plants like mango, corn, tomato, banana):
+You MUST POLITELY REFUSE:
+- In Tagalog: "Paumanhin po, ako po ay si Oryzatix AI Agronomist na nakalaan lamang para sumagot sa mga katanungan tungkol sa pagsasaka ng palay, mga sakit at peste ng palay, tamang abono, at mga pamantayan ng DA-PhilRice. May maitutulong po ba ako tungkol sa inyong palayan?"
+- In English: "I apologize, but I am the Oryzatix AI Agronomist dedicated exclusively to rice farming, rice crop diseases, pest management, fertilization, and DA-PhilRice agronomic standards. How can I assist you with your rice crops today?"
+
+=======================================================
+3. RESPONSE FORMAT & TONE:
+=======================================================
+• Language: Respond fluently and respectfully in {$language}. (If tagalog, use warm, respectful, and natural Filipino farmer terms like Ka-Oryzatix, pagsusuwi, pagbubuntis, pilapil, patubig, knapsack sprayer).
+• Structure:
+  - Start with a clear, direct summary of the diagnosis/answer.
+  - Use bold headings (e.g. ### 🌾 Pamamahala at Gamot).
+  - Use bullet points (•) for chemical active ingredients, exact dosages (e.g., **2.0–2.5 g / L** o **30–40 g bawat 16L sprayer**), and safety intervals.
+  - Provide cultural/preventive practices (sanitation, fertilization adjustment, water drainage).
+• Completeness: Never leave sentences unfinished or truncated. Provide full, step-by-step guidance.
 PROMPT;
+    }
+
+    /**
+     * Translate consultation text between Tagalog and English.
+     */
+    public function translate(Request $request): JsonResponse
+    {
+        $request->validate([
+            'text' => 'required|string',
+            'target_language' => 'required|in:tagalog,english',
+        ]);
+
+        $text = trim($request->input('text'));
+        $targetLang = $request->input('target_language');
+
+        $translated = $this->callGeminiTranslation($text, $targetLang);
+
+        if (!empty($translated)) {
+            return response()->json([
+                'success' => true,
+                'translated_text' => $translated,
+                'target_language' => $targetLang,
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'translated_text' => $text,
+            'target_language' => $targetLang,
+            'message' => 'Translation unavailable, showing original message.',
+        ]);
+    }
+
+    /**
+     * Translate text accurately using Google Gemini API.
+     */
+    private function callGeminiTranslation(string $text, string $targetLang): ?string
+    {
+        $apiKey = config('services.gemini.api_key') ?: env('GEMINI_API_KEY');
+        if (empty($apiKey)) {
+            return null;
+        }
+
+        $langTarget = $targetLang === 'tagalog' ? 'natural Tagalog / Filipino' : 'fluent English';
+        $instruction = "You are a professional agricultural translator. Accurately translate the following rice consultation advice into {$langTarget}. Retain all markdown formatting, bullet points, headings, chemical dosages, and active ingredients exactly. Output ONLY the translated text.";
+
+        $payload = [
+            'system_instruction' => [
+                'parts' => [
+                    ['text' => $instruction]
+                ]
+            ],
+            'contents' => [
+                [
+                    'role' => 'user',
+                    'parts' => [
+                        ['text' => $text]
+                    ]
+                ]
+            ],
+            'generationConfig' => [
+                'temperature' => 0.1,
+                'maxOutputTokens' => 2048,
+            ]
+        ];
+
+        $configuredModel = config('services.gemini.model') ?: env('GEMINI_MODEL', 'gemini-flash-lite-latest');
+        $modelsToTry = array_unique([$configuredModel, 'gemini-flash-lite-latest', 'gemini-3.1-flash-lite', 'gemini-3.8-flash', 'gemini-flash-latest']);
+
+        foreach ($modelsToTry as $mName) {
+            try {
+                $url = "https://generativelanguage.googleapis.com/v1beta/models/{$mName}:generateContent?key={$apiKey}";
+                $response = Http::timeout(15)->post($url, $payload);
+                if ($response->successful()) {
+                    $data = $response->json();
+                    $candidates = $data['candidates'] ?? [];
+                    if (!empty($candidates)) {
+                        $parts = $candidates[0]['content']['parts'] ?? [];
+                        if (!empty($parts)) {
+                            $reply = trim($parts[0]['text'] ?? '');
+                            if (!empty($reply)) {
+                                return $reply;
+                            }
+                        }
+                    }
+                }
+            } catch (Exception $e) {
+                Log::error("Gemini Translation ($mName) error: " . $e->getMessage());
+            }
+        }
+
+        return null;
     }
 }

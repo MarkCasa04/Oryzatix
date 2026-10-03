@@ -13,7 +13,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // 1. Admin Account
+        // 1. Admin Accounts
+        User::firstOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
+                'name' => 'System Administrator',
+                'password' => Hash::make('password'),
+                'role' => 'admin',
+                'location' => 'JPC IT Research Lab',
+            ]
+        );
+
         User::firstOrCreate(
             ['email' => 'admin@oryzatix.ph'],
             [
@@ -26,6 +36,16 @@ class DatabaseSeeder extends Seeder
 
         // 2. Staff / Agricultural Extension Worker
         User::firstOrCreate(
+            ['email' => 'staff@gmail.com'],
+            [
+                'name' => 'Maria Santos (Agronomist)',
+                'password' => Hash::make('password'),
+                'role' => 'agri_worker',
+                'location' => 'DA Regional Extension Office',
+            ]
+        );
+
+        User::firstOrCreate(
             ['email' => 'staff@oryzatix.ph'],
             [
                 'name' => 'Maria Santos (Agronomist)',
@@ -36,6 +56,26 @@ class DatabaseSeeder extends Seeder
         );
 
         // 3. Registered Farmers
+        User::firstOrCreate(
+            ['email' => 'farmer1@gmail.com'],
+            [
+                'name' => 'Mang Juan Dela Cruz',
+                'password' => Hash::make('password'),
+                'role' => 'farmer',
+                'location' => 'Brgy. San Mariano, Roxas, Oriental Mindoro',
+            ]
+        );
+
+        User::firstOrCreate(
+            ['email' => 'farmer@gmail.com'],
+            [
+                'name' => 'Mang Juan Dela Cruz',
+                'password' => Hash::make('password'),
+                'role' => 'farmer',
+                'location' => 'Brgy. San Mariano, Roxas, Oriental Mindoro',
+            ]
+        );
+
         User::firstOrCreate(
             ['email' => 'farmer@oryzatix.ph'],
             [

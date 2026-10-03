@@ -21,6 +21,11 @@ Route::get('/health', function () {
 Route::prefix('auth')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::get('/security-config', [AuthController::class, 'getSecurityConfig'])->name('auth.security-config');
+    Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('auth.forgot-password');
+    Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('auth.reset-password');
+    Route::post('/google-login', [AuthController::class, 'googleLogin'])->name('auth.google-login');
+    Route::get('/google-accounts', [AuthController::class, 'googleAccounts'])->name('auth.google-accounts');
 });
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -66,6 +71,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::match(['put', 'post'], '/chatbot/knowledge/{id}', [AdminController::class, 'updateChatbotKnowledge'])->name('admin.chatbot.knowledge.update');
         Route::delete('/chatbot/knowledge/{id}', [AdminController::class, 'destroyChatbotKnowledge'])->name('admin.chatbot.knowledge.destroy');
         Route::post('/chatbot/knowledge/{id}/toggle-status', [AdminController::class, 'toggleChatbotKnowledgeStatus'])->name('admin.chatbot.knowledge.toggle');
+
+        // 7. Security Settings (Login Attempt & Penalty Lockout Management)
+        Route::get('/security-settings', [AdminController::class, 'getSecuritySettings'])->name('admin.security.get');
+        Route::post('/security-settings', [AdminController::class, 'updateSecuritySettings'])->name('admin.security.update');
+        Route::post('/security-settings/reset-lockouts', [AdminController::class, 'resetLockouts'])->name('admin.security.reset-lockouts');
     });
 
     Route::prefix('rice-detector')->group(function () {
@@ -77,6 +87,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('consultation')->group(function () {
         Route::get('/messages', [ConsultationController::class, 'index'])->name('consultation.messages');
         Route::post('/send', [ConsultationController::class, 'send'])->name('consultation.send');
+        Route::post('/translate', [ConsultationController::class, 'translate'])->name('consultation.translate');
         Route::delete('/clear', [ConsultationController::class, 'clear'])->name('consultation.clear');
     });
 });

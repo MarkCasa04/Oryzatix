@@ -17,6 +17,44 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/rice-detector.css') }}?v={{ time() }}">
+<meta name="google-signin-client_id" content="{{ config('services.google.client_id') ?? env('GOOGLE_CLIENT_ID', '') }}">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+@php
+  $currentUserData = null;
+  if (Auth::check()) {
+      $u = Auth::user();
+      $roleLabel = match($u->role) {
+          'farmer' => 'Rice Farmer',
+          'agri_worker' => 'Agricultural Extension Worker',
+          'admin' => 'Administrator / Researcher',
+          default => ucfirst($u->role),
+      };
+      $avatarUrl = null;
+      if ($u->avatar) {
+          $avatarUrl = (str_starts_with($u->avatar, 'http') || str_starts_with($u->avatar, 'data:'))
+              ? $u->avatar
+              : asset('storage/' . $u->avatar);
+      }
+      $currentUserData = [
+          'id' => $u->id,
+          'name' => $u->name,
+          'email' => $u->email,
+          'role' => $u->role,
+          'role_label' => $roleLabel,
+          'location' => $u->location ?: 'Not specified',
+          'avatar' => $u->avatar,
+          'avatar_url' => $avatarUrl,
+          'created_at' => $u->created_at ? $u->created_at->format('M j, Y') : 'N/A',
+      ];
+  }
+@endphp
+<script>
+  window.INITIAL_AUTH = {
+    user: @json($currentUserData),
+    token: @json(session('auth_token', null)),
+    googleLoginSuccess: @json(session('google_login_success', false)),
+  };
+</script>
 </head>
 <body>
 
@@ -39,8 +77,6 @@
     </div>
 
     <nav class="sidebar-menu">
-      <div class="menu-label" data-en="Main Menu" data-tl="Pangunahing Menu">Main Menu</div>
-
       <!-- FARMER DASHBOARD -->
       <button class="sidebar-nav-btn active" id="sidebarFarmerHomeBtn" data-screen="home" onclick="showScreen('home'); loadHomeRecentScans();">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -51,28 +87,23 @@
       <button class="sidebar-nav-btn" id="sidebarAdminHomeBtn" data-screen="admin-dashboard" onclick="showScreen('admin-dashboard'); loadAdminDashboard();" style="display: none;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         <span data-en="Admin Dashboard" data-tl="Admin Dashboard">Admin Dashboard</span>
-        <span class="badge-pill" style="background: var(--amber-100); color: var(--amber-800);">Admin</span>
       </button>
 
       <!-- STAFF / EXTENSION WORKER DASHBOARD (Top Primary Dashboard for Staff) -->
       <button class="sidebar-nav-btn" id="sidebarStaffHomeBtn" data-screen="staff-dashboard" onclick="showScreen('staff-dashboard'); loadStaffDashboard();" style="display: none;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
         <span data-en="Staff Dashboard" data-tl="Staff Dashboard">Staff Dashboard</span>
-        <span class="badge-pill" style="background: var(--blue-100); color: var(--blue-800);">Staff</span>
       </button>
 
       <button class="sidebar-nav-btn" data-screen="scan" onclick="showScreen('scan');">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         <span data-en="Disease Scan" data-tl="Pag-scan ng Sakit">Disease Scan</span>
-        <span class="badge-pill">AI</span>
       </button>
 
       <button class="sidebar-nav-btn" data-screen="history" onclick="showScreen('history'); loadHistory();">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         <span data-en="Scan History" data-tl="Kasaysayan ng Scan">Scan History</span>
       </button>
-
-      <div class="menu-label" style="margin-top: 10px;" data-en="Assistant & Care" data-tl="Tulong at Gamutan">Assistant & Care</div>
 
       <button class="sidebar-nav-btn" data-screen="consultation" onclick="showScreen('consultation'); loadChatMessages();">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -85,19 +116,15 @@
       </button>
 
       <!-- ADMIN ONLY SECTION -->
-      <div id="sidebarAdminGroup" style="display: none;">
-        <div class="menu-label" style="margin-top: 10px;" data-en="Admin Portal" data-tl="Admin Portal">Admin Portal</div>
-        
+      <div id="sidebarAdminGroup" style="display: none; display: contents;">
         <button class="sidebar-nav-btn" data-screen="admin-users" onclick="showScreen('admin-users'); loadAdminUsers();">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           <span data-en="User Accounts" data-tl="Mga Account">User Management</span>
-          <span class="badge-pill" style="background: var(--amber-100); color: var(--amber-800);">Admin</span>
         </button>
 
         <button class="sidebar-nav-btn" data-screen="admin-diseases" onclick="showScreen('admin-diseases'); loadAdminDiseases();">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           <span data-en="Disease Management" data-tl="Pamamahala ng Sakit">Disease Info</span>
-          <span class="badge-pill" style="background: var(--green-100); color: var(--green-800);">5 Classes</span>
         </button>
 
         <button class="sidebar-nav-btn" data-screen="admin-scans-logs" onclick="showScreen('admin-scans-logs'); loadAdminScansLogs();">
@@ -115,18 +142,6 @@
           <span data-en="Chatbot FAQ / AI" data-tl="Chatbot at FAQ">Chatbot Manager</span>
         </button>
       </div>
-
-      <div class="menu-label" style="margin-top: 10px;" data-en="Account" data-tl="Account">Account</div>
-
-      <button class="sidebar-nav-btn" data-screen="profile" onclick="showScreen('profile');">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span data-en="Profile & Settings" data-tl="Profile at Mga Setting">Profile & Settings</span>
-      </button>
-
-      <button class="sidebar-nav-btn" onclick="openModal('modalLogoutConfirm')" style="color: var(--red-600); margin-top: 4px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-        <span data-en="Sign Out" data-tl="Mag-sign Out">Sign Out</span>
-      </button>
     </nav>
   </aside>
 
@@ -149,8 +164,6 @@
     </div>
 
     <nav class="drawer-menu sidebar-menu">
-      <div class="menu-label" data-en="Main Menu" data-tl="Pangunahing Menu">Main Menu</div>
-
       <!-- FARMER DASHBOARD -->
       <button class="sidebar-nav-btn active" id="drawerFarmerHomeBtn" data-screen="home" onclick="showScreen('home'); loadHomeRecentScans(); closeMobileDrawer();">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -161,28 +174,23 @@
       <button class="sidebar-nav-btn" id="drawerAdminHomeBtn" data-screen="admin-dashboard" onclick="showScreen('admin-dashboard'); loadAdminDashboard(); closeMobileDrawer();" style="display: none;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         <span data-en="Admin Dashboard" data-tl="Admin Dashboard">Admin Dashboard</span>
-        <span class="badge-pill" style="background: var(--amber-100); color: var(--amber-800);">Admin</span>
       </button>
 
       <!-- STAFF DASHBOARD -->
       <button class="sidebar-nav-btn" id="drawerStaffHomeBtn" data-screen="staff-dashboard" onclick="showScreen('staff-dashboard'); loadStaffDashboard(); closeMobileDrawer();" style="display: none;">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
         <span data-en="Staff Dashboard" data-tl="Staff Dashboard">Staff Dashboard</span>
-        <span class="badge-pill" style="background: var(--blue-100); color: var(--blue-800);">Staff</span>
       </button>
 
       <button class="sidebar-nav-btn" data-screen="scan" onclick="showScreen('scan'); closeMobileDrawer();">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
         <span data-en="Disease Scan" data-tl="Pag-scan ng Sakit">Disease Scan</span>
-        <span class="badge-pill">AI</span>
       </button>
 
       <button class="sidebar-nav-btn" data-screen="history" onclick="showScreen('history'); loadHistory(); closeMobileDrawer();">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         <span data-en="Scan History" data-tl="Kasaysayan ng Scan">Scan History</span>
       </button>
-
-      <div class="menu-label" style="margin-top: 10px;" data-en="Assistant & Care" data-tl="Tulong at Gamutan">Assistant & Care</div>
 
       <button class="sidebar-nav-btn" data-screen="consultation" onclick="showScreen('consultation'); loadChatMessages(); closeMobileDrawer();">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -195,19 +203,15 @@
       </button>
 
       <!-- ADMIN ONLY SECTION -->
-      <div id="drawerAdminGroup" style="display: none;">
-        <div class="menu-label" style="margin-top: 10px;" data-en="Admin Portal" data-tl="Admin Portal">Admin Portal</div>
-        
+      <div id="drawerAdminGroup" style="display: none; display: contents;">
         <button class="sidebar-nav-btn" data-screen="admin-users" onclick="showScreen('admin-users'); loadAdminUsers(); closeMobileDrawer();">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           <span data-en="User Accounts" data-tl="Mga Account">User Management</span>
-          <span class="badge-pill" style="background: var(--amber-100); color: var(--amber-800);">Admin</span>
         </button>
 
         <button class="sidebar-nav-btn" data-screen="admin-diseases" onclick="showScreen('admin-diseases'); loadAdminDiseases(); closeMobileDrawer();">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           <span data-en="Disease Management" data-tl="Pamamahala ng Sakit">Disease Info</span>
-          <span class="badge-pill" style="background: var(--green-100); color: var(--green-800);">5 Classes</span>
         </button>
 
         <button class="sidebar-nav-btn" data-screen="admin-scans-logs" onclick="showScreen('admin-scans-logs'); loadAdminScansLogs(); closeMobileDrawer();">
@@ -225,18 +229,6 @@
           <span data-en="Chatbot FAQ / AI" data-tl="Chatbot at FAQ">Chatbot Manager</span>
         </button>
       </div>
-
-      <div class="menu-label" style="margin-top: 10px;" data-en="Account" data-tl="Account">Account</div>
-
-      <button class="sidebar-nav-btn" data-screen="profile" onclick="showScreen('profile'); closeMobileDrawer();">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span data-en="Profile & Settings" data-tl="Profile at Mga Setting">Profile & Settings</span>
-      </button>
-
-      <button class="sidebar-nav-btn" onclick="openModal('modalLogoutConfirm'); closeMobileDrawer();" style="color: var(--red-600); margin-top: 4px;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-        <span data-en="Sign Out" data-tl="Mag-sign Out">Sign Out</span>
-      </button>
     </nav>
   </aside>
 
@@ -252,14 +244,113 @@
         <h2 class="topbar-title" id="webPageTitle" data-en="Dashboard" data-tl="Dashboard">Dashboard</h2>
       </div>
       <div class="topbar-actions">
-        <div class="lang-switch">
-          <button onclick="setUILanguage('english')" class="active" id="webLangEn">EN</button>
-          <button onclick="setUILanguage('tagalog')" id="webLangTl">TL</button>
+        <!-- Live Real-Time Date & Time Clock Widget -->
+        <div class="topbar-datetime-widget" id="topbarDatetimeWidget" title="Current Real-Time Date & Time">
+          <div class="topbar-datetime-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="topbar-datetime-text">
+            <span class="topbar-date" id="topbarLiveDate">--</span>
+            <span class="topbar-datetime-divider">&bull;</span>
+            <span class="topbar-time" id="topbarLiveTime">--:--:-- --</span>
+          </div>
         </div>
+
         <button class="topbar-notif-btn" onclick="openModal('modalNotifications')" title="Notifications">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
           <div class="notif-dot"></div>
         </button>
+
+        <!-- Topbar User Profile & Settings Dropdown Trigger -->
+        <div class="topbar-user-menu-wrap" id="topbarUserMenuWrap">
+          <button type="button" class="topbar-user-btn" id="topbarUserBtn" onclick="toggleTopbarUserDropdown(event)" aria-haspopup="true" aria-expanded="false" title="Account & Settings">
+            <div class="topbar-user-avatar" id="topbarUserAvatar">
+              <span id="topbarUserAvatarInitials">MJ</span>
+              <img id="topbarUserAvatarImg" src="" alt="User Avatar" style="display: none;">
+            </div>
+            <div class="topbar-user-meta">
+              <span class="topbar-user-name" id="topbarUserName">Mang Juan</span>
+              <span class="topbar-user-role" id="topbarUserRole" data-en="Rice Farmer" data-tl="Magsasaka ng Palay">Rice Farmer</span>
+            </div>
+            <svg class="topbar-user-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+
+          <!-- Filtered Settings & Profile Dropdown Panel -->
+          <div class="topbar-user-dropdown" id="topbarUserDropdown" style="display: none;">
+            <div class="dropdown-user-header">
+              <div class="dropdown-avatar-wrap">
+                <div class="dropdown-avatar" id="dropdownAvatar">MJ</div>
+                <button type="button" class="dropdown-avatar-edit" onclick="openModal('modalEditProfile'); toggleTopbarUserDropdown();" title="Change Photo">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                </button>
+              </div>
+              <div class="dropdown-user-info">
+                <h4 id="dropdownUserName">Mang Juan</h4>
+                <p id="dropdownUserEmail">user@oryzatix.ph</p>
+                <span class="dropdown-role-badge" id="dropdownUserRoleBadge">Rice Farmer</span>
+                <div class="dropdown-location" id="dropdownUserLocation">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span id="dropdownLocationText">Roxas, Oriental Mindoro</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <div class="dropdown-menu-list">
+              <button type="button" class="dropdown-item" onclick="openModal('modalEditProfile'); toggleTopbarUserDropdown();">
+                <div class="item-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                <div class="item-text">
+                  <span class="item-title" data-en="Edit Profile & Password" data-tl="I-edit ang Profile at Password">Edit Profile & Password</span>
+                  <span class="item-desc" data-en="Photo, display name, location & security" data-tl="Larawan, pangalan, lokasyon at seguridad">Photo, display name, location & security</span>
+                </div>
+              </button>
+
+              <button type="button" class="dropdown-item" onclick="showScreen('profile'); toggleTopbarUserDropdown();">
+                <div class="item-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+                <div class="item-text">
+                  <span class="item-title" data-en="Account & App Settings" data-tl="Mga Setting ng Account">Account & App Settings</span>
+                  <span class="item-desc" data-en="View all profile details & preferences" data-tl="Tingnan ang lahat ng detalye ng profile">View all profile details & preferences</span>
+                </div>
+              </button>
+
+              <button type="button" class="dropdown-item" onclick="openModal('modalDiseaseLibrary'); toggleTopbarUserDropdown();">
+                <div class="item-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                <div class="item-text">
+                  <span class="item-title" data-en="Disease Library" data-tl="Aklatan ng Sakit">Disease Reference Library</span>
+                  <span class="item-desc" data-en="Symptom guides & diagnostic aids" data-tl="Mga gabay sa sintomas">Symptom guides & diagnostic aids</span>
+                </div>
+              </button>
+
+              <button type="button" class="dropdown-item" onclick="openModal('modalHelpSupport'); toggleTopbarUserDropdown();">
+                <div class="item-icon amber"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                <div class="item-text">
+                  <span class="item-title" data-en="Photography Tips" data-tl="Mga Tip sa Litrato">Photography & Lighting Tips</span>
+                  <span class="item-desc" data-en="Best practices for AI leaf scans" data-tl="Wastong pag-scan ng dahon">Best practices for AI leaf scans</span>
+                </div>
+              </button>
+
+              <button type="button" class="dropdown-item" onclick="openModal('modalAbout'); toggleTopbarUserDropdown();">
+                <div class="item-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+                <div class="item-text">
+                  <span class="item-title" data-en="About Oryzatix" data-tl="Tungkol sa Oryzatix">About Oryzatix System</span>
+                  <span class="item-desc" data-en="DA-PhilRice v2.0 AI Platform" data-tl="DA-PhilRice v2.0 AI Platform">DA-PhilRice v2.0 AI Platform</span>
+                </div>
+              </button>
+            </div>
+
+            <div class="dropdown-divider"></div>
+
+            <div class="dropdown-footer">
+              <button type="button" class="dropdown-signout-btn" onclick="openModal('modalLogoutConfirm'); toggleTopbarUserDropdown();">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                <span data-en="Sign Out" data-tl="Mag-sign Out">Sign Out</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -278,22 +369,59 @@
           </div>
 
           <div class="auth-body">
-            <div class="error-banner" id="loginError"></div>
-            <div class="success-banner" id="loginSuccess"></div>
+            @if(session('auth_error'))
+              <div class="error-banner show" id="loginError">{{ session('auth_error') }}</div>
+            @else
+              <div class="error-banner" id="loginError"></div>
+            @endif
+
+            @if(session('auth_success'))
+              <div class="success-banner show" id="loginSuccess">{{ session('auth_success') }}</div>
+            @else
+              <div class="success-banner" id="loginSuccess"></div>
+            @endif
+
+            <!-- Lockout Countdown Alert Card -->
+            <div class="lockout-countdown-card" id="loginLockoutCard" style="display: none;">
+              <div class="lockout-header">
+                <div class="lockout-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </div>
+                <div class="lockout-text">
+                  <h4>Temporary Login Lockout</h4>
+                  <p id="loginLockoutMsg">Too many incorrect password attempts.</p>
+                </div>
+              </div>
+              <div class="lockout-timer-wrap">
+                <div class="lockout-time-label">Try again in:</div>
+                <div class="lockout-timer-display" id="loginLockoutTimer">00:30</div>
+              </div>
+              <div class="lockout-progress-bar">
+                <div class="lockout-progress-fill" id="loginLockoutProgress" style="width: 100%;"></div>
+              </div>
+            </div>
 
             <form class="auth-form" id="loginForm" onsubmit="handleLogin(event); return false;" action="javascript:void(0);">
               <div class="form-group">
-                <label>EMAIL</label>
-                <input type="email" id="loginEmail" placeholder="Enter your email" required autocomplete="email">
+                <label for="loginEmail">USERNAME OR EMAIL ADDRESS</label>
+                <input type="text" id="loginEmail" placeholder="Enter username or email address" required autocomplete="username">
               </div>
 
               <div class="form-group">
-                <label>PASSWORD</label>
+                <div class="form-label-row">
+                  <label for="loginPassword">PASSWORD</label>
+                  <a href="javascript:void(0)" class="auth-forgot-link" onclick="showScreen('forgot-password')">Forgot Password?</a>
+                </div>
                 <div class="password-wrapper">
                   <input type="password" id="loginPassword" placeholder="Enter your password" required autocomplete="current-password">
                   <button type="button" class="toggle-password-btn" onclick="togglePassword('loginPassword', this)" aria-label="Show password">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                   </button>
+                </div>
+                <!-- Remaining Attempts Warning Badge below password input -->
+                <div class="attempts-warning-badge" id="loginAttemptsBadge" style="display: none;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                  <span id="loginAttemptsText">Remaining login attempts before lockout: 2 / 3</span>
                 </div>
               </div>
 
@@ -305,6 +433,17 @@
               <p>or</p>
               <span></span>
             </div>
+
+            <!-- Instant Direct Google Sign-In Button -->
+            <a href="{{ route('auth.google.redirect') }}?mode=login" class="google-auth-btn" style="text-decoration: none;">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+              </svg>
+              <span>Continue with Google</span>
+            </a>
 
             <div class="auth-switch">
               <span>Don't have an account? </span>
@@ -322,6 +461,7 @@
               <img src="{{ asset('images/logo.png') }}" alt="Oryzatix Logo" class="auth-app-logo">
             </div>
             <h1>Create Account</h1>
+            <p>Create your ORYZATIX account</p>
           </div>
 
           <div class="auth-body">
@@ -330,17 +470,17 @@
 
             <form class="auth-form" id="registerForm" onsubmit="handleRegister(event); return false;" action="javascript:void(0);">
               <div class="form-group">
-                <label>FULL NAME</label>
+                <label for="regName">FULL NAME</label>
                 <input type="text" id="regName" placeholder="Enter your full name" required autocomplete="name">
               </div>
 
               <div class="form-group">
-                <label>EMAIL</label>
-                <input type="email" id="regEmail" placeholder="Enter your email" required autocomplete="email">
+                <label for="regEmail">EMAIL ADDRESS</label>
+                <input type="email" id="regEmail" placeholder="Enter your email address" required autocomplete="email">
               </div>
 
               <div class="form-group">
-                <label>USER ROLE</label>
+                <label for="regRole">USER ROLE</label>
                 <select id="regRole" required>
                   <option value="farmer">Rice Farmer</option>
                   <option value="agri_worker">Agricultural Extension Worker</option>
@@ -348,12 +488,12 @@
               </div>
 
               <div class="form-group">
-                <label>FARM LOCATION</label>
-                <input type="text" id="regLocation" placeholder="Enter farm location (optional)" autocomplete="address-level2">
+                <label for="regLocation">FARM LOCATION</label>
+                <input type="text" id="regLocation" placeholder="Enter farm location (e.g. Barangay San Jose, Bicol)" autocomplete="address-level2">
               </div>
 
               <div class="form-group">
-                <label>PASSWORD</label>
+                <label for="regPassword">PASSWORD</label>
                 <div class="password-wrapper">
                   <input type="password" id="regPassword" placeholder="Enter password (min 6 chars)" minlength="6" required autocomplete="new-password">
                   <button type="button" class="toggle-password-btn" onclick="togglePassword('regPassword', this)" aria-label="Show password">
@@ -363,7 +503,7 @@
               </div>
 
               <div class="form-group">
-                <label>CONFIRM PASSWORD</label>
+                <label for="regPasswordConfirm">CONFIRM PASSWORD</label>
                 <div class="password-wrapper">
                   <input type="password" id="regPasswordConfirm" placeholder="Confirm password" minlength="6" required autocomplete="new-password">
                   <button type="button" class="toggle-password-btn" onclick="togglePassword('regPasswordConfirm', this)" aria-label="Show password">
@@ -381,9 +521,105 @@
               <span></span>
             </div>
 
+            <!-- Instant Direct Google Sign-Up Button -->
+            <a href="{{ route('auth.google.redirect') }}?mode=register" class="google-auth-btn" style="text-decoration: none;">
+              <svg viewBox="0 0 24 24" width="18" height="18">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+              </svg>
+              <span>Continue with Google</span>
+            </a>
+
             <div class="auth-switch">
               <span>Already have an account? </span>
               <a href="javascript:void(0)" onclick="showScreen('login')">Sign In</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ SCREEN 2B: FORGOT PASSWORD (OTP) ═══════════ -->
+      <section class="screen" id="forgot-password">
+        <div class="auth-web-card">
+          <div class="auth-header-card">
+            <div class="auth-logo-badge">
+              <img src="{{ asset('images/logo.png') }}" alt="Oryzatix Logo" class="auth-app-logo">
+            </div>
+            <h1>Forgot Password</h1>
+            <p>Recover your account using email OTP</p>
+          </div>
+
+          <div class="auth-body">
+            <div class="error-banner" id="forgotError"></div>
+            <div class="success-banner" id="forgotSuccess"></div>
+
+            <!-- STEP 1: Enter Email to receive 6-digit OTP -->
+            <div id="forgotStep1">
+              <form class="auth-form" onsubmit="handleSendOtp(event); return false;" action="javascript:void(0);">
+                <div class="form-group">
+                  <label for="forgotEmail">EMAIL ADDRESS</label>
+                  <input type="email" id="forgotEmail" placeholder="Enter your email address" required autocomplete="email">
+                </div>
+
+                <button type="submit" class="auth-btn" id="btnSendOtp">Send Verification Code</button>
+              </form>
+            </div>
+
+            <!-- STEP 2: Enter OTP Code and Set New Password -->
+            <div id="forgotStep2" style="display: none;">
+              <div class="otp-sent-info-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <div>
+                  <span>Verification code sent to:</span>
+                  <strong id="forgotSentEmailText">user@gmail.com</strong>
+                </div>
+              </div>
+
+              <form class="auth-form" onsubmit="handleResetPassword(event); return false;" action="javascript:void(0);">
+                <div class="form-group">
+                  <label for="forgotOtp">6-DIGIT VERIFICATION CODE (OTP)</label>
+                  <input type="text" id="forgotOtp" placeholder="Enter 6-digit code" maxlength="6" pattern="[0-9]{6}" required autocomplete="one-time-code" style="letter-spacing: 4px; font-weight: 800; font-size: 18px; text-align: center;">
+                </div>
+
+                <div class="form-group">
+                  <label for="forgotNewPassword">NEW PASSWORD</label>
+                  <div class="password-wrapper">
+                    <input type="password" id="forgotNewPassword" placeholder="Enter new password (min 6 chars)" minlength="6" required autocomplete="new-password">
+                    <button type="button" class="toggle-password-btn" onclick="togglePassword('forgotNewPassword', this)" aria-label="Show password">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="forgotNewPasswordConfirm">CONFIRM NEW PASSWORD</label>
+                  <div class="password-wrapper">
+                    <input type="password" id="forgotNewPasswordConfirm" placeholder="Confirm new password" minlength="6" required autocomplete="new-password">
+                    <button type="button" class="toggle-password-btn" onclick="togglePassword('forgotNewPasswordConfirm', this)" aria-label="Show password">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <button type="submit" class="auth-btn" id="btnResetPassword">Reset Password</button>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                  <a href="javascript:void(0)" class="auth-forgot-link" onclick="handleResendOtp()">Resend Code</a>
+                  <a href="javascript:void(0)" class="auth-forgot-link" onclick="changeForgotEmail()">Change Email</a>
+                </div>
+              </form>
+            </div>
+
+            <div class="auth-or-divider">
+              <span></span>
+              <p>or</p>
+              <span></span>
+            </div>
+
+            <div class="auth-switch">
+              <a href="javascript:void(0)" onclick="showScreen('login')">← Back to Sign In</a>
             </div>
           </div>
         </div>
@@ -534,17 +770,17 @@
       <section class="screen" id="unrecognized-result">
         <div class="unrecognized-card">
           <div class="unrec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="28" height="28"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-          <h2 id="unrecTitle" data-en="Image Not Found in Dataset" data-tl="Hindi Mabasa ang Larawan">Hindi Mabasa ang Larawan</h2>
-          <p class="unrec-subtitle" id="unrecMessage" style="font-size: 15px; font-weight: 600; color: #b91c1c;">Hindi mabasa ang larawan dahil wala ito sa dataset o database ng system.</p>
+          <h2 id="unrecTitle" data-en="Unreadable Image" data-tl="Hindi Mabasa ang Larawan">Unreadable Image</h2>
+          <p class="unrec-subtitle" id="unrecMessage" style="font-size: 15px; font-weight: 600; color: #b91c1c;">Cannot read or diagnose this image because it is not found in the system dataset or database.</p>
 
           <div class="unrec-box">
-            <h4>Aktibong Dataset sa Database:</h4>
+            <h4 data-en="Active Dataset in Database:" data-tl="Aktibong Dataset sa Database:">Active Dataset in Database:</h4>
             <ul>
               <li><strong>Bacterial Leaf Blight (BLB)</strong> — <em>Mild (≤ 25%), Moderate (26% – 60%), Severe (> 60%)</em></li>
               <li><strong>Rice Leaf Blast (Magnaporthe oryzae)</strong></li>
               <li><strong>Brown Spot (Bipolaris oryzae)</strong></li>
               <li><strong>Rice Tungro Disease (RTBV/RTSV)</strong></li>
-              <li><strong>Healthy Rice Leaves (Malulusog na Dahon)</strong></li>
+              <li><strong>Healthy Rice Leaves</strong></li>
             </ul>
           </div>
 
@@ -624,18 +860,30 @@
           <div class="stat-card"><div class="stat-num red" id="statSevere">0</div><div class="stat-label">Severe (> 60%)</div></div>
         </div>
 
-        <div class="history-filter-wrap">
-          <input type="text" class="history-search-input" id="historySearchInput" placeholder="Search disease name, pathogen, or date..." oninput="filterHistoryList()">
-          <div class="history-filter-chips">
-            <button class="history-chip active" onclick="setHistoryFilter('all', this)">All Scans</button>
-            <button class="history-chip" onclick="setHistoryFilter('healthy', this)">Healthy</button>
-            <button class="history-chip" onclick="setHistoryFilter('mild', this)">Mild</button>
-            <button class="history-chip" onclick="setHistoryFilter('moderate', this)">Moderate</button>
-            <button class="history-chip" onclick="setHistoryFilter('severe', this)">Severe</button>
-            <button class="history-chip" onclick="setHistoryFilter('blast', this)">Leaf Blast</button>
-            <button class="history-chip" onclick="setHistoryFilter('blb', this)">BLB</button>
-            <button class="history-chip" onclick="setHistoryFilter('brown_spot', this)">Brown Spot</button>
-            <button class="history-chip" onclick="setHistoryFilter('tungro', this)">Tungro</button>
+        <div class="history-filter-card">
+          <div class="history-search-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="history-search-input" id="historySearchInput" placeholder="Search disease name, pathogen, or date..." oninput="filterHistoryList()">
+          </div>
+          <div class="history-filter-controls">
+            <div class="history-select-wrap">
+              <label for="historyFilterSelect">Filter:</label>
+              <select id="historyFilterSelect" onchange="setHistoryFilter(this.value)">
+                <option value="all">All Scans</option>
+                <option value="healthy">Healthy</option>
+                <option value="mild">Mild (≤ 25%)</option>
+                <option value="moderate">Moderate (26% – 60%)</option>
+                <option value="severe">Severe (> 60%)</option>
+                <option value="blast">Leaf Blast</option>
+                <option value="blb">BLB</option>
+                <option value="brown_spot">Brown Spot</option>
+                <option value="tungro">Tungro</option>
+              </select>
+            </div>
+            <button class="btn-refresh" onclick="loadHistory()" title="Refresh Scan History">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              <span>Refresh</span>
+            </button>
           </div>
         </div>
 
@@ -692,12 +940,16 @@
 
         <div class="chat-messages" id="chatMessages">
           <div class="chat-time">Today · AI Assistant Active</div>
-          <div class="chat-bubble ai" data-lang="tagalog">
+          <div class="chat-bubble ai" data-lang="tagalog" data-raw-content="Kumusta! Ako ang iyong Rice AI Assistant. Pwede mo akong tanungin tungkol sa mga sakit ng palay, tamang dosage ng gamot, organiko o kemikal na gamutan. Mag-type o mag-voice message lang!">
             <div class="chat-text-content">
               <p>Kumusta! Ako ang iyong Rice AI Assistant. Pwede mo akong tanungin tungkol sa mga sakit ng palay, tamang dosage ng gamot, organiko o kemikal na gamutan. Mag-type o mag-voice message lang!</p>
             </div>
             <div class="chat-bubble-footer">
-              <button class="audio-speaker-btn" onclick="toggleSpeechBubble(this)" title="Read aloud / Stop">
+              <button type="button" class="translate-bubble-btn" onclick="translateAiBubble(this)" title="Translate message">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M5 8l6 6"/><path d="M4 14l6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="M22 22l-5-10-5 10"/><path d="M14 18h6"/></svg>
+                <span>Translate to English</span>
+              </button>
+              <button type="button" class="audio-speaker-btn" onclick="toggleSpeechBubble(this)" title="Read aloud / Stop">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
                 <span>Read</span>
               </button>
@@ -1106,7 +1358,7 @@
           </div>
           <button class="admin-add-btn" onclick="openModal('modalAdminAddUser')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            <span>+ Add New User</span>
+            <span>Add New User</span>
           </button>
         </div>
 
@@ -1198,7 +1450,7 @@
           </div>
           <button class="admin-add-btn" onclick="openModal('modalAdminAddDisease')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            <span>+ Add Disease Info</span>
+            <span>Add Disease Info</span>
           </button>
         </div>
 
@@ -1348,7 +1600,7 @@
           </div>
           <button class="admin-add-btn" onclick="openModal('modalAdminAddFaq')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            <span>+ Add Q&A Knowledge</span>
+            <span>Add Q&A Knowledge</span>
           </button>
         </div>
 
@@ -1410,7 +1662,7 @@
         </div>
       </section>
 
-      <!-- ═══════════ SCREEN 12: PROFILE & SETTINGS ═══════════ -->
+      <!-- ═══════════ SCREEN 12: ACCOUNT & APP SETTINGS (PROFILE & SECURITY) ═══════════ -->
       <section class="screen" id="profile">
         <div class="profile-card">
           <div class="profile-avatar-wrap">
@@ -1427,6 +1679,12 @@
           <div class="profile-menu-item" onclick="openModal('modalEditProfile')">
             <div class="pm-icon green-bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
             <span class="pm-text">Edit Profile Information</span>
+            <span class="pm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+          </div>
+
+          <div class="profile-menu-item" id="profileSecurityMenuItem" style="display: none;" onclick="openModal('modalAdminSecuritySettings'); loadAdminSecuritySettings();">
+            <div class="pm-icon purple-bg" style="background: #ede9fe; color: #7c3aed;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <span class="pm-text">Login Security & Attempt Policy</span>
             <span class="pm-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
           </div>
 
@@ -1664,6 +1922,130 @@
         </svg>
         <span>Yes, Delete Account</span>
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- Admin: Login Security & Attempt Lockout Settings Modal -->
+<div class="modal-backdrop" id="modalAdminSecuritySettings">
+  <div class="modal-box edit-profile-modal-box" style="max-width: 680px; max-height: 88vh; overflow-y: auto;">
+    <div class="modal-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="modal-header-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div>
+          <h3 style="margin: 0; font-size: 17px; font-weight: 800;">Login Security & Attempt Policy</h3>
+          <p style="font-size: 11.5px; color: var(--neutral-500); margin: 2px 0 0;">Configure password attempt limits and lockout durations</p>
+        </div>
+      </div>
+      <button class="modal-close-btn" onclick="closeModal('modalAdminSecuritySettings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+
+    <div class="success-banner" id="adminSecuritySuccessBanner"></div>
+    <div class="error-banner" id="adminSecurityErrorBanner"></div>
+
+    <!-- Active Security Overview Banner -->
+    <div class="admin-panel-card" style="margin: 14px 0 18px;">
+      <div class="panel-card-header">
+        <div class="panel-title-group">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <h3>Current Active Security Rules</h3>
+        </div>
+        <span class="badge-pill" style="background: transparent; color: var(--brand-green); font-weight: 800; padding: 0; display: inline-flex; align-items: center; gap: 6px;"><span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--brand-green);"></span>Active &amp; Enforcing</span>
+      </div>
+      <div class="panel-card-body" style="padding: 16px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+          <div style="background: var(--neutral-50); border: 1px solid var(--neutral-200); border-radius: var(--radius-md); padding: 12px;">
+            <div style="font-size: 10.5px; font-weight: 800; color: var(--neutral-500); text-transform: uppercase; letter-spacing: 0.5px;">Max Failed Attempts</div>
+            <div style="font-size: 20px; font-weight: 900; color: var(--brand-green); margin-top: 2px;" id="dispActiveMaxAttempts">3 Attempts</div>
+            <div style="font-size: 11.5px; color: var(--neutral-600); margin-top: 2px;">Wrong passwords before lockout</div>
+          </div>
+          <div style="background: var(--neutral-50); border: 1px solid var(--neutral-200); border-radius: var(--radius-md); padding: 12px;">
+            <div style="font-size: 10.5px; font-weight: 800; color: var(--neutral-500); text-transform: uppercase; letter-spacing: 0.5px;">Lockout Penalty</div>
+            <div style="font-size: 20px; font-weight: 900; color: #e11d48; margin-top: 2px;" id="dispActiveLockoutSeconds">30 Seconds</div>
+            <div style="font-size: 11.5px; color: var(--neutral-600); margin-top: 2px;">Cooling-off wait time</div>
+          </div>
+          <div style="background: var(--neutral-50); border: 1px solid var(--neutral-200); border-radius: var(--radius-md); padding: 12px;">
+            <div style="font-size: 10.5px; font-weight: 800; color: var(--neutral-500); text-transform: uppercase; letter-spacing: 0.5px;">Protection Scope</div>
+            <div style="font-size: 15px; font-weight: 800; color: var(--neutral-800); margin-top: 4px;">IP &amp; Account Level</div>
+            <div style="font-size: 11.5px; color: var(--neutral-600); margin-top: 2px;">Anti brute-force protection</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Adjustment Configuration Cards -->
+    <div class="admin-security-grid" style="grid-template-columns: 1fr; gap: 16px;">
+      <!-- CARD 1: MAX LOGIN ATTEMPTS -->
+      <div class="security-setting-card">
+        <div>
+          <div class="security-card-header">
+            <div class="security-card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="security-card-title">
+              <h3 style="font-size: 15px;">Maximum Failed Login Attempts</h3>
+              <p>Allowed consecutive incorrect password attempts before imposing lockout.</p>
+            </div>
+          </div>
+
+          <div class="security-preset-pills" id="attemptPillsContainer">
+            <button type="button" class="sec-preset-pill active" onclick="selectAttemptPreset(3, this)">3 Attempts (Default)</button>
+            <button type="button" class="sec-preset-pill" onclick="selectAttemptPreset(5, this)">5 Attempts</button>
+            <button type="button" class="sec-preset-pill" onclick="selectAttemptPreset(10, this)">10 Attempts</button>
+          </div>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <label for="adminMaxAttemptsInput" style="font-size: 11px; font-weight: 800; color: var(--neutral-700);">CUSTOM ATTEMPT LIMIT</label>
+            <div class="security-input-row">
+              <input type="number" id="adminMaxAttemptsInput" min="1" max="20" value="3" oninput="onCustomAttemptChange()">
+              <span>attempts before lockout</span>
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 11.5px; color: var(--neutral-500); margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--neutral-100);">
+          💡 Recommended: <strong>3 attempts</strong> for optimal protection against unauthorized access.
+        </div>
+      </div>
+
+      <!-- CARD 2: LOCKOUT PENALTY DURATION -->
+      <div class="security-setting-card">
+        <div>
+          <div class="security-card-header">
+            <div class="security-card-icon amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="security-card-title">
+              <h3 style="font-size: 15px;">Lockout Penalty Duration</h3>
+              <p>Base cooling-off duration the user must wait before attempting to sign in again.</p>
+            </div>
+          </div>
+
+          <div class="security-preset-pills" id="durationPillsContainer">
+            <button type="button" class="sec-preset-pill active" onclick="selectDurationPreset(30, this)">30 Seconds (Default)</button>
+            <button type="button" class="sec-preset-pill" onclick="selectDurationPreset(60, this)">1 Minute</button>
+            <button type="button" class="sec-preset-pill" onclick="selectDurationPreset(120, this)">2 Minutes</button>
+            <button type="button" class="sec-preset-pill" onclick="selectDurationPreset(300, this)">5 Minutes</button>
+          </div>
+
+          <div class="form-group" style="margin-top: 14px;">
+            <label for="adminLockoutDurationInput" style="font-size: 11px; font-weight: 800; color: var(--neutral-700);">CUSTOM LOCKOUT SECONDS</label>
+            <div class="security-input-row">
+              <input type="number" id="adminLockoutDurationInput" min="5" max="3600" value="30" oninput="onCustomDurationChange()">
+              <span>seconds cooling-off period</span>
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 11.5px; color: var(--neutral-500); margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--neutral-100);">
+          ⏱️ Choose between fast <strong>30 seconds</strong>, <strong>1 minute</strong>, or <strong>2 minutes</strong> base penalty.
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; border-top: 1px solid var(--neutral-200); padding-top: 14px;">
+      <button type="button" class="btn-modal-cancel" onclick="closeModal('modalAdminSecuritySettings')">Cancel</button>
+      <button type="button" class="auth-btn" onclick="saveAdminSecuritySettings()" id="btnSaveSecuritySettings" style="margin-top: 0; min-width: 180px;">Save Security Settings</button>
     </div>
   </div>
 </div>
@@ -2024,6 +2406,34 @@
   </div>
 </div>
 
+<!-- Admin: View Full Disease Details Modal -->
+<div class="modal-backdrop" id="modalAdminViewDisease">
+  <div class="modal-box edit-profile-modal-box" style="max-width: 680px; max-height: 85vh; overflow-y: auto;">
+    <div class="modal-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="modal-header-icon green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <h3 id="adminViewDiseaseTitle" style="margin: 0; font-size: 17px; font-weight: 800;">Disease Details</h3>
+          <p id="adminViewDiseaseSciTitle" style="font-size: 12px; font-style: italic; color: var(--neutral-500); margin: 2px 0 0;">Scientific Name</p>
+        </div>
+      </div>
+      <button class="modal-close-btn" onclick="closeModal('modalAdminViewDisease')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div id="adminViewDiseaseContent" style="padding: 10px 0;">
+      <!-- Content populated dynamically -->
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 14px; border-top: 1px solid var(--neutral-200); padding-top: 12px;">
+      <button type="button" id="adminViewDiseaseDeleteBtn" class="btn-danger-outline" style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; font-size: 12.5px; font-weight: 700; color: #e11d48; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        Delete Disease
+      </button>
+      <button type="button" class="btn-modal-cancel" onclick="closeModal('modalAdminViewDisease')">Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- Admin: Delete Disease Confirmation Modal -->
 <div class="modal-backdrop" id="modalAdminDeleteDisease">
   <div class="modal-box delete-confirm-modal-box">
@@ -2265,6 +2675,8 @@
     </div>
   </div>
 </div>
+
+
 
 <script src="{{ asset('js/rice-detector.js') }}?v={{ time() }}"></script>
 <script>
