@@ -107,12 +107,10 @@ function apiUrl(path) {
 
 function getAuthToken() {
   try {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.removeItem('oryzatix_auth_token');
-      window.localStorage.removeItem('oryzatix_token');
-    }
     const ses = (typeof window !== 'undefined' && window.sessionStorage) ? window.sessionStorage.getItem('oryzatix_auth_token') : null;
-    return ses || null;
+    if (ses) return ses;
+    const loc = (typeof window !== 'undefined' && window.localStorage) ? window.localStorage.getItem('oryzatix_auth_token') : null;
+    return loc || null;
   } catch (e) {
     return null;
   }
@@ -120,15 +118,16 @@ function getAuthToken() {
 
 function setAuthToken(token) {
   try {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.removeItem('oryzatix_auth_token');
-      window.localStorage.removeItem('oryzatix_token');
-    }
-    if (typeof window !== 'undefined' && window.sessionStorage) {
+    if (typeof window !== 'undefined') {
       if (token) {
-        window.sessionStorage.setItem('oryzatix_auth_token', token);
+        if (window.sessionStorage) window.sessionStorage.setItem('oryzatix_auth_token', token);
+        if (window.localStorage) window.localStorage.setItem('oryzatix_auth_token', token);
       } else {
-        window.sessionStorage.removeItem('oryzatix_auth_token');
+        if (window.sessionStorage) window.sessionStorage.removeItem('oryzatix_auth_token');
+        if (window.localStorage) {
+          window.localStorage.removeItem('oryzatix_auth_token');
+          window.localStorage.removeItem('oryzatix_token');
+        }
       }
     }
   } catch (e) {}
@@ -606,6 +605,7 @@ async function checkAuthAndProceed() {
     setAuthToken(paramToken);
     try {
       sessionStorage.setItem('oryzatix_is_logged_in', 'true');
+      localStorage.setItem('oryzatix_is_logged_in', 'true');
     } catch (e) {}
     // Clean URL query string without page reload
     try {
@@ -613,15 +613,17 @@ async function checkAuthAndProceed() {
     } catch (e) {}
   }
 
-  const isSessionLoggedIn = (typeof sessionStorage !== 'undefined') && sessionStorage.getItem('oryzatix_is_logged_in') === 'true';
+  const isSessionLoggedIn = (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('oryzatix_is_logged_in') === 'true') ||
+                            (typeof localStorage !== 'undefined' && localStorage.getItem('oryzatix_is_logged_in') === 'true');
   const isGoogleCallback = isGoogleParam || !!(window.INITIAL_AUTH && window.INITIAL_AUTH.googleLoginSuccess);
   const savedScreen = (typeof sessionStorage !== 'undefined') ? sessionStorage.getItem('oryzatix_active_screen') : null;
   const savedAuthScreen = (typeof sessionStorage !== 'undefined') ? sessionStorage.getItem('oryzatix_active_auth_screen') : null;
 
-  // 1. If user is in an active session OR returning from a successful Google OAuth login
-  if ((isSessionLoggedIn || isGoogleCallback) && window.INITIAL_AUTH && window.INITIAL_AUTH.user) {
+  // 1. If user is pre-rendered in INITIAL_AUTH
+  if (window.INITIAL_AUTH && window.INITIAL_AUTH.user) {
     try {
       sessionStorage.setItem('oryzatix_is_logged_in', 'true');
+      localStorage.setItem('oryzatix_is_logged_in', 'true');
     } catch (e) {}
     currentUser = window.INITIAL_AUTH.user;
     if (window.INITIAL_AUTH.token) {
@@ -652,6 +654,7 @@ async function checkAuthAndProceed() {
       if (res.ok && data && data.success && data.user) {
         try {
           sessionStorage.setItem('oryzatix_is_logged_in', 'true');
+          localStorage.setItem('oryzatix_is_logged_in', 'true');
         } catch (e) {}
         currentUser = data.user;
         applyUserToUI();
@@ -674,6 +677,10 @@ async function checkAuthAndProceed() {
     sessionStorage.removeItem('oryzatix_is_logged_in');
     sessionStorage.removeItem('oryzatix_active_screen');
     sessionStorage.removeItem('oryzatix_last_scan_result');
+  }
+  if (typeof localStorage !== 'undefined') {
+    localStorage.removeItem('oryzatix_is_logged_in');
+    localStorage.removeItem('oryzatix_active_screen');
   }
   resetAuthForms();
   const targetAuthScreen = (savedAuthScreen && AUTH_SCREENS.includes(savedAuthScreen) && document.getElementById(savedAuthScreen))

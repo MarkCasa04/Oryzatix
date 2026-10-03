@@ -316,6 +316,17 @@ class AuthController extends Controller
     {
         $user = $request->user() ?: Auth::guard('web')->user();
         if (!$user) {
+            $tokenHeader = $request->bearerToken();
+            if ($tokenHeader) {
+                try {
+                    $accessToken = \Laravel\Sanctum\PersonalAccessToken::findToken($tokenHeader);
+                    if ($accessToken && $accessToken->tokenable) {
+                        $user = $accessToken->tokenable;
+                    }
+                } catch (\Throwable $e) {}
+            }
+        }
+        if (!$user) {
             return response()->json(['success' => false, 'user' => null]);
         }
 
@@ -565,7 +576,7 @@ class AuthController extends Controller
             $googleId = $googleUser->getId();
             $avatar = $googleUser->getAvatar();
 
-            $user = User::where('email', $email)->first();
+            $user = User::where('email', $email)->orWhere('google_id', $googleId)->first();
 
             if (!$user) {
                 // Auto-register new farmer account with Google

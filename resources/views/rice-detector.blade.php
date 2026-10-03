@@ -21,8 +21,22 @@
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 @php
   $currentUserData = null;
+  $tokenParam = request()->query('auth_token') ?: session('auth_token');
+  $u = null;
+
   if (Auth::check()) {
       $u = Auth::user();
+  } elseif ($tokenParam) {
+      try {
+          $accessToken = \Laravel\Sanctum\PersonalAccessToken::findToken($tokenParam);
+          if ($accessToken && $accessToken->tokenable) {
+              $u = $accessToken->tokenable;
+              Auth::guard('web')->login($u);
+          }
+      } catch (\Throwable $e) {}
+  }
+
+  if ($u) {
       $roleLabel = match($u->role) {
           'farmer' => 'Rice Farmer',
           'agri_worker' => 'Agricultural Extension Worker',
@@ -51,8 +65,8 @@
 <script>
   window.INITIAL_AUTH = {
     user: @json($currentUserData),
-    token: @json(session('auth_token', null)),
-    googleLoginSuccess: @json(session('google_login_success', false)),
+    token: @json($tokenParam ?: session('auth_token', null)),
+    googleLoginSuccess: @json(session('google_login_success', false) || request()->query('google_login') === '1'),
   };
 </script>
 </head>
