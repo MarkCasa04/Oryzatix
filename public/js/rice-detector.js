@@ -589,8 +589,23 @@ function navigateAfterAuth() {
 }
 
 async function checkAuthAndProceed() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramToken = urlParams.get('auth_token');
+  const isGoogleParam = urlParams.get('google_login') === '1';
+
+  if (paramToken) {
+    setAuthToken(paramToken);
+    try {
+      sessionStorage.setItem('oryzatix_is_logged_in', 'true');
+    } catch (e) {}
+    // Clean URL query string without page reload
+    try {
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } catch (e) {}
+  }
+
   const isSessionLoggedIn = (typeof sessionStorage !== 'undefined') && sessionStorage.getItem('oryzatix_is_logged_in') === 'true';
-  const isGoogleCallback = !!(window.INITIAL_AUTH && window.INITIAL_AUTH.googleLoginSuccess);
+  const isGoogleCallback = isGoogleParam || !!(window.INITIAL_AUTH && window.INITIAL_AUTH.googleLoginSuccess);
   const savedScreen = (typeof sessionStorage !== 'undefined') ? sessionStorage.getItem('oryzatix_active_screen') : null;
   const savedAuthScreen = (typeof sessionStorage !== 'undefined') ? sessionStorage.getItem('oryzatix_active_auth_screen') : null;
 
@@ -613,29 +628,33 @@ async function checkAuthAndProceed() {
     return;
   }
 
-  // 2. If session is flagged as logged in and a token exists, verify with /auth/user
-  if (isSessionLoggedIn) {
-    const token = getAuthToken();
-    if (token) {
-      try {
-        const res = await fetch(apiUrl('/auth/user'), {
-          credentials: 'include',
-          headers: authHeaders(),
-        });
-        const data = await res.json();
-        if (res.ok && data && data.success && data.user) {
-          currentUser = data.user;
-          applyUserToUI();
-          if (savedScreen && !AUTH_SCREENS.includes(savedScreen) && document.getElementById(savedScreen)) {
-            showScreen(savedScreen);
-          } else {
-            navigateAfterAuth();
-          }
-          return;
+  // 2. If token exists (from URL param or storage), fetch user info directly
+  const activeToken = getAuthToken() || paramToken;
+  if (activeToken || isSessionLoggedIn || isGoogleCallback) {
+    if (activeToken) {
+      setAuthToken(activeToken);
+    }
+    try {
+      const res = await fetch(apiUrl('/auth/user'), {
+        credentials: 'include',
+        headers: authHeaders(),
+      });
+      const data = await res.json();
+      if (res.ok && data && data.success && data.user) {
+        try {
+          sessionStorage.setItem('oryzatix_is_logged_in', 'true');
+        } catch (e) {}
+        currentUser = data.user;
+        applyUserToUI();
+        if (savedScreen && !AUTH_SCREENS.includes(savedScreen) && document.getElementById(savedScreen)) {
+          showScreen(savedScreen);
+        } else {
+          navigateAfterAuth();
         }
-      } catch (e) {
-        console.warn('Auth token verification error:', e);
+        return;
       }
+    } catch (e) {
+      console.warn('Auth token verification error:', e);
     }
   }
 

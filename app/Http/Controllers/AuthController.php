@@ -554,7 +554,9 @@ class AuthController extends Controller
 
             $authToken = $user->createToken('auth_token')->plainTextToken;
 
-            return redirect('/')->with('google_login_success', true)->with('auth_token', $authToken);
+            return redirect('/?auth_token=' . urlencode($authToken) . '&google_login=1')
+                ->with('google_login_success', true)
+                ->with('auth_token', $authToken);
         } catch (Exception $e) {
             Log::error('Google Socialite error: ' . $e->getMessage());
             return redirect('/')->with('auth_error', 'Failed to authenticate with Google: ' . $e->getMessage());
