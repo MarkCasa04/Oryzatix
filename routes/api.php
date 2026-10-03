@@ -79,7 +79,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('rice-detector')->group(function () {
-        Route::post('/upload', [RiceScanController::class, 'upload'])->name('rice-detector.upload');
         Route::get('/history', [RiceScanController::class, 'history'])->name('rice-detector.history');
         Route::delete('/scan/{id}', [RiceScanController::class, 'destroy'])->name('rice-detector.destroy');
     });
@@ -91,3 +90,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/clear', [ConsultationController::class, 'clear'])->name('consultation.clear');
     });
 });
+
+// Scan upload with optional user attachment (accessible for seamless scanning across all auth modes)
+Route::post('/rice-detector/upload', [RiceScanController::class, 'upload'])->name('rice-detector.upload');

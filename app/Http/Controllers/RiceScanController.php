@@ -1597,7 +1597,8 @@ class RiceScanController extends Controller
         $saved = false;
 
         try {
-            if ($path && ($user = $request->user())) {
+            $user = auth('sanctum')->user() ?: Auth::guard('web')->user() ?: $request->user();
+            if ($path && $user) {
                 $scan = RiceScan::create([
                     'user_id' => $user->id,
                     'image_path' => $path,
