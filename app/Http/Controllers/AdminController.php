@@ -980,9 +980,14 @@ class AdminController extends Controller
 
     private function formatScan(RiceScan $scan): array
     {
-        $imageUrl = $scan->image_path
-            ? (str_starts_with($scan->image_path, 'http') ? $scan->image_path : asset('storage/' . $scan->image_path))
-            : null;
+        $imageUrl = null;
+        if ($scan->image_path) {
+            if (str_starts_with($scan->image_path, 'data:') || str_starts_with($scan->image_path, 'http://') || str_starts_with($scan->image_path, 'https://')) {
+                $imageUrl = $scan->image_path;
+            } else {
+                $imageUrl = asset('storage/' . $scan->image_path);
+            }
+        }
 
         return [
             'id' => $scan->id,

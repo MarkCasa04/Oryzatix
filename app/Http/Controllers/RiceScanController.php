@@ -1574,18 +1574,24 @@ class RiceScanController extends Controller
 
         $path = null;
         $imageUrl = null;
-        try {
-            $path = $file->store('scans', 'public');
-            if ($path) {
-                $imageUrl = asset('storage/' . $path);
+        $base64Image = null;
+
+        if ($fullPath && file_exists($fullPath)) {
+            $mime = $file->getMimeType() ?: 'image/jpeg';
+            $fileContent = @file_get_contents($fullPath);
+            if ($fileContent) {
+                $base64Image = 'data:' . $mime . ';base64,' . base64_encode($fileContent);
+                $imageUrl = $base64Image;
             }
-        } catch (Exception $e) {
-            $path = null;
         }
 
-        if (!$imageUrl && $fullPath && file_exists($fullPath)) {
-            $mime = $file->getMimeType() ?: 'image/jpeg';
-            $imageUrl = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($fullPath));
+        try {
+            $path = $file->store('scans', 'public');
+            if ($path && !$imageUrl) {
+                $imageUrl = asset('storage/' . $path);
+            }
+        } catch (\Throwable $e) {
+            $path = null;
         }
 
         $diseaseKeys = $this->supportedDatasetKeys();
@@ -1861,7 +1867,7 @@ class RiceScanController extends Controller
         try {
             $user = auth('sanctum')->user() ?: Auth::guard('web')->user() ?: $request->user();
             if ($user) {
-                $savedPath = $path ?: ('scans/' . ($originalName ?: ('scan_' . time() . '.jpg')));
+                $savedPath = $base64Image ?: ($imageUrl ?: ($path ?: ('scans/' . ($originalName ?: ('scan_' . time() . '.jpg')))));
                 $scan = RiceScan::create([
                     'user_id' => $user->id,
                     'image_path' => $savedPath,
@@ -1954,6 +1960,15 @@ class RiceScanController extends Controller
                         $affectedStr = '> 60%';
                     }
 
+                    $scanImageUrl = null;
+                    if ($scan->image_path) {
+                        if (str_starts_with($scan->image_path, 'data:') || str_starts_with($scan->image_path, 'http://') || str_starts_with($scan->image_path, 'https://')) {
+                            $scanImageUrl = $scan->image_path;
+                        } else {
+                            $scanImageUrl = asset('storage/' . $scan->image_path);
+                        }
+                    }
+
                     return [
                         'id' => $scan->id,
                         'disease' => $scan->disease_name,
@@ -1966,7 +1981,7 @@ class RiceScanController extends Controller
                         'severity_label' => ucfirst($scan->severity),
                         'affected_percentage' => $affectedStr,
                         'severity_class' => $severityClass,
-                        'image_url' => $scan->image_path ? asset('storage/' . $scan->image_path) : null,
+                        'image_url' => $scanImageUrl,
                         'treatments' => $scan->treatment_recommendation,
                     ];
                 });

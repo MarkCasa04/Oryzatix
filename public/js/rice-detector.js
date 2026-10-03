@@ -2242,13 +2242,18 @@ function getDefaultTreatments(key, severity = 'moderate') {
       { name: 'Compost & Organic Matter', desc: 'Incorporate 2-3 tons/ha well-decomposed compost into field soil.', tag: 'Cultural', tag_class: 'cultural' },
     ],
   };
-}
-
 function applyScanResult(scan) {
   currentScanResult = scan;
   try {
     if (typeof sessionStorage !== 'undefined' && scan) {
       sessionStorage.setItem('oryzatix_last_scan_result', JSON.stringify(scan));
+    }
+    if (typeof localStorage !== 'undefined' && scan && scan.image_url) {
+      let imageMap = {};
+      try { imageMap = JSON.parse(localStorage.getItem('oryzatix_scan_images') || '{}'); } catch(e){}
+      if (scan.id) imageMap[scan.id] = scan.image_url;
+      imageMap['latest'] = scan.image_url;
+      localStorage.setItem('oryzatix_scan_images', JSON.stringify(imageMap));
     }
   } catch (e) {}
 
@@ -2770,8 +2775,16 @@ function renderHistoryList(scans) {
       badgeText = 'Moderate (26% – 60%)';
     }
 
-    const thumb = scan.image_url
-      ? '<img src="' + escapeHtml(scan.image_url) + '" alt="' + escapeHtml(scan.disease) + '">'
+    let scanImg = scan.image_url;
+    if (!scanImg && typeof localStorage !== 'undefined') {
+      try {
+        const map = JSON.parse(localStorage.getItem('oryzatix_scan_images') || '{}');
+        scanImg = map[scan.id] || null;
+      } catch(e){}
+    }
+
+    const thumb = scanImg
+      ? '<img src="' + escapeHtml(scanImg) + '" alt="' + escapeHtml(scan.disease) + '" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">'
       : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8v8M8 12h8"/></svg>';
 
     const sciname = scan.scientific ? '<em>' + escapeHtml(scan.scientific) + '</em>' : (sev === 'healthy' ? 'Optimal Plant Health' : 'Diagnosed via MobileNet');
@@ -2957,8 +2970,15 @@ async function loadHomeRecentScans() {
         if (s.severity === 'healthy') sevLabel = 'Healthy';
         else if (s.severity === 'mild') sevLabel = 'Mild (≤25%)';
         else if (s.severity === 'moderate') sevLabel = 'Moderate (26-60%)';
-        const thumbContent = s.image_url
-          ? '<img src="' + escapeHtml(s.image_url) + '" alt="' + escapeHtml(s.disease) + '" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">'
+        let scanImg = s.image_url;
+        if (!scanImg && typeof localStorage !== 'undefined') {
+          try {
+            const map = JSON.parse(localStorage.getItem('oryzatix_scan_images') || '{}');
+            scanImg = map[s.id] || map['latest'] || null;
+          } catch(e){}
+        }
+        const thumbContent = scanImg
+          ? '<img src="' + escapeHtml(scanImg) + '" alt="' + escapeHtml(s.disease) + '" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">'
           : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M7 12h10"/></svg>';
 
         return '<div class="recent-scan-card fade-in" onclick="viewHistoryScanDetail(' + (s.id || 0) + ')">' +
