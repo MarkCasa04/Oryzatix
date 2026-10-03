@@ -106,7 +106,7 @@
 <input type="hidden" id="chatLanguage" value="tagalog">
 <input type="hidden" id="uiLanguage" value="english">
 
-<div class="web-app-shell {{ $currentUserData ? '' : 'auth-mode' }}">
+<div class="web-app-shell auth-mode">
 
   <!-- ═══════════ DESKTOP NAVIGATION SIDEBAR ═══════════ -->
   <aside class="web-sidebar">
@@ -273,31 +273,6 @@
           <span data-en="Chatbot FAQ / AI" data-tl="Chatbot at FAQ">Chatbot Manager</span>
         </button>
       </div>
-        <button class="sidebar-nav-btn" data-screen="admin-users" onclick="showScreen('admin-users'); loadAdminUsers(); closeMobileDrawer();">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          <span data-en="User Accounts" data-tl="Mga Account">User Management</span>
-        </button>
-
-        <button class="sidebar-nav-btn" data-screen="admin-diseases" onclick="showScreen('admin-diseases'); loadAdminDiseases(); closeMobileDrawer();">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span data-en="Disease Management" data-tl="Pamamahala ng Sakit">Disease Info</span>
-        </button>
-
-        <button class="sidebar-nav-btn" data-screen="admin-scans-logs" onclick="showScreen('admin-scans-logs'); loadAdminScansLogs(); closeMobileDrawer();">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span data-en="Detection Logs" data-tl="Mga Tala ng Scan">Detection Records</span>
-        </button>
-
-        <button class="sidebar-nav-btn" data-screen="admin-reports" onclick="showScreen('admin-reports'); loadAdminReports(); closeMobileDrawer();">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-          <span data-en="Reports & Analytics" data-tl="Ulat at Analytics">Reports & Analytics</span>
-        </button>
-
-        <button class="sidebar-nav-btn" data-screen="admin-chatbot" onclick="showScreen('admin-chatbot'); loadAdminChatbot(); closeMobileDrawer();">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-          <span data-en="Chatbot FAQ / AI" data-tl="Chatbot at FAQ">Chatbot Manager</span>
-        </button>
-      </div>
     </nav>
   </aside>
 
@@ -427,7 +402,7 @@
     <div class="web-page-content">
 
       <!-- ═══════════ SCREEN 1: LOGIN ═══════════ -->
-      <section class="screen {{ $currentUserData ? '' : 'active' }}" id="login">
+      <section class="screen active" id="login">
         <div class="auth-web-card">
           <div class="auth-header-card">
             <div class="auth-logo-badge">
@@ -705,7 +680,7 @@
       </section>
 
       <!-- ═══════════ SCREEN 4: HOME / DASHBOARD ═══════════ -->
-      <section class="screen {{ ($currentUserData && $currentUserData['role'] === 'farmer') ? 'active' : '' }}" id="home">
+      <section class="screen" id="home">
         <div class="dashboard-welcome-header">
           <div class="dwh-user">
             <h2 id="homeUserName">Mang Juan</h2>
@@ -1040,7 +1015,7 @@
       </section>
 
       <!-- ═══════════ SCREEN 10B: STAFF EXTENSION WORKER DASHBOARD ═══════════ -->
-      <section class="screen {{ ($currentUserData && $currentUserData['role'] === 'agri_worker') ? 'active' : '' }}" id="staff-dashboard">
+      <section class="screen" id="staff-dashboard">
         <div class="staff-header-banner">
           <div class="staff-banner-content">
             <div class="staff-badge-pill">
@@ -1219,7 +1194,7 @@
       </section>
 
       <!-- ═══════════ SCREEN 10C: ADMIN EXECUTIVE DASHBOARD ═══════════ -->
-      <section class="screen {{ ($currentUserData && $currentUserData['role'] === 'admin') ? 'active' : '' }}" id="admin-dashboard">
+      <section class="screen" id="admin-dashboard">
         <div class="admin-header-banner">
           <div class="admin-banner-content">
             <div class="admin-badge-pill">
