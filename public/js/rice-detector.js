@@ -107,10 +107,12 @@ function apiUrl(path) {
 
 function getAuthToken() {
   try {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.removeItem('oryzatix_auth_token');
+      window.localStorage.removeItem('oryzatix_token');
+    }
     const ses = (typeof window !== 'undefined' && window.sessionStorage) ? window.sessionStorage.getItem('oryzatix_auth_token') : null;
-    if (ses) return ses;
-    const loc = (typeof window !== 'undefined' && window.localStorage) ? window.localStorage.getItem('oryzatix_auth_token') : null;
-    return loc || null;
+    return ses || null;
   } catch (e) {
     return null;
   }
@@ -118,16 +120,15 @@ function getAuthToken() {
 
 function setAuthToken(token) {
   try {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      window.localStorage.removeItem('oryzatix_auth_token');
+      window.localStorage.removeItem('oryzatix_token');
+    }
+    if (typeof window !== 'undefined' && window.sessionStorage) {
       if (token) {
-        if (window.sessionStorage) window.sessionStorage.setItem('oryzatix_auth_token', token);
-        if (window.localStorage) window.localStorage.setItem('oryzatix_auth_token', token);
+        window.sessionStorage.setItem('oryzatix_auth_token', token);
       } else {
-        if (window.sessionStorage) window.sessionStorage.removeItem('oryzatix_auth_token');
-        if (window.localStorage) {
-          window.localStorage.removeItem('oryzatix_auth_token');
-          window.localStorage.removeItem('oryzatix_token');
-        }
+        window.sessionStorage.removeItem('oryzatix_auth_token');
       }
     }
   } catch (e) {}
@@ -599,74 +600,28 @@ function navigateAfterAuth() {
 async function checkAuthAndProceed() {
   const urlParams = new URLSearchParams(window.location.search);
   const paramToken = urlParams.get('auth_token');
-  const paramUserRaw = urlParams.get('auth_user');
   const isGoogleParam = urlParams.get('google_login') === '1';
-
-  let paramUser = null;
-  if (paramUserRaw) {
-    try {
-      paramUser = JSON.parse(atob(decodeURIComponent(paramUserRaw)));
-    } catch (e) {
-      try {
-        paramUser = JSON.parse(atob(paramUserRaw));
-      } catch (e2) {}
-    }
-  }
 
   if (paramToken) {
     setAuthToken(paramToken);
     try {
       sessionStorage.setItem('oryzatix_is_logged_in', 'true');
-      localStorage.setItem('oryzatix_is_logged_in', 'true');
     } catch (e) {}
-  }
-
-  // If user data is directly passed in URL callback, log in instantly without waiting for fetch
-  if (paramUser && paramUser.id) {
-    currentUser = paramUser;
-    try {
-      sessionStorage.setItem('oryzatix_is_logged_in', 'true');
-      localStorage.setItem('oryzatix_is_logged_in', 'true');
-      if (typeof window !== 'undefined' && window.localStorage) {
-        window.localStorage.setItem('oryzatix_cached_user', JSON.stringify(paramUser));
-      }
-    } catch (e) {}
-    applyUserToUI();
-    try {
-      window.history.replaceState({}, document.title, window.location.pathname);
-    } catch (e) {}
-    navigateAfterAuth();
-    return;
-  }
-
-  // Display auth_error if redirect failed
-  const authError = urlParams.get('auth_error');
-  if (authError) {
-    const errBanner = document.getElementById('loginError');
-    if (errBanner) {
-      errBanner.textContent = decodeURIComponent(authError);
-      errBanner.classList.add('show');
-    }
-  }
-
-  // Clean URL query string without page reload
-  if (paramToken || isGoogleParam || authError) {
+    // Clean URL query string without page reload
     try {
       window.history.replaceState({}, document.title, window.location.pathname);
     } catch (e) {}
   }
 
-  const isSessionLoggedIn = (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('oryzatix_is_logged_in') === 'true') ||
-                            (typeof localStorage !== 'undefined' && localStorage.getItem('oryzatix_is_logged_in') === 'true');
+  const isSessionLoggedIn = (typeof sessionStorage !== 'undefined') && sessionStorage.getItem('oryzatix_is_logged_in') === 'true';
   const isGoogleCallback = isGoogleParam || !!(window.INITIAL_AUTH && window.INITIAL_AUTH.googleLoginSuccess);
   const savedScreen = (typeof sessionStorage !== 'undefined') ? sessionStorage.getItem('oryzatix_active_screen') : null;
   const savedAuthScreen = (typeof sessionStorage !== 'undefined') ? sessionStorage.getItem('oryzatix_active_auth_screen') : null;
 
-  // 1. If user is pre-rendered in INITIAL_AUTH
+  // 1. If user is pre-rendered in INITIAL_AUTH or returning from Google login
   if (window.INITIAL_AUTH && window.INITIAL_AUTH.user) {
     try {
       sessionStorage.setItem('oryzatix_is_logged_in', 'true');
-      localStorage.setItem('oryzatix_is_logged_in', 'true');
     } catch (e) {}
     currentUser = window.INITIAL_AUTH.user;
     if (window.INITIAL_AUTH.token) {
@@ -697,7 +652,6 @@ async function checkAuthAndProceed() {
       if (res.ok && data && data.success && data.user) {
         try {
           sessionStorage.setItem('oryzatix_is_logged_in', 'true');
-          localStorage.setItem('oryzatix_is_logged_in', 'true');
         } catch (e) {}
         currentUser = data.user;
         applyUserToUI();
@@ -720,10 +674,6 @@ async function checkAuthAndProceed() {
     sessionStorage.removeItem('oryzatix_is_logged_in');
     sessionStorage.removeItem('oryzatix_active_screen');
     sessionStorage.removeItem('oryzatix_last_scan_result');
-  }
-  if (typeof localStorage !== 'undefined') {
-    localStorage.removeItem('oryzatix_is_logged_in');
-    localStorage.removeItem('oryzatix_active_screen');
   }
   resetAuthForms();
   const targetAuthScreen = (savedAuthScreen && AUTH_SCREENS.includes(savedAuthScreen) && document.getElementById(savedAuthScreen))
@@ -2292,18 +2242,13 @@ function getDefaultTreatments(key, severity = 'moderate') {
       { name: 'Compost & Organic Matter', desc: 'Incorporate 2-3 tons/ha well-decomposed compost into field soil.', tag: 'Cultural', tag_class: 'cultural' },
     ],
   };
+}
+
 function applyScanResult(scan) {
   currentScanResult = scan;
   try {
     if (typeof sessionStorage !== 'undefined' && scan) {
       sessionStorage.setItem('oryzatix_last_scan_result', JSON.stringify(scan));
-    }
-    if (typeof localStorage !== 'undefined' && scan && scan.image_url) {
-      let imageMap = {};
-      try { imageMap = JSON.parse(localStorage.getItem('oryzatix_scan_images') || '{}'); } catch(e){}
-      if (scan.id) imageMap[scan.id] = scan.image_url;
-      imageMap['latest'] = scan.image_url;
-      localStorage.setItem('oryzatix_scan_images', JSON.stringify(imageMap));
     }
   } catch (e) {}
 
@@ -2825,16 +2770,8 @@ function renderHistoryList(scans) {
       badgeText = 'Moderate (26% – 60%)';
     }
 
-    let scanImg = scan.image_url;
-    if (!scanImg && typeof localStorage !== 'undefined') {
-      try {
-        const map = JSON.parse(localStorage.getItem('oryzatix_scan_images') || '{}');
-        scanImg = map[scan.id] || null;
-      } catch(e){}
-    }
-
-    const thumb = scanImg
-      ? '<img src="' + escapeHtml(scanImg) + '" alt="' + escapeHtml(scan.disease) + '" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">'
+    const thumb = scan.image_url
+      ? '<img src="' + escapeHtml(scan.image_url) + '" alt="' + escapeHtml(scan.disease) + '">'
       : '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M12 8v8M8 12h8"/></svg>';
 
     const sciname = scan.scientific ? '<em>' + escapeHtml(scan.scientific) + '</em>' : (sev === 'healthy' ? 'Optimal Plant Health' : 'Diagnosed via MobileNet');
@@ -3020,15 +2957,8 @@ async function loadHomeRecentScans() {
         if (s.severity === 'healthy') sevLabel = 'Healthy';
         else if (s.severity === 'mild') sevLabel = 'Mild (≤25%)';
         else if (s.severity === 'moderate') sevLabel = 'Moderate (26-60%)';
-        let scanImg = s.image_url;
-        if (!scanImg && typeof localStorage !== 'undefined') {
-          try {
-            const map = JSON.parse(localStorage.getItem('oryzatix_scan_images') || '{}');
-            scanImg = map[s.id] || map['latest'] || null;
-          } catch(e){}
-        }
-        const thumbContent = scanImg
-          ? '<img src="' + escapeHtml(scanImg) + '" alt="' + escapeHtml(s.disease) + '" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">'
+        const thumbContent = s.image_url
+          ? '<img src="' + escapeHtml(s.image_url) + '" alt="' + escapeHtml(s.disease) + '" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">'
           : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M7 12h10"/></svg>';
 
         return '<div class="recent-scan-card fade-in" onclick="viewHistoryScanDetail(' + (s.id || 0) + ')">' +
