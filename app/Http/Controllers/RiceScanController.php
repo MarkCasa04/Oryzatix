@@ -1335,12 +1335,25 @@ class RiceScanController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
         ]);
 
+        $file = $request->file('image');
+        $originalName = $file->getClientOriginalName();
+        $fileNameLower = strtolower($originalName);
+        $fullPath = $file->getRealPath();
+
+        $path = null;
         $imageUrl = null;
         try {
-            $path = $request->file('image')->store('scans', 'public');
-            $imageUrl = asset('storage/' . $path);
+            $path = $file->store('scans', 'public');
+            if ($path) {
+                $imageUrl = asset('storage/' . $path);
+            }
         } catch (Exception $e) {
             $path = null;
+        }
+
+        if (!$imageUrl && $fullPath && file_exists($fullPath)) {
+            $mime = $file->getMimeType() ?: 'image/jpeg';
+            $imageUrl = 'data:' . $mime . ';base64,' . base64_encode(file_get_contents($fullPath));
         }
 
         $diseaseKeys = $this->supportedDatasetKeys();
@@ -1351,11 +1364,7 @@ class RiceScanController extends Controller
         $calculatedSeverity = null;
 
         try {
-            if ($path) {
-                $fullPath = Storage::disk('public')->path($path);
-                $originalName = $request->file('image')->getClientOriginalName();
-                $fileNameLower = strtolower($originalName);
-
+            if ($fullPath && file_exists($fullPath)) {
                 // Load all pre-indexed dataset metadata files
                 $blbMetadata = $this->getBlbDatasetMetadata();
                 $brownSpotMetadata = $this->getBrownSpotDatasetMetadata();
