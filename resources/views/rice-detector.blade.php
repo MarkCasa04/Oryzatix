@@ -807,6 +807,7 @@
           <button class="disease-pill active" onclick="switchTreatmentDisease('blast')">Leaf Blast</button>
           <button class="disease-pill" onclick="switchTreatmentDisease('blb')">Bacterial Blight</button>
           <button class="disease-pill" onclick="switchTreatmentDisease('brown_spot')">Brown Spot</button>
+          <button class="disease-pill" onclick="switchTreatmentDisease('sheath_blight')">Sheath Blight</button>
           <button class="disease-pill" onclick="switchTreatmentDisease('tungro')">Rice Tungro</button>
           <button class="disease-pill" onclick="switchTreatmentDisease('healthy')">Healthy Care</button>
         </div>
@@ -877,6 +878,7 @@
                 <option value="blast">Leaf Blast</option>
                 <option value="blb">BLB</option>
                 <option value="brown_spot">Brown Spot</option>
+                <option value="sheath_blight">Sheath Blight</option>
                 <option value="tungro">Tungro</option>
               </select>
             </div>

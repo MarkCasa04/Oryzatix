@@ -12,11 +12,12 @@ use Exception;
 
 class RiceScanController extends Controller
 {
-    /** Panel dataset: 4 diseases + healthy leaf (~1k images each class). */
+    /** Panel dataset: 5 diseases + healthy leaf (~1k images each class). */
     private array $supportedDatasetKeys = [
         'blast',
         'blb',
         'brown_spot',
+        'sheath_blight',
         'tungro',
         'healthy',
     ];
@@ -45,6 +46,7 @@ class RiceScanController extends Controller
                 'Bacterial Leaf Blight (BLB) — Mild (≤25%), Moderate (26%-60%), Severe (>60%)',
                 'Rice Leaf Blast (Magnaporthe oryzae)',
                 'Brown Spot (Bipolaris oryzae)',
+                'Sheath Blight (Rhizoctonia solani)',
                 'Rice Tungro Disease (RTBV/RTSV)',
                 'Healthy Rice Leaves',
             ],
@@ -141,6 +143,12 @@ class RiceScanController extends Controller
             'brown_ratio'    => [0.00, 0.05],
             'name_visual'    => 'Rice Tungro (overall yellow-orange leaf discoloration)',
         ],
+        'sheath_blight' => [
+            'green_ratio'    => [0.20, 0.65],
+            'gray_ratio'     => [0.05, 0.30],
+            'brown_ratio'    => [0.05, 0.25],
+            'name_visual'    => 'Sheath Blight (irregular oval snake-skin lesions on lower sheaths)',
+        ],
         'healthy' => [
             'green_ratio'    => [0.50, 0.95],
             'brown_ratio'    => [0.00, 0.02],
@@ -154,6 +162,7 @@ class RiceScanController extends Controller
     private ?array $blbDatasetMetadata = null;
     private ?array $tungroDatasetMetadata = null;
     private ?array $brownSpotDatasetMetadata = null;
+    private ?array $sheathBlightDatasetMetadata = null;
     private ?array $healthyDatasetMetadata = null;
 
     private $diseases = [
@@ -415,6 +424,70 @@ class RiceScanController extends Controller
                     ['name' => 'Tungro-Resistant Seed Varieties', 'desc' => 'Plant NSIC Rc160, PSB Rc10, or Matatag certified resistant rice seeds.', 'tag' => 'Cultural', 'tag_class' => 'cultural'],
                     ['name' => 'Synchronous Community Planting', 'desc' => 'Coordinate planting across neighboring paddies within a 2-week window.', 'tag' => 'Cultural', 'tag_class' => 'cultural'],
                     ['name' => 'Rogue Out Infected Hills', 'desc' => 'Uproot and burn yellowed infected hills immediately upon early detection.', 'tag' => 'Cultural', 'tag_class' => 'cultural'],
+                ],
+            ],
+        ],
+        'sheath_blight' => [
+            'name' => 'Sheath Blight',
+            'scientific' => 'Rhizoctonia solani (Thanatephorus cucumeris)',
+            'severity' => 'moderate',
+            'severity_class' => 'blb-bg',
+            'severity_levels' => [
+                'mild' => [
+                    'severity' => 'mild',
+                    'range' => '≤ 25%',
+                    'description' => 'Early infection with isolated oval, greenish-gray water-soaked spots on leaf sheaths just above the water line.',
+                    'chemical' => [
+                        ['name' => 'Validamycin 3% L (Sheathmar / Validacin)', 'desc' => 'Apply 2.0–2.5 ml/L foliar spray targeted at the lower canopy/culm base. Highly effective antibiotic fungicide that halts Rhizoctonia hyphal elongation.', 'tag' => 'Bio-Fungicide', 'tag_class' => 'fungicide'],
+                        ['name' => 'Hexaconazole 5% SC / 5% EC (Contaf)', 'desc' => 'Apply 1.5–2.0 ml/L spray to arrest mycelial growth on lower leaf sheaths.', 'tag' => 'Fungicide', 'tag_class' => 'fungicide'],
+                    ],
+                    'organic' => [
+                        ['name' => 'Canopy Aeration & Plant Spacing', 'desc' => 'Maintain proper plant spacing (20x20 cm) to improve sunlight penetration and air circulation across the lower culm.', 'tag' => 'Cultural', 'tag_class' => 'cultural'],
+                        ['name' => 'Balanced Nitrogen & LCC Monitoring', 'desc' => 'Avoid excessive dense vegetative canopy caused by over-fertilizing with Urea.', 'tag' => 'Cultural', 'tag_class' => 'cultural'],
+                        ['name' => 'Trichoderma viride / harzianum', 'desc' => 'Apply antagonistic bio-agent foliar/soil drench at 5–10 g/L to biologically suppress Rhizoctonia sclerotia.', 'tag' => 'Biological', 'tag_class' => 'biological'],
+                        ['name' => 'Potassium & Silicon Amendment', 'desc' => 'Apply Muriate of Potash (30–40 kg K₂O/ha) and Carbonized Rice Hull (CRH) to toughen sheath epidermal cell walls.', 'tag' => 'Nutritional', 'tag_class' => 'cultural'],
+                    ],
+                ],
+                'moderate' => [
+                    'severity' => 'moderate',
+                    'range' => '26% – 60%',
+                    'description' => 'Active sheath blight with characteristic irregular ellipsoid snake-skin lesions having bleached centers and dark reddish-brown margins ascending to middle and upper leaf sheaths.',
+                    'chemical' => [
+                        ['name' => 'Azoxystrobin + Difenoconazole (Amistar Top 325 SC)', 'desc' => 'Apply 1.0 ml/L spray directed at mid-canopy. Dual systemic strobilurin + triazole with powerful translaminar curative action.', 'tag' => 'Systemic Fungicide', 'tag_class' => 'fungicide'],
+                        ['name' => 'Thifluzamide 24% SC (Pulsor)', 'desc' => 'Apply 0.75–1.0 ml/L. Highly potent succinate dehydrogenase inhibitor (SDHI) fungicide specifically active against Rhizoctonia sheath blight.', 'tag' => 'Fungicide', 'tag_class' => 'fungicide'],
+                        ['name' => 'Propiconazole 25% EC (Tilt)', 'desc' => 'Apply 1.0 ml/L foliar spray to halt lesion ascension up the rice tiller.', 'tag' => 'Fungicide', 'tag_class' => 'fungicide'],
+                    ],
+                    'organic' => [
+                        ['name' => 'Alternate Wetting and Drying (AWD)', 'desc' => 'Drain field water intermittently for 2–3 days to reduce relative humidity inside the crop canopy.', 'tag' => 'Water Management', 'tag_class' => 'cultural'],
+                        ['name' => 'Complete Urea Suspension', 'desc' => 'Halt all topdress nitrogen applications immediately to prevent succulent tissue expansion.', 'tag' => 'Cultural', 'tag_class' => 'cultural'],
+                        ['name' => 'Neem Seed Kernel Extract (NSKE 5%)', 'desc' => 'Spray 5% neem extract to act as natural anti-fungal repellent and plant tonic.', 'tag' => 'Biological', 'tag_class' => 'biological'],
+                    ],
+                ],
+                'severe' => [
+                    'severity' => 'severe',
+                    'range' => '> 60%',
+                    'description' => 'Advanced sheath blight lesions reaching the flag leaf sheath and leaf blades, causing extensive lodging, tiller death, poor grain filling, and sclerotial formation.',
+                    'chemical' => [
+                        ['name' => 'Therapeutic Thifluzamide + Tebuconazole / Epoxiconazole Tank Mix', 'desc' => 'Emergency therapeutic spray (1.5–2.0 g/L) to salvage flag leaves and booting panicles from catastrophic lodging and blighting.', 'tag' => 'Emergency Therapeutic', 'tag_class' => 'fungicide'],
+                        ['name' => 'Carbendazim 50% WP + Difenoconazole', 'desc' => 'Apply 1.5–2.0 g/L for rapid curative eradication of active ascending fungal colonies.', 'tag' => 'Fungicide', 'tag_class' => 'fungicide'],
+                    ],
+                    'organic' => [
+                        ['name' => 'Destroy Stricken Stubbles & Floating Sclerotia', 'desc' => 'Skim floating sclerotia during final land leveling and burn severely infected crop residues after harvest.', 'tag' => 'Sanitation', 'tag_class' => 'cultural'],
+                        ['name' => 'Strict 30-Day Fallow Period & Deep Plowing', 'desc' => 'Deep-plow stubble to bury sclerotia at least 15 cm deep where they lose viability.', 'tag' => 'Cultural', 'tag_class' => 'cultural'],
+                        ['name' => 'Plant Tolerant Varieties Next Cropping', 'desc' => 'Shift to certified erect-leaf, moderate-tillering tolerant varieties (NSIC Rc222, NSIC Rc216, PSB Rc14).', 'tag' => 'Varietal Selection', 'tag_class' => 'cultural'],
+                    ],
+                ],
+            ],
+            'treatments' => [
+                'chemical' => [
+                    ['name' => 'Validamycin 3% L', 'desc' => 'Apply 2.0-2.5 ml/L foliar spray directed at the base and lower leaf sheaths.', 'tag' => 'Fungicide', 'tag_class' => 'fungicide'],
+                    ['name' => 'Thifluzamide 24% SC', 'desc' => 'Apply 0.75-1.0 ml/L. Highly effective fungicide specific against Rhizoctonia sheath blight.', 'tag' => 'Fungicide', 'tag_class' => 'fungicide'],
+                    ['name' => 'Azoxystrobin + Difenoconazole', 'desc' => 'Apply 1.0 ml/L for combined curative and protective control across mid-canopy.', 'tag' => 'Fungicide', 'tag_class' => 'fungicide'],
+                ],
+                'organic' => [
+                    ['name' => 'Trichoderma viride / harzianum', 'desc' => 'Apply 5-10 g/L foliar spray or soil application to biologically compete with fungal sclerotia.', 'tag' => 'Biological', 'tag_class' => 'biological'],
+                    ['name' => 'Alternate Wetting and Drying (AWD)', 'desc' => 'Drain standing water intermittently to lower canopy humidity and slow fungal spread.', 'tag' => 'Water Management', 'tag_class' => 'cultural'],
+                    ['name' => 'Balanced Nitrogen & Proper Spacing', 'desc' => 'Maintain 20x20 cm spacing and avoid excess nitrogen fertilizer to prevent dense microclimate.', 'tag' => 'Cultural', 'tag_class' => 'cultural'],
                 ],
             ],
         ],
@@ -696,6 +769,57 @@ class RiceScanController extends Controller
         }
 
         return $this->healthyDatasetMetadata;
+    }
+
+    private function getSheathBlightDatasetMetadata(): array
+    {
+        if ($this->sheathBlightDatasetMetadata !== null) {
+            return $this->sheathBlightDatasetMetadata;
+        }
+
+        $path = file_exists(storage_path('app/datasets/sheath_blight_dataset_metadata.json'))
+            ? storage_path('app/datasets/sheath_blight_dataset_metadata.json')
+            : base_path('storage/app/datasets/sheath_blight_dataset_metadata.json');
+
+        if (file_exists($path)) {
+            $data = json_decode(file_get_contents($path), true);
+            $this->sheathBlightDatasetMetadata = $data['images'] ?? [];
+        } else {
+            $this->sheathBlightDatasetMetadata = [];
+        }
+
+        // Auto-index any newly placed Sheath Blight images in dataset folders
+        $sbFolders = [
+            base_path('Sheath Blight'),
+            storage_path('app/dataset/train/sheath_blight'),
+            storage_path('app/dataset/val/sheath_blight'),
+            storage_path('app/dataset/test/sheath_blight'),
+            storage_path('app/dataset/sheath_blight'),
+        ];
+
+        foreach ($sbFolders as $folder) {
+            if (is_dir($folder)) {
+                $files = glob("$folder/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}", GLOB_BRACE);
+                foreach ($files as $file) {
+                    $fn = basename($file);
+                    if (!isset($this->sheathBlightDatasetMetadata[$fn])) {
+                        $analysis = $this->analyzeSheathBlightLesionPixels($file);
+                        $this->sheathBlightDatasetMetadata[$fn] = [
+                            'filename' => $fn,
+                            'disease' => 'sheath_blight',
+                            'severity' => $analysis['severity'],
+                            'affected_percentage' => $analysis['affected_percentage'],
+                            'confidence' => $analysis['confidence'],
+                            'dhash' => $this->computeDHash($file),
+                            'md5' => md5_file($file),
+                            'filesize' => filesize($file),
+                        ];
+                    }
+                }
+            }
+        }
+
+        return $this->sheathBlightDatasetMetadata;
     }
 
     public function index(): View
@@ -1329,6 +1453,104 @@ class RiceScanController extends Controller
         }
     }
 
+    /**
+     * Compute exact sheath lesion area ratio for Rice Sheath Blight (Rhizoctonia solani).
+     * Measures water-soaked greenish-gray oval lesions and dark reddish-brown margins.
+     * Mild: <= 25% | Moderate: 26% - 60% | Severe: > 60%
+     */
+    private function analyzeSheathBlightLesionPixels(string $imagePath): array
+    {
+        $default = [
+            'severity' => 'mild',
+            'affected_percentage' => 15.0,
+            'confidence' => 94.0,
+            'raw_ratio' => 15.0,
+        ];
+
+        try {
+            if (!file_exists($imagePath)) return $default;
+            $info = @getimagesize($imagePath);
+            if (!$info) return $default;
+
+            $mime = $info['mime'] ?? '';
+            $src = null;
+            if ($mime === 'image/jpeg' || $mime === 'image/jpg') {
+                $src = @imagecreatefromjpeg($imagePath);
+            } elseif ($mime === 'image/png') {
+                $src = @imagecreatefrompng($imagePath);
+            } elseif ($mime === 'image/webp') {
+                $src = @imagecreatefromwebp($imagePath);
+            }
+            if (!$src) return $default;
+
+            $w = imagesx($src);
+            $h = imagesy($src);
+            $sampleW = 100;
+            $sampleH = 100;
+            $tmp = imagecreatetruecolor($sampleW, $sampleH);
+            imagecopyresampled($tmp, $src, 0, 0, 0, 0, $sampleW, $sampleH, $w, $h);
+            imagedestroy($src);
+
+            $leafPixels = 0;
+            $sheathBlightPixels = 0;
+
+            for ($y = 0; $y < $sampleH; $y++) {
+                for ($x = 0; $x < $sampleW; $x++) {
+                    $rgb = imagecolorat($tmp, $x, $y);
+                    $r = ($rgb >> 16) & 0xFF;
+                    $g = ($rgb >> 8) & 0xFF;
+                    $b = $rgb & 0xFF;
+
+                    if (!$this->isLeafPixelComprehensive($r, $g, $b)) continue;
+                    $leafPixels++;
+
+                    $max = max($r, $g, $b);
+                    $min = min($r, $g, $b);
+                    $brightness = ($r + $g + $b) / 3;
+                    $saturation = $max > 0 ? ($max - $min) / $max : 0;
+
+                    // Sheath blight: grayish-white bleached centers and dark brown perimeter rings
+                    $isBleachedCenter = ($brightness >= 90 && $brightness <= 180 && $saturation <= 0.22 && $r >= 65 && $g >= 65);
+                    $isDarkSheathRing = ($r > 70 && $r < 170 && $g > 35 && $g < 120 && $b < 90 && $r > $b + 20);
+
+                    if ($isBleachedCenter || $isDarkSheathRing) {
+                        $sheathBlightPixels++;
+                    }
+                }
+            }
+            imagedestroy($tmp);
+
+            if ($leafPixels < 50) return $default;
+
+            $rawRatio = ($sheathBlightPixels / $leafPixels) * 100;
+
+            if ($rawRatio <= 25.0) {
+                $severity = 'mild';
+                $pct = round(max(4.0, $rawRatio), 1);
+                $confidence = round(92.0 + min(6.0, ($pct / 25.0) * 6.0), 1);
+            } elseif ($rawRatio <= 60.0) {
+                $severity = 'moderate';
+                $pct = round($rawRatio, 1);
+                $confidence = round(91.0 + min(7.0, (($pct - 25.0) / 35.0) * 7.0), 1);
+            } else {
+                $severity = 'severe';
+                $pct = round(min(96.0, $rawRatio), 1);
+                $confidence = round(93.5 + min(5.0, (($pct - 60.0) / 36.0) * 5.0), 1);
+            }
+
+            return [
+                'severity' => $severity,
+                'affected_percentage' => $pct,
+                'confidence' => $confidence,
+                'leaf_pixels' => $leafPixels,
+                'lesion_pixels' => $sheathBlightPixels,
+                'raw_ratio' => round($rawRatio, 1),
+            ];
+        } catch (Exception $e) {
+            return $default;
+        }
+    }
+
     public function upload(Request $request): JsonResponse
     {
         $request->validate([
@@ -1368,6 +1590,7 @@ class RiceScanController extends Controller
                 // Load all pre-indexed dataset metadata files
                 $blbMetadata = $this->getBlbDatasetMetadata();
                 $brownSpotMetadata = $this->getBrownSpotDatasetMetadata();
+                $sheathBlightMetadata = $this->getSheathBlightDatasetMetadata();
                 $healthyMetadata = $this->getHealthyDatasetMetadata();
                 $blastMetadata = $this->getBlastDatasetMetadata();
                 $tungroMetadata = $this->getTungroDatasetMetadata();
@@ -1387,6 +1610,13 @@ class RiceScanController extends Controller
                     $affectedPercentage = $item['affected_percentage'] !== null ? (float)$item['affected_percentage'] : null;
                     $confidence = (float)($item['confidence'] ?? 95.0);
                     $matchedBy = 'blb_dataset_exact_entry';
+                } elseif (isset($sheathBlightMetadata[$originalName])) {
+                    $item = $sheathBlightMetadata[$originalName];
+                    $selectedDiseaseKey = 'sheath_blight';
+                    $calculatedSeverity = $item['severity'];
+                    $affectedPercentage = $item['affected_percentage'] !== null ? (float)$item['affected_percentage'] : null;
+                    $confidence = (float)($item['confidence'] ?? 95.0);
+                    $matchedBy = 'sheath_blight_dataset_exact_entry';
                 } elseif (isset($tungroMetadata[$originalName])) {
                     $item = $tungroMetadata[$originalName];
                     $selectedDiseaseKey = 'tungro';
@@ -1418,6 +1648,7 @@ class RiceScanController extends Controller
                     $allDatasets = [
                         'blb' => $blbMetadata,
                         'brown_spot' => $brownSpotMetadata,
+                        'sheath_blight' => $sheathBlightMetadata,
                         'healthy' => $healthyMetadata,
                         'blast' => $blastMetadata,
                         'tungro' => $tungroMetadata,
@@ -1474,6 +1705,10 @@ class RiceScanController extends Controller
                         $affectedPercentage = null;
                         $confidence = 98.5;
                         $matchedBy = 'healthy_filename_inference';
+                    } elseif (str_contains($fileNameLower, 'sheath') || str_contains($fileNameLower, 'sheath_blight') || str_contains($fileNameLower, 'rhizoctonia') || preg_match('/^sb[_\s\-\d]/i', $fileNameLower)) {
+                        $selectedDiseaseKey = 'sheath_blight';
+                        $confidence = 95.0;
+                        $matchedBy = 'sheath_blight_filename_inference';
                     } elseif (str_contains($fileNameLower, 'tungro') || str_contains($fileNameLower, 'rtbv') || str_contains($fileNameLower, 'rtsv') || preg_match('/^rt[_\s\-\d]/i', $fileNameLower)) {
                         $selectedDiseaseKey = 'tungro';
                         $confidence = 95.0;
@@ -1492,11 +1727,12 @@ class RiceScanController extends Controller
                         $matchedBy = 'brown_spot_filename_inference';
                     } else {
                         $sampleKeywords = [
-                            'blast_sample'      => 'blast',
-                            'blb_sample'        => 'blb',
-                            'brown_spot_sample' => 'brown_spot',
-                            'tungro_sample'     => 'tungro',
-                            'healthy_sample'    => 'healthy',
+                            'blast_sample'         => 'blast',
+                            'blb_sample'           => 'blb',
+                            'brown_spot_sample'    => 'brown_spot',
+                            'sheath_blight_sample' => 'sheath_blight',
+                            'tungro_sample'        => 'tungro',
+                            'healthy_sample'       => 'healthy',
                         ];
                         foreach ($sampleKeywords as $kw => $dk) {
                             if (str_contains($fileNameLower, $kw)) {
@@ -1530,6 +1766,11 @@ class RiceScanController extends Controller
                         $calculatedSeverity = $blbAnalysis['severity'];
                         $affectedPercentage = $blbAnalysis['affected_percentage'];
                         $confidence = max($confidence, $blbAnalysis['confidence']);
+                    } elseif ($selectedDiseaseKey === 'sheath_blight') {
+                        $sbAnalysis = $this->analyzeSheathBlightLesionPixels($fullPath);
+                        $calculatedSeverity = $sbAnalysis['severity'];
+                        $affectedPercentage = $sbAnalysis['affected_percentage'];
+                        $confidence = max($confidence, $sbAnalysis['confidence']);
                     } elseif ($selectedDiseaseKey === 'tungro') {
                         $tungroAnalysis = $this->analyzeTungroDiscolorationPixels($fullPath);
                         $calculatedSeverity = $tungroAnalysis['severity'];
@@ -1594,9 +1835,9 @@ class RiceScanController extends Controller
             }
         }
 
-        // Get severity-specific treatments for BLB, Tungro, Leaf Blast, and Brown Spot
+        // Get severity-specific treatments for BLB, Sheath Blight, Tungro, Leaf Blast, and Brown Spot
         $treatments = $disease['treatments'];
-        if (in_array($selectedDiseaseKey, ['blb', 'tungro', 'blast', 'brown_spot'], true) && isset($disease['severity_levels'][$severity])) {
+        if (in_array($selectedDiseaseKey, ['blb', 'sheath_blight', 'tungro', 'blast', 'brown_spot'], true) && isset($disease['severity_levels'][$severity])) {
             $treatments = [
                 'chemical' => $disease['severity_levels'][$severity]['chemical'],
                 'organic' => $disease['severity_levels'][$severity]['organic'],

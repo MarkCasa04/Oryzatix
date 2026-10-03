@@ -43,6 +43,15 @@ const ALL_DISEASES = {
     thumb: 'blast',
     symptoms: 'Stunted plant growth, reduced tillering, and pronounced yellow-orange discoloration of upper leaves.',
   },
+  sheath_blight: {
+    key: 'sheath_blight',
+    name: 'Sheath Blight',
+    scientific: 'Rhizoctonia solani',
+    severity: 'moderate',
+    cls: 'disease-blb',
+    thumb: 'blb',
+    symptoms: 'Irregular oval or snake-skin lesions with grayish-white centers and dark reddish-brown margins ascending from lower sheaths.',
+  },
   healthy: {
     key: 'healthy',
     name: 'Healthy Rice Leaf',
@@ -2183,6 +2192,47 @@ function getDefaultTreatments(key, severity = 'moderate') {
       };
     }
   }
+  if (key === 'sheath_blight') {
+    if (severity === 'mild') {
+      return {
+        chemical: [
+          { name: 'Validamycin 3% L (Sheathmar / Validacin)', desc: 'Apply 2.0–2.5 ml/L foliar spray targeted at the lower canopy/culm base. Highly effective antibiotic fungicide that halts Rhizoctonia hyphal elongation.', tag: 'Bio-Fungicide', tag_class: 'fungicide' },
+          { name: 'Hexaconazole 5% SC (Contaf)', desc: 'Apply 1.5–2.0 ml/L spray to arrest mycelial growth on lower leaf sheaths.', tag: 'Fungicide', tag_class: 'fungicide' },
+        ],
+        organic: [
+          { name: 'Canopy Aeration & Proper Spacing', desc: 'Maintain 20x20 cm plant spacing to improve sunlight penetration and air circulation across the lower culm.', tag: 'Cultural', tag_class: 'cultural' },
+          { name: 'Trichoderma viride / harzianum', desc: 'Apply antagonistic bio-agent foliar/soil drench at 5–10 g/L to biologically suppress Rhizoctonia sclerotia.', tag: 'Biological', tag_class: 'biological' },
+          { name: 'Potassium & Silicon Amendment', desc: 'Apply Muriate of Potash (30–40 kg K₂O/ha) and Carbonized Rice Hull (CRH) to toughen sheath epidermal cell walls.', tag: 'Nutritional', tag_class: 'cultural' },
+        ],
+      };
+    } else if (severity === 'severe') {
+      return {
+        chemical: [
+          { name: 'Therapeutic Thifluzamide + Tebuconazole Tank Mix', desc: 'Emergency therapeutic spray (1.5–2.0 g/L) to salvage flag leaves and booting panicles from catastrophic lodging and blighting.', tag: 'Emergency Therapeutic', tag_class: 'fungicide' },
+          { name: 'Carbendazim 50% WP + Difenoconazole', desc: 'Apply 1.5–2.0 g/L for rapid curative eradication of active ascending fungal colonies.', tag: 'Fungicide', tag_class: 'fungicide' },
+        ],
+        organic: [
+          { name: 'Destroy Stricken Stubbles & Floating Sclerotia', desc: 'Skim floating sclerotia during final land leveling and burn severely infected crop residues after harvest.', tag: 'Sanitation', tag_class: 'cultural' },
+          { name: 'Strict 30-Day Fallow Period & Deep Plowing', desc: 'Deep-plow stubble to bury sclerotia at least 15 cm deep where they lose viability.', tag: 'Cultural', tag_class: 'cultural' },
+          { name: 'Plant Tolerant Varieties Next Cropping', desc: 'Shift to certified erect-leaf, moderate-tillering tolerant varieties (NSIC Rc222, NSIC Rc216, PSB Rc14).', tag: 'Varietal Selection', tag_class: 'cultural' },
+        ],
+      };
+    } else {
+      // Moderate (26% - 60%)
+      return {
+        chemical: [
+          { name: 'Azoxystrobin + Difenoconazole (Amistar Top 325 SC)', desc: 'Apply 1.0 ml/L spray directed at mid-canopy. Dual systemic strobilurin + triazole with powerful translaminar curative action.', tag: 'Systemic Fungicide', tag_class: 'fungicide' },
+          { name: 'Thifluzamide 24% SC (Pulsor)', desc: 'Apply 0.75–1.0 ml/L. Highly potent succinate dehydrogenase inhibitor (SDHI) fungicide specifically active against Rhizoctonia sheath blight.', tag: 'Fungicide', tag_class: 'fungicide' },
+          { name: 'Propiconazole 25% EC (Tilt)', desc: 'Apply 1.0 ml/L foliar spray to halt lesion ascension up the rice tiller.', tag: 'Fungicide', tag_class: 'fungicide' },
+        ],
+        organic: [
+          { name: 'Alternate Wetting and Drying (AWD)', desc: 'Drain field water intermittently for 2–3 days to reduce relative humidity inside the crop canopy.', tag: 'Water Management', tag_class: 'cultural' },
+          { name: 'Complete Urea Suspension', desc: 'Halt all topdress nitrogen applications immediately to prevent succulent tissue expansion.', tag: 'Cultural', tag_class: 'cultural' },
+          { name: 'Neem Seed Kernel Extract (NSKE 5%)', desc: 'Spray 5% neem extract to act as natural anti-fungal repellent and plant tonic.', tag: 'Biological', tag_class: 'biological' },
+        ],
+      };
+    }
+  }
   return {
     chemical: [
       { name: 'Preventive Mild Fungicide', desc: 'Apply mild protective spray only during prolonged wet periods.', tag: 'Fungicide', tag_class: 'fungicide' },
@@ -2382,6 +2432,22 @@ const RESULT_TRANSLATIONS = {
         }
       }
     },
+    sheath_blight: {
+      tagalog: {
+        symptoms: {
+          mild: 'Umaabot sa humigit-kumulang {pct}% ng saha at dahon ang apektado ng Sheath Blight. Maagang yugto (≤25%): may hugis-itlog na kulay berdeng-abo na basa-basang sugat (water-soaked lesions) sa ibaba ng puno malapit sa tubig. Mag-spray agad ng Validamycin 3% L o Hexaconazole bilang proteksyon.',
+          moderate: 'Umaabot sa humigit-kumulang {pct}% ng saha at dahon ang apektado ng Sheath Blight. Katamtamang yugto (26%-60%): may mala-balat ng ahas (snake-skin pattern) na mga sugat na may maputing gitna at mamulang kayumangging gilid na umaakyat sa itaas na dahon. Mag-spray ng Azoxystrobin + Difenoconazole o Thifluzamide at isagawa ang AWD patubig.',
+          severe: 'Umaabot sa humigit-kumulang {pct}% ng saha at dahon ang apektado ng Sheath Blight. Malalang yugto (>60%): umabot na ang mga sugat sa flag leaf sheath, nagdudulot ng paghiga ng palay (lodging), pagkabulok ng puno, at pagkasira ng uhay. Mag-spray agad ng therapeutic systemic fungicide at linisin ang bukid.'
+        }
+      },
+      english: {
+        symptoms: {
+          mild: 'Rice Sheath Blight symptoms affect approximately {pct}% of the culm and sheath area. Early stage (≤25%): initial oval greenish-gray water-soaked spots on leaf sheaths near the water level. Apply preventive Validamycin or Hexaconazole.',
+          moderate: 'Rice Sheath Blight symptoms affect approximately {pct}% of the culm and sheath area. Moderate stage (26%-60%): characteristic irregular ellipsoid snake-skin lesions ascending to upper sheaths and leaves. Spray Azoxystrobin + Difenoconazole or Thifluzamide and practice AWD irrigation.',
+          severe: 'Rice Sheath Blight symptoms affect approximately {pct}% of the culm and sheath area. Severe stage (>60%): extensive blighting reaching flag leaf sheaths, causing widespread lodging, tiller death, and sclerotial formation. Apply emergency therapeutic systemic fungicide.'
+        }
+      }
+    },
     healthy: {
       tagalog: {
         symptoms: 'Malusog at berde ang dahon ng palay. Walang anumang fungal lesions, bacterial streaks, o viral discoloration na natukoy. Ipagpatuloy ang Good Agricultural Practices (GAP) tulad ng balanseng pataba (NPK), tamang patubig (AWD), at regular na pagmamasid sa bukid.'
@@ -2467,7 +2533,7 @@ function speakResultSymptoms(btn) {
 /* ═══════════ TREATMENT GUIDE & DOSAGE CALCULATOR ═══════════ */
 function switchTreatmentDisease(diseaseKey, severity = 'moderate') {
   const d = ALL_DISEASES[diseaseKey] || ALL_DISEASES.blast;
-  const isMultiSev = (diseaseKey === 'blb' || diseaseKey === 'tungro' || diseaseKey === 'blast' || diseaseKey === 'brown_spot');
+  const isMultiSev = (diseaseKey === 'blb' || diseaseKey === 'tungro' || diseaseKey === 'blast' || diseaseKey === 'brown_spot' || diseaseKey === 'sheath_blight');
   currentScanResult = {
     disease_key: diseaseKey,
     disease: d.name,
@@ -2491,7 +2557,7 @@ function switchDiseaseSeverity(sevLevel) {
   if (activeBtn) activeBtn.classList.add('active');
 
   const curKey = (currentScanResult && currentScanResult.disease_key) ? currentScanResult.disease_key : 'blast';
-  const targetKey = (curKey === 'tungro' || curKey === 'blb' || curKey === 'blast' || curKey === 'brown_spot') ? curKey : 'blast';
+  const targetKey = (curKey === 'tungro' || curKey === 'blb' || curKey === 'blast' || curKey === 'brown_spot' || curKey === 'sheath_blight') ? curKey : 'blast';
   const d = ALL_DISEASES[targetKey] || ALL_DISEASES.blast;
 
   currentScanResult = {
@@ -2522,7 +2588,7 @@ function loadCurrentTreatment() {
   const s = currentScanResult;
   const key = s.disease_key || 'blast';
   const curSeverity = s.severity || 'moderate';
-  const isMultiSev = (key === 'blb' || key === 'tungro' || key === 'blast' || key === 'brown_spot');
+  const isMultiSev = (key === 'blb' || key === 'tungro' || key === 'blast' || key === 'brown_spot' || key === 'sheath_blight');
 
   const name = document.getElementById('treatDiseaseName');
   if (name) name.textContent = s.disease;
